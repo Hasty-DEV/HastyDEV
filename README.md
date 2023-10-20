@@ -2,6 +2,8 @@
 
 A "HastyDEV" é uma plataforma projetada com o propósito de simplificar e facilitar a colaboração entre desenvolvedores, Microempreendedores Individuais (MEIs) e Organizações Não Governamentais (ONGs) no mercado de desenvolvimento de software. Esta plataforma oferece oportunidades únicas para todos os envolvidos, tornando-se um centro de convergência para criar soluções tecnológicas, promover o crescimento de portfólios e incentivar a participação através de um sistema gamificado.
 
+Este Repositório é uma continuação do: https://github.com/Portela03/HastyDEV
+
 ## Visão Geral
 
 O mercado de desenvolvimento de software está em constante crescimento, mas muitas empresas pequenas e ONGs não têm recursos para contratar desenvolvedores em tempo integral. Ao mesmo tempo, desenvolvedores novos e experientes podem ter dificuldade em encontrar oportunidades de trabalho e construir um portfólio sólido. A "HastyDEV" visa resolver esses problemas, criando um espaço onde desenvolvedores, MEIs e ONGs podem se beneficiar mutuamente.
