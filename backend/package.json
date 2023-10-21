@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "devStart": "nodemon --watch App.js",
-    "start": "node src/App.js"
+    "build": "tsup src"
   },
   "keywords": [],
   "author": "",
@@ -23,7 +23,8 @@
     "nodemailer": "^6.9.6",
     "pino": "^8.16.0",
     "sequelize": "^6.33.0",
-    "socket.io": "^4.7.2"
+    "socket.io": "^4.7.2",
+    "tsup": "^7.2.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
