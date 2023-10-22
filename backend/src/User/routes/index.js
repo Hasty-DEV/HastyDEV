@@ -1,4 +1,4 @@
-const express = require("express");
+ const express = require("express");
 
 const router = express.Router();
 
@@ -30,4 +30,4 @@ router.post('/verify' ,sendVerificationEmail);
 //rota para verificar o pin
 router.post('/checkverify', PinVerify)
 
-module.exports = router;
+module.exports = router; 

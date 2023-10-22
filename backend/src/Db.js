@@ -1,5 +1,4 @@
-const pino = require("pino");
-const logger = pino();
+ 
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
 

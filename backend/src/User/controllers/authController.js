@@ -1,19 +1,17 @@
 const jwt = require("jsonwebtoken");
-const pino = require("pino")();
+const { logError} = require('../../utils/logger.js');
 
 function checkToken(req, res, next) {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
 
   if (!token) {
-    pino.error("Acesso negado: Token não fornecido");
-    return res.status(401).json({ error: "Acesso negado: Token não fornecido" });
+    logError("Acesso negado: Token não fornecido", res, 401);
   }
 
   jwt.verify(token, process.env.SECRET, (err, decoded) => {
     if (err) {
-      pino.error("Token inválido" + err);
-      return res.status(403).json({ error: "Token inválido" });
+      logError("Token inválido", res, 403);
     }
     req.userid = decoded.id;  
     next();
@@ -31,14 +29,12 @@ function checkToken(req, res, next) {
   const refreshToken = req.body.refreshToken;
 
   if (!refreshToken) {
-    pino.error("Acesso negado: Token não fornecido");
-    return res.status(401).json({ error: "Acesso negado: refresh Token não fornecido" });
+    logError("Acesso negado: Token não fornecido", res, 401);
   }
 
   jwt.verify(refreshToken, process.env.REFRESH_SECRET, (err, decoded) => {
     if (err) {
-      pino.error("Token inválido" + err);
-      return res.status(403).json({ error: "refresh Token inválido" });
+      logError("Token inválido", res, 403);
     }
     req.userId = decoded.userId;
     next();
