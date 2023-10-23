@@ -1,10 +1,29 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Foter = styled.div`
   background: ${props => props.theme.colors.primary};
   color: ${props => props.theme.colors.text};
   margin-top: 5%;
-  padding:5%
+  padding:5%;
+  font-family: 'Arial';
+`;
+
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+
+  
+`;
+export const SubTitle = styled.h2`
+ 
+  color:${props => props.theme.colors.text};
+  font-size: 16px;
+  font-family: 'Arial';
+  font-weight: 400;
+  line-height: 3;
+  word-wrap: break-word;
+  text-decoration: none !important;
 `;
 
 export const Title = styled.h2`
@@ -19,17 +38,7 @@ color:${props => props.theme.colors.text};
  
 `;
 
-export const SubTitle = styled.h2`
-  opacity: 0.65;
-  color:${props => props.theme.colors.text};
-  font-size: 16px;
-  font-family: 'Rasa';
-  font-weight: 400;
-  line-height: 3;
-  word-wrap: break-word;
-  
-  
-`;
+
 
 export const Button = styled.button`
   width: 50px;

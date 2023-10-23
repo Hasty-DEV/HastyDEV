@@ -55,5 +55,5 @@ color:  ${(props) => props.theme.colors.text};
 
 export const spanStyled = styled.span`
   display: block;
-  ccolor:  ${(props) => props.theme.colors.text};
+  color:  ${(props) => props.theme.colors.text};
 `;

@@ -1,7 +1,7 @@
-import { Title, SubTitle, Button, Foter, Decoration } from './Footer.styles';
+import { StyledLink,SubTitle, Title, Button, Foter, Decoration } from './Footer.styles';
 import LogoDark from '../../assets/LogoDark.svg';
 import LogoLight from '../../assets/LogoLight.svg';
-import { Link, } from "react-router-dom";
+
 import { Row, Col, Container } from 'react-bootstrap';
 import { ThemeContext } from "styled-components";
 import { useContext } from "react";
@@ -43,12 +43,12 @@ const Footer: React.FC = () => {
           </Col>
           <Col sm={3}>
             <Title>Quick Links</Title>
-            <Link to="/">
+            <StyledLink to="/">
               <SubTitle>Home</SubTitle>
-            </Link>
-            <Link to="/About">
+            </StyledLink>
+            <StyledLink to="/About">
               <SubTitle>Sobre Nós</SubTitle>
-            </Link>
+            </StyledLink>
           </Col>
           <Col sm={3}>
             <Title>Sobre o Projeto</Title>
