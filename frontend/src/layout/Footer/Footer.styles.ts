@@ -5,12 +5,6 @@ export const Foter = styled.div`
   color: ${props => props.theme.colors.text};
   margin-top: 5%;
   padding:5%
-  
-  
-  
-
-
-  
 `;
 
 export const Title = styled.h2`

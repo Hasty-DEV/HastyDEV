@@ -30,7 +30,7 @@ const Footer: React.FC = () => {
   return (
 
     <Foter>
-      <Container className="custom-mt-15percent">
+      <Container fluid className="custom-mt-15percent">
         <Row>
           <Col sm={3}>
             <img
