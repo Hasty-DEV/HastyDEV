@@ -1,0 +1,18 @@
+.tabela-transparente {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.tabela-transparente td,
+.tabela-transparente tr {
+  padding: 8px;
+  
+}
+
+td {
+    width: 50%;
+}
+
+.tabela-transparente td:first-child {
+    text-align: left;
+  }
