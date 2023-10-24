@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const Foter = styled.div`
+export const FooterStyled = styled.div`
   background: ${props => props.theme.colors.primary};
   color: ${props => props.theme.colors.text};
   margin-top: 5%;

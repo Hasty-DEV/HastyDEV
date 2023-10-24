@@ -3,7 +3,7 @@ import { Navbar, Nav, Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import NavLinks from "../../components/NavLinks/NavLinks"
 import LogoLight from "../../assets/LogoLight.svg";
-import LogoDark from  "../../assets/LogoDark.svg";
+import LogoDark from "../../assets/LogoDark.svg";
 
 import Switch from 'react-switch';
 import { ThemeContext } from "styled-components";
@@ -18,29 +18,27 @@ interface Props {
 const Header: React.FC<Props> = ({ toggleTheme }) => {
   const theme = useContext(ThemeContext);
   if (!theme) {
-
     return null;
   }
 
-    const ImgDarkLight = (theme.title) === 'light' ? LogoLight : LogoDark
-    
+  const ImgDarkLight = (theme.title) === 'light' ? LogoLight : LogoDark
+
   return (
     <L.Container id="container1">
       <Navbar expand="lg">
         <Container fluid>
           <Navbar.Brand as={Link} to="/" className="mr-auto">
             <img
-                src={ImgDarkLight}
+              src={ImgDarkLight}
               alt="Logo HastyDEV modo Light"
               className="mt-2"
             />
           </Navbar.Brand>
-
           <Navbar.Toggle aria-controls="navbarSupportedContent" />
           <Navbar.Collapse id="navbarSupportedContent" role="navigation">
             <Nav className="ml-auto topnav w-100 justify-content-between">
               <NavLinks />
-              
+
               <div className="d-flex align-items-center gap-3">
                 <Nav.Item>
                   <Link to="/login">
@@ -53,7 +51,6 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
                   </Link>
                 </Nav.Item>
                 <Nav.Item>
-
                   <Switch
                     onChange={toggleTheme}
                     checked={theme?.title === 'dark'}

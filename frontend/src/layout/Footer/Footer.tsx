@@ -1,4 +1,4 @@
-import { StyledLink,SubTitle, Title, Button, Foter, Decoration } from './Footer.styles';
+import { StyledLink,SubTitle, Title, Button, FooterStyled, Decoration } from './Footer.styles';
 import LogoDark from '../../assets/LogoDark.svg';
 import LogoLight from '../../assets/LogoLight.svg';
 
@@ -9,27 +9,15 @@ import setaButton from '../../assets/setaButton.svg'
 import SocialLinks from '../../assets/SocialLinks.svg'
 import SocialLinksDark from '../../assets/SocialLinksDark.svg'
 
-
-
-
-
-
-
 const Footer: React.FC = () => {
-
   const theme = useContext(ThemeContext);
   if (!theme) {
-
     return null;
   }
-
   const ImgDarkLight = (theme.title) === 'light' ? LogoLight : LogoDark
-
   const socialLinksDarkMode = (theme.title) === 'dark' ? SocialLinks : SocialLinksDark
-
   return (
-
-    <Foter>
+    <FooterStyled>
       <Container fluid className="custom-mt-15percent">
         <Row>
           <Col sm={3}>
@@ -107,7 +95,7 @@ const Footer: React.FC = () => {
         </Container>
 
       </Container>
-    </Foter>
+    </FooterStyled>
   );
 
 }
