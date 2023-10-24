@@ -6,23 +6,10 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-display: swap;
-   
-   
-    
+    font-display: swap;  
 }
 body {
     background: ${(props) => props.theme.colors.background};
-    color : ${(props) => props.theme.colors.text};
-    
-    
+    color : ${(props) => props.theme.colors.text};  
 }
-
-    
-
-
-
-
-
-
 `;

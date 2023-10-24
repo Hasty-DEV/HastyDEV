@@ -1,13 +1,6 @@
-import React from 'react';
-import { Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import styled from 'styled-components';
-
-
-const StyledNavLink = styled(Nav.Link)`
-  color: ${props => props.theme.colors.text};
-  text-decoration: none;
-`;
+import { StyledNavLink } from "./NavLinks.styles";
+import { Nav } from "react-bootstrap";
 
 const NavLinks: React.FC = () => {
   return (
