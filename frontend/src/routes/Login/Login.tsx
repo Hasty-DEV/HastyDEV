@@ -1,15 +1,18 @@
-import * as L from "./Login.styles";
-import * as yup from "yup";
-import { Container, Row, Col } from "react-bootstrap";
-import LoginImg from "../../assets/images/LoginImg.png";
+import React, { useState } from 'react';
+import { Formik, Field } from 'formik';
+import * as yup from 'yup';
+import { Link } from 'react-router-dom';
 import {
   FacebookLoginButton,
   GoogleLoginButton,
   GithubLoginButton,
-} from "react-social-login-buttons";
-import { FormFetch } from "../../axios/config";
-import { Formik, Field } from "formik";
-import { Link } from "react-router-dom";
+} from 'react-social-login-buttons';
+import { Container, Row, Col } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'; 
+import LoginImg from '../../assets/images/LoginImg.png';
+import { FormFetch } from '../../axios/config';
+import * as L from './Login.styles';
 
 interface FormValues {
   username: string;
@@ -17,25 +20,32 @@ interface FormValues {
 }
 
 const validationsLogin = yup.object().shape({
-  username: yup.string().required("O Usuário é obrigatório"),
+  username: yup.string().required('O Usuário é obrigatório'),
   password: yup
     .string()
-    .min(6, "A senha deve ter pelo menos 6 caracteres")
-    .required("A senha é obrigatória"),
+    .min(6, 'A senha deve ter pelo menos 6 caracteres')
+    .required('A senha é obrigatória'),
 });
 
 const Login: React.FC = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   const handleLogin = async ({ username, password }: FormValues) => {
     try {
-      const response = await FormFetch.post("/login", { username, password });
+      const response = await FormFetch.post('/login', { username, password });
 
       console.log(response.data);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       alert(err.response.data.error);
     }
   };
 
+
+  const isPasswordVisible = showPassword ? 'text' : 'password'
   return (
     <>
       <Container fluid>
@@ -44,8 +54,8 @@ const Login: React.FC = () => {
             <L.LoginForm>
               <Formik
                 initialValues={{
-                  username: "",
-                  password: "",
+                  username: '',
+                  password: '',
                 }}
                 onSubmit={handleLogin}
                 validationSchema={validationsLogin}
@@ -63,7 +73,18 @@ const Login: React.FC = () => {
 
                       <div className="form-group">
                         <label htmlFor="password">Senha:</label>
-                        <Field type="password" id="password" name="password" />
+                        <div className="password-input">
+                          <Field
+                            type={isPasswordVisible}
+                            id="password"
+                            name="password"
+                          />
+                          <FontAwesomeIcon
+                            icon={showPassword ? faEyeSlash : faEye}
+                            onClick={handleTogglePassword}
+                            className="password-toggle-icon"
+                          />
+                        </div>
                         {errors.password && touched.password && errors.password}
                       </div>
 
@@ -73,11 +94,9 @@ const Login: React.FC = () => {
                         </button>
                       </div>
                     </form>
-                    
+
                     <div className="sign_in">
-                    <Link to ="/Register">
-                      Nao tem uma Conta?<a href="#"> Inscreva-se</a>
-                      </Link>
+                      <Link to="/Register">Nao tem uma Conta? <a href="#"> Inscreva-se</a></Link>
                     </div>
                     <div className="forgot-password">
                       <a href="#">Esqueceu a senha?</a>
@@ -86,22 +105,22 @@ const Login: React.FC = () => {
                       <p>Ou faça login com:</p>
                       <div
                         style={{
-                          justifyContent: "center",
-                          alignItems: "center",
-                          marginLeft: "260px",
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          marginLeft: '260px',
                         }}
                       >
                         <FacebookLoginButton
-                          style={{ width: "360px", marginBottom: "20px" }}
+                          style={{ width: '360px', marginBottom: '20px' }}
                         >
                           <span>Entrar com o Facebook</span>
                         </FacebookLoginButton>
                         <GoogleLoginButton
-                          style={{ width: "360px", marginBottom: "20px" }}
+                          style={{ width: '360px', marginBottom: '20px' }}
                         >
                           <span>Entrar com o Google</span>
                         </GoogleLoginButton>
-                        <GithubLoginButton style={{ width: "360px" }}>
+                        <GithubLoginButton style={{ width: '360px' }}>
                           <span>Entrar com o Github</span>
                         </GithubLoginButton>
                       </div>
@@ -111,21 +130,19 @@ const Login: React.FC = () => {
               </Formik>
             </L.LoginForm>
           </Col>
-          
-          <Col style={{ position: "relative" }}>
+
+          <Col style={{ position: 'relative' }}>
             <img
               src={LoginImg}
               alt=""
               style={{
-                position: "absolute",
-                zIndex: "2",
-                height: "auto",
-                width: "90%",
-                
-                
+                position: 'absolute',
+                zIndex: '2',
+                height: 'auto',
+                width: '90%',
               }}
             />
-            <div className="d-flex justify-content-end" style={{ zIndex: "1" }}>
+            <div className="d-flex justify-content-end" style={{ zIndex: '1' }}>
               <L.rightDivSyled></L.rightDivSyled>
             </div>
           </Col>

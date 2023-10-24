@@ -44,13 +44,13 @@ function login(req, res) {
 
         if (senhaCorreta) {
           user.loginAttempts = 0;
-          logInfo("Usuário logado com sucesso");
+          
 
           const secret = process.env.SECRET;
 
           const token = jwt.sign({ id: user.id }, secret);
-
-          res.status(200).json({ msg: "Autenticação realizada com sucesso", token });
+          logInfo("Usuário logado com sucesso", res, 200);
+       console.log(token)
         } else {
           user.loginAttempts += 1;
           user.save().then(() => {
