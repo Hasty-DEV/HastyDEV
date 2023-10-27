@@ -16,3 +16,24 @@ export const ButtonPrimary: React.FC<ButtonProps> = ({ route, buttonText, ...res
     </B.StyledLink>
   );
 };
+
+export const ButtonSecondStyled: React.FC<ButtonProps> = ({ route, buttonText, ...rest }) => {
+  return (
+      
+    <B.StyledLink to={route}>
+      <B.ButtonSecond2Styled {...rest}>{buttonText}</B.ButtonSecond2Styled>
+    </B.StyledLink>
+  );
+};
+
+export const ButtonSecond2Styled: React.FC<ButtonProps> = ({ route, buttonText, ...rest }) => {
+  return (
+      
+    <B.StyledLink to={route}>
+      <B.ButtonSecond2Styled {...rest}>{buttonText}</B.ButtonSecond2Styled>
+    </B.StyledLink>
+  );
+};
+
+
+  

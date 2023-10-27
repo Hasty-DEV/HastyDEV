@@ -1,9 +1,12 @@
 import * as L from "./Header.styles";
-import { Navbar, Nav, Button, Container } from "react-bootstrap";
+import { Navbar, Nav, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import NavLinks from "../../components/NavLinks/NavLinks"
 import LogoLight from "../../assets/LogoLight.svg";
 import LogoDark from "../../assets/LogoDark.svg";
+import  { ButtonSecondStyled, ButtonSecond2Styled }  from "../../components/Buttons/Buttons";
+
+
 
 import Switch from 'react-switch';
 import { ThemeContext } from "styled-components";
@@ -40,16 +43,12 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
               <NavLinks />
 
               <div className="d-flex align-items-center gap-3">
-                <Nav.Item>
-                  <Link to="/login">
-                    <Button variant="primary">Login</Button>
-                  </Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Link to="/register" >
-                    <Button variant="danger">Inscreva-se</Button>
-                  </Link>
-                </Nav.Item>
+              
+                <ButtonSecond2Styled route={"/login"} buttonText={"Login"}/>
+                
+                <ButtonSecondStyled route={"/register"} buttonText={"Inscreva-se"}/>
+                    
+                 
                 <Nav.Item>
                   <Switch
                     onChange={toggleTheme}
