@@ -17,7 +17,7 @@ export const ButtonPrimary: React.FC<ButtonProps> = ({ route, buttonText, ...res
   );
 };
 
-export const ButtonSecondStyled: React.FC<ButtonProps> = ({ route, buttonText, ...rest }) => {
+export const ButtonSecond2Styled: React.FC<ButtonProps> = ({ route, buttonText, ...rest }) => {
   return (
       
     <B.StyledLink to={route}>
@@ -26,11 +26,11 @@ export const ButtonSecondStyled: React.FC<ButtonProps> = ({ route, buttonText, .
   );
 };
 
-export const ButtonSecond2Styled: React.FC<ButtonProps> = ({ route, buttonText, ...rest }) => {
+export const ButtonSecondStyled: React.FC<ButtonProps> = ({ route, buttonText, ...rest }) => {
   return (
       
     <B.StyledLink to={route}>
-      <B.ButtonSecond2Styled {...rest}>{buttonText}</B.ButtonSecond2Styled>
+      <B.ButtonSecondStyled {...rest}>{buttonText}</B.ButtonSecondStyled>
     </B.StyledLink>
   );
 };
