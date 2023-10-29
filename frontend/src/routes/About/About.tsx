@@ -43,7 +43,7 @@ const About: React.FC = () => {
           </h2>
         </Col>
         <Col xs={12}>
-          <img src={WorldMapLight} alt="" />
+          <img src={WorldMapLight} alt="mapa" style={{width: 1024.587, height: 482.987}} />
         </Col>
         <Col
           xs={12}

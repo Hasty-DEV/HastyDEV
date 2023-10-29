@@ -5,7 +5,7 @@ export const RectangleDiv = styled(Container)`
   width: 1280px;
   height: 402px;
   flex-shrink: 0;
-  background: #fed30a;
+  background:  ${(props) => props.theme.colors.secondary};
   position: absolute;
   z-index: -1;
   border-radius: 40px;
