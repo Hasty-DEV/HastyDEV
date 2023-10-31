@@ -5,7 +5,7 @@ export default{
     colors : {
         primary: '#fff',
         secondary:'#FED30A',
-
+        span: "#FED30A",
         background:'#fff',
         text:'#222',
         color:'#fff',
