@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Formik, Field } from 'formik';
 import * as yup from 'yup';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   FacebookLoginButton,
   GoogleLoginButton,
@@ -29,6 +29,7 @@ const validationsLogin = yup.object().shape({
 
 const Login: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate(); // Obtenha o objeto history do React Router
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
@@ -39,13 +40,18 @@ const Login: React.FC = () => {
       const response = await FormFetch.post('/login', { username, password });
 
       console.log(response.data);
+
+      // Redirecione para a rota "/chat" após o login bem-sucedido
+      navigate('/chat');
     } catch (err: any) {
       alert(err.response.data.error);
     }
   };
 
+  const isPasswordVisible = showPassword ? 'text' : 'password';
 
-  const isPasswordVisible = showPassword ? 'text' : 'password'
+ 
+
   return (
     <>
       <Container fluid>
