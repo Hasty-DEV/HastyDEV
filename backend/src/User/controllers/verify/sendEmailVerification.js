@@ -2,7 +2,7 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const User = require('../../models/userModel');
 const VerificationCode = require('../../models/verificationCodeModel');
-const generateVerificationCode = require('./emailVerifyGenerate');
+const generatePinCode = require('../../../utils/PinGenerate');
 const fs = require('fs');
 const path = require('path');
 const { logError, logInfo } = require('../../../utils/logger');
@@ -11,7 +11,7 @@ async function sendVerificationEmail(req, res) {
   const { email } = req.body;
 
   try {
-    const verificationCode = generateVerificationCode();
+    const verificationCode = generatePinCode();
     const user = await User.findOne({ where: { email } });
 
     if (user) {
