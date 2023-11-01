@@ -1,60 +1,41 @@
-const express = require('express');
-const nodemailer = require('nodemailer');
 const User = require('../../models/userModel');
 const VerificationCode = require('../../models/verificationCodeModel');
-const generateVerificationCode = require('./emailVerifyGenerate');
-const fs = require('fs');
-const path = require('path');
-const { logError, logInfo } = require('../../../utils/logger');
 
-async function sendVerificationEmail(req, res) {
-  const { email } = req.body;
+async function PinVerify(req, res) {
+  const { verificationCode, email } = req.body;
 
   try {
-    const verificationCode = generateVerificationCode();
     const user = await User.findOne({ where: { email } });
 
     if (user) {
-      // Remova os códigos de verificação existentes para o usuário
-      await VerificationCode.destroy({ where: { userId: user.userid } });
-
-      // Crie um novo código de verificação
-       await VerificationCode.create({
-        userId: user.userid,
-        code: verificationCode,
+      const code = await VerificationCode.findOne({
+        where: { userId: user.userid, code: verificationCode },
       });
 
-      // Configure o transporte do email
-      const transport = nodemailer.createTransport({
-        host: 'smtp.hostinger.com',
-        port: 465,
-        secure: true,
-        auth: {
-          user: process.env.GMAIL_USER,
-          pass: process.env.GMAIL_PASS,
-        },
-      });
+      if (code) {
+  
+        const currentTime = new Date();
+        const codeTime = code.createdAt;
+        const timeDifference = currentTime - codeTime;
+        const codeExpirationTime = 10 * 60 * 1000; // 10 minutos em milissegundos
 
-      // Leia o conteúdo do email de um arquivo
-      const emailHTMLPath = path.join(__dirname, 'emailConfirmation.html');
-      const emailHTML = fs.readFileSync(emailHTMLPath, 'utf8');
-      const emailHTMLWithPIN = emailHTML.replace('@PIN_CODE', verificationCode);
-
-      // Envie o email de verificação
-      await transport.sendMail({
-        from: process.env.GMAIL_USER,
-        to: email,
-        subject: 'Confirmação de email',
-        html: emailHTMLWithPIN,
-      });
-
-      logInfo('Email de verificação enviado com sucesso.', res, 200);
+        if (timeDifference <= codeExpirationTime) {
+          user.isVerified = true;
+          await user.save();
+          return res.status(200).json({ message: 'Código de verificação válido.' });
+        } else {
+          return res.status(400).json({ error: 'Código de verificação expirado.' });
+        }
+      } else {
+        return res.status(400).json({ error: 'Código de verificação inválido.' });
+      }
     } else {
-      logError('Usuário não encontrado.', res, 404);
+      return res.status(404).json({ error: 'Usuário não encontrado.' });
     }
   } catch (err) {
-    logError('Erro ao enviar email de verificação.', res, 500);
+    console.error('Erro ao verificar o código de verificação:' + err);
+    return res.status(500).json({ error: 'Erro ao verificar o código de verificação.' });
   }
 }
 
-module.exports = sendVerificationEmail;
+module.exports = PinVerify;
