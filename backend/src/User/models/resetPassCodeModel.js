@@ -13,7 +13,7 @@ const resetPassCode = sequelize.define('resetPassCode', {
     allowNull: false,
   },
   resetCode: {
-    type: DataTypes.STRING(32),
+    type: DataTypes.STRING(6),
     allowNull: false,
   },
   expiresAt: {
@@ -27,7 +27,7 @@ const resetPassCode = sequelize.define('resetPassCode', {
   },
 }, {
   timestamps: false,
-  tableName: 'password_reset_codes', // Nome da tabela no banco de dados
+  tableName: 'resetpasscode', // Nome da tabela no banco de dados
 });
 
 module.exports = resetPassCode;

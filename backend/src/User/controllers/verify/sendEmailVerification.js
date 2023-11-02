@@ -1,7 +1,6 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const User = require('../../models/userModel');
-const emailVerifyCode = require('../../models/emailVerifyCodeModel');
 const generatePinCode = require('../../../utils/PinGenerate');
 const fs = require('fs');
 const path = require('path');
