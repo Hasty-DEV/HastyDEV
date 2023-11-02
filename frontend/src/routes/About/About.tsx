@@ -21,6 +21,7 @@ const About: React.FC = () => {
             title="Aqui Nós Garantimos"
             span="Seu Sucesso Profissional"
             hasUnderline={true}
+            className="mt-5"
           />
         </Col>
         <Col xs={12}>
@@ -45,6 +46,7 @@ const About: React.FC = () => {
             subtitle="Não Precisa Correr Atrás"
             span="Para Fazer Seu Projeto Dos Sonhos"
             hasUnderline={true}
+            className="mt-5"
           ></HeadingSubtitle>
         </Col>
         <Col xs={12}>
@@ -66,7 +68,7 @@ const About: React.FC = () => {
           />
         </Col>
         <Col xs={12}>
-          <table className="tabela-transparente">
+          <table className="tabela-transparente mb-3">
             <tbody>
               <tr>
                 <td>
@@ -134,27 +136,39 @@ const About: React.FC = () => {
           <table className="tabela-transparente">
             <tbody>
               <tr>
-                <td>Inovação</td>
                 <td>
-                  Na HastyDEV, a inovação é nossa força motriz. Buscamos
-                  constantemente soluções criativas para enfrentar desafios e
-                  moldar o futuro.
+                  <HeadingSubInterTitle SubInterTitle="Inovação" />
+                </td>
+                <td>
+                  <Paragraph
+                    paragraph="Na HastyDEV, a inovação é nossa força motriz. Buscamos
+                    constantemente soluções criativas para enfrentar desafios e
+                    moldar o futuro."
+                  />
                 </td>
               </tr>
               <tr>
-                <td>Excelência</td>
                 <td>
-                  Comprometidos com a excelência em tudo o que fazemos, na
-                  HastyDEV. Buscamos a mais alta qualidade em cada aspecto do
-                  nosso trabalho.
+                  <HeadingSubInterTitle SubInterTitle="Excelência" />
+                </td>
+                <td>
+                  <Paragraph
+                    paragraph="Comprometidos com a excelência em tudo o que fazemos, na
+                    HastyDEV. Buscamos a mais alta qualidade em cada aspecto do
+                    nosso trabalho."
+                  />
                 </td>
               </tr>
               <tr>
-                <td>Impacto</td>
                 <td>
-                  O impacto é o coração da nossa missão na HastyDEV. Unimos
-                  desenvolvedores a organizações sociais e empresas para causar
-                  mudanças positivas.
+                  <HeadingSubInterTitle SubInterTitle="Impacto" />
+                </td>
+                <td>
+                  <Paragraph
+                    paragraph="O impacto é o coração da nossa missão na HastyDEV. Unimos
+                    desenvolvedores a organizações sociais e empresas para causar
+                    mudanças positivas."
+                  />
                 </td>
               </tr>
             </tbody>
@@ -162,7 +176,7 @@ const About: React.FC = () => {
         </Col>
       </Row>
       <Col xs={12}>
-        <h2>Nosso Time de Sucesso</h2>
+        <HeadingSubtitle span="Nosso Time de Sucesso" className="mt-5" />
       </Col>
       <div> silder </div>
       <Col xs={12}>
