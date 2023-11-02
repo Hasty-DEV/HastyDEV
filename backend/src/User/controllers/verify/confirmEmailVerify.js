@@ -1,15 +1,15 @@
 const User = require('../../models/userModel');
-const VerificationCode = require('../../models/verificationCodeModel');
+const emailVerifyCode = require('../../models/emailVerifyCodeModel');
 
 async function PinVerify(req, res) {
-  const { verificationCode, email } = req.body;
+  const { emailVerifyCode, email } = req.body;
 
   try {
     const user = await User.findOne({ where: { email } });
 
     if (user) {
-      const code = await VerificationCode.findOne({
-        where: { userId: user.userid, code: verificationCode },
+      const code = await emailVerifyCode.findOne({
+        where: { userId: user.userid, code: emailVerifyCode },
       });
 
       if (code) {
