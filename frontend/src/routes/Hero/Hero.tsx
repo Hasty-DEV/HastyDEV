@@ -11,6 +11,7 @@ const Hero: React.FC = () => {
       <Paragraph
         paragraph="Encontre Projetos Reais para Anexar ao seu Portfólio, Conquiste Seu
         Local no Mercado E Seja Recompensado Por Isso!"
+        className="text-center"
       />
       <ButtonPrimary
         route="/register"
