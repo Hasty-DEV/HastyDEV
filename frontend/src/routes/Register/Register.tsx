@@ -14,10 +14,6 @@ interface FormValues {
   email: string;
   confirmPassword: string;
 }
- 
-
- 
-
 const validationsRegister = yup.object().shape({
   first_name: yup.string().required("O campo de nome é obrigatório"),
   last_name: yup.string().required("O campo de sobrenome é obrigatório"),

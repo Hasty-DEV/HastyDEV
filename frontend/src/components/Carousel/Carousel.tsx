@@ -8,7 +8,6 @@ import HeroImg4 from "../../assets/images/Hero/HeroImg4.webp";
 
 interface CustomCarouselProps {
   className: string;
-  imgSrc: string;
 }
 
 class Carousel extends Component<CustomCarouselProps> {

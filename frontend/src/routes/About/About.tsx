@@ -11,9 +11,14 @@ import {
   HeadingSubInterTitle,
   Paragraph,
 } from "../../components/Texts/Texts";
+import ContactForm from "../../components/ContactForm/ContactForm";
+import SliderContact from "../../components/Slider/SliderContact";
+
 
 const About: React.FC = () => {
+
   return (
+    <>
     <Container className="text-center">
       <Row>
         <Col xs={12}>
@@ -178,36 +183,26 @@ const About: React.FC = () => {
       <Col xs={12}>
         <HeadingSubtitle span="Nosso Time de Sucesso" className="mt-5" />
       </Col>
-      <div> silder </div>
       <Col xs={12}>
-        <h2>Fale Conosco</h2>
-      </Col>
-      <Col xs={12}>
-        <p>
-          Ficaremos Felizes de Falar Contigo. Preencha o Formulário Para
-          Atendemos Você
-        </p>
-      </Col>
-      <Col xs={12}>
-        <form>
-          <input type="text" name="nome" placeholder="Nome" />
-
-          <input type="email" name="email" placeholder="Email" />
-
-          <input type="tel" name="telefone" placeholder="Telefone" />
-
-          <select name="categoria" title="Categorias">
-            <option value="Vendas">Vendas</option>
-            <option value="Suporte">Suporte</option>
-            <option value="Outro">Outro</option>
-          </select>
-
-          <input type="text" name="assunto" placeholder="Assunto" />
-
-          <button type="submit">Entre em Contato</button>
-        </form>
+        <SliderContact />
       </Col>
     </Container>
+    <A.ContactFormDiv fluid>
+    <Col xs={12}>
+      <HeadingSubtitle span="Fale Conosco" className="mt-5" />
+    </Col>
+    <Col xs={12}>
+      <Paragraph
+        paragraph="Ficaremos Felizes de Falar Contigo. Preencha o Formulário Para
+      Atendemos Você"
+        className="text-center text-dark"
+      />
+    </Col>
+    <Col xs={12} className="mx-auto text-center">
+      <ContactForm />
+    </Col>
+  </A.ContactFormDiv>
+  </>
   );
 };
 

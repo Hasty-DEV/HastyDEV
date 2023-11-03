@@ -39,7 +39,30 @@ export const ButtonPrimaryStyled = styled.button`
   }
 `;
 
-export const ButtonSecond2Styled = styled.button`
+
+export const ButtonPrimaryLongStyled = styled.button`
+  color:  ${(props) => props.theme.colors.text};
+  display: flex;
+  width: 100%;
+  height: 58px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 5px;
+  background: ${(props) => props.theme.colors.secondary};
+  border: none;
+  transition: opacity 0.3s; 
+
+  &:hover {
+    opacity: 0.8; 
+  }
+  &:active {
+    opacity: 0.5;
+  }
+`;
+
+export const ButtonTertiaryStyled = styled.button`
    color: ${(props) => props.theme.colors.color_button};
   background: ${(props) => props.theme.colors.color};
   border: 3px solid ${(props) => props.theme.colors.borda};
@@ -63,7 +86,7 @@ export const ButtonSecond2Styled = styled.button`
   
 `;
 
-export const ButtonSecondStyled = styled.button`
+export const ButtonSecondaryStyled = styled.button`
   color:  ${(props) => props.theme.colors.text};
   background: ${(props) => props.theme.colors.color_button};
   

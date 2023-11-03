@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import NavLinks from "../../components/NavLinks/NavLinks"
 import LogoLight from "../../assets/LogoLight.svg";
 import LogoDark from "../../assets/LogoDark.svg";
-import  { ButtonSecondStyled, ButtonSecond2Styled }  from "../../components/Buttons/Buttons";
+import  {ButtonSecondary, ButtonTertiary }  from "../../components/Buttons/Buttons";
 
 
 
@@ -44,9 +44,9 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
 
               <div className="d-flex align-items-center gap-3">
               
-                <ButtonSecond2Styled route={"/login"} buttonText={"Login"}/>
+                <ButtonTertiary route={"/login"} buttonText={"Login"}/>
                 
-                <ButtonSecondStyled route={"/register"} buttonText={"Inscreva-se"}/>
+                <ButtonSecondary route={"/register"} buttonText={"Inscreva-se"}/>
                     
                  
                 <Nav.Item>

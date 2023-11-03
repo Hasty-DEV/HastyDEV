@@ -15,3 +15,9 @@ export const RectangleDiv = styled(Container)`
 export const ImageStyled = styled.img`
     margin-top: 20%;
 `;
+
+export const ContactFormDiv = styled(Container)`
+  background: #fff;
+  padding: 10px;
+  padding-bottom: 30px;
+`;
