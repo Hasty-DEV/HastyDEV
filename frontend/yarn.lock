@@ -270,7 +270,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-slick@^0.23.10":
+"@types/react-slick@^0.23.11":
   version "0.23.11"
   resolved "https://registry.npmjs.org/@types/react-slick/-/react-slick-0.23.11.tgz"
   integrity sha512-52AbNhYN7u0ATqAUvap2MXNG3znUsJslAWgebUHrovvnJ6EG6oic+TZyC82XiwwvijRMyL2V0C2wPJbzsSwllw==
