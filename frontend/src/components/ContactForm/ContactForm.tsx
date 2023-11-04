@@ -102,7 +102,7 @@ const ContactForm = () => {
   }: ContactFormTypes) => {
     try {
       if (validateForm()) {
-        const response = await FormFetch.post("/ContactForm", {
+        const response = await FormFetch.post("/contactForm", {
           Name,
           Email,
           Phone,
@@ -167,7 +167,6 @@ const ContactForm = () => {
             placeholder="Digite sua Mensagem..."
           ></textarea>
          <ButtonPrimaryLong type="submit" buttonText="Entre em Contato" />
-
         </form>
       </FormContainer>
       <ToastContainer />
