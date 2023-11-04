@@ -1,15 +1,16 @@
 const User = require('../../models/userModel');
 const emailVerifyCode = require('../models/emailVerifyCodeModel');
+const { logError, logInfo } = require('../../../utils/logger'); // Substitua com o caminho correto do seu arquivo de logging
 
-async function PinVerify(req, res) {
-  const { emailVerifyCode, email } = req.body;
+async function emailVerification(req, res) {
+  const { verificationCode, email } = req.body;
 
   try {
     const user = await User.findOne({ where: { email } });
 
     if (user) {
       const code = await emailVerifyCode.findOne({
-        where: { userId: user.userid, code: emailVerifyCode },
+        where: { userId: user.userid, code: verificationCode },
       });
 
       if (code) {
@@ -22,20 +23,19 @@ async function PinVerify(req, res) {
         if (timeDifference <= codeExpirationTime) {
           user.isVerified = true;
           await user.save();
-          return res.status(200).json({ message: 'Código de verificação válido.' });
+          logInfo('Código de verificação válido', res, 200);
         } else {
-          return res.status(400).json({ error: 'Código de verificação expirado.' });
+          logError('Código de verificação expirado', res, 400);
         }
       } else {
-        return res.status(400).json({ error: 'Código de verificação inválido.' });
+        logError('Código de verificação inválido', res, 400);
       }
     } else {
-      return res.status(404).json({ error: 'Usuário não encontrado.' });
+      logError('Usuário não encontrado', res, 404);
     }
   } catch (err) {
-    console.error('Erro ao verificar o código de verificação:' + err);
-    return res.status(500).json({ error: 'Erro ao verificar o código de verificação.' });
+    logError('Erro ao verificar o código de verificação: ' + err, res, 500);
   }
 }
 
-module.exports = PinVerify;
+module.exports = emailVerification;

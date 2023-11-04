@@ -1,11 +1,11 @@
 const User = require('../../models/userModel');
 const VerificationCode = require('../models/resetPassCodeModel');
 const bcrypt = require('bcrypt');
-const resetPasswordValidationRules = require('../validations/resetPassValidation')
+const resetPasswordValidationRules = require('../validations/resetPassValidation');
 const { validationResult } = require('express-validator');
 const { logError, logInfo } = require('../../../utils/logger');
+
 // ...
- 
 
 async function resetPassword(req, res) {
   const { email, resetCode, newPassword } = req.body;
@@ -13,10 +13,9 @@ async function resetPassword(req, res) {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    logError("Erros de validação no registro", res, 400);
+    logError(errors, res, 400);
     return;
   }
-
 
   try {
     const code = await VerificationCode.findOne({
@@ -25,20 +24,16 @@ async function resetPassword(req, res) {
       },
     });
 
- 
-
     if (!code) {
-      // O código de redefinição é inválido
-      return res.status(400).json({ message: 'Código de redefinição de senha inválido.' });
+      logError('Código de redefinição de senha inválido', res, 400);
+      return;
     }
 
-    // Verifique se o código de redefinição não expirou
     if (new Date() > code.expiresAt) {
-      // O código de redefinição expirou
-      return res.status(400).json({ message: 'Código de redefinição de senha expirou.' });
+      logError('Código de redefinição de senha expirou', res, 400);
+      return;
     }
 
-    // Encontre o usuário com base no e-mail
     const user = await User.findOne({ where: { email } });
 
     if (user) {
@@ -50,13 +45,12 @@ async function resetPassword(req, res) {
 
       await code.destroy();
 
-      return res.status(200).json({ message: 'Senha redefinida com sucesso.' });
+      logInfo('Senha redefinida com sucesso', res, 200);
     } else {
-      return res.status(404).json({ message: 'Usuário não encontrado.' });
+      logError('Usuário não encontrado', res, 404);
     }
   } catch (err) {
-    console.error(err);
-    return res.status(500).json({ message: 'Erro ao redefinir a senha.' });
+    logError('Erro ao redefinir a senha: ' + err, res, 500);
   }
 }
 

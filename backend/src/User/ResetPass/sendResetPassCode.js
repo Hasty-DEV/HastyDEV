@@ -1,13 +1,12 @@
-const User = require('../models/userModel'); // Importe o modelo de usuário
+const User = require('../models/userModel');
 const generatePinCode = require('../../utils/PinGenerate');
-const VerificationCode = require('./models/resetPassCodeModel'); // Modelo para armazenar códigos de redefinição de senha
-const nodemailer = require('nodemailer'); // Para envio de e-mails
+const VerificationCode = require('./models/resetPassCodeModel');
+const nodemailer = require('nodemailer');
+const { logError, logInfo } = require('../../utils/logger');
 
 async function sendPasswordResetEmail(req, res) {
   const { email } = req.body;
 
-
-  
   try {
     // Verifique se o e-mail existe no banco de dados
     const user = await User.findOne({ where: { email } });
@@ -23,7 +22,9 @@ async function sendPasswordResetEmail(req, res) {
         expiresAt: new Date(Date.now() + 24 * 3600 * 1000), // Código expira em 24 horas
       };
 
+      // Remova códigos de redefinição anteriores para este usuário
       await VerificationCode.destroy({ where: { userId: user.userid } });
+
       // Associe o código ao usuário no banco de dados
       await VerificationCode.create(resetPassCode);
 
@@ -54,15 +55,15 @@ async function sendPasswordResetEmail(req, res) {
       });
 
       // Informe ao usuário que o e-mail de redefinição de senha foi enviado com sucesso.
-      return res.status(200).json({ message: 'E-mail de redefinição de senha enviado com sucesso.' });
+      logInfo('E-mail de redefinição de senha enviado com sucesso', res, 200);
     } else {
       // Informe ao usuário que o e-mail não foi encontrado.
-      return res.status(404).json({ message: 'E-mail não encontrado.' });
+      logError('E-mail não encontrado', res, 404);
     }
   } catch (err) {
     // Trate erros, como problemas de banco de dados ou envio de e-mail.
     console.error(err);
-    return res.status(500).json({ message: 'Erro ao enviar e-mail de redefinição de senha.' });
+    logError('Erro ao enviar e-mail de redefinição de senha: ' + err, res, 500);
   }
 }
 

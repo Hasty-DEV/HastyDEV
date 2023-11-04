@@ -6,7 +6,7 @@ const handleContactForm = async (req, res) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    logError('Erros de validação no formulário', res, 422);
+    logError( errors, res, 422);
     return;
   }
 
