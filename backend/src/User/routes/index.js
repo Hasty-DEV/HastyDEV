@@ -9,6 +9,8 @@ const sendEmailVerification = require("../emailVerify/sendEmailVerification");
 const emailVerification = require("../emailVerify/controllers/emailVerifyController");
 const sendPasswordResetEmail = require("../ResetPass/sendResetPassCode");
 const resetPassword = require("../ResetPass/controllers/ResetPassController");
+const contactFormValidationRules = require ("../contactForm/validations/contactFormValidation");
+const handleContactForm = require ("../contactForm/controllers/contactFormController")
 
 // Rota de registro
 router.post("/register", registrationController.registrationValidationRules, registrationController.register);
@@ -36,5 +38,7 @@ router.post('/sendPasswordResetEmail', sendPasswordResetEmail);
 
 // Rota para redefinir a senha
 router.post('/resetPassword', resetPassword.resetPasswordValidationRules, resetPassword.resetPassword);
+
+router.post('/contactForm', contactFormValidationRules, handleContactForm);
 
 module.exports = router;
