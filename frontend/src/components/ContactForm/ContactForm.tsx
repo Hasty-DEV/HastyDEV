@@ -1,18 +1,9 @@
+import React, { useState } from "react";
 import styled from "styled-components";
-import { useState } from "react";
 import { FormFetch } from "../../axios/config";
 import { ToastContainer, toast, ToastOptions } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ButtonPrimaryLong } from "../Buttons/Buttons";
-
-interface ContactFormTypes {
-  Name: string;
-  Email: string;
-  Phone: string;
-  Category: string;
-  Subject: string;
-  Message: string;
-}
 
 const ContactForm = () => {
   const [values, setValues] = useState({
@@ -33,7 +24,9 @@ const ContactForm = () => {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
@@ -45,11 +38,7 @@ const ContactForm = () => {
 
   function isValidPhoneNumber(Phone: string) {
     const numericPhoneNumber = Phone.replace(/\D/g, "");
-    if (numericPhoneNumber.length > 10) {
-      return true;
-    } else {
-      return false;
-    }
+    return numericPhoneNumber.length >= 10;
   }
 
   const validateForm = () => {
@@ -88,65 +77,43 @@ const ContactForm = () => {
       );
       return false;
     }
-
     return true;
   };
 
-  const handleContactForm = async ({
-    Name,
-    Email,
-    Phone,
-    Category,
-    Subject,
-    Message,
-  }: ContactFormTypes) => {
-    try {
-      if (validateForm()) {
-        const response = await FormFetch.post("/contactForm", {
-          Name,
-          Email,
-          Phone,
-          Category,
-          Subject,
-          Message,
-        });
-        console.log(response.data);
-      }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (err: any) {
-      alert(err);
-    }
+  const handleContactForm = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("Enviando...")
   };
 
   return (
     <>
       <FormContainer>
-        <form action="" onSubmit={() => handleContactForm(values)}>
+        <form action="" onSubmit={handleContactForm}>
           <input
             type="text"
             placeholder="Nome"
             name="Name"
-            onChange={(e) => handleChange(e)}
-            min="3"
+            required
           />
           <input
             type="email"
             placeholder="E-mail"
             name="Email"
-            onChange={(e) => handleChange(e)}
+            required
           />
           <input
             type="tel"
             placeholder="Telefone"
             name="Phone"
-            onChange={(e) => handleChange(e)}
+            required
           />
           <select
             title="Category"
             id="Category"
             name="Category"
-            onChange={(e) => handleChange(e)}
+            required
           >
+            <option value="">Selecione uma Categoria</option>
             <option value="Comercial">Comercial</option>
             <option value="Financeiro">Financeiro</option>
             <option value="Suporte">Suporte</option>
@@ -157,16 +124,21 @@ const ContactForm = () => {
             type="text"
             placeholder="Assunto"
             name="Subject"
+            value={values.Subject}
             onChange={(e) => handleChange(e)}
+            required
           />
           <textarea
             name="Message"
             id="Message"
+            value={values.Message}
+            onChange={(e) => handleChange(e)}
             cols={30}
             rows={10}
             placeholder="Digite sua Mensagem..."
+            required
           ></textarea>
-         <ButtonPrimaryLong type="submit" buttonText="Entre em Contato" />
+          <ButtonPrimaryLong type="submit" buttonText="Entre em Contato" />
         </form>
       </FormContainer>
       <ToastContainer />
