@@ -1,16 +1,39 @@
-const messageModel = require("../models/messageModel");
+const Messages = require("../models/messageModel");
 
-function chatController(io, socket) {
-  console.log("Usuário Conectado");
+module.exports.getMessages = async (req, res, next) => {
+  try {
+    const { from, to } = req.body;
 
-  socket.on("disconnect", () => {
-    console.log("Usuário Desconectado");
-  });
+    const messages = await Messages.find({
+      users: {
+        $all: [from, to],
+      },
+    }).sort({ updatedAt: 1 });
 
-  socket.on("chatMessage", (msg) => {
-    messageModel.saveMessage(msg);
-    io.emit("chatMessage", msg);
-  });
-}
+    const projectedMessages = messages.map((msg) => {
+      return {
+        fromSelf: msg.sender.toString() === from,
+        message: msg.message.text,
+      };
+    });
+    res.json(projectedMessages);
+  } catch (ex) {
+    next(ex);
+  }
+};
 
-module.exports = chatController;
+module.exports.addMessage = async (req, res, next) => {
+  try {
+    const { from, to, message } = req.body;
+    const data = await Messages.create({
+      message: { text: message },
+      users: [from, to],
+      sender: from,
+    });
+
+    if (data) return res.json({ msg: "Message added successfully." });
+    else return res.json({ msg: "Failed to add message to the database" });
+  } catch (ex) {
+    next(ex);
+  }
+};
