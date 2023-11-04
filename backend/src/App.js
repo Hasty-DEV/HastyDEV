@@ -33,9 +33,9 @@ app.use("/", routes);
 app.use("/api/chat", chatRoutes);
 
 // Conexão Socket
-io.on("connection", (socket) => {
-  chatController(io, socket);
-});
+//io.on("connection", (socket) => {
+ // chatController(io, socket);
+//});
 
 const PORT = process.env.PORT || 3001;
 
