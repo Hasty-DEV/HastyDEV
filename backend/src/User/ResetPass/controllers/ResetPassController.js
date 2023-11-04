@@ -1,15 +1,22 @@
 const User = require('../../models/userModel');
-const VerificationCode = require('../../models/resetPassCodeModel');
+const VerificationCode = require('../models/resetPassCodeModel');
 const bcrypt = require('bcrypt');
-const resetPasswordValidationRules = require('./resetPassValidation')
-
+const resetPasswordValidationRules = require('../validations/resetPassValidation')
+const { validationResult } = require('express-validator');
+const { logError, logInfo } = require('../../../utils/logger');
 // ...
  
 
 async function resetPassword(req, res) {
   const { email, resetCode, newPassword } = req.body;
 
- 
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    logError("Erros de validação no registro", res, 400);
+    return;
+  }
+
 
   try {
     const code = await VerificationCode.findOne({

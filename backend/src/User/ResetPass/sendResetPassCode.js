@@ -1,11 +1,13 @@
-const User = require('../../models/userModel'); // Importe o modelo de usuário
-const generatePinCode = require('../../../utils/PinGenerate');
-const VerificationCode = require('../../models/resetPassCodeModel'); // Modelo para armazenar códigos de redefinição de senha
+const User = require('../models/userModel'); // Importe o modelo de usuário
+const generatePinCode = require('../../utils/PinGenerate');
+const VerificationCode = require('./models/resetPassCodeModel'); // Modelo para armazenar códigos de redefinição de senha
 const nodemailer = require('nodemailer'); // Para envio de e-mails
 
 async function sendPasswordResetEmail(req, res) {
   const { email } = req.body;
 
+
+  
   try {
     // Verifique se o e-mail existe no banco de dados
     const user = await User.findOne({ where: { email } });

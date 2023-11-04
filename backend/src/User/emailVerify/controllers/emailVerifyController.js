@@ -1,5 +1,5 @@
 const User = require('../../models/userModel');
-const emailVerifyCode = require('../../models/emailVerifyCodeModel');
+const emailVerifyCode = require('../models/emailVerifyCodeModel');
 
 async function PinVerify(req, res) {
   const { emailVerifyCode, email } = req.body;

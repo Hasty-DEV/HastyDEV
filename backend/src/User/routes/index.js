@@ -1,18 +1,17 @@
- const express = require("express");
-
+const express = require("express");
 const router = express.Router();
 
-const registerController = require("../controllers/registerController");
+const registrationController = require("../controllers/registerController");
 const loginController = require("../controllers/loginController");
 const authController = require("../controllers/authController");
 const userController = require("../controllers/userController");
-const sendVerificationEmail = require("../controllers/verify/sendEmailVerification");
-const PinVerify = require("../controllers/verify/confirmEmailVerify")
- const sendPasswordResetEmail = require("../controllers/ResetPass/sendResetPassCode")
- const resetPass = require("../controllers/ResetPass/ResetPass")
+const sendEmailVerification = require("../emailVerify/sendEmailVerification");
+const emailVerification = require("../emailVerify/controllers/emailVerifyController");
+const sendPasswordResetEmail = require("../ResetPass/sendResetPassCode");
+const resetPassword = require("../ResetPass/controllers/ResetPassController");
 
 // Rota de registro
-router.post("/register", registerController.registrationValidationRules, registerController.register);
+router.post("/register", registrationController.registrationValidationRules, registrationController.register);
 
 // Rota de login
 router.post("/login", loginController.login);
@@ -20,20 +19,22 @@ router.post("/login", loginController.login);
 // Rota protegida de usuário
 router.get("/user/:id", authController.checkToken, userController.getUserById);
 
-//Rota atualização token
+// Rota de atualização de token
 router.post("/refresh-token", authController.checkRefreshToken, (req, res) => {
-     const accessToken = authController.createJwt(req.userId);
-    res.status(200).json({ accessToken });
-  });
+  const accessToken = authController.createJwt(req.userId);
+  res.status(200).json({ accessToken });
+});
 
-  // Rota para enviar email de verificação
-router.post('/emailVerify' ,sendVerificationEmail);
+// Rota para enviar email de verificação
+router.post('/sendEmailVerification', sendEmailVerification);
 
-//rota para verificar o pin
-router.post('/checkEmailVerify', PinVerify)
+// Rota para verificar o PIN de email
+router.post('/emailVerification', emailVerification);
 
-router.post('/ResetPassVerify', sendPasswordResetEmail);
+// Rota para enviar email de redefinição de senha
+router.post('/sendPasswordResetEmail', sendPasswordResetEmail);
 
-router.post('/ResetPass', resetPass.resetPasswordValidationRules, resetPass.resetPassword);
+// Rota para redefinir a senha
+router.post('/resetPassword', resetPassword.resetPasswordValidationRules, resetPassword.resetPassword);
 
-module.exports = router; 
+module.exports = router;

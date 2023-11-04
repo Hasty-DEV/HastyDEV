@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const { validationResult } = require('express-validator');
 const User = require('../models/userModel');
-const { registrationValidationRules } = require('./validations/userValidation');
+const { registrationValidationRules } = require('../validations/userValidation');
 const { logError, logInfo } = require('../../utils/logger');
 
 const saltRounds = 10;
