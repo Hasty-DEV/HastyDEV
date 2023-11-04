@@ -1,3 +1,5 @@
+import { DefaultTheme } from "styled-components";
+
 export default{
     title: 'dark',
     colors : {
@@ -10,4 +12,4 @@ export default{
         color_button:'linear-gradient(90deg, #9D5BF0 0%, #24034E 100%)',
         borda:'#9D5BF0'
     }
-}; 
+} as DefaultTheme; 
