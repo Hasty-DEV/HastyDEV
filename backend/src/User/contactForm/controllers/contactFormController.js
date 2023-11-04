@@ -1,7 +1,6 @@
 const { validationResult } = require('express-validator');
 const nodemailer = require('nodemailer');
-const { logError, logInfo } = require('../../../utils/logger'); // Substitua com o caminho correto do seu arquivo de logging
-
+const { logError, logInfo } = require('../../../utils/logger');
 const handleContactForm = async (req, res) => {
   const errors = validationResult(req);
 
@@ -12,7 +11,6 @@ const handleContactForm = async (req, res) => {
 
   const { Name, Email, Phone, Category, Subject, Message } = req.body;
 
-  // Configure seu transporte de e-mail com suas próprias credenciais e configurações
   const transport = nodemailer.createTransport({
     host: 'smtp.hostinger.com',
     port: 465,
@@ -24,7 +22,6 @@ const handleContactForm = async (req, res) => {
   });
 
   try {
-    // Enviar o e-mail
      await transport.sendMail({
       from: process.env.GMAIL_USER,
       to: process.env.GMAIL_USER,  
