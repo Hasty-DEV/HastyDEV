@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Formik, Field } from 'formik';
 import * as yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
@@ -11,8 +11,9 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'; 
 import LoginImg from '../../assets/images/LoginImg.png';
-import { FormFetch } from '../../axios/config';
+ 
 import * as L from './Login.styles';
+import { AuthContext } from '../../Contexts/Auth/AuthContext';
 
 interface FormValues {
   username: string;
@@ -28,6 +29,8 @@ const validationsLogin = yup.object().shape({
 });
 
 const Login: React.FC = () => {
+  const { signin } = useContext(AuthContext);
+
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate(); // Obtenha o objeto history do React Router
 
@@ -37,12 +40,13 @@ const Login: React.FC = () => {
 
   const handleLogin = async ({ username, password }: FormValues) => {
     try {
-      const response = await FormFetch.post('/login', { username, password });
+      await signin(username, password);
 
-      console.log(response.data);
+      // response.data.token
+      // console.log();
 
-      // Redirecione para a rota "/chat" após o login bem-sucedido
-      navigate('/chat');
+  
+      navigate('/project');
     } catch (err: any) {
       alert(err.response.data.error);
     }
