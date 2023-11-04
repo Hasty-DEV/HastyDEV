@@ -25,7 +25,7 @@ const validationsContact = yup.object().shape({
     .min(10, "O Campo deve ter pelo menos 10 caracteres"),
 });
 
-const ContactForm = () => {
+const ContactUSForm = () => {
   const handleContact = async ({
     Name,
     Email,
@@ -115,7 +115,7 @@ const ContactForm = () => {
   );
 };
 
-export default ContactForm;
+export default ContactUSForm;
 
 const FormContainer = styled.div`
   display: flex;
@@ -133,29 +133,20 @@ const FormContainer = styled.div`
 
   input,
   select {
-    border: none;
-    border-bottom: 1px solid #000;
-    display: flex;
-    width: 500px;
-    height: 58px;
-    padding-top: 24px;
-    gap: 10px;
-
+   
     &::placeholder {
-      color: #5d5f61;
+     
     }
 
     &:focus {
-      outline: none;
-      border-bottom-color: #000;
+
     }
   }
 
   textarea {
-    padding: 10px;
-    resize: none;
+
     &:focus {
-      outline: none;
+
     }
   }
 `;
