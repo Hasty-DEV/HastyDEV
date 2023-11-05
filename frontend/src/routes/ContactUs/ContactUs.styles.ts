@@ -1,20 +1,25 @@
 import styled, { DefaultTheme } from "styled-components";
-import { Col } from "react-bootstrap";
+import {HeadingSubtitle as HS} from "../../components/Texts/Texts";
 
 export interface ContactUsStyledProps {
   customColor?: keyof DefaultTheme["colors"];
 }
 
 export const ContactUsDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
   background: #fff;
   box-shadow: 0px 0px 60px 30px rgba(0, 0, 0, 0.03);
+  padding-left: 0;
 `;
 
-export const FormDiv = styled(Col)``;
+export const FormDiv = styled.div``;
 
 export const ContactUsInfoDiv = styled.div`
   padding-bottom: 150px;
 `;
+
+export const HeadingSubtitle = styled(HS)``;
 
 export const ContactUsSocialIconsDiv = styled.div`
   padding: 50px;
@@ -45,7 +50,7 @@ export const ContactUsSocialIconsDiv = styled.div`
   }
 `;
 
-export const InfoDiv = styled(Col)`
+export const InfoDiv = styled.div`
   background: #10375c;
   border-radius: 10px;
   padding: 25px;
