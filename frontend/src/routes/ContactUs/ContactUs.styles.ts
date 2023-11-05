@@ -1,5 +1,5 @@
 import styled, { DefaultTheme } from "styled-components";
-import {HeadingSubtitle as HS} from "../../components/Texts/Texts";
+import {HeadingSubtitle as HS, Paragraph as P} from "../../components/Texts/Texts";
 
 export interface ContactUsStyledProps {
   customColor?: keyof DefaultTheme["colors"];
@@ -11,6 +11,7 @@ export const ContactUsDiv = styled.div`
   background: #fff;
   box-shadow: 0px 0px 60px 30px rgba(0, 0, 0, 0.03);
   padding-left: 0;
+  border-radius: 10px;
 `;
 
 export const FormDiv = styled.div``;
@@ -19,8 +20,13 @@ export const ContactUsInfoDiv = styled.div`
   padding-bottom: 150px;
 `;
 
-export const HeadingSubtitle = styled(HS)``;
+export const HeadingSubtitle = styled(HS)`
+  color: #fff;
+`;
 
+export const Paragraph = styled(P)`
+  color: #fff;
+`;
 export const ContactUsSocialIconsDiv = styled.div`
   padding: 50px;
   padding-left: 0px;

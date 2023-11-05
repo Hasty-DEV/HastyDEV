@@ -16,7 +16,7 @@ const ContactUs: React.FC = () => {
     <Container className="text-center">
       <Row>
         <Col xs={12}>
-          <HeadingTitle span="Contate-Nos" className="mt-4" />
+          <HeadingTitle span="Contate-Nos" className="mt-4"/>
         </Col>
         <Col xs={12}>
           <Paragraph
@@ -30,12 +30,10 @@ const ContactUs: React.FC = () => {
             <C.InfoDiv>
               <C.HeadingSubtitle
                 subtitle="Informações de Contato"
-                customColor="primary"
               />
-              <Paragraph
+              <C.Paragraph
                 paragraph="Entre em Contato com Conosco e em breve lhe atenderemos!"
                 className="text-center"
-                customColor="primary"
               />
               <C.ContactUsInfoDiv>
                 <Col xs={12}>
