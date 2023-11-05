@@ -39,8 +39,8 @@ function App() {
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/Login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/project" element={ <RequireAuth><Project/></RequireAuth> } />
-            <Route path="/chat" element={<Chat />} />
+            <Route path="/chat" element={ <RequireAuth><Chat/></RequireAuth> } />
+            <Route path="/project" element={<Project />} />
           </Routes>
           <Footer />
         </Router>
