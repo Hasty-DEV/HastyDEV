@@ -6,6 +6,10 @@ import HeroImg2 from "../../assets/images/Hero/HeroImg2.webp";
 import HeroImg3 from "../../assets/images/Hero/HeroImg3.webp";
 import HeroImg4 from "../../assets/images/Hero/HeroImg4.webp";
 
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+
 interface CustomCarouselProps {
   className: string;
 }
@@ -24,8 +28,22 @@ class Carousel extends Component<CustomCarouselProps> {
       autoplaySpeed: 0,
       cssEase: "linear",
       arrows: false,
+      responsive: [
+        {
+          breakpoint: 1024, // Tamanho da tela onde você quer mostrar menos slides
+          settings: {
+            slidesToShow: 2,
+          },
+        },
+        {
+          breakpoint: 768, // Tamanho da tela onde você quer mostrar ainda menos slides
+          settings: {
+            slidesToShow: 1,
+          },
+        },
+      ],
     };
-
+    
     return (
       <Container className={className}>
         <Slider {...settings}>
