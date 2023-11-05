@@ -37,6 +37,11 @@ export const ButtonPrimaryStyled = styled.button`
   &:active {
     opacity: 0.5;
   }
+
+  @media (max-width: 768px) {
+    margin-bottom: 81px;
+   
+  }
 `;
 
 

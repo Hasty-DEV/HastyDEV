@@ -6,20 +6,20 @@ import { ButtonPrimary } from "../../components/Buttons/Buttons";
 
 const Hero: React.FC = () => {
   return (
-    <Container className="text-center mt-5">
-      <HeadingTitle title="Bem-vindo à HastyDEV - Desenvolva Projetos Reais" />
-      <Paragraph
-        paragraph="Encontre Projetos Reais para Anexar ao seu Portfólio, Conquiste Seu
-        Local no Mercado E Seja Recompensado Por Isso!"
-        className="text-center"
-      />
-      <ButtonPrimary
-        route="/register"
-        buttonText="Inscreva-se"
-        className="mx-auto d-block"
-      />
-      <Carousel className="mt-4"/>
-    </Container>
+    <Container className="text-center mt-5 ">
+    <HeadingTitle className="" title="Bem-vindo à HastyDEV - Desenvolva Projetos Reais" />
+    <Paragraph
+      paragraph="Encontre Projetos Reais para Anexar ao seu Portfólio, Conquiste Seu Local no Mercado E Seja Recompensado Por Isso!"
+      className="text-center "
+    />
+    <ButtonPrimary
+      route="/register"
+      buttonText="Inscreva-se"
+      className="mx-auto d-block"
+    />
+    <Carousel className="mt-4"/>
+  </Container>
+  
   );
 };
 

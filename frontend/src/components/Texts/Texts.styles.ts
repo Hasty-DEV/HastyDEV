@@ -23,6 +23,11 @@ export const HeadingTitleStyled = styled.h1<TextStyledProps>`
     background: ${(props) => props.theme.colors[props.customColor || "text"]};
     opacity: ${(props) => (props.hasUnderline ? 1 : 0)};
   }
+  @media (max-width: 768px) {
+    font-size: 3rem;
+    line-height: 1.2;
+   
+  }
 `;
 
 export const HeadingSubtitleStyled = styled.h2<TextStyledProps>`
@@ -89,6 +94,14 @@ export const ParagraphStyled = styled.p<TextStyledProps>`
   font-weight: 500;
   line-height: 24px;
   text-align: justify;
+  
+  @media (max-width: 768px) {
+    
+    line-height: 1.5;
+    
+   
+  }
+
 `;
 
 export const spanStyled = styled.span<TextStyledProps>`
