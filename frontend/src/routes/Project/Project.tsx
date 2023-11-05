@@ -3,9 +3,11 @@ import styled from "styled-components";
 import {
   HeadingSubInterTitle,
   HeadingTitle,
+  Paragraph,
 } from "../../components/Texts/Texts";
 import { Link } from "react-router-dom";
-import { AiOutlineRight } from "react-icons/ai";
+import { AiOutlineRight, AiOutlineLine } from "react-icons/ai";
+
 
 const Project: React.FC = () => {
   return (
@@ -14,25 +16,24 @@ const Project: React.FC = () => {
         <Row>
           <Col xs={6}>
             <Col xs={12}>
-              <HeadingSubInterTitle SubInterTitle="Sobre o Projeto" />
+              <ProjectSubInterTitle SubInterTitle="Sobre o Projeto" />
+              <AiOutlineLine size={64}/>
             </Col>
             <Col xs={12}>
-              <HeadingTitle
+              <ProjectHeadingTitle
                 title="Revolucionário Espaço de Projetos Para Realizar sua"
                 span="Inovação"
               />
             </Col>
           </Col>
           <Col xs={6}>
-            <p>
-              Em nosso espaço de co-working, a inovação se torna realidade. Na
+            <ProjectParagraph paragraph="Em nosso espaço de co-working, a inovação se torna realidade. Na
               HastyDEV, oferecemos um ambiente único onde mentes criativas se
               unem para transformar ideias ousadas em conquistas tangíveis.
               Aqui, você encontrará as ferramentas, o suporte e a inspiração
               necessários para dar vida à sua visão inovadora. Junte-se a nós e
               faça parte de uma comunidade que desafia os limites e redefine o
-              futuro.
-            </p>
+              futuro." />
           </Col>
           <Col xs={12}>
             <SearchFormDiv xs={4}>
@@ -140,8 +141,25 @@ const Project: React.FC = () => {
 export default Project;
 
 const ProjectFirstSection = styled(Container)`
-  padding: 100px;
+  padding: 200px;
   padding-top: 20px;
+`;
+
+const ProjectHeadingTitle = styled(HeadingTitle)`
+  max-width: 800px;
+  font-size: 3rem;
+  text-align: start;
+`;
+
+const ProjectSubInterTitle = styled(HeadingSubInterTitle)`
+  display: inline-block;
+  width: 40%;
+`;
+
+const ProjectParagraph = styled(Paragraph)`
+  max-width: 600px;
+  font-size: 1.5rem;
+  line-height: 30px;
 `;
 
 const SearchFormDiv = styled(Col)`
