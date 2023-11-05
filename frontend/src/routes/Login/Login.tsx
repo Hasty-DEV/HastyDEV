@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Formik, Field } from 'formik';
 import * as yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
@@ -10,10 +10,11 @@ import {
 import { Container, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'; 
+
 import LoginImg from '../../assets/images/LoginImg.png';
+import { useAuth } from '../../Contexts/Auth/AuthProvider';
  
 import * as L from './Login.styles';
-import { AuthContext } from '../../Contexts/Auth/AuthContext';
 
 interface FormValues {
   username: string;
@@ -29,7 +30,7 @@ const validationsLogin = yup.object().shape({
 });
 
 const Login: React.FC = () => {
-  const { signin } = useContext(AuthContext);
+  const { signin } = useAuth();
 
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate(); // Obtenha o objeto history do React Router
