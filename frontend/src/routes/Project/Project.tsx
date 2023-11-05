@@ -4,6 +4,8 @@ import {
   HeadingSubInterTitle,
   HeadingTitle,
 } from "../../components/Texts/Texts";
+import { Link } from "react-router-dom";
+import { AiOutlineRight } from "react-icons/ai";
 
 const Project: React.FC = () => {
   return (
@@ -71,6 +73,66 @@ const Project: React.FC = () => {
           </Col>
         </Row>
       </ProjectFirstSection>
+      <ProjectSecondSection>
+        <Row>
+          <Col xs={12}>
+            <Col xs={4}>
+              <h2>Nossa Plataforma</h2>
+            </Col>
+            <Col xs={4}>
+              <p>
+                Nossa Plataforma Foi Projetada Para Proporcionar Uma Experiência
+                Diferente Ao Criar ou Buscar Projetos
+              </p>
+            </Col>
+            <Col xs={4}></Col>
+          </Col>
+          <Col xs={4}>
+            <Col xs={12}>
+              <Link to="/register">
+                <button title="Link to register">
+                  <AiOutlineRight size={16} />
+                </button>
+              </Link>
+            </Col>
+            <Col xs={12}>
+              <p>Encontre Projetos</p>
+            </Col>
+          </Col>
+          <Col xs={4}>
+            <Col xs={12}>
+              <Col xs={8}></Col>
+              <Col xs={4}></Col>
+            </Col>
+            <Col xs={12}>
+              <h4>Espaço Único</h4>
+              <p>
+                Encontre o Seu Projeto, Desenvolva, Ajude e Ganhe Experiência.
+              </p>
+            </Col>
+            <Col xs={12}>
+              <Link to="/register">
+                <button title="Link to register">
+                  Cadastre-se
+                  <AiOutlineRight size={16} />
+                </button>
+              </Link>
+            </Col>
+          </Col>
+          <Col xs={4}>
+            <Col xs={12}>
+              <Link to="/register">
+                <button title="Link to register">
+                  <AiOutlineRight size={16} />
+                </button>
+              </Link>
+            </Col>
+            <Col xs={12}>
+              <p>Consiga Uma Nova Oportunidade</p>
+            </Col>
+          </Col>
+        </Row>
+      </ProjectSecondSection>
     </>
   );
 };
@@ -78,7 +140,8 @@ const Project: React.FC = () => {
 export default Project;
 
 const ProjectFirstSection = styled(Container)`
-  padding: 50px;
+  padding: 100px;
+  padding-top: 20px;
 `;
 
 const SearchFormDiv = styled(Col)`
@@ -117,4 +180,8 @@ const SearchFormDiv = styled(Col)`
     border: none;
     cursor: pointer;
   }
+`;
+
+const ProjectSecondSection = styled(Container)`
+  margin-top: 5%;
 `;
