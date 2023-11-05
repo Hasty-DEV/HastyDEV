@@ -9,7 +9,6 @@ export interface TextStyledProps {
 export const HeadingTitleStyled = styled.h1<TextStyledProps>`
   color: ${(props) => props.theme.colors[props.customColor || "text"]};
   text-align: center;
-  font-family: Inter;
   font-size: 5rem;
   font-style: normal;
   font-weight: 500;
@@ -29,7 +28,6 @@ export const HeadingTitleStyled = styled.h1<TextStyledProps>`
 export const HeadingSubtitleStyled = styled.h2<TextStyledProps>`
   color: ${(props) => props.theme.colors[props.customColor || "text"]};
   text-align: center;
-  font-family: Inter;
   font-size: 4rem;
   font-style: normal;
   font-weight: 600;
@@ -48,7 +46,6 @@ export const HeadingSubtitleStyled = styled.h2<TextStyledProps>`
 
 export const HeadingInterTitleStyled = styled.h3<TextStyledProps>`
   color: ${(props) => props.theme.colors[props.customColor || "text"]};
-  font-family: Inter;
   font-size: 3rem;
   font-style: normal;
   font-weight: 600;
@@ -67,7 +64,6 @@ export const HeadingInterTitleStyled = styled.h3<TextStyledProps>`
 
 export const HeadingSubInterTitleStyled = styled.h4<TextStyledProps>`
   color: ${(props) => props.theme.colors[props.customColor || "text"]};
-  font-family: Inter;
   font-size: 2rem;
   font-style: normal;
   font-weight: 600;
