@@ -1,24 +1,20 @@
 const bcrypt = require("bcrypt");
 const { validationResult } = require('express-validator');
+const jwt = require("jsonwebtoken");
 const User = require('../models/userModel');
+const UserToken = require('../models/userTokenModel');
 const { registrationValidationRules } = require('../validations/userValidation');
 const { logError, logInfo } = require('../../utils/logger');
 
 const saltRounds = 10;
 
- 
 async function register(req, res) {
-  const { username, email, password, confirmPassword, first_name, last_name } = req.body;
+  const { username, email, password, first_name, last_name } = req.body;
 
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
     logError("Erros de validação no registro", res, 400);
-    return;
-  }
-
-  if (password !== confirmPassword) {
-    logError('A senha e a confirmação de senha não coincidem', res, 400);
     return;
   }
 
@@ -31,7 +27,6 @@ async function register(req, res) {
 
     // Verifica se o email já está em uso
     existingUserByEmail = await User.findOne({ where: { email: email } });
-
   } catch (err) {
     // Erro ao consultar o banco de dados
     logError("Erro ao consultar o banco de dados: " + err, res, 500);
@@ -53,7 +48,7 @@ async function register(req, res) {
     const hash = await bcrypt.hash(password, saltRounds);
 
     // Inserir dados no banco de dados usando o modelo de usuário
-    await User.create({
+    const user = await User.create({
       username: username,
       password: hash,
       email: email,
@@ -61,8 +56,15 @@ async function register(req, res) {
       last_name: last_name,
     });
 
-    // Registro bem-sucedido
-    logInfo("Cadastrado com sucesso", res, 200);
+    const user_id = user.dataValues.userid;
+
+    const secret = process.env.SECRET;
+
+    const token = jwt.sign({ id: user_id }, secret);
+
+    UserToken.create({ user_id, token }).then(() => {
+      res.json({ token, user: { id: user_id } });
+    });
   } catch (err) {
     // Erro ao inserir dados no banco de dados
     logError("Erro ao inserir dados no banco de dados: " + err, res, 500);

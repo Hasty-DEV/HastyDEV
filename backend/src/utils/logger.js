@@ -1,4 +1,3 @@
-
 const pino = require("pino")();
 
 function logError(message, res, statusCode = 500) {

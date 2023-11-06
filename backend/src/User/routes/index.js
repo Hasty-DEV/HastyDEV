@@ -12,6 +12,8 @@ const resetPassword = require("../ResetPass/controllers/ResetPassController");
 const contactFormValidationRules = require ("../contactForm/validations/contactFormValidation");
 const handleContactForm = require ("../contactForm/controllers/contactFormController")
 
+// router.post('/auth/me', middlewareAuth, controller);
+
 // Rota de registro
 router.post("/register", registrationController.registrationValidationRules, registrationController.register);
 

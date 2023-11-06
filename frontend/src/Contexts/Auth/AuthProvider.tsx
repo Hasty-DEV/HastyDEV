@@ -2,10 +2,19 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { api } from "../../services/api";
 import { User } from "../../Types/User";
 
+type SignInPayload = { username: string, password: string };
+type SignUpPayload = {
+  first_name: string;
+  last_name: string;
+  username: string;
+  email: string;
+  password: string;
+}
+
 export type AuthContextType = {
   user: User | null;
-  signin: (username: string, password: string) => Promise<void>;
-  register: (username: string, password: string) => Promise<void>;
+  signin: (payload: SignInPayload) => Promise<void>;
+  register: (payload: SignUpPayload) => Promise<void>;
   signout: () => void;
 };
 
@@ -37,18 +46,21 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
         api.defaults.headers.authorization = `Bearer ${token}`;
 
-        const response = await api.post("users/me", storageData);
+        /* const response = await api.post("auth/me", storageData);
 
-        setUser(response.data.user);
+        setUser(response.data.user); */
+
+        // tirar o token do localstore
+        // refresh na página
       }
     };
 
     validateToken();
   }, []);
 
-  const signin = async (username: string, password: string) => {
+  const signin = async (payload: SignInPayload) => {
     try {
-      const response = await api.post("/login", { username, password });
+      const response = await api.post("/login", payload);
 
       // isso pode não estar vindo do backend
       const { user, token } = response.data;
@@ -61,24 +73,23 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
       setUser(user);
     } catch (err: any) {
       if (err.response.status === 401) {
-        //
       }
+      throw err;
     }
   };
 
-  const register = async (username: string, password: string) => {
+  const register = async (payload: SignUpPayload) => {
     try {
-      const response = await api.post("/regiser", { username, password });
+      const response = await api.post("/register", payload);
 
-      // isso pode não estar vindo do backend
-      const { id, name, token } = response.data;
+      const { id, token } = response.data;
 
       const storagedData = JSON.stringify({ token });
       localStorage.setItem("authToken", storagedData);
 
       api.defaults.headers.authorization = `Bearer ${token}`;
 
-      setUser({ id, name });
+      setUser({ id });
     } catch (err: any) {
       if (err.response.status === 401) {
         //

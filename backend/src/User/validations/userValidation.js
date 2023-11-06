@@ -25,16 +25,6 @@ const registrationValidationRules = [
     .notEmpty()
     .withMessage('O campo de senha é obrigatório'),
 
-  body('confirmPassword')
-    .custom((value, { req }) => {
-      if (value !== req.body.password) {
-        throw new Error('A confirmação de senha não coincide com a senha');
-      }
-      return true;
-    })
-    .notEmpty()
-    .withMessage('O campo de confirmação de senha é obrigatório'),
-
   body('username')
     .isLength({ min: 5 })
     .withMessage('O username deve ter pelo menos 5 caracteres')

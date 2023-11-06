@@ -17,8 +17,28 @@ import light from "./styles/themes/light";
 import dark from "./styles/themes/dark";
 
 import usePersisteState from "./utils/usePersisteState";
-import { AuthProvider } from "./Contexts/Auth/AuthProvider";
-import { RequireAuth } from "./Contexts/Auth/RequireAuth";
+import { AuthProvider, useAuth } from "./Contexts/Auth/AuthProvider";
+
+type RouteAccessProps = {
+  children: React.ReactNode;
+  authLevel?: "authed" | "unauthed";
+};
+
+function RouteAccess({ children, authLevel = "authed" }: RouteAccessProps) {
+  const { user } = useAuth();
+
+  const isUserAuthed = user !== null;
+
+  if (!isUserAuthed && authLevel === "authed") {
+    return <Navigate to="/" replace />;
+  }
+
+  if (!isUserAuthed && authLevel === "authed") {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
+}
 
 function App() {
   const [theme, setTheme] = usePersisteState("themes", light);
@@ -29,23 +49,44 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <AuthProvider>
-        <Router>
-          <GlobalStyle />
-          <Header toggleTheme={toggleTheme} />
-          <Routes>
-            <Route path="/" element={<Hero />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<ContactUs />} />
-            <Route path="/Login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/chat" element={ <RequireAuth><Chat/></RequireAuth> } />
-            <Route path="/project" element={<Project />} />
-          </Routes>
-          <Footer />
-        </Router>
-      </AuthProvider>
-    </ThemeProvider>
+    <AuthProvider>
+      <Router>
+        <GlobalStyle />
+        <Header toggleTheme={toggleTheme} />
+        <Routes>
+          <Route path="/" element={<Hero />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<ContactUs />} />
+          <Route
+            path="/login"
+            element={
+              <RouteAccess authLevel="unauthed">
+                <Login />
+              </RouteAccess>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <RouteAccess authLevel="unauthed">
+                <Register />
+              </RouteAccess>
+            }
+          />
+          <Route
+            path="/chat"
+            element={
+              <RouteAccess authLevel="authed">
+                <Chat />
+              </RouteAccess>
+            }
+          />
+          <Route path="/project" element={<Project />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </AuthProvider>
+  </ThemeProvider>
   );
 }
 
