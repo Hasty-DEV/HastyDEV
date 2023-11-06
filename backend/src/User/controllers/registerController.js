@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const { validationResult } = require('express-validator');
 const jwt = require("jsonwebtoken");
 const User = require('../models/userModel');
-const UserToken = require('../models/userTokenModel');
+const Token = require('../token/tokensModel');
 const { registrationValidationRules } = require('../validations/userValidation');
 const { logError, logInfo } = require('../../utils/logger');
 
@@ -62,8 +62,11 @@ async function register(req, res) {
 
     const token = jwt.sign({ id: user_id }, secret);
 
-    UserToken.create({ user_id, token }).then(() => {
+
+    const newToken = new Token({ user_id, token });
+    newToken.save().then(() => {
       res.json({ token, user: { id: user_id } });
+    
     });
   } catch (err) {
     // Erro ao inserir dados no banco de dados

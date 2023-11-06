@@ -11,7 +11,7 @@ const sendPasswordResetEmail = require("../ResetPass/sendResetPassCode");
 const resetPassword = require("../ResetPass/controllers/ResetPassController");
 const contactFormValidationRules = require ("../contactForm/validations/contactFormValidation");
 const handleContactForm = require ("../contactForm/controllers/contactFormController")
-
+const verifyToken = require ("../token/verifyToken")
 // router.post('/auth/me', middlewareAuth, controller);
 
 // Rota de registro
@@ -21,7 +21,8 @@ router.post("/register", registrationController.registrationValidationRules, reg
 router.post("/login", loginController.login);
 
 // Rota protegida de usuário
-router.get("/user/:id", authController.checkToken, userController.getUserById);
+router.get("/user/:id",  verifyToken, userController.getUserById);
+ 
 
 // Rota de atualização de token
 router.post("/refresh-token", authController.checkRefreshToken, (req, res) => {

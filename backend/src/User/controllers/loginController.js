@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 const { logError, logInfo } = require('../../utils/logger');
+const Token = require('../token/tokensModel');
 
 const MAX_LOGIN_ATTEMPTS = 5;
 const LOCK_TIME = 15 * 60 * 1000;
@@ -45,12 +46,18 @@ function login(req, res) {
         if (senhaCorreta) {
           user.loginAttempts = 0;
           
+          const user_id = user.dataValues.userid;
 
           const secret = process.env.SECRET;
-
-          const token = jwt.sign({ id: user.id }, secret);
-          logInfo("Usuário logado com sucesso", res, 200);
-       console.log(token)
+      
+          const token = jwt.sign({ id: user_id }, secret);
+      
+          const newToken = new Token({ user_id, token });
+          newToken.save().then(() => {
+            res.json({ token, user: { id: user_id } });
+          
+          
+          });
         } else {
           user.loginAttempts += 1;
           user.save().then(() => {
