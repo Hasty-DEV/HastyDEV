@@ -45,8 +45,7 @@ const Login: React.FC = () => {
       // response.data.token
       // console.log();
 
-  
-      navigate('/project');
+      navigate('/chat');
     } catch (err: any) {
       alert(err.response.data.error);
     }
