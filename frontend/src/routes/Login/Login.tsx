@@ -42,10 +42,7 @@ const Login: React.FC = () => {
   const handleLogin = async ({ username, password }: FormValues) => {
     try {
       await signin({username, password});
-
-      // response.data.token
-
-
+ 
   
       navigate('/project');
     } catch (err: any) {
