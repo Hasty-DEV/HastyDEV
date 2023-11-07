@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 import * as yup from "yup";
 import { FormFetch } from "../../axios/config";
 import { ButtonPrimaryLongNoLink } from "../Buttons/Buttons";
+import { HeadingInterTitle } from "../Texts/Texts";
 
 interface SearchFormValues {
   Partner: string;
@@ -33,6 +34,7 @@ function SearchForm() {
   };
   return (
     <SearchFormDiv>
+      <SearchFormHeadingInterTitle intertitle="Procure um Projeto Ideal" className="text-center"/>
       <Formik
         initialValues={{
           Partner: "",
@@ -119,8 +121,11 @@ function SearchForm() {
 export default SearchForm;
 
 const SearchFormDiv = styled.div`
+
+  background: #10375C;
+  padding: 20px;
   form {
-    width: 500px;
+    width: 100%;
     margin: 0 auto;
   }
 
@@ -155,4 +160,9 @@ const SearchFormDiv = styled.div`
   }
 
 
+`;
+
+const SearchFormHeadingInterTitle = styled(HeadingInterTitle)`
+  font-size: 2.5rem;
+  color: #fff;
 `;
