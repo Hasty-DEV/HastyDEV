@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import { Formik, Field } from 'formik';
-import * as yup from 'yup';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { Formik, Field } from "formik";
+import * as yup from "yup";
+import { Link, useNavigate } from "react-router-dom";
 import {
   FacebookLoginButton,
   GoogleLoginButton,
   GithubLoginButton,
-} from 'react-social-login-buttons';
-import { Container, Row, Col } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'; 
+} from "react-social-login-buttons";
+import { Container, Row, Col } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
-import LoginImg from '../../assets/images/LoginImg.png';
-import { useAuth } from '../../Contexts/Auth/AuthProvider';
- 
-import * as L from './Login.styles';
+import LoginImg from "../../assets/images/LoginImg.png";
+import { useAuth } from "../../Contexts/Auth/AuthProvider";
+
+import * as L from "./Login.styles";
 
 interface FormValues {
   username: string;
@@ -22,11 +22,11 @@ interface FormValues {
 }
 
 const validationsLogin = yup.object().shape({
-  username: yup.string().required('O Usuário é obrigatório'),
+  username: yup.string().required("O Usuário é obrigatório"),
   password: yup
     .string()
-    .min(6, 'A senha deve ter pelo menos 6 caracteres')
-    .required('A senha é obrigatória'),
+    .min(6, "A senha deve ter pelo menos 6 caracteres")
+    .required("A senha é obrigatória"),
 });
 
 const Login: React.FC = () => {
@@ -41,27 +41,15 @@ const Login: React.FC = () => {
 
   const handleLogin = async ({ username, password }: FormValues) => {
     try {
-      await signin({username, password});
-<<<<<<< HEAD
-        
-      // response.data.token
-      // console.log();
-
-      navigate('/chat');
-=======
- 
-  
-      navigate('/project');
->>>>>>> 61e9d6ff24ac2aa4348bb326e3862f23b6a4173a
+      await signin({ username, password });
+      navigate("/project");
+      
     } catch (err: any) {
-
       alert(err.response.data.error);
     }
   };
 
-  const isPasswordVisible = showPassword ? 'text' : 'password';
-
- 
+  const isPasswordVisible = showPassword ? "text" : "password";
 
   return (
     <>
@@ -71,8 +59,8 @@ const Login: React.FC = () => {
             <L.LoginForm>
               <Formik
                 initialValues={{
-                  username: '',
-                  password: '',
+                  username: "",
+                  password: "",
                 }}
                 onSubmit={handleLogin}
                 validationSchema={validationsLogin}
@@ -113,7 +101,9 @@ const Login: React.FC = () => {
                     </form>
 
                     <div className="sign_in">
-                      <Link to="/Register">Nao tem uma Conta? <a href="#"> Inscreva-se</a></Link>
+                      <Link to="/Register">
+                        Nao tem uma Conta? <a href="#"> Inscreva-se</a>
+                      </Link>
                     </div>
                     <div className="forgot-password">
                       <a href="#">Esqueceu a senha?</a>
@@ -122,22 +112,22 @@ const Login: React.FC = () => {
                       <p>Ou faça login com:</p>
                       <div
                         style={{
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          marginLeft: '260px',
+                          justifyContent: "center",
+                          alignItems: "center",
+                          marginLeft: "260px",
                         }}
                       >
                         <FacebookLoginButton
-                          style={{ width: '360px', marginBottom: '20px' }}
+                          style={{ width: "360px", marginBottom: "20px" }}
                         >
                           <span>Entrar com o Facebook</span>
                         </FacebookLoginButton>
                         <GoogleLoginButton
-                          style={{ width: '360px', marginBottom: '20px' }}
+                          style={{ width: "360px", marginBottom: "20px" }}
                         >
                           <span>Entrar com o Google</span>
                         </GoogleLoginButton>
-                        <GithubLoginButton style={{ width: '360px' }}>
+                        <GithubLoginButton style={{ width: "360px" }}>
                           <span>Entrar com o Github</span>
                         </GithubLoginButton>
                       </div>
@@ -148,18 +138,18 @@ const Login: React.FC = () => {
             </L.LoginForm>
           </Col>
 
-          <Col style={{ position: 'relative' }}>
+          <Col style={{ position: "relative" }}>
             <img
               src={LoginImg}
               alt=""
               style={{
-                position: 'absolute',
-                zIndex: '2',
-                height: 'auto',
-                width: '90%',
+                position: "absolute",
+                zIndex: "2",
+                height: "auto",
+                width: "90%",
               }}
             />
-            <div className="d-flex justify-content-end" style={{ zIndex: '1' }}>
+            <div className="d-flex justify-content-end" style={{ zIndex: "1" }}>
               <L.rightDivSyled></L.rightDivSyled>
             </div>
           </Col>
