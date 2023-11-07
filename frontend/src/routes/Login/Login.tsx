@@ -33,16 +33,15 @@ const Login: React.FC = () => {
   const { signin } = useAuth();
 
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate(); // Obtenha o objeto history do React Router
-
+  const navigate = useNavigate(); 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
 
   const handleLogin = async ({ username, password }: FormValues) => {
     try {
-      await signin(username, password);
-
+      await signin({username, password});
+        
       // response.data.token
       // console.log();
 
