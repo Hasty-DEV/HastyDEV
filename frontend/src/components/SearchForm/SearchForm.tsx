@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 import * as yup from "yup";
 import { FormFetch } from "../../axios/config";
 import { ButtonPrimaryLongNoLink } from "../Buttons/Buttons";
+import { HeadingInterTitle } from "../Texts/Texts";
 
 interface SearchFormValues {
   Partner: string;
@@ -33,6 +34,7 @@ function SearchForm() {
   };
   return (
     <SearchFormDiv>
+      <SearchFormHeadingInterTitle intertitle="Procure um Projeto Ideal" className="text-center"/>
       <Formik
         initialValues={{
           Partner: "",
@@ -52,15 +54,15 @@ function SearchForm() {
         }) => (
           <>
             <form onSubmit={handleSubmit}>
-              <div className="form-group">
+              <div className="form-group mt-3">
                 <label htmlFor="Partner">Qual Parceiro Deseja Ajudar?</label>
                 <select
                   title="Partner"
                   id="Partner"
                   name="Partner"
                   value={values.Partner}
+                  placeholder="Qual Parceiro Deseja Ajudar?"
                   onChange={(e) => setFieldValue("Partner", e.target.value)}
-                  className="mt-3"
                 >
                   <option value="">Selecione uma Categoria</option>
                   <option value="ONGs">ONGs</option>
@@ -68,7 +70,7 @@ function SearchForm() {
                 </select>
                 {errors.Partner && touched.Partner && errors.Partner}
               </div>
-              <div className="form-group">
+              <div className="form-group mt-4">
                 <label htmlFor="WorkArea">Qual Sua Área de Atuação?</label>
                 <select
                   title="WorkArea"
@@ -76,7 +78,6 @@ function SearchForm() {
                   name="WorkArea"
                   value={values.WorkArea}
                   onChange={(e) => setFieldValue("WorkArea", e.target.value)}
-                  className="mt-3"
                 >
                   <option value="">Selecione uma Categoria</option>
                   <option value="Front-End">Front-End</option>
@@ -88,7 +89,7 @@ function SearchForm() {
                 </select>
                 {errors.WorkArea && touched.WorkArea && errors.WorkArea}
               </div>
-              <div className="form-group">
+              <div className="form-group mt-4">
                 <label htmlFor="wantMoney">Deseja Remuneração?</label>
                 <select
                   title="wantMoney"
@@ -96,7 +97,6 @@ function SearchForm() {
                   name="wantMoney"
                   value={values.wantMoney}
                   onChange={(e) => setFieldValue("wantMoney", e.target.value)}
-                  className="mt-3"
                 >
                   <option value="">Selecione uma Categoria</option>
                   <option value="Sim">Sim</option>
@@ -121,45 +121,48 @@ function SearchForm() {
 export default SearchForm;
 
 const SearchFormDiv = styled.div`
-  form {
-    width: 500px;
-    margin: 0 auto;
-  }
 
-  h2 {
-    text-align: center;
+  background: #10375C;
+  padding: 20px;
+  form {
+    width: 100%;
+    margin: 0 auto;
   }
 
   .campos {
     margin-top: 20px;
   }
 
-  label {
-    font-weight: bold;
-  }
-
   input,
   select {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-  }
-
-  input[type="radio"] {
-    margin-right: 10px;
-  }
-
-  button {
-    background-color: #000;
-    color: #fff;
-    padding: 10px;
     border: none;
-    cursor: pointer;
   }
 
   .form-group {
-    label {
-        margin-bottom: -100px;
+    padding: 10px;
+  }
+
+  .form-group,
+  select {
+    background: #0d2c4a;
+    color: white;
+  }
+
+  .form-group label {
+    opacity: 0.35;
+  }
+
+  select {
+    &:focus {
+      outline: none;
     }
   }
+
+
+`;
+
+const SearchFormHeadingInterTitle = styled(HeadingInterTitle)`
+  font-size: 2.5rem;
+  color: #fff;
 `;

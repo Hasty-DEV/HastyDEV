@@ -8,7 +8,7 @@ import {
 import { Link } from "react-router-dom";
 import { AiOutlineRight, AiOutlineLine } from "react-icons/ai";
 import SearchForm from "../../components/SearchForm/SearchForm";
-
+import ProjectImg1 from "../../assets/images/Project/ProjectImg1.webp"
 
 const Project: React.FC = () => {
   return (
@@ -36,11 +36,13 @@ const Project: React.FC = () => {
               faça parte de uma comunidade que desafia os limites e redefine o
               futuro." />
           </Col>
-          <Col xs={12} className="mt-1">
+          <Col xs={12} className="mt-3 d-flex">
             <Col xs={4}>
               <SearchForm />
             </Col>
-            <Col xs={8}></Col>
+            <Col xs={8} >
+              <img src={ProjectImg1} alt="" className="img-fluid"/>
+            </Col>
           </Col>
         </Row>
       </ProjectFirstSection>
@@ -136,3 +138,4 @@ const ProjectParagraph = styled(Paragraph)`
 const ProjectSecondSection = styled(Container)`
   margin-top: 5%;
 `;
+
