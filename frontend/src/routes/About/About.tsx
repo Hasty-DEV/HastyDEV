@@ -13,6 +13,7 @@ import {
 } from "../../components/Texts/Texts";
 import ContactForm from "../../components/ContactForm/ContactForm";
 import SliderContact from "../../components/Slider/SliderContact";
+import { ImageStyled } from "./About.styles";
 
 
 const About: React.FC = () => {
@@ -29,6 +30,7 @@ const About: React.FC = () => {
             className="mt-5"
           />
         </Col>
+
         <Col xs={12}>
           <A.RectangleDiv className="mt-4">
             <Paragraph
@@ -43,9 +45,11 @@ const About: React.FC = () => {
             />
           </A.RectangleDiv>
         </Col>
-        <Col xs={12} className="mt-auto">
-          <A.ImageStyled src={AboutImg} alt="" className="img-fluid" />
+
+        <Col >
+          <ImageStyled src={AboutImg} alt="" className="img-fluid" />
         </Col>
+
         <Col xs={12} className="mt-1">
           <HeadingSubtitle
             subtitle="Não Precisa Correr Atrás"
@@ -76,7 +80,7 @@ const About: React.FC = () => {
           <table className="tabela-transparente mb-3">
             <tbody>
               <tr>
-                <td>
+                <td className="tabela">
                   <HeadingSubInterTitle SubInterTitle="Colaboração" />
                 </td>
                 <td>
@@ -88,7 +92,7 @@ const About: React.FC = () => {
                 </td>
               </tr>
               <tr>
-                <td>
+                <td className="tabela">
                   <HeadingSubInterTitle SubInterTitle="Gamificação" />
                 </td>
                 <td>
@@ -97,10 +101,10 @@ const About: React.FC = () => {
                   com sistemas de recompensas. Motivamos os desenvolvedores a se
                   desafiarem e contribuírem para projetos de impacto."
                   />
-                </td>
+                </td >
               </tr>
               <tr>
-                <td>
+                <td className="tabela">
                   <HeadingSubInterTitle SubInterTitle="Profissionalismo" />
                 </td>
                 <td>
@@ -113,7 +117,7 @@ const About: React.FC = () => {
                 </td>
               </tr>
               <tr>
-                <td>
+                <td className="tabela">
                   <HeadingSubInterTitle SubInterTitle="Impacto Social" />
                 </td>
                 <td>
@@ -141,7 +145,7 @@ const About: React.FC = () => {
           <table className="tabela-transparente">
             <tbody>
               <tr>
-                <td>
+                <td className="tabela">
                   <HeadingSubInterTitle SubInterTitle="Inovação" />
                 </td>
                 <td>
@@ -153,7 +157,7 @@ const About: React.FC = () => {
                 </td>
               </tr>
               <tr>
-                <td>
+                <td className="tabela">
                   <HeadingSubInterTitle SubInterTitle="Excelência" />
                 </td>
                 <td>
@@ -165,7 +169,7 @@ const About: React.FC = () => {
                 </td>
               </tr>
               <tr>
-                <td>
+                <td className="tabela">
                   <HeadingSubInterTitle SubInterTitle="Impacto" />
                 </td>
                 <td>

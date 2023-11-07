@@ -6,14 +6,33 @@ export const RectangleDiv = styled(Container)`
   height: 402px;
   flex-shrink: 0;
   background:  ${(props) => props.theme.colors.secondary};
-  position: absolute;
+  
   z-index: -1;
   border-radius: 40px;
   padding: 35px;
+
+  @media (max-width: 768px) {
+   
+    width: 100%; 
+    height: auto; 
+    transform: none;
+    
+  }
 `;
 
 export const ImageStyled = styled.img`
-    margin-top: 20%;
+    margin-top: -10%;
+    
+    
+    @media (max-width: 768px) {
+      margin-top: -15%;
+    
+      width: 100%; 
+      height: auto; 
+      transform: none;
+ }
+
+ 
 `;
 
 export const ContactFormDiv = styled(Container)`
