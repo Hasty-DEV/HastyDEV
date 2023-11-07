@@ -33,7 +33,8 @@ const Login: React.FC = () => {
   const { signin } = useAuth();
 
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate(); // Obtenha o objeto history do React Router
+
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
@@ -41,12 +42,19 @@ const Login: React.FC = () => {
   const handleLogin = async ({ username, password }: FormValues) => {
     try {
       await signin({username, password});
+<<<<<<< HEAD
         
       // response.data.token
       // console.log();
 
       navigate('/chat');
+=======
+ 
+  
+      navigate('/project');
+>>>>>>> 61e9d6ff24ac2aa4348bb326e3862f23b6a4173a
     } catch (err: any) {
+
       alert(err.response.data.error);
     }
   };
