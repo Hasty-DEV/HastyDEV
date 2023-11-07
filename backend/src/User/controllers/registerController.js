@@ -6,11 +6,11 @@ const Token = require('../token/tokensModel');
 const { registrationValidationRules } = require('../validations/userValidation');
 const { logError, logInfo } = require('../../utils/logger');
 
-const saltRounds = 10;
+const saltRounds = parseInt(process.env.SALTROUNDS_SECRET);
 
 async function register(req, res) {
   const { username, email, password, first_name, last_name } = req.body;
-
+ 
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -65,9 +65,11 @@ async function register(req, res) {
 
     const newToken = new Token({ user_id, token });
     newToken.save().then(() => {
+      console.log("Cadastrado com Sucesso")
       res.json({ token, user: { id: user_id } });
-    
     });
+
+   
   } catch (err) {
     // Erro ao inserir dados no banco de dados
     logError("Erro ao inserir dados no banco de dados: " + err, res, 500);
