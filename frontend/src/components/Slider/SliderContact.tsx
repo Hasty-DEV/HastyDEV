@@ -5,8 +5,7 @@ import HeroImg1 from "../../assets/images/Hero/HeroImg1.webp";
 import HeroImg2 from "../../assets/images/Hero/HeroImg2.webp";
 import HeroImg3 from "../../assets/images/Hero/HeroImg3.webp";
 import HeroImg4 from "../../assets/images/Hero/HeroImg4.webp";
-
-
+import { CarouselImage } from "./SliderContect.styles"; // Substitua pelo nome correto do seu arquivo de componentes estilizados
 
 interface CustomSliderContactProps {
   className?: string;
@@ -26,44 +25,44 @@ class SliderContact extends Component<CustomSliderContactProps> {
         {
           breakpoint: 1024,
           settings: {
-            slidesToShow: 3,
+            slidesToShow: 2,
             slidesToScroll: 1,
             infinite: true,
-            dots: true
-          }
+            dots: true,
+          },
         },
         {
           breakpoint: 600,
           settings: {
-            slidesToShow: 2,
+            slidesToShow: 1,
             slidesToScroll: 1,
-            initialSlide: 2
-          }
+            initialSlide: 2,
+          },
         },
         {
           breakpoint: 480,
           settings: {
             slidesToShow: 1,
-            slidesToScroll: 1
-          }
-        }
-      ]
+            slidesToScroll: 1,
+          },
+        },
+      ],
     };
 
     return (
       <Container className={className}>
         <Slider {...settings} className="mt-3">
           <div className="slide-item">
-            <img src={HeroImg1} alt="" className="responsive-image" />
+            <CarouselImage src={HeroImg1} alt="" />
           </div>
           <div className="slide-item">
-            <img src={HeroImg2} alt="" className="responsive-image" />
+            <CarouselImage src={HeroImg2} alt="" />
           </div>
           <div className="slide-item">
-            <img src={HeroImg3} alt="" className="responsive-image" />
+            <CarouselImage src={HeroImg3} alt="" />
           </div>
           <div className="slide-item">
-            <img src={HeroImg4} alt="" className="responsive-image" />
+            <CarouselImage src={HeroImg4} alt="" />
           </div>
         </Slider>
       </Container>
