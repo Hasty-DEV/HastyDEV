@@ -4,8 +4,10 @@ import { Container, Row, Col } from "react-bootstrap";
 import RegisterImg from "../../assets/images/RegisterImg.png";
 import { FormFetch } from "../../axios/config";
 import { Formik, Field } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import swal  from 'sweetalert2';
+ 
+ 
 
 interface FormValues {
   username: string;
@@ -31,11 +33,14 @@ const validationsRegister = yup.object().shape({
 });
 
 const Register: React.FC = () => {
+
+  
+  const navigate = useNavigate(); 
   const handleRegister = async ({ first_name, last_name, username, email, password, confirmPassword }: FormValues) => {
     try {
       const response = await FormFetch.post("/register", { first_name, last_name, username, email, password, confirmPassword })
       console.log(response.data);
-      
+ 
         swal.fire({
           position: 'center',
           icon: 'success',
@@ -44,11 +49,15 @@ const Register: React.FC = () => {
           timer: 1500,
         });
       
+     
+      navigate('/login');
+ 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       alert(err.response.data.errors[0].msg);
       alert(err.response.data.error);
     }
+
   };
 
   return (
@@ -116,6 +125,7 @@ const Register: React.FC = () => {
                       />
                       {errors.confirmPassword && touched.confirmPassword && errors.confirmPassword}
                     </div>
+                    
                     <div className="form-group">
                       <button type="submit" disabled={isSubmitting}>Inscreva-se</button>
                     </div>
