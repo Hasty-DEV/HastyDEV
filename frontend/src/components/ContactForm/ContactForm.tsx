@@ -117,12 +117,35 @@ const ContactForm = () => {
 
 export default ContactForm;
 
+
+
+
+
 const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 1rem;
   align-items: center;
+
+  @media (max-width: 768px) {
+    form {
+      flex-direction: column-reverse;
+      gap: 1rem;
+    }
+
+    input,
+    select {
+      width: 100%;
+      height: 40px;
+      padding-top: 16px;
+      gap: 5px;
+    }
+
+    textarea {
+      height: 100px;
+    }
+  }
 
   form {
     display: flex;
@@ -158,4 +181,11 @@ const FormContainer = styled.div`
       outline: none;
     }
   }
-`;
+  @media (max-width: 768px) {
+   input,
+   select,
+   textarea {
+     width: 100%; // Faz com que os campos ocupem a largura total
+   }
+  }
+  `;
