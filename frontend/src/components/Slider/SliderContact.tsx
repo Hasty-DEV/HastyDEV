@@ -6,7 +6,7 @@ import HeroImg2 from "../../assets/images/Hero/HeroImg2.webp";
 import HeroImg3 from "../../assets/images/Hero/HeroImg3.webp";
 import HeroImg4 from "../../assets/images/Hero/HeroImg4.webp";
 
-import "./SliderContact.css"; // Importe seu arquivo de estilos CSS
+
 
 interface CustomSliderContactProps {
   className?: string;
