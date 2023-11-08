@@ -5,6 +5,7 @@ import RegisterImg from "../../assets/images/RegisterImg.png";
 import { FormFetch } from "../../axios/config";
 import { Formik, Field } from "formik";
 import { Link } from "react-router-dom";
+import swal  from 'sweetalert2';
 
 interface FormValues {
   username: string;
@@ -34,6 +35,15 @@ const Register: React.FC = () => {
     try {
       const response = await FormFetch.post("/register", { first_name, last_name, username, email, password, confirmPassword })
       console.log(response.data);
+      
+        swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Seu cadastro foi realizado com sucesso',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       alert(err.response.data.errors[0].msg);
