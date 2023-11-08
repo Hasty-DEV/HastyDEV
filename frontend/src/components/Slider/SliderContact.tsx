@@ -6,6 +6,8 @@ import HeroImg2 from "../../assets/images/Hero/HeroImg2.webp";
 import HeroImg3 from "../../assets/images/Hero/HeroImg3.webp";
 import HeroImg4 from "../../assets/images/Hero/HeroImg4.webp";
 
+import "./SliderContact.css"; // Importe seu arquivo de estilos CSS
+
 interface CustomSliderContactProps {
   className?: string;
 }
@@ -52,16 +54,16 @@ class SliderContact extends Component<CustomSliderContactProps> {
       <Container className={className}>
         <Slider {...settings} className="mt-3">
           <div className="slide-item">
-            <img src={HeroImg1} alt="" width="90%" height="400px" />
+            <img src={HeroImg1} alt="" className="responsive-image" />
           </div>
           <div className="slide-item">
-            <img src={HeroImg2} alt="" width="90%" height="400px" />
+            <img src={HeroImg2} alt="" className="responsive-image" />
           </div>
           <div className="slide-item">
-            <img src={HeroImg3} alt="" width="90%" height="400px" />
+            <img src={HeroImg3} alt="" className="responsive-image" />
           </div>
           <div className="slide-item">
-            <img src={HeroImg4} alt="" width="90%" height="400px" />
+            <img src={HeroImg4} alt="" className="responsive-image" />
           </div>
         </Slider>
       </Container>

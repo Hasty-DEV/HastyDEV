@@ -21,10 +21,11 @@ td {
 @media (max-width: 768px) {
   .tabela-transparente td {
     display: block;
+    width: 100%;
   }
 
   .tabela-transparente td:first-child {
-    text-align: center;
+    text-align: left;
   }
 
   .tabela-transparente tr {

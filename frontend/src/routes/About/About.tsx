@@ -185,7 +185,7 @@ const About: React.FC = () => {
         </Col>
       </Row>
       <Col xs={12}>
-        <HeadingSubtitle span="Nosso Time de Sucesso" className="mt-5" />
+        <HeadingSubtitle span="Nosso Time de Sucesso" className="mt-5"  />
       </Col>
       <Col xs={12}>
         <SliderContact />
