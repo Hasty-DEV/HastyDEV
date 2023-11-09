@@ -40,7 +40,7 @@ export const LoginForm = styled.div`
       line-height: normal;
     }
     input {
-      width: 370px;
+      width: 100%;
       padding: 10px;
       border-radius: 50px;
       border: 2px solid ${(props) => props.theme.colors.secondary};
@@ -50,7 +50,7 @@ export const LoginForm = styled.div`
   }
 
   button {
-    width: 365px;
+    width: 100%;
     height: 34px;
     flex-shrink: 0;
     border-radius: 50px;

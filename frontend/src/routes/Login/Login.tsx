@@ -43,7 +43,6 @@ const Login: React.FC = () => {
     try {
       await signin({ username, password });
       navigate("/project");
-      
     } catch (err: any) {
       alert(err.response.data.error);
     }
@@ -110,24 +109,18 @@ const Login: React.FC = () => {
                     </div>
                     <div className="social-media">
                       <p>Ou faça login com:</p>
-                      <div
-                        style={{
-                          justifyContent: "center",
-                          alignItems: "center",
-                          marginLeft: "260px",
-                        }}
-                      >
+                      <div className="d-flex flex-column align-items-center justify-content-center">
                         <FacebookLoginButton
-                          style={{ width: "360px", marginBottom: "20px" }}
+                          style={{ width: "100%", marginBottom: "20px" }}
                         >
                           <span>Entrar com o Facebook</span>
                         </FacebookLoginButton>
                         <GoogleLoginButton
-                          style={{ width: "360px", marginBottom: "20px" }}
+                          style={{ width: "100%", marginBottom: "20px" }}
                         >
                           <span>Entrar com o Google</span>
                         </GoogleLoginButton>
-                        <GithubLoginButton style={{ width: "360px" }}>
+                        <GithubLoginButton style={{ width: "100%" }}>
                           <span>Entrar com o Github</span>
                         </GithubLoginButton>
                       </div>
