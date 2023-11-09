@@ -10,7 +10,6 @@ import Login from "./routes/Login/Login";
 import Project from "./routes/Project/Project";
 import Register from "./routes/Register/Register";
 import Chat from "./components/Chat/Chat";
-
 import GlobalStyle from "./styles/global";
 import { ThemeProvider } from "styled-components";
 import light from "./styles/themes/light";

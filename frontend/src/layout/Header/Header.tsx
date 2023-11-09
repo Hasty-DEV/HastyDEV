@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import NavLinks from "../../components/NavLinks/NavLinks"
 import LogoLight from "../../assets/LogoLight.svg";
 import LogoDark from "../../assets/LogoDark.svg";
+import "./button-navbar.css";
 import  {ButtonSecondary, ButtonTertiary }  from "../../components/Buttons/Buttons";
-import './teste.css'
 
 
 import Switch from 'react-switch';
