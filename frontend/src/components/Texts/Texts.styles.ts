@@ -101,7 +101,7 @@ export const ParagraphStyled = styled.p<TextStyledProps>`
 
   @media (max-width: 768px) {
     line-height: 1.5;
-    font-size: .8rem;
+    font-size: 1rem;
   }
 `;
 
