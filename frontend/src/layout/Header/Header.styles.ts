@@ -1,10 +1,19 @@
 import styled from "styled-components";
-import { Navbar } from "react-bootstrap";
 
 export const Container = styled.div`
     background:${props => props.theme.colors.primary};
 `;
 
-export const NavbarToggleStyled = styled(Navbar.Toggle)`
+export const ButtonsHeader = styled.div`
 
+    hr {
+        display: none;
+    }
+
+    @media (max-width: 991px) {   
+        flex-direction: column;
+        hr {
+            display: block;
+        }
+    }
 `;

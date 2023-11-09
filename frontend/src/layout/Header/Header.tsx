@@ -1,4 +1,4 @@
-import * as L from "./Header.styles";
+import * as H from "./Header.styles";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import NavLinks from "../../components/NavLinks/NavLinks";
@@ -28,7 +28,7 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
   const ImgDarkLight = theme.title === "light" ? LogoLight : LogoDark;
 
   return (
-    <L.Container id="container1">
+    <H.Container id="container1">
       <Navbar expand="lg">
         <Container fluid>
           <Navbar.Brand as={Link} to="/" className="mr-auto">
@@ -45,7 +45,8 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
           <Navbar.Collapse id="navbarSupportedContent" role="navigation">
             <Nav className="ml-auto topnav w-100 justify-content-between">
               <NavLinks />
-              <div className="d-flex align-items-center gap-3">
+              <hr />
+              <H.ButtonsHeader className="d-flex align-items-center gap-3">
                 <ButtonTertiary route={"/login"} buttonText={"Login"} />
                 <ButtonSecondary
                   route={"/register"}
@@ -66,12 +67,12 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
                     onColor={theme?.colors.secondary}
                   ></Switch>
                 </Nav.Item>
-              </div>
+              </H.ButtonsHeader>
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-    </L.Container>
+    </H.Container>
   );
 };
 

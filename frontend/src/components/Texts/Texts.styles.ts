@@ -26,7 +26,6 @@ export const HeadingTitleStyled = styled.h1<TextStyledProps>`
   @media (max-width: 768px) {
     font-size: 3rem;
     line-height: 1.2;
-   
   }
 `;
 
@@ -94,14 +93,10 @@ export const ParagraphStyled = styled.p<TextStyledProps>`
   font-weight: 500;
   line-height: 24px;
   text-align: justify;
-  
-  @media (max-width: 768px) {
-    
-    line-height: 1.5;
-    
-   
-  }
 
+  @media (max-width: 768px) {
+    line-height: 1.5;
+  }
 `;
 
 export const spanStyled = styled.span<TextStyledProps>`
