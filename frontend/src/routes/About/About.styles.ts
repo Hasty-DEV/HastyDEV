@@ -23,7 +23,6 @@ export const RectangleDiv = styled(Container)`
 export const ImageStyled = styled.img`
     margin-top: -10%;
     
-    
     @media (max-width: 768px) {
       margin-top: -15%;
     
@@ -32,6 +31,9 @@ export const ImageStyled = styled.img`
       transform: none;
  }
 
+ @media (min-width: 769px) and (max-width: 998px) {
+    margin-top: -20%;
+ }
  
 `;
 

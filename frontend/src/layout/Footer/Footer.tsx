@@ -58,7 +58,7 @@ const Footer: React.FC = () => {
           <Col sm={3}>
             <Title>Newsletter</Title>
             <div className="container text-center">
-              <div className="row align-items-start">
+              <div className="row align-items-start" >
                 <NewsletterDiv className="col d-flex align-items-center">
                   <Decoration placeholder="Receba As Novidades" />
                   <Button>
@@ -92,7 +92,7 @@ const Footer: React.FC = () => {
               className="d-flex align-items-center justify-content-center"
             >
               <p>
-                Um Produto da{" "}
+                Um Produto da
                 <img
                   src={ImgDarkLight}
                   alt="Logo HastyDEV modo Light"
