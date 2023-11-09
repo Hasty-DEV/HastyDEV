@@ -87,6 +87,10 @@ export const HeadingSubInterTitleStyled = styled.h4<TextStyledProps>`
     background: ${(props) => props.theme.colors[props.customColor || "text"]};
     opacity: ${(props) => (props.hasUnderline ? 1 : 0)};
   }
+
+  @media (max-width: 575px) {
+    font-size: 1.8rem;
+  }
 `;
 
 export const ParagraphStyled = styled.p<TextStyledProps>`
