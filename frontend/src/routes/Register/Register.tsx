@@ -6,8 +6,9 @@ import { FormFetch } from "../../axios/config";
 import { Formik, Field } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import swal  from 'sweetalert2';
- 
- 
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 interface FormValues {
   username: string;
@@ -29,7 +30,7 @@ const validationsRegister = yup.object().shape({
     .matches(/[A-Z]/, "A senha deve conter pelo menos uma letra maiúscula")
     .matches(/[0-9]/, "A senha deve conter pelo menos um número")
     .matches(/[@$!¨%*#?&]/, "A senha deve conter pelo menos um caractere especial"),
-  confirmPassword: yup.string().required("A confirmação da senha é obrigatória").oneOf([yup.ref("password")], "As senhas não coincidem"),
+    confirmPassword: yup.string().required("A confirmação da senha é obrigatória").oneOf([yup.ref("password")], "As senhas não coincidem"),
 });
 
 const Register: React.FC = () => {
@@ -49,11 +50,12 @@ const Register: React.FC = () => {
           timer: 1500,
         });
       
-     
+    
       navigate('/login');
  
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
+      toast.error(err.response.data.error);
       alert(err.response.data.errors[0].msg);
       alert(err.response.data.error);
     }
@@ -142,6 +144,7 @@ const Register: React.FC = () => {
           </R.RegisterForm>
         </Col>
       </Row>
+      <ToastContainer />
     </Container>
   );
 };

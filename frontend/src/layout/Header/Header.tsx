@@ -5,7 +5,7 @@ import NavLinks from "../../components/NavLinks/NavLinks"
 import LogoLight from "../../assets/LogoLight.svg";
 import LogoDark from "../../assets/LogoDark.svg";
 import  {ButtonSecondary, ButtonTertiary }  from "../../components/Buttons/Buttons";
-
+import './teste.css'
 
 
 import Switch from 'react-switch';
@@ -37,7 +37,7 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
               className="mt-2"
             />
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="navbarSupportedContent" />
+          <Navbar.Toggle aria-controls="navbarSupportedContent" className="custom-navbar-toggler" />
           <Navbar.Collapse id="navbarSupportedContent" role="navigation">
             <Nav className="ml-auto topnav w-100 justify-content-between">
               <NavLinks />

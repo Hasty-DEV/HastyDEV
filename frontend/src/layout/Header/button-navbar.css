@@ -1,0 +1,17 @@
+ 
+  .custom-navbar-toggler {
+        background-image: url('../../assets/button-navbar.svg'); /* Substitua pelo caminho da sua imagem */
+    background-size: 56px 40px; /* Ajuste o tamanho da imagem de acordo com suas necessidades */
+    width: 56px; /* Defina o tamanho desejado para o ícone */
+    height: 40px;
+ /* Defina o tamanho desejado para o ícone */
+    /* Outros estilos personalizados, se necessário */
+    .navbar-toggler-icon {
+      background-image: none;  
+      background-color: transparent;  
+      width: 56px; 
+      height: 40px; 
+      
+    }
+  }
+  
