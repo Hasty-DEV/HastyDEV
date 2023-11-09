@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { StyledNavLink } from "./NavLinks.styles";
+import { StyledNavLink, StyledNavLinksContainer } from "./NavLinks.styles";
 import { Nav } from "react-bootstrap";
 
 const NavLinks: React.FC = () => {
   return (
-    <div className="d-flex align-items-center gap-4" style={{ marginLeft: 100 }}>
+    <StyledNavLinksContainer  className="d-flex align-items-center gap-4">
       <Nav.Item>
         <StyledNavLink as={Link} to="/">
           Home
@@ -25,7 +25,7 @@ const NavLinks: React.FC = () => {
           O Projeto
         </StyledNavLink>
       </Nav.Item>
-    </div>
+    </StyledNavLinksContainer>
   );
 };
 
