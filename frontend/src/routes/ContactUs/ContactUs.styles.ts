@@ -79,6 +79,11 @@ export const InfoDiv = styled.div`
   background: #10375c;
   border-radius: 10px;
   padding: 25px;
+  
+  @media (max-width: 768px) {
+
+    margin-left:10px ;
+  }
 `;
 
 export const Infos = styled.div<ContactUsStyledProps>`
