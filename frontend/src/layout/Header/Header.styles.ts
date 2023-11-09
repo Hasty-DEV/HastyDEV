@@ -5,7 +5,6 @@ export const Container = styled.div`
 `;
 
 export const ButtonsHeader = styled.div`
-
     hr {
         display: none;
     }

@@ -30,6 +30,7 @@ color:${props => props.theme.colors.text};
   font-weight: 300;
   line-height: 3;
   word-wrap: break-word;
+
 `;
 
 export const Button = styled.button`
@@ -56,6 +57,10 @@ padding: 10px
 
 `;
 
+
+export const NewsletterDiv = styled.div`
+  padding-left: 0px;
+`;
 
 
 
