@@ -6,13 +6,13 @@ const Posts = () => {
   const posts = [
     {
       id: 1,
-      name: "John Doe",
+      name: "Jamilly, a reacter",
       userId: "1",
       profilePic:
         "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+      desc: "Alguem Poderia Montar um site com esse layout?",
       img:
-        "https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600",
+        "https://s3-alpha.figma.com/hub/file/3581213814/e622a7cd-e8ce-4613-8289-94660d0e0191-cover.png",
     },
     {
       id: 2,
@@ -21,7 +21,7 @@ const Posts = () => {
       profilePic:
         "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1600",
       desc:
-        "Tenetur iste voluptates dolorem rem commodi voluptate pariatur, voluptatum, laboriosam consequatur enim nostrum cumque! Maiores a nam non adipisci minima modi tempore.",
+        "Preciso de Algúem para fazer um site em react...",
       img: "",
     },
   ];

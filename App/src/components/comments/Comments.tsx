@@ -18,7 +18,7 @@ const Comments = () => {
     },
     {
       id: 2,
-      desc: "Pode Contar comigo!",
+      desc: "Irei te chamar Cleiton!",
       name: "Jamilly, a reacter",
       userId: 2,
       profilePicture: "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1600",
