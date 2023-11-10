@@ -3,6 +3,8 @@ import { FaHeart, FaRegHeart, FaComment, FaShare } from 'react-icons/fa';
 import { Link } from "react-router-dom";
 import Comments from "../comments/Comments";
 import { useState } from "react";
+//import UserIcon from "../../assets/user/user_icon.png"
+
 
 interface PostType {
   profilePic: string;
@@ -31,7 +33,7 @@ const Post = ({ post }: { post: PostType }) => {
               >
                 <span className="name">{post.name}</span>
               </Link>
-              <span className="date">1 min ago</span>
+              <span className="date">2 Horas Atrás</span>
             </div>
           </div>
         </div>
@@ -42,15 +44,15 @@ const Post = ({ post }: { post: PostType }) => {
         <div className="info">
           <div className="item">
             {liked ? <FaHeart /> : <FaRegHeart />}
-            12 Likes
+            1 Likes
           </div>
           <div className="item" onClick={() => setCommentOpen(!commentOpen)}>
             <FaComment />
-            12 Comments
+            2 Comentários
           </div>
           <div className="item">
             <FaShare />
-            Share
+            Compartilhe
           </div>
         </div>
         {commentOpen && <Comments />}
