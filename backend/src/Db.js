@@ -11,6 +11,12 @@ const db = new Sequelize(
   }
 );
 
-db.authenticate();
+db.authenticate()
+  .then(() => {
+    console.log("Conexão bem-sucedida com o banco de dados");
+  })
+  .catch((error) => {
+    console.error("Erro na autenticação com o banco de dados:", error);
+  });
 
 module.exports = db;
