@@ -75,12 +75,12 @@ const ContactUSForm = () => {
           <>
             <form onSubmit={handleSubmit}>
               <Container>
-                <Row className="flex-column flex-md-row"> {/* Altere a classe para flex-md-row */}
-                  <Col xs={12} md={6} className="mt-2"> {/* Mantenha o tamanho original em dispositivos médios e grandes */}
+                <Row className="flex-column flex-md-row">
+                  <Col xs={12} md={6} className="mt-2">
                     <Field type="text" placeholder="Nome" name="Name" />
                     {errors.Name && touched.Name && errors.Name}
                   </Col>
-                  <Col xs={12} md={6} className="mt-2"> {/* Mantenha o tamanho original em dispositivos médios e grandes */}
+                  <Col xs={12} md={6} className="mt-2"> 
                     <Field
                       type="email"
                       placeholder="E-mail"
@@ -89,11 +89,11 @@ const ContactUSForm = () => {
                     />
                     {errors.Email && touched.Email && errors.Email}
                   </Col>
-                  <Col xs={12} md={6} className="mt-2"> {/* Mantenha o tamanho original em dispositivos médios e grandes */}
+                  <Col xs={12} md={6} className="mt-2">
                     <Field type="tel" placeholder="Telefone" name="Phone" />
                     {errors.Phone && touched.Phone && errors.Phone}
                   </Col>
-                  <Col xs={12} md={6} className="mt-2"> {/* Mantenha o tamanho original em dispositivos médios e grandes */}
+                  <Col xs={12} md={6} className="mt-2"> 
                     <select
                       title="Category"
                       id="Category"
