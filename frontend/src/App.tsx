@@ -9,6 +9,7 @@ import Hero from "./routes/Hero/Hero";
 import Login from "./routes/Login/Login";
 import Project from "./routes/Project/Project";
 import Register from "./routes/Register/Register";
+import EmailVerification from "./routes/EmailVerification/EmailVerification";
 import Chat from "./components/Chat/Chat";
 import GlobalStyle from "./styles/global";
 import { ThemeProvider } from "styled-components";
@@ -81,6 +82,7 @@ function App() {
             }
           />
           <Route path="/project" element={<Project />} />
+          <Route path="/emailVerification" element={<EmailVerification />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
         <Footer />
