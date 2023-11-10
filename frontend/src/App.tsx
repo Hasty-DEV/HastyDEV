@@ -81,6 +81,7 @@ function App() {
             }
           />
           <Route path="/project" element={<Project />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
         <Footer />
       </Router>
