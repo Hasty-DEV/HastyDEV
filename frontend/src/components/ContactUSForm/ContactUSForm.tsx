@@ -79,7 +79,12 @@ const ContactUSForm = () => {
                     <Col xs={6} className="mt-2">
                       <Field type="text" placeholder="Nome" name="Name" />
                       {errors.Name && touched.Name && errors.Name}
-                      <Field type="email" placeholder="E-mail" name="Email" className="mt-3"/>
+                      <Field
+                        type="email"
+                        placeholder="E-mail"
+                        name="Email"
+                        className="mt-3"
+                      />
                       {errors.Email && touched.Email && errors.Email}
                     </Col>
                     <Col xs={6} className="mt-2">
@@ -115,16 +120,15 @@ const ContactUSForm = () => {
                       />
                       {errors.Message && touched.Message && errors.Message}
                     </Col>
-                    <Col xs={6} className="mt-4">
+                    <Col xs={6} className="mt-4"></Col>
+
+                    <Col xs={12} className="mt-4 d-flex justify-content-center">
+                      <ButtonPrimaryLongNoLink
+                        type="submit"
+                        buttonText="Entre em Contato"
+                        disabled={isSubmitting}
+                      />
                     </Col>
-                    <Col xs={6} className="mt-4">
-                    <ButtonPrimaryLongNoLink
-                      type="submit"
-                      buttonText="Entre em Contato"
-                      disabled={isSubmitting}
-                    />
-                    </Col>
-                    
                   </Row>
                 </Container>
               </form>
@@ -145,34 +149,53 @@ const FormContainer = styled.div`
   gap: 1rem;
   align-items: center;
   padding: 2rem;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.colors.color_Form};
   border-radius: 10px;
+  color: ${(props) => props.theme.colors.color}
 
   form {
     display: flex;
     flex-direction: column;
     gap: 2rem;
     border-radius: 2rem;
+    background-color: ${(props) => props.theme.colors.color_Form};
+    color: ${(props) => props.theme.colors.color}
+
   }
 
   input,
   select,
   textarea {
-    width: 100%;
+   
     padding: 1rem;
     outline: none;
+    background-color: ${(props) => props.theme.colors.color_Form};
+    color: ${(props) => props.theme.colors.color};
+
+    &::placeholder {
+      color: ${(props) => props.theme.colors.color};
+    }
   }
 
   input, select {
+    width: 100%;
     border: none;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid ${(props) => props.theme.colors.text};
+    background-color: ${(props) => props.theme.colors.color_Form};
+    color: ${(props) => props.theme.colors.color};
+    &::placeholder {
+      color: ${(props) => props.theme.colors.color};
+    }
   }
 
   textarea {
+    width: 100%;
     resize: none;
     height: 10rem;
     border-radius: 5px;
-    border: 1px solid #ccc
+    border: 1px solid ${(props) => props.theme.colors.text};
+    background-color: ${(props) => props.theme.colors.color_Form};
+    color: ${(props) => props.theme.colors.color}
   }
 `;
 

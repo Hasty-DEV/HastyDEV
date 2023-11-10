@@ -10,6 +10,7 @@ export default{
         text:'#fff',
         color:'#fff',
         color_button:'linear-gradient(90deg, #9D5BF0 0%, #24034E 100%)',
-        borda:'#9D5BF0'
+        borda:'#9D5BF0',
+        color_Form: '#21173E'
     }
 } as DefaultTheme; 

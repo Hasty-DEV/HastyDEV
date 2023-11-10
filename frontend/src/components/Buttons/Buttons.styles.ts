@@ -38,10 +38,7 @@ export const ButtonPrimaryStyled = styled.button`
     opacity: 0.5;
   }
 
-  @media (max-width: 768px) {
-    margin-bottom: 81px;
-   
-  }
+ 
 `;
 
 
@@ -65,6 +62,14 @@ export const ButtonPrimaryLongStyled = styled.button`
   &:active {
     opacity: 0.5;
   }
+  @media (max-width: 768px) {
+    width: 278px;
+    
+    
+   
+  }
+
+ 
 `;
 
 export const ButtonTertiaryStyled = styled.button`
