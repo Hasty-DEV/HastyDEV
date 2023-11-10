@@ -43,14 +43,14 @@ const Login: React.FC = () => {
     try {
       setIsLoading(true);
       await signin({ username, password });
-      navigate("/project");
+      window.location.href = "https://app-hastydev.vercel.app/";
     } catch (err: any) {
       alert(err.response.data.error);
     } finally {
       setIsLoading(false);
     }
   };
-
+  
   const isPasswordVisible = showPassword ? "text" : "password";
 
 
