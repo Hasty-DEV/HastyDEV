@@ -16,6 +16,10 @@ const validationsSearch = yup.object().shape({
 });
 
 function SearchForm() {
+
+  const construcao = () => {
+    alert("Em Construção!");
+  }
   const handleSearch = async ({
     Partner,
     WorkArea,
@@ -109,6 +113,7 @@ function SearchForm() {
                 buttonText="Procure o Projeto"
                 disabled={isSubmitting}
                 className="mt-4"
+                onClick={construcao}
               />
             </form>
           </>
