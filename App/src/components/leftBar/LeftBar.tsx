@@ -12,12 +12,13 @@ import Messages from "../../assets/10.png";
 import Tutorials from "../../assets/11.png";
 import Courses from "../../assets/12.png";
 import Fund from "../../assets/13.png";
-import { AuthContext } from "../../context/authContext";
-import { useContext } from "react";
+//import { AuthContext } from "../../context/authContext";
+//import { useContext } from "react";
+import UserIcon from "../../assets/user/user_icon.png"
 
 const LeftBar = () => {
-  const authContext = useContext(AuthContext);
-  const currentUser = authContext ? authContext.currentUser : { profilePic: "", name: "" };
+  //const authContext = useContext(AuthContext);
+  //const currentUser = authContext ? authContext.currentUser : { profilePic: "", name: "" };
 
   return (
     <div className="leftBar">
@@ -25,70 +26,70 @@ const LeftBar = () => {
         <div className="menu">
           <div className="user">
             <img
-              src={currentUser.profilePic}
+              src={UserIcon}
               alt=""
             />
-            <span>{currentUser.name}</span>
+            <span>Usuário</span>
           </div>
           <div className="item">
             <img src={Friends} alt="" />
-            <span>Friends</span>
+            <span>Home</span>
           </div>
           <div className="item">
             <img src={Groups} alt="" />
-            <span>Groups</span>
+            <span>Em Construção...</span>
           </div>
           <div className="item">
             <img src={Market} alt="" />
-            <span>Marketplace</span>
+            <span>Em Construção...</span>
           </div>
           <div className="item">
             <img src={Watch} alt="" />
-            <span>Watch</span>
+            <span>Em Construção...</span>
           </div>
           <div className="item">
             <img src={Memories} alt="" />
-            <span>Memories</span>
+            <span>Em Construção...</span>
           </div>
         </div>
         <hr />
         <div className="menu">
-          <span>Your shortcuts</span>
+          <span>Em Construção...</span>
           <div className="item">
             <img src={Events} alt="" />
-            <span>Events</span>
+            <span>Em Construção...</span>
           </div>
           <div className="item">
             <img src={Gaming} alt="" />
-            <span>Gaming</span>
+            <span>Em Construção...</span>
           </div>
           <div className="item">
             <img src={Gallery} alt="" />
-            <span>Gallery</span>
+            <span>Em Construção...</span>
           </div>
           <div className="item">
             <img src={Videos} alt="" />
-            <span>Videos</span>
+            <span>Em Construção...</span>
           </div>
           <div className="item">
             <img src={Messages} alt="" />
-            <span>Messages</span>
+            <span>Em Construção...</span>
           </div>
         </div>
         <hr />
         <div className="menu">
-          <span>Others</span>
+          <span>Em Construção...</span>
           <div className="item">
             <img src={Fund} alt="" />
-            <span>Fundraiser</span>
+            <span>Em Construção...</span>
           </div>
           <div className="item">
             <img src={Tutorials} alt="" />
-            <span>Tutorials</span>
+            <span>Em Construção...</span>
           </div>
           <div className="item">
             <img src={Courses} alt="" />
-            <span>Courses</span>
+            <span>Em Construção...</span>
           </div>
         </div>
       </div>
