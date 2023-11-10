@@ -1,10 +1,9 @@
 import axios from "axios";
 
-const URL = "http://localhost";
-const PORT = "3001"
+const URL = "http://localhost:3001";
 
 export const FormFetch = axios.create({
-  baseURL: `${URL}:${PORT}`,
+  baseURL: `${URL}`,
   headers: {
     "Content-Type": "application/json",
   },
