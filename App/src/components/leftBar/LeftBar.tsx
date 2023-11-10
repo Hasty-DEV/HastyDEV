@@ -14,7 +14,7 @@ import Courses from "../../assets/12.png";
 import Fund from "../../assets/13.png";
 //import { AuthContext } from "../../context/authContext";
 //import { useContext } from "react";
-import UserIcon from "../../assets/user/user_icon.png"
+import UserIcon from "../../assets/user/user_icon.png";
 
 const LeftBar = () => {
   //const authContext = useContext(AuthContext);
@@ -25,10 +25,7 @@ const LeftBar = () => {
       <div className="container">
         <div className="menu">
           <div className="user">
-            <img
-              src={UserIcon}
-              alt=""
-            />
+            <img src={UserIcon} alt="" />
             <span>Usuário</span>
           </div>
           <div className="item">
