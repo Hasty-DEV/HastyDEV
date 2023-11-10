@@ -4,6 +4,7 @@ import Map from "../../assets/map.png";
 import Friend from "../../assets/friend.png";
 import { useContext } from "react";
 import { AuthContext, AuthContextType } from "../../context/authContext";
+import UserIcon from "../../assets/user/user_icon.png"
 
 const Share = () => {
   const authContext = useContext<AuthContextType | undefined>(AuthContext);
@@ -19,10 +20,10 @@ const Share = () => {
       <div className="container">
         <div className="top">
           <img
-            src={currentUser.profilePic}
+            src={UserIcon}
             alt=""
           />
-          <input type="text" placeholder={`What's on your mind ${currentUser.name}?`} />
+          <input type="text" placeholder={`O que você está pensando... ${currentUser.name}?`} />
         </div>
         <hr />
         <div className="bottom">
@@ -31,20 +32,20 @@ const Share = () => {
             <label htmlFor="file">
               <div className="item">
                 <img src={Image} alt="" />
-                <span>Add Image</span>
+                <span>Adicionar Imagem</span>
               </div>
             </label>
             <div className="item">
               <img src={Map} alt="" />
-              <span>Add Place</span>
+              <span>Adicionar Lugar</span>
             </div>
             <div className="item">
               <img src={Friend} alt="" />
-              <span>Tag Friends</span>
+              <span>Marcar Amigos</span>
             </div>
           </div>
           <div className="right">
-            <button>Share</button>
+            <button>Compartilhar</button>
           </div>
         </div>
       </div>
