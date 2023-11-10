@@ -1,15 +1,18 @@
-import * as R from "./Register.styles";
-import * as yup from "yup";
-import { Container, Row, Col } from "react-bootstrap";
-import RegisterImg from "../../assets/images/RegisterImg.png";
-import { FormFetch } from "../../axios/config";
+import { useState } from "react";
 import { Formik, Field } from "formik";
+import * as yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert2";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import "react-toastify/dist/ReactToastify.css";
 import Loader from "../../components/Loader/Loader";
-import { useState } from "react";
+import * as R from "./Register.styles";
+import { Container, Row, Col } from "react-bootstrap";
+import RegisterImg from "../../assets/images/RegisterImg.png";
+import { FormFetch } from "../../axios/config";
 
 interface FormValues {
   username: string;
@@ -19,6 +22,7 @@ interface FormValues {
   email: string;
   confirmPassword: string;
 }
+
 const validationsRegister = yup.object().shape({
   first_name: yup.string().required("O campo de nome é obrigatório"),
   last_name: yup.string().required("O campo de sobrenome é obrigatório"),
@@ -45,6 +49,8 @@ const validationsRegister = yup.object().shape({
 });
 
 const Register: React.FC = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
   const [registrationInProgress, setRegistrationInProgress] = useState(false);
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
 
@@ -83,6 +89,13 @@ const Register: React.FC = () => {
       alert(err.response.data.errors[0].msg);
       alert(err.response.data.error);
     }
+  };
+
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+  const handleTogglePassword2 = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -147,18 +160,34 @@ const Register: React.FC = () => {
                       </div>
                       <div className="form-group">
                         <label htmlFor="password">Senha:</label>
-                        <Field type="password" id="password" name="password" />
+                        <div className="password-input">
+                          <Field
+                            type={showPassword ? "text" : "password"}
+                            id="password"
+                            name="password"
+                          />
+                          <FontAwesomeIcon
+                            icon={showPassword ? faEyeSlash : faEye}
+                            onClick={handleTogglePassword}
+                            className="password-toggle-icon"
+                          />
+                        </div>
                         {errors.password && touched.password && errors.password}
                       </div>
                       <div className="form-group">
-                        <label htmlFor="confirmPassword">
-                          Confirme Sua Senha:
-                        </label>
-                        <Field
-                          type="password"
-                          id="confirmPassword"
-                          name="confirmPassword"
-                        />
+                        <label htmlFor="confirmPassword">Confirme Sua Senha:</label>
+                        <div className="password-input">
+                          <Field
+                            type={showPassword ? "text" : "password"}
+                            id="confirmPassword"
+                            name="confirmPassword"
+                          />
+                          <FontAwesomeIcon
+                            icon={showPassword ? faEyeSlash : faEye}
+                            onClick={handleTogglePassword2}
+                            className="password-toggle-icon"
+                          />
+                        </div>
                         {errors.confirmPassword &&
                           touched.confirmPassword &&
                           errors.confirmPassword}
