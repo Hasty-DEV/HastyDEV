@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Formik, Field } from "formik";
 import * as yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
@@ -15,6 +15,8 @@ import LoginImg from "../../assets/images/LoginImg.png";
 import { useAuth } from "../../Contexts/Auth/AuthProvider";
 
 import * as L from "./Login.styles";
+
+import Loader from "../../components/Loader/Loader"; 
 
 interface FormValues {
   username: string;
@@ -33,7 +35,8 @@ const Login: React.FC = () => {
   const { signin } = useAuth();
 
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate(); // Obtenha o objeto history do React Router
+  const [isLoading, setIsLoading] = useState(false); 
+  const navigate = useNavigate();
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
@@ -41,10 +44,13 @@ const Login: React.FC = () => {
 
   const handleLogin = async ({ username, password }: FormValues) => {
     try {
+      setIsLoading(true);
       await signin({ username, password });
       navigate("/project");
     } catch (err: any) {
       alert(err.response.data.error);
+    } finally {
+      setIsLoading(false); 
     }
   };
 
@@ -56,81 +62,83 @@ const Login: React.FC = () => {
         <Row>
           <Col>
             <L.LoginForm>
-              <Formik
-                initialValues={{
-                  username: "",
-                  password: "",
-                }}
-                onSubmit={handleLogin}
-                validationSchema={validationsLogin}
-              >
-                {({ errors, touched, handleSubmit, isSubmitting }) => (
-                  <>
-                    <form onSubmit={handleSubmit}>
-                      <h2>Bem-Vindo de Volta à HastyDEV!</h2>
+              {isLoading ? ( 
+                <Loader />
+              ) : (
+                <Formik
+                  initialValues={{
+                    username: "",
+                    password: "",
+                  }}
+                  onSubmit={handleLogin}
+                  validationSchema={validationsLogin}
+                >
+                  {({ errors, touched, handleSubmit, isSubmitting }) => (
+                    <>
+                      <form onSubmit={handleSubmit}>
+                        <h2>Bem-Vindo de Volta à HastyDEV!</h2>
 
-                      <div className="form-group">
-                        <label htmlFor="username">Username:</label>
-                        <Field type="text" id="username" name="username" />
-                        {errors.username && touched.username && errors.username}
-                      </div>
-
-                      <div className="form-group">
-                        <label htmlFor="password">Senha:</label>
-                        <div className="password-input">
-                          <Field
-                            type={isPasswordVisible}
-                            id="password"
-                            name="password"
-                          />
-                          <FontAwesomeIcon
-                            icon={showPassword ? faEyeSlash : faEye}
-                            onClick={handleTogglePassword}
-                            className="password-toggle-icon"
-                          />
+                        <div className="form-group">
+                          <label htmlFor="username">Username:</label>
+                          <Field type="text" id="username" name="username" />
+                          {errors.username && touched.username && errors.username}
                         </div>
-                        {errors.password && touched.password && errors.password}
-                      </div>
 
-                      <div className="form-group">
-                        <button type="submit" disabled={isSubmitting}>
-                          Login
-                        </button>
-                      </div>
-                    </form>
+                        <div className="form-group">
+                          <label htmlFor="password">Senha:</label>
+                          <div className="password-input">
+                            <Field
+                              type={isPasswordVisible}
+                              id="password"
+                              name="password"
+                            />
+                            <FontAwesomeIcon
+                              icon={showPassword ? faEyeSlash : faEye}
+                              onClick={handleTogglePassword}
+                              className="password-toggle-icon"
+                            />
+                          </div>
+                          {errors.password && touched.password && errors.password}
+                        </div>
 
-                    <div className="sign_in">
-                      <Link to="/Register">
-                        Nao tem uma Conta? <a href="#"> Inscreva-se</a>
-                      </Link>
-                    </div>
-                    <div className="forgot-password">
-                      <a href="#">Esqueceu a senha?</a>
-                    </div>
-                    <div className="social-media">
-                      <p>Ou faça login com:</p>
-                      <div className="d-flex flex-column align-items-center justify-content-center">
-                        <FacebookLoginButton
-                          style={{ width: "100%", marginBottom: "20px" }}
-                        >
-                          <span>Entrar com o Facebook</span>
-                        </FacebookLoginButton>
-                        <GoogleLoginButton
-                          style={{ width: "100%", marginBottom: "20px" }}
-                        >
-                          <span>Entrar com o Google</span>
-                        </GoogleLoginButton>
-                        <GithubLoginButton style={{ width: "100%" }}>
-                          <span>Entrar com o Github</span>
-                        </GithubLoginButton>
+                        <div className="form-group">
+                          <button type="submit" disabled={isSubmitting}>
+                            Login
+                          </button>
+                        </div>
+                      </form>
+                      <div className="sign_in">
+                        <Link to="/Register">
+                          Nao tem uma Conta? <a href="#"> Inscreva-se</a>
+                        </Link>
                       </div>
-                    </div>
-                  </>
-                )}
-              </Formik>
+                      <div className="forgot-password">
+                        <a href="#">Esqueceu a senha?</a>
+                      </div>
+                      <div className="social-media">
+                        <p>Ou faça login com:</p>
+                        <div className="d-flex flex-column align-items-center justify-content-center">
+                          <FacebookLoginButton
+                            style={{ width: "100%", marginBottom: "20px" }}
+                          >
+                            <span>Entrar com o Facebook</span>
+                          </FacebookLoginButton>
+                          <GoogleLoginButton
+                            style={{ width: "100%", marginBottom: "20px" }}
+                          >
+                            <span>Entrar com o Google</span>
+                          </GoogleLoginButton>
+                          <GithubLoginButton style={{ width: "100%" }}>
+                            <span>Entrar com o Github</span>
+                          </GithubLoginButton>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </Formik>
+              )}
             </L.LoginForm>
           </Col>
-
           <Col style={{ position: "relative" }}>
             <img
               src={LoginImg}
