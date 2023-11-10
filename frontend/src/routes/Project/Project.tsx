@@ -5,10 +5,10 @@ import {
   HeadingTitle,
   Paragraph,
 } from "../../components/Texts/Texts";
-import { Link } from "react-router-dom";
-import { AiOutlineRight, AiOutlineLine } from "react-icons/ai";
+import { AiOutlineLine } from "react-icons/ai";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import ProjectImg1 from "../../assets/images/Project/ProjectImg1.webp";
+
 
 const Project: React.FC = () => {
   return (
@@ -27,7 +27,7 @@ const Project: React.FC = () => {
               />
             </Col>
           </Col>
-          <Col xs={12}  sm={6}>
+          <Col xs={12} sm={6}>
             <ProjectParagraph
               paragraph="Em nosso espaço de co-working, a inovação se torna realidade. Na
               HastyDEV, oferecemos um ambiente único onde mentes criativas se
@@ -38,74 +38,14 @@ const Project: React.FC = () => {
               futuro."
             />
           </Col>
-          <Col xs={12}>
+          <Col xs={12} sm={6}>
             <SearchForm />
           </Col>
-          <Col xs={12}>
+          <Col xs={12} sm={6}>
             <img src={ProjectImg1} alt="" className="img-fluid" />
           </Col>
         </Row>
       </ProjectFirstSection>
-      <ProjectSecondSection>
-        <Row>
-          <Col xs={12}>
-            <Col xs={12} sm={5} md={4}>
-              <h2>Nossa Plataforma</h2>
-            </Col>
-            <Col xs={12} sm={5} md={6}>
-              <p>
-                Nossa Plataforma Foi Projetada Para Proporcionar Uma Experiência
-                Diferente Ao Criar ou Buscar Projetos
-              </p>
-            </Col>
-            <Col xs={4} sm={2} md={2}></Col>
-          </Col>
-          <Col xs={4}>
-            <Col xs={12}>
-              <Link to="/register">
-                <button title="Link to register">
-                  <AiOutlineRight size={16} />
-                </button>
-              </Link>
-            </Col>
-            <Col xs={12}>
-              <p>Encontre Projetos</p>
-            </Col>
-          </Col>
-          <Col xs={4}>
-            <Col xs={12}>
-              <Col xs={8}></Col>
-              <Col xs={4}></Col>
-            </Col>
-            <Col xs={12}>
-              <h4>Espaço Único</h4>
-              <p>
-                Encontre o Seu Projeto, Desenvolva, Ajude e Ganhe Experiência.
-              </p>
-            </Col>
-            <Col xs={12}>
-              <Link to="/register">
-                <button title="Link to register">
-                  Cadastre-se
-                  <AiOutlineRight size={16} />
-                </button>
-              </Link>
-            </Col>
-          </Col>
-          <Col xs={4}>
-            <Col xs={12}>
-              <Link to="/register">
-                <button title="Link to register">
-                  <AiOutlineRight size={16} />
-                </button>
-              </Link>
-            </Col>
-            <Col xs={12}>
-              <p>Consiga Uma Nova Oportunidade</p>
-            </Col>
-          </Col>
-        </Row>
-      </ProjectSecondSection>
     </>
   );
 };
@@ -132,12 +72,15 @@ const ProjectHeadingTitle = styled(HeadingTitle)`
 
   @media (max-width: 575px) {
     font-size: 2.5rem;
+    padding: 10px;
   }
 `;
-
 const ProjectSubInterTitle = styled(HeadingSubInterTitle)`
   display: inline-block;
   width: 40%;
+  @media (max-width: 575px) {
+    padding: 10px;
+  }
 `;
 
 const ProjectParagraph = styled(Paragraph)`
@@ -147,10 +90,6 @@ const ProjectParagraph = styled(Paragraph)`
 
   @media (max-width: 575px) {
     font-size: 1rem;
-    padding-right: 5px;
+    padding: 10px;
   }
-`;
-
-const ProjectSecondSection = styled(Container)`
-  margin-top: 5%;
 `;
