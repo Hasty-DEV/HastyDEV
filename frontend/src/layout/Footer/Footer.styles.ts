@@ -60,9 +60,13 @@ padding: 10px
 
 export const NewsletterDiv = styled.div`
   padding-left: 0px;
+  
+ 
 
   @media(max-width: 575px) {
     margin-bottom: 5%;
+    
+    
   }
 `;
 

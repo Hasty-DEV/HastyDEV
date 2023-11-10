@@ -10,13 +10,11 @@ import {
 import { Container, Row, Col } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-
 import LoginImg from "../../assets/images/LoginImg.png";
 import { useAuth } from "../../Contexts/Auth/AuthProvider";
-
 import * as L from "./Login.styles";
+import Loader from "../../components/Loader/Loader";
 
-import Loader from "../../components/Loader/Loader"; 
 
 interface FormValues {
   username: string;
@@ -33,9 +31,8 @@ const validationsLogin = yup.object().shape({
 
 const Login: React.FC = () => {
   const { signin } = useAuth();
-
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleTogglePassword = () => {
@@ -50,11 +47,17 @@ const Login: React.FC = () => {
     } catch (err: any) {
       alert(err.response.data.error);
     } finally {
-      setIsLoading(false); 
+      setIsLoading(false);
     }
   };
 
   const isPasswordVisible = showPassword ? "text" : "password";
+
+
+  const handleEmCostrução = () => {
+    alert("Este botão está em construção.");
+  };
+ 
 
   return (
     <>
@@ -62,7 +65,7 @@ const Login: React.FC = () => {
         <Row>
           <Col>
             <L.LoginForm>
-              {isLoading ? ( 
+              {isLoading ? (
                 <Loader />
               ) : (
                 <Formik
@@ -116,19 +119,24 @@ const Login: React.FC = () => {
                         <a href="#">Esqueceu a senha?</a>
                       </div>
                       <div className="social-media">
-                        <p>Ou faça login com:</p>
+                        
                         <div className="d-flex flex-column align-items-center justify-content-center">
                           <FacebookLoginButton
                             style={{ width: "100%", marginBottom: "20px" }}
+                            onClick={handleEmCostrução}
                           >
                             <span>Entrar com o Facebook</span>
                           </FacebookLoginButton>
                           <GoogleLoginButton
                             style={{ width: "100%", marginBottom: "20px" }}
+                            onClick={handleEmCostrução}
                           >
                             <span>Entrar com o Google</span>
                           </GoogleLoginButton>
-                          <GithubLoginButton style={{ width: "100%" }}>
+                          <GithubLoginButton
+                            style={{ width: "100%" }}
+                            onClick={handleEmCostrução}
+                          >
                             <span>Entrar com o Github</span>
                           </GithubLoginButton>
                         </div>
