@@ -46,7 +46,7 @@ export const Decoration = styled.input`
 border-radius: 6px 0 0 6px;
 border: 1px solid rgba(254, 211, 10, 0.20);
 background: #FFF;
-width: 198px;
+width: 100%;
 height: 50px;
 color: #000;
 font-size: 14px;

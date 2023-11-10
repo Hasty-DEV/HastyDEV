@@ -29,7 +29,7 @@ const Footer: React.FC = () => {
     <FooterStyled>
       <Container fluid className="custom-mt-15percent">
         <Row>
-          <Col sm={3}>
+          <Col sm={6}>
             <img
               src={ImgDarkLight}
               alt="Logo HastyDEV modo Light"
@@ -38,7 +38,7 @@ const Footer: React.FC = () => {
             <Title>+55 (11) 9 8181-7497</Title>
             <Title>contato@jeffldscompany.com.br</Title>
           </Col>
-          <Col sm={3}>
+          <Col sm={6}>
             <Title>Quick Links</Title>
             <StyledLink to="/">
               <SubTitle>Home</SubTitle>
@@ -46,16 +46,14 @@ const Footer: React.FC = () => {
             <StyledLink to="/About">
               <SubTitle>Sobre Nós</SubTitle>
             </StyledLink>
-          </Col>
-          <Col sm={3}>
             <StyledLink to="/project">
-              <Title>Sobre o Projeto</Title>
+              <SubTitle>Sobre o Projeto</SubTitle>
             </StyledLink>
             <StyledLink to="/contact">
-              <Title>Contate-Nos</Title>
+              <SubTitle>Contate-Nos</SubTitle>
             </StyledLink>
           </Col>
-          <Col sm={3}>
+          <Col sm={12} className="mb-4">
             <Title>Newsletter</Title>
             <div className="container text-center">
               <div className="row align-items-start" >
