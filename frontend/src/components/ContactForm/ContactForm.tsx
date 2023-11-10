@@ -185,7 +185,7 @@ const FormContainer = styled.div`
    input,
    select,
    textarea {
-     width: 100%; // Faz com que os campos ocupem a largura total
+     width: 100%;
    }
   }
   `;

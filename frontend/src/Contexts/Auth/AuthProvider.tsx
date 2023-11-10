@@ -43,13 +43,9 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
       if (storageData) {
         const { token } = JSON.parse(storageData);
-
         api.defaults.headers.authorization = `Bearer ${token}`;
-
-        /* const response = await api.post("auth/me", storageData);
-
-        setUser(response.data.user); */
-
+        const response = await api.post("user/:id", storageData);
+        setUser(response.data.user); 
         // tirar o token do localstore
         // refresh na página
       }
