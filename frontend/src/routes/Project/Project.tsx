@@ -27,7 +27,7 @@ const Project: React.FC = () => {
               />
             </Col>
           </Col>
-          <Col xs={12} sm={6}>
+          <Col xs={12} sm={6} className="d-flex align-items-center justify-content-center">
             <ProjectParagraph
               paragraph="Em nosso espaço de co-working, a inovação se torna realidade. Na
               HastyDEV, oferecemos um ambiente único onde mentes criativas se
