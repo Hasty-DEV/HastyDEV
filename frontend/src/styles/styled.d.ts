@@ -13,6 +13,7 @@ declare module 'styled-components' {
             color:string;
             color_button: string;
             borda:string;
+            color_Form: string;
         }
     }
 }

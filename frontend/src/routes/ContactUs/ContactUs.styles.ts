@@ -12,10 +12,12 @@ export interface ContactUsStyledProps {
 export const ContactUsDiv = styled(Col)`
   display: flex;
   justify-content: space-between;
-  background: #fff;
+  background-color: ${(props) => props.theme.colors.color_Form};
   box-shadow: 0px 0px 60px 30px rgba(0, 0, 0, 0.03);
   padding-left: 0;
   border-radius: 10px;
+
+
 `;
 
 export const FormDiv = styled.div``;
@@ -76,13 +78,13 @@ export const ContactUsSocialIconsDiv = styled.div`
 `;
 
 export const InfoDiv = styled.div`
-  background: #10375c;
+  background: ${(props) => props.theme.colors.secondary};
   border-radius: 10px;
   padding: 25px;
-  
-  @media (max-width: 768px) {
 
-    margin-left:10px ;
+  @media (max-width: 767px) {
+    margin-left: 10px;
+    margin-top: 10px;
   }
 `;
 
