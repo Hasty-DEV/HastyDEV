@@ -33,7 +33,7 @@ const Login: React.FC = () => {
   const { signin } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
