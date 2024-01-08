@@ -3,7 +3,7 @@ const cors = require("cors");
 const app = express();
 const http = require("http");
 const { Server } = require("socket.io");
-const connectDB = require("./mongoDB"); 
+const connectDB = require("./mongoDB");
 const routes = require("./User/routes");
 const chatController = require("./Chat/controllers/chatController");
 const chatRoutes = require("./Chat/Routes/ChatRoutes");
@@ -32,7 +32,7 @@ app.use("/api/chat", chatRoutes);
 
 //Conexão Socket
 //io.on("connection", (socket) => {
- // chatController(io, socket);
+// chatController(io, socket);
 //});
 
 const PORT = process.env.PORT || 3001;

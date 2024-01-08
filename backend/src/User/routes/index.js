@@ -10,9 +10,9 @@ const emailVerification = require("../emailVerify/controllers/emailVerifyControl
 const sendPasswordResetEmail = require("../ResetPass/sendResetPassCode");
 const resetPassword = require("../ResetPass/controllers/ResetPassController");
 const contactFormValidationRules = require ("../contactForm/validations/contactFormValidation");
-const handleContactForm = require ("../contactForm/controllers/contactFormController")
-const verifyToken = require ("../token/verifyToken")
-// router.post('/auth/me', middlewareAuth, controller);
+const handleContactForm = require ("../contactForm/controllers/contactFormController");
+const verifyToken = require ("../token/verifyToken");
+const deleteAccountController = require ("../delete-account/controllers/delete-accountController");
 
 // Rota de registro
 router.post("/register", registrationController.registrationValidationRules, registrationController.register);
@@ -22,7 +22,6 @@ router.post("/login", loginController.login);
 
 // Rota protegida de usuário
 router.get("/user/:id",  verifyToken, userController.getUserById);
- 
 
 // Rota de atualização de token
 router.post("/refresh-token", authController.checkRefreshToken, (req, res) => {
@@ -42,6 +41,10 @@ router.post('/sendPasswordResetEmail', sendPasswordResetEmail);
 // Rota para redefinir a senha
 router.post('/resetPassword', resetPassword.resetPasswordValidationRules, resetPassword.resetPassword);
 
+// Rota para exclusão de conta
+router.delete('/deleteAccount/:userId', verifyToken, deleteAccountController.deleteAccount);
+
+// Rota do formulário de contato
 router.post('/contactForm', contactFormValidationRules, handleContactForm);
 
 module.exports = router;
