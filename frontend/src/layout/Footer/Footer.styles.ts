@@ -49,14 +49,12 @@ background: #FFF;
 flex: 1;
 height: 50px;
 color: #000;
-font-size: 14.3px;
+font-size: 14.4px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
 white-space: nowrap;
 padding: 10px;
-
-
 
 @media(max-width: 575px) {
   width: 100%;
@@ -70,9 +68,7 @@ padding: 10px;
 
 export const NewsletterDiv = styled.div`
   padding-left: 0px;
-  
 
-  
   @media(max-width: 575px) {
     margin-bottom: 5%;
     
