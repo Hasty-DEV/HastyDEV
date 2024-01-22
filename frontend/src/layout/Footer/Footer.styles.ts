@@ -43,25 +43,26 @@ export const Button = styled.button`
 `;
 
 export const Decoration = styled.input`
-border-radius: 6px 0 0 6px;
-border: 1px solid rgba(254, 211, 10, 0.20);
-background: #FFF;
-flex: 1;
-height: 50px;
-color: #000;
-font-size: 14.4px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-white-space: nowrap;
-padding: 10px;
+  border-radius: 6px 0 0 6px;
+  border: 1px solid rgba(254, 211, 10, 0.20);
+  background: #FFF;
+  flex: 1;
+  height: 50px;
+  color: #000;
+  font-size: 14.4px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  white-space: nowrap;
+  padding: 10px;
 
-@media(max-width: 575px) {
+  @media(max-width: 575px) {
   width: 100%;
   margin-bottom: 10px;
   font-size: 14px;
   box-sizing: border-box; 
-}
+ 
+  }
 
 `;
 

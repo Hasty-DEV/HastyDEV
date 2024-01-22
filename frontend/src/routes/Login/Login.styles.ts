@@ -60,6 +60,23 @@ export const LoginForm = styled.div`
     margin-top: 48px;
     margin-bottom: 48px;
   }
+}
+
+  .password-input {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+  input {
+    width: calc(100% - 38px);  // Reduz a largura para acomodar o ícone do olho
+  }
+
+  .password-toggle-icon {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+  }
+}
 
   .forgot-password {
     text-align: center;
