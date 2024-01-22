@@ -47,7 +47,23 @@ export const RegisterForm = styled.div`
       color:  ${(props) => props.theme.colors.text};
     }
   }
+   
+  .password-input {
+    position: relative;
 
+    input {
+      width: calc(100% - 30px);
+    }
+
+    .password-toggle-icon {
+      position: absolute;
+      top: 50%;
+      right: 25px;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+  }
+}
   button {
     width: 365px;
     height: 34px;

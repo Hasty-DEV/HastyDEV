@@ -68,7 +68,7 @@ export const LoginForm = styled.div`
     position: relative;
 
   input {
-    width: calc(100% - 38px);  // Reduz a largura para acomodar o ícone do olho
+    width: calc(100% - 38px);  
   }
 
   .password-toggle-icon {

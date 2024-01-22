@@ -53,6 +53,14 @@ const Register: React.FC = () => {
 
   const [registrationInProgress, setRegistrationInProgress] = useState(false);
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
+  
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleTogglePassword2 = () => {
+    setShowPassword(!showPassword);
+  };
 
   const navigate = useNavigate();
   const handleRegister = async ({
@@ -89,13 +97,6 @@ const Register: React.FC = () => {
       alert(err.response.data.errors[0].msg);
       alert(err.response.data.error);
     }
-  };
-
-  const handleTogglePassword = () => {
-    setShowPassword(!showPassword);
-  };
-  const handleTogglePassword2 = () => {
-    setShowPassword(!showPassword);
   };
 
   return (
