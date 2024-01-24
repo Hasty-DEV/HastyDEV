@@ -15,7 +15,9 @@ const ContactUs: React.FC = () => {
     <Container className="text-center">
       <Row>
         <Col xs={12}>
+          <div style={{ marginTop: '10%' }}>
           <HeadingTitle span="Contate-Nos" className="mt-4" />
+          </div>
         </Col>
         <Col xs={12}>
           <Paragraph

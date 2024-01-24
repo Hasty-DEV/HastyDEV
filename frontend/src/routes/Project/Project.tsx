@@ -17,8 +17,10 @@ const Project: React.FC = () => {
         <Row>
           <Col xs={12} sm={6}>
             <Col xs={12}>
+            <div style={{ marginTop: '50%' }}>
               <ProjectSubInterTitle SubInterTitle="Sobre o Projeto" />
               <AiOutlineLine size={64} />
+            </div>
             </Col>
             <Col xs={12}>
               <ProjectHeadingTitle

@@ -23,12 +23,14 @@ const About: React.FC = () => {
     <Container className="text-center">
       <Row>
         <Col xs={12}>
+          <div style={{ marginTop: '10%' }}>
           <HeadingTitle
             title="Aqui Nós Garantimos"
             span="Seu Sucesso Profissional"
             hasUnderline={true}
             className="mt-5"
           />
+          </div>
         </Col>
 
         <Col xs={12}>

@@ -12,6 +12,7 @@ export const RegisterForm = styled.div`
   padding: 20px;
   border-radius: 10px;
   text-align: center;
+  margin-top: 20%;
   
 
   h2 {
@@ -51,14 +52,13 @@ export const RegisterForm = styled.div`
   .password-input {
     position: relative;
 
-    input {
-      width: calc(100% - 30px);
-    }
+   
 
     .password-toggle-icon {
       position: absolute;
       top: 50%;
       right: 25px;
+      width: 40%;
       transform: translateY(-50%);
       cursor: pointer;
     }

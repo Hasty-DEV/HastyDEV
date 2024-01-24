@@ -6,7 +6,6 @@ export const RectangleDiv = styled(Container)`
   height: 402px;
   flex-shrink: 0;
   background:  ${(props) => props.theme.colors.secondary};
-  
   z-index: -1;
   border-radius: 40px;
   padding: 35px;

@@ -103,7 +103,7 @@ const Register: React.FC = () => {
     <Container fluid>
       <Row>
         <Col>
-          <img src={RegisterImg} alt="" height="auto" width="90%" />
+          <img src={RegisterImg} alt="" height="auto" width="90%" style={{ marginTop: '30%' }}/>
         </Col>
         <Col>
           <R.RegisterForm>
