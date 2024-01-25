@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   StyledLink,
   SubTitle,
@@ -16,15 +16,44 @@ import { ThemeContext } from "styled-components";
 import setaButton from "../../assets/setaButton.svg";
 import SocialLinks from "../../assets/SocialLinks.svg";
 import SocialLinksDark from "../../assets/SocialLinksDark.svg";
+import { toast } from "react-toastify";
+
 
 const Footer: React.FC = () => {
   const theme = useContext(ThemeContext);
+  const [email, setEmail] = useState("");
+
   if (!theme) {
     return null;
   }
+
   const ImgDarkLight = theme.title === "light" ? LogoLight : LogoDark;
   const socialLinksDarkMode =
     theme.title === "dark" ? SocialLinks : SocialLinksDark;
+    
+    const handleNewsletterSignup = async () => {
+      try {
+        const response = await fetch("api", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email }),
+        });
+       
+        if (response.ok) {
+          toast.success("Inscrição na newsletter realizada com sucesso!");
+          // Pode adicionar mais lógica aqui, se necessário
+        } else {
+          const data = await response.json();
+          toast.error(data.error || "Erro ao se inscrever na newsletter");
+        }
+      } catch (error) {
+        console.error("Erro ao se inscrever na newsletter:", error);
+        toast.error("Erro ao se inscrever na newsletter");
+      }
+    };
+  
   return (
     <FooterStyled>
       <Container fluid className="custom-mt-15percent">
@@ -59,8 +88,10 @@ const Footer: React.FC = () => {
             <div className="container text-center">
               <div className="row align-items-start">
                 <NewsletterDiv className="col d-flex align-items-center">
-                  <Decoration placeholder="Receba As Novidades" />
-                  <Button>
+                  <Decoration placeholder="Receba As Novidades" 
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email} />
+                  <Button onClick={handleNewsletterSignup}>
                     <img src={setaButton} alt="setaButton" />
                   </Button>
                 </NewsletterDiv>

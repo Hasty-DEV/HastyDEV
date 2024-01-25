@@ -14,6 +14,7 @@ const handleContactForm = require ("../contactForm/controllers/contactFormContro
 const verifyToken = require ("../token/verifyToken");
 const deleteAccountController = require ("../delete-account/controllers/delete-accountController");
 
+
 // Rota de registro
 router.post("/register", registrationController.registrationValidationRules, registrationController.register);
 
@@ -46,5 +47,14 @@ router.delete('/deleteAccount/:userId', verifyToken, deleteAccountController.del
 
 // Rota do formulário de contato
 router.post('/contactForm', contactFormValidationRules, handleContactForm);
+
+// Rota do Newsletter 
+router.post('/subscribeNewsletter', (req, res) => {
+  const { email } = req.body;
+  
+res.json({ 
+  success: true, 
+  message: 'Inscrição na newsletter realizada com sucesso!' });
+});
 
 module.exports = router;
