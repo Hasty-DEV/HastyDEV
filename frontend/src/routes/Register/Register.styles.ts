@@ -63,7 +63,6 @@ export const RegisterForm = styled.div`
       cursor: pointer;
     }
   }
-}
   button {
     width: 365px;
     height: 34px;

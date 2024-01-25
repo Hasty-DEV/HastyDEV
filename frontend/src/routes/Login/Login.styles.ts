@@ -60,7 +60,6 @@ export const LoginForm = styled.div`
     margin-top: 48px;
     margin-bottom: 48px;
   }
-}
 
   .password-input {
     display: flex;

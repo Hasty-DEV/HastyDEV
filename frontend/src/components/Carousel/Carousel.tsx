@@ -30,13 +30,13 @@ class Carousel extends Component<CustomCarouselProps> {
       arrows: false,
       responsive: [
         {
-          breakpoint: 1024, // Tamanho da tela onde você quer mostrar menos slides
+          breakpoint: 1024,
           settings: {
             slidesToShow: 2,
           },
         },
         {
-          breakpoint: 768, // Tamanho da tela onde você quer mostrar ainda menos slides
+          breakpoint: 768,
           settings: {
             slidesToShow: 1,
           },

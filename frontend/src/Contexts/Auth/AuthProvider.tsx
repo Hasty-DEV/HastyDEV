@@ -26,17 +26,6 @@ export function useAuth() {
 
 export const AuthProvider = ({ children }: { children: JSX.Element }) => {
   const [user, setUser] = useState<User | null>(null);
-
-  /*
-		colocar callback
-		fazer uma função auth
-		RequiredAuth e RequiredUnauth
-
-		improv:
-		loading
-		initial loading
-	*/
-
   useEffect(() => {
     const validateToken = async () => {
       const storageData = localStorage.getItem("authToken");
@@ -46,8 +35,6 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
         api.defaults.headers.authorization = `Bearer ${token}`;
         const response = await api.post("user/:id", storageData);
         setUser(response.data.user); 
-        // tirar o token do localstore
-        // refresh na página
       }
     };
 
@@ -58,7 +45,6 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     try {
       const response = await api.post("/login", payload);
 
-      // isso pode não estar vindo do backend
       const { user, token } = response.data;
 
       const storagedData = JSON.stringify({ token });
@@ -88,7 +74,6 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
       setUser({ id });
     } catch (err: any) {
       if (err.response.status === 401) {
-        //
       }
     }
   };

@@ -9,7 +9,6 @@ import {
 } from "react-social-login-buttons";
 import { Container, Row, Col } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import LoginImg from "../../assets/images/LoginImg.png";
 import { useAuth } from "../../Contexts/Auth/AuthProvider";
 import * as L from "./Login.styles";
@@ -84,7 +83,9 @@ const Login: React.FC = () => {
                         <div className="form-group">
                           <label htmlFor="username">Username:</label>
                           <Field type="text" id="username" name="username" />
-                          {errors.username && touched.username && errors.username}
+                          {errors.username &&
+                            touched.username &&
+                            errors.username}
                         </div>
 
                         <div className="form-group">
@@ -96,12 +97,18 @@ const Login: React.FC = () => {
                               name="password"
                             />
                             <FontAwesomeIcon
-                              icon={showPassword ? faEyeSlash : faEye}
+                              icon={
+                                showPassword
+                                  ? ["fas", "eye-slash"]
+                                  : ["fas", "eye"]
+                              }
                               onClick={handleTogglePassword}
                               className="password-toggle-icon"
                             />
                           </div>
-                          {errors.password && touched.password && errors.password}
+                          {errors.password &&
+                            touched.password &&
+                            errors.password}
                         </div>
 
                         <div className="form-group">
@@ -119,7 +126,6 @@ const Login: React.FC = () => {
                         <a href="#">Esqueceu a senha?</a>
                       </div>
                       <div className="social-media">
-                        
                         <div className="d-flex flex-column align-items-center justify-content-center">
                           <FacebookLoginButton
                             style={{ width: "100%", marginBottom: "20px" }}

@@ -5,7 +5,7 @@ import HeroImg1 from "../../assets/images/Hero/HeroImg1.webp";
 import HeroImg2 from "../../assets/images/Hero/HeroImg2.webp";
 import HeroImg3 from "../../assets/images/Hero/HeroImg3.webp";
 import HeroImg4 from "../../assets/images/Hero/HeroImg4.webp";
-import { CarouselImage } from "./SliderContect.styles"; // Substitua pelo nome correto do seu arquivo de componentes estilizados
+import { CarouselImage } from "./SliderContect.styles"; 
 
 interface CustomSliderContactProps {
   className?: string;

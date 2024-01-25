@@ -6,7 +6,8 @@ import swal from "sweetalert2";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "../../components/Loader/Loader";
 import * as R from "./Register.styles";
@@ -53,7 +54,7 @@ const Register: React.FC = () => {
 
   const [registrationInProgress, setRegistrationInProgress] = useState(false);
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
-  
+
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
@@ -103,7 +104,13 @@ const Register: React.FC = () => {
     <Container fluid>
       <Row>
         <Col>
-          <img src={RegisterImg} alt="" height="auto" width="90%" style={{ marginTop: '30%' }}/>
+          <img
+            src={RegisterImg}
+            alt=""
+            height="auto"
+            width="90%"
+            style={{ marginTop: "30%" }}
+          />
         </Col>
         <Col>
           <R.RegisterForm>
@@ -168,7 +175,11 @@ const Register: React.FC = () => {
                             name="password"
                           />
                           <FontAwesomeIcon
-                            icon={showPassword ? faEyeSlash : faEye}
+                            icon={
+                              showPassword
+                                ? (FaEyeSlash as unknown as IconProp)
+                                : (FaEye as unknown as IconProp)
+                            }
                             onClick={handleTogglePassword}
                             className="password-toggle-icon"
                           />
@@ -176,7 +187,9 @@ const Register: React.FC = () => {
                         {errors.password && touched.password && errors.password}
                       </div>
                       <div className="form-group">
-                        <label htmlFor="confirmPassword">Confirme Sua Senha:</label>
+                        <label htmlFor="confirmPassword">
+                          Confirme Sua Senha:
+                        </label>
                         <div className="password-input">
                           <Field
                             type={showPassword ? "text" : "password"}
@@ -184,7 +197,11 @@ const Register: React.FC = () => {
                             name="confirmPassword"
                           />
                           <FontAwesomeIcon
-                            icon={showPassword ? faEyeSlash : faEye}
+                            icon={
+                              showPassword
+                                ? (FaEyeSlash as unknown as IconProp)
+                                : (FaEye as unknown as IconProp)
+                            }
                             onClick={handleTogglePassword2}
                             className="password-toggle-icon"
                           />
