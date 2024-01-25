@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Container = styled.div`
     background:${props => props.theme.colors.primary};
@@ -8,6 +8,8 @@ export const Container = styled.div`
     z-index: 1000;
     
 `;
+
+
 
 export const ButtonsHeader = styled.div`
     hr {

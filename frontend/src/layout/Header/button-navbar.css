@@ -11,7 +11,17 @@
       background-color: transparent;  
       width: 56px; 
       height: 40px; 
-      
+      border: none;
     }
+     
+     border: none !important;
+     outline: none !important;
+ 
+    
+     &:focus {
+         box-shadow: none !important;
+         border: none !important;
+     }
+    
   }
   

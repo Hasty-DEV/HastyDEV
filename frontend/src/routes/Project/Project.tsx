@@ -17,7 +17,7 @@ const Project: React.FC = () => {
         <Row>
           <Col xs={12} sm={6}>
             <Col xs={12}>
-            <div style={{ marginTop: '50%' }}>
+            <div style={{ marginTop: '30%' }}>
               <ProjectSubInterTitle SubInterTitle="Sobre o Projeto" />
               <AiOutlineLine size={64} />
             </div>
@@ -30,6 +30,7 @@ const Project: React.FC = () => {
             </Col>
           </Col>
           <Col xs={12} sm={6} className="d-flex align-items-center justify-content-center">
+          <div style={{ marginTop: '10%' }}>
             <ProjectParagraph
               paragraph="Em nosso espaço de co-working, a inovação se torna realidade. Na
               HastyDEV, oferecemos um ambiente único onde mentes criativas se
@@ -39,6 +40,7 @@ const Project: React.FC = () => {
               faça parte de uma comunidade que desafia os limites e redefine o
               futuro."
             />
+          </div>
           </Col>
           <Col xs={12} sm={6}>
             <SearchForm />

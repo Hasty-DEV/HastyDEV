@@ -23,7 +23,7 @@ const About: React.FC = () => {
     <Container className="text-center">
       <Row>
         <Col xs={12}>
-          <div style={{ marginTop: '10%' }}>
+          <div style={{ marginTop: '20%' }}>
           <HeadingTitle
             title="Aqui Nós Garantimos"
             span="Seu Sucesso Profissional"
