@@ -9,7 +9,7 @@ import {
   HeadingSubInterTitle,
   Paragraph,
 } from "../../Ui/components/Texts/Texts";
-import ContactForm from "../../Ui/components/ContactForm/ContactForm";
+import ContactForm from "../../Ui/Partials/ContactForm/ContactForm";
 import SliderContact from "../../Ui/components/Slider/SliderContact";
 import { ImageStyled } from "../../Ui/styles/About/About.styles";
 
