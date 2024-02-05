@@ -14,7 +14,8 @@ import { useAuth } from "../../Data/Contexts/Auth/AuthProvider";
 import * as L from "../../Ui/styles/Login/Login.styles";
 import Loader from "../../Ui/components/Loader/Loader";
 import { FormValues } from "../../Data/@types/FormValues/FormValues.type";
-
+import { toast, ToastContainer } from "react-toastify";
+import { stringify } from "querystring";
 
 const validationsLogin = yup.object().shape({
   username: yup.string().required("O Usuário é obrigatório"),
@@ -37,9 +38,10 @@ const Login: React.FC = () => {
     try {
       setIsLoading(true);
       await signin({ username, password });
+      toast.success("Logado com Sucesso");
       window.location.href = "https://app-hastydev.vercel.app/";
     } catch (err: any) {
-      alert(err.response.data.error);
+      toast.error(err.response.data.error);
     } finally {
       setIsLoading(false);
     }
@@ -163,6 +165,7 @@ const Login: React.FC = () => {
           </Col>
         </Row>
       </Container>
+      <ToastContainer />
     </>
   );
 };
