@@ -2,22 +2,21 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { api } from "../../Services/api";
 import { User } from "../../@types/User/User.type";
 
-type SignInPayload = { username: string, password: string };
+type SignInPayload = { username: string; password: string };
 type SignUpPayload = {
   first_name: string;
   last_name: string;
   username: string;
   email: string;
   password: string;
-}
+};
 
 export type AuthContextType = {
   user: User | null;
-  signin: (payload: SignInPayload) => Promise<{ user: User; token: string }>;
+  signin: (payload: SignInPayload) => Promise<{ id: User; token: string }>;
   register: (payload: SignUpPayload) => Promise<void>;
   signout: () => void;
 };
-
 
 export const AuthContext = createContext<AuthContextType>(null!);
 
@@ -35,7 +34,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
         const { token } = JSON.parse(storageData);
         api.defaults.headers.authorization = `Bearer ${token}`;
         const response = await api.post("user/:id", storageData);
-        setUser(response.data.user); 
+        setUser(response.data.user);
       }
     };
 
@@ -46,16 +45,16 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     try {
       const response = await api.post("/login", payload);
 
-      const { user, token } = response.data;
+      const { id, token } = response.data;
 
       const storagedData = JSON.stringify({ token });
       localStorage.setItem("authToken", storagedData);
 
       api.defaults.headers.authorization = `Bearer ${token}`;
 
-      setUser(user);
-
-      return {user, token};
+      setUser(response.data);
+      console.log(response.data);
+      return { id, token };
     } catch (err: any) {
       if (err.response.status === 401) {
       }
