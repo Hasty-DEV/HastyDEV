@@ -2,18 +2,9 @@ import "./share.scss";
 import Image from "../../assets/img.png";
 import Map from "../../assets/map.png";
 import Friend from "../../assets/friend.png";
-import { useContext } from "react";
-import { AuthContext, AuthContextType } from "../../context/authContext";
 import UserIcon from "../../assets/user/user_icon.png"
 
 const Share = () => {
-  const authContext = useContext<AuthContextType | undefined>(AuthContext);
-
-  if (!authContext) {
-    return null;
-  }
-
-  const { currentUser } = authContext;
 
   return (
     <div className="share">
@@ -23,7 +14,7 @@ const Share = () => {
             src={UserIcon}
             alt=""
           />
-          <input type="text" placeholder={`O que você está pensando... ${currentUser.name}?`} />
+          <input type="text" placeholder={`O que você está pensando...?`} />
         </div>
         <hr />
         <div className="bottom">

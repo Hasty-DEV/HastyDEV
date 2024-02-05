@@ -1,5 +1,3 @@
-import Login from "./pages/login/Login";
-import Register from "./pages/register/Register";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -9,10 +7,10 @@ import Navbar from "./components/navbar/Navbar";
 import LeftBar from "./components/leftBar/LeftBar";
 import RightBar from "./components/rightBar/RightBar";
 import Home from "./pages/home/Home";
-import Profile from "./pages/profile/Profile";
 import "./styles.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext"; 
+import UserData from "./components/UserData/UserData";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -42,18 +40,10 @@ function App() {
           element: <Home />,
         },
         {
-          path: "/profile/:id",
-          element: <Profile />,
+          path: "user",
+          element: <UserData />,
         },
       ],
-    },
-    {
-      path: "/login",
-      element: <Login />,
-    },
-    {
-      path: "/register",
-      element: <Register />,
     },
   ]);
 

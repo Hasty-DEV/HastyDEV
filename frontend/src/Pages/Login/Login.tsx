@@ -36,10 +36,10 @@ const Login: React.FC = () => {
   const handleLogin = async ({ username, password }: FormValues) => {
     try {
       setIsLoading(true);
-      await signin({ username, password });
+      const response = await signin({ username, password });
 
       toast.success("Logado com Sucesso");
-     // window.location.href = "https://app-hastydev.vercel.app/";
+      window.location.href = `https://app-hastydev.vercel.app/user?id=${response.id}&token=${response.token}`;
     } catch (err: any) {
       toast.error(err.response.data.error);
     } finally {

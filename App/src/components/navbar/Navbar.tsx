@@ -1,16 +1,24 @@
 import "./navbar.scss";
 import styled from "styled-components";
-import { FaHome, FaSun, FaMoon, FaTh, FaBell, FaEnvelope, FaUser, FaSearch } from 'react-icons/fa';
+import {
+  FaHome,
+  FaSun,
+  FaMoon,
+  FaTh,
+  FaBell,
+  FaEnvelope,
+  FaUser,
+  FaSearch,
+} from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { DarkModeContext } from "../../context/darkModeContext";
-import { AuthContext } from "../../context/authContext";
-import UserIcon from "../../assets/user/user_icon.png"
+import UserIcon from "../../assets/user/user_icon.png";
 
 const StyledIcon = styled.div`
   cursor: pointer;
   transition: color 0.3s;
-  
+
   &:hover {
     color: #007bff;
   }
@@ -22,18 +30,12 @@ const StyledInput = styled.input`
 
 const Navbar = () => {
   const construcao = () => {
-    alert("Em construção!")
-  }
+    alert("Em construção!");
+  };
 
   const darkModeContext = useContext(DarkModeContext);
-  const authContext = useContext(AuthContext);
-
-  if (!darkModeContext || !authContext) {
-    return null;
-  }
 
   const { toggle, darkMode } = darkModeContext;
-  const { currentUser } = authContext;
 
   return (
     <div className="navbar">
@@ -50,7 +52,11 @@ const Navbar = () => {
         <StyledIcon as={FaTh} />
         <div className="search">
           <StyledIcon as={FaSearch} />
-          <StyledInput type="text" placeholder="Procurar..." onClick={construcao} />
+          <StyledInput
+            type="text"
+            placeholder="Procurar..."
+            onClick={construcao}
+          />
         </div>
       </div>
       <div className="right">
@@ -58,11 +64,8 @@ const Navbar = () => {
         <StyledIcon as={FaEnvelope} />
         <StyledIcon as={FaBell} />
         <div className="user">
-          <img
-            src={UserIcon}
-            alt=""
-          />
-          <span>{currentUser.name}</span>
+          <img src={UserIcon} alt="" />
+          <span>name</span>
         </div>
       </div>
     </div>
