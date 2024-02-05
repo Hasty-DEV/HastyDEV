@@ -15,7 +15,6 @@ import * as L from "../../Ui/styles/Login/Login.styles";
 import Loader from "../../Ui/components/Loader/Loader";
 import { FormValues } from "../../Data/@types/FormValues/FormValues.type";
 import { toast, ToastContainer } from "react-toastify";
-import { stringify } from "querystring";
 
 const validationsLogin = yup.object().shape({
   username: yup.string().required("O Usuário é obrigatório"),
@@ -37,9 +36,11 @@ const Login: React.FC = () => {
   const handleLogin = async ({ username, password }: FormValues) => {
     try {
       setIsLoading(true);
-      await signin({ username, password });
+      const response = await signin({ username, password });
+
+      console.log("Resposta da API:", response);
       toast.success("Logado com Sucesso");
-      window.location.href = "https://app-hastydev.vercel.app/";
+      // window.location.href = "https://app-hastydev.vercel.app/";
     } catch (err: any) {
       toast.error(err.response.data.error);
     } finally {
