@@ -1,8 +1,8 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
-const { logError, logInfo } = require("../../utils/logger");
 const Token = require("../token/tokensModel");
+const { response } = require("express");
 
 const MAX_LOGIN_ATTEMPTS = 5;
 const LOCK_TIME = 15 * 60 * 1000;
@@ -15,13 +15,11 @@ async function login(req, res) {
     const user = await User.findOne({ where: { username } });
 
     if (!user) {
-      logError("Usuário/Senha incorreta", res, 401);
-      return;
+      return res.status(401).json({ error: "Usuário/Senha incorreta" });
     }
 
     if (user.lockUntil > Date.now()) {
-      logError("Conta bloqueada", res, 403);
-      return;
+      return res.status(403).json({ error: "Conta bloqueada" });
     }
 
     if (user.loginAttempts === MAX_LOGIN_ATTEMPTS) {
@@ -45,14 +43,16 @@ async function login(req, res) {
       const newToken = new Token({ user_id, token });
       await newToken.save();
 
-      res.json({ token, user: { id: user_id } });
+      // Enviar o ID do usuário e o token como resposta JSON
+      res.json({ id: user_id, token });
     } else {
       user.loginAttempts += 1;
       await user.save();
-      logError("Usuário/Senha incorreta", res, 401);
+      return res.status(401).json({ error: "Usuário/Senha incorreta" });
     }
   } catch (err) {
-    logError("Erro ao consultar o banco de dados: " + err, res);
+    console.error("Erro ao consultar o banco de dados:", err);
+    return res.status(500).json({ error: "Erro interno do servidor" });
   }
 }
 

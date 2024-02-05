@@ -7,6 +7,7 @@ import { ContactFormValues } from "../../../Data/@types/ContactFormValues/Contac
 import { FormContainer } from "../../styles/ContactUsForm/ContactUsForm.styles";
 import { useState } from "react";
 import Loader from "../../components/Loader/Loader";
+import { toast, ToastContainer } from "react-toastify";
 
 const validationsContact = yup.object().shape({
   Name: yup.string().required("O campo de nome é obrigatório"),
@@ -32,7 +33,7 @@ const ContactUSForm = () => {
   }: ContactFormValues) => {
     try {
       setLoading(true);
-      const response = await FormFetch.post("/contactForm", {
+   await FormFetch.post("/contactForm", {
         Name,
         Email,
         Phone,
@@ -40,9 +41,9 @@ const ContactUSForm = () => {
         Subject,
         Message,
       });
-      console.log(response.data);
+      toast.success("E-mail enviado com sucesso");
     } catch (err) {
-      alert(err);
+      toast.error("Erro ao enviar e-mail");
     } finally {
       setLoading(false);
     }
@@ -143,11 +144,13 @@ const ContactUSForm = () => {
                     </Row>
                   </Container>
                 </form>
+                
               </>
             )}
           </Formik>
         </FormContainer>
       )}
+      <ToastContainer />
     </>
   );
 };

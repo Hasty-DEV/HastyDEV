@@ -6,6 +6,7 @@ import { ContactFormValues } from "../../../Data/@types/ContactFormValues/Contac
 import { FormContainer } from "../../styles/ContactForm/ContactForm.styles";
 import { useState } from "react";
 import Loader from "../../components/Loader/Loader";
+ 
 
 const validationsContact = yup.object().shape({
   Name: yup.string().required("O campo de nome é obrigatório"),
@@ -32,7 +33,7 @@ const ContactForm = () => {
   }: ContactFormValues) => {
     try {
       setLoading(true);
-      const response = await FormFetch.post("/contactForm", {
+     await FormFetch.post("/contactForm", {
         Name,
         Email,
         Phone,
@@ -40,9 +41,9 @@ const ContactForm = () => {
         Subject,
         Message,
       });
-      console.log(response.data);
+ 
     } catch (err) {
-      alert(err);
+       console.log(err)
     } finally {
       setLoading(false);
     }
@@ -115,6 +116,7 @@ const ContactForm = () => {
         </FormContainer>
       )}
     </>
+    
   );
 };
 

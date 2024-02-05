@@ -13,10 +13,11 @@ type SignUpPayload = {
 
 export type AuthContextType = {
   user: User | null;
-  signin: (payload: SignInPayload) => Promise<void>;
+  signin: (payload: SignInPayload) => Promise<{ user: User; token: string }>;
   register: (payload: SignUpPayload) => Promise<void>;
   signout: () => void;
 };
+
 
 export const AuthContext = createContext<AuthContextType>(null!);
 
@@ -53,6 +54,8 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
       api.defaults.headers.authorization = `Bearer ${token}`;
 
       setUser(user);
+
+      return {user, token};
     } catch (err: any) {
       if (err.response.status === 401) {
       }
