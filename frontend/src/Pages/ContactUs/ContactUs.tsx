@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { HeadingTitle, Paragraph } from "../../Ui/components/Texts/Texts";
 import * as C from "../../Ui/styles/ContactUs/ContactUs.styles";
-import ContactUSForm from "../../Ui/components/ContactUSForm/ContactUSForm";
+import ContactUSForm from "../../Ui/Partials/ContactUSForm/ContactUSForm";
 import { FiPhoneCall } from "react-icons/fi";
 import { AiOutlineMail } from "react-icons/ai";
 import {

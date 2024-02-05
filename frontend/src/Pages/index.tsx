@@ -18,7 +18,6 @@ import Login from "./Login/Login";
 import Project from "./Project/Project";
 import Register from "./Register/Register";
 
-
 type RouteAccessProps = {
   children: React.ReactNode;
   authLevel?: "authed" | "unauthed";
@@ -41,7 +40,7 @@ const RouteAccess = ({ children, authLevel = "authed" }: RouteAccessProps) => {
 };
 
 type PagesProps = {
-  theme: any; 
+  theme: any;
   setTheme: React.Dispatch<React.SetStateAction<any>>;
 };
 
