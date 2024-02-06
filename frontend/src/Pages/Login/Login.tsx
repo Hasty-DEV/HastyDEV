@@ -15,6 +15,7 @@ import * as L from "../../Ui/styles/Login/Login.styles";
 import Loader from "../../Ui/components/Loader/Loader";
 import { FormValues } from "../../Data/@types/FormValues/FormValues.type";
 import { toast, ToastContainer } from "react-toastify";
+import { GoogleLogin } from "react-google-login";
 
 const validationsLogin = yup.object().shape({
   username: yup.string().required("O Usuário é obrigatório"),
@@ -52,6 +53,14 @@ const Login: React.FC = () => {
   const handleEmCostrução = () => {
     alert("Este botão está em construção.");
   };
+  
+  const onSucess = (res) => {
+      console.log("Logado com Sucesso, Usuário: ", res.profileObj);
+  }
+
+  const onFailure = (res) => {
+    console.log("Erro ao fazer o Login", res);
+}
 
   return (
     <>
@@ -120,6 +129,9 @@ const Login: React.FC = () => {
                       <div className="forgot-password">
                         <a href="#">Esqueceu a senha?</a>
                       </div>
+
+            
+
                       <div className="social-media">
                         <div className="d-flex flex-column align-items-center justify-content-center">
                           <FacebookLoginButton
@@ -128,12 +140,16 @@ const Login: React.FC = () => {
                           >
                             <span>Entrar com o Facebook</span>
                           </FacebookLoginButton>
-                          <GoogleLoginButton
-                            style={{ width: "100%", marginBottom: "20px" }}
-                            onClick={handleEmCostrução}
-                          >
-                            <span>Entrar com o Google</span>
-                          </GoogleLoginButton>
+
+                          <GoogleLogin
+                           clientId="578853434334-q3am40ksm1i65m546g5mtuuij3hbevne.apps.googleusercontent.com" 
+                           buttonText="Entrar com o Google"
+                           onSuccess={onSucess}
+                           onFailure={onFailure}
+                           cookiePolicy={'single_host_origin'}
+                           isSignedIn={true}
+                           />
+                          
                           <GithubLoginButton
                             style={{ width: "100%" }}
                             onClick={handleEmCostrução}
