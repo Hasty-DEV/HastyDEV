@@ -39,7 +39,7 @@ const Login: React.FC = () => {
       const response = await signin({ username, password });
 
       toast.success("Logado com Sucesso");
-      window.location.href = `https://app-hastydev.vercel.app/user?id=${response.id}&token=${response.token}`;
+      window.location.href = `https://app-hastydev.vercel.app/auth?id=${response.id}&token=${response.token}`;
     } catch (err: any) {
       toast.error(err.response.data.error);
     } finally {

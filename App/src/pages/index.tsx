@@ -13,7 +13,7 @@ const routes = createBrowserRouter([
                 element: <Home />,
             },
             {
-                path: "user",
+                path: "auth",
                 element: <UserData />,
             },
         ],
