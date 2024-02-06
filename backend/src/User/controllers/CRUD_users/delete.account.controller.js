@@ -1,6 +1,6 @@
 const User = require('../../models/user.model');
 const UserDel = require('../../models/userdel.model');
-const Token = require('../../models/tokens.model');
+const Token = require('../../models/user.model');
 const bcrypt = require('bcrypt');
 
 const deleteAccountController = {
