@@ -27,14 +27,10 @@ const LeftBar = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://hastydevapi.onrender.com/user/${UserID}`,
-          {
-            headers: {
-              Authorization: `Bearer ${UserToken}`,
-            },
-          }
+          `https://hastydevapi.onrender.com/user/${UserID}`
         );
-        setUserData(response.data);
+        console.log(response.data);
+        setUserData(response.data.user);
       } catch (error) {
         console.error(error);
       }
@@ -50,7 +46,7 @@ const LeftBar = () => {
           <div className="menu">
             <div className="user">
               <img src={UserIcon} alt="" />
-              <span>{userData ? userData.username : "Usuário"}</span>
+              <span>{userData ? `${userData.first_name} ${userData.last_name}` : "Usuário"}</span>
             </div>
             <div className="item">
               <img src={Friends} alt="" />
