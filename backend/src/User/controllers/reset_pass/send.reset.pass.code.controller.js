@@ -1,6 +1,6 @@
 const User = require('../../models/user.model');
 const generatePinCode = require('../../../utils/PinGenerate');
-const VerificationCode = require('./models/resetPassCodeModel');
+const VerificationCode = require('../../models/reset.pass.code.model');
 const nodemailer = require('nodemailer');
 const { logError, logInfo } = require('../../../utils/logger');
 

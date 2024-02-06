@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const Token = require('./tokensModel'); // Importe o modelo da tabela de tokens
+const Token = require('../../models/tokens.model'); // Importe o modelo da tabela de tokens
 
 const verifyToken = async (req, res, next) => {
   const { token, id } = req.body; // Suponha que o token e o ID sejam enviados no corpo da solicitação

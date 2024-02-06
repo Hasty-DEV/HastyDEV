@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const sequelize = require('../../../Db');
+const sequelize = require('../../Db');
 
 const VerificationCode = sequelize.define('verificationCode', {
   codeId: {

@@ -1,15 +1,15 @@
 const express = require("express");
 const router = express.Router();
 
-const registrationController = require("../controllers/registerController");
-const loginController = require("../controllers/loginController");
-const sendEmailVerification = require("../emailVerify/sendEmailVerification");
-const emailVerification = require("../emailVerify/controllers/emailVerifyController");
-const sendPasswordResetEmail = require("../ResetPass/sendResetPassCode");
-const resetPassword = require("../ResetPass/controllers/ResetPassController");
-const handleContactForm = require ("../contactForm/controllers/contactFormController");
-const verifyToken = require ("../token/verifyToken");
-const deleteAccountController = require ("../delete-account/controllers/delete-accountController");
+const registrationController = require("../controllers/CRUD_Users/register.controller");
+const loginController = require("../controllers/CRUD_Users/login.controller");
+const sendEmailVerification = require("../controllers/email_verify/send.email.verify.controller");
+const emailVerification = require("../controllers/email_verify/email.verify.controller");
+const sendPasswordResetEmail = require("../controllers/reset_pass/send.reset.pass.code.controller");
+const resetPassword = require("../controllers/reset_pass/reset.pass.controller");
+const handleContactForm = require ("../controllers/contact_form/contact.form.controller");
+const verifyToken = require ("../controllers/protected_route/verify.token.controller");
+const deleteAccountController = require ("../controllers/CRUD_users/delete.account.controller");
 
 
 
@@ -32,7 +32,7 @@ router.post('/sendPasswordResetEmail', sendPasswordResetEmail);
 router.post('/resetPassword', resetPassword.resetPasswordValidationRules, resetPassword.resetPassword);
 
 // Rota do formulário de contato
-router.post('/contactForm', handleContactForm.contactFormValidationRules, handleContactForm);
+router.post('/contactForm', handleContactForm.contactFormValidationRules, handleContactForm.handleContactForm);
 
 // Rota do Newsletter 
 router.post('/subscribeNewsletter', (req, res) => {

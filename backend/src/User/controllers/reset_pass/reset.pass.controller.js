@@ -1,7 +1,7 @@
 const User = require('../../models/user.model');
 const VerificationCode = require('../../models/reset.pass.code.model');
 const bcrypt = require('bcrypt');
-const resetPasswordValidationRules = require('../validations/validations.controller');
+const { resetPasswordValidationRules } = require('../validations/validations.controller');
 const { validationResult } = require('express-validator');
 const { logError, logInfo } = require('../../../utils/logger');
 
