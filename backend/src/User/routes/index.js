@@ -10,8 +10,9 @@ const resetPassword = require("../controllers/reset_pass/reset.pass.controller")
 const handleContactForm = require ("../controllers/contact_form/contact.form.controller");
 const verifyToken = require ("../controllers/protected_route/verify.token.controller");
 const deleteAccountController = require ("../controllers/CRUD_users/delete.account.controller");
+const readUserController = require("../controllers/CRUD_users/readUser.controller");
 
-
+router.get("/user/:id", readUserController);
 
 // Rota de registro
 router.post("/register", registrationController.registrationValidationRules, registrationController.register);
