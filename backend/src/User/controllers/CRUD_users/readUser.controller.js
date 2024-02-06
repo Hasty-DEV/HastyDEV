@@ -3,10 +3,9 @@ const verifyToken = require("../protected_route/verify.token.controller");
 
 const readUser = async (req, res) => {
   const userId = req.params.id;
-  const token = req.headers.authorization;
 
   try {
-    await verifyToken(token, userId, res);
+    //await verifyToken(token, userId, res);
 
     const user = await User.findByPk(userId);
 
