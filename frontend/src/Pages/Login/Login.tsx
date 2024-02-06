@@ -4,7 +4,6 @@ import * as yup from "yup";
 import { Link } from "react-router-dom";
 import {
   FacebookLoginButton,
-  GoogleLoginButton,
   GithubLoginButton,
 } from "react-social-login-buttons";
 import { Container, Row, Col } from "react-bootstrap";
@@ -54,11 +53,11 @@ const Login: React.FC = () => {
     alert("Este botão está em construção.");
   };
   
-  const onSucess = (res) => {
+  const onSucess = (res: any) => {
       console.log("Logado com Sucesso, Usuário: ", res.profileObj);
   }
 
-  const onFailure = (res) => {
+  const onFailure = (res: any) => {
     console.log("Erro ao fazer o Login", res);
 }
 
