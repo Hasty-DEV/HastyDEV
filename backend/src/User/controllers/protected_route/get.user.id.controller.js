@@ -1,5 +1,6 @@
-const User = require("../models/userModel");
-const { logError } = require("../../utils/logger");
+  
+const User = require('../../models/user.model');  
+const { logError} = require('../../../utils/logger');
 
 // Função de rota para buscar usuário por ID
 async function getUserById(req, res) {
@@ -10,7 +11,8 @@ async function getUserById(req, res) {
 
     if (!user) {
       logError("Usuário não encontrado", res, 404);
-    }
+     }
+
 
     res.status(200).json({ user });
   } catch (err) {

@@ -1,6 +1,6 @@
-const User = require('../../models/userModel');
-const emailVerifyCode = require('../models/emailVerifyCodeModel');
-const { logError, logInfo } = require('../../../utils/logger'); // Substitua com o caminho correto do seu arquivo de logging
+const User = require('../../models/user.model');
+const emailVerifyCode = require('../../models/email.verify.code.model');
+const { logError, logInfo } = require('../../../utils/logger');  
 
 async function emailVerification(req, res) {
   const { verificationCode, email } = req.body;

@@ -4,12 +4,11 @@ const router = express.Router();
 const registrationController = require("../controllers/registerController");
 const loginController = require("../controllers/loginController");
 const authController = require("../controllers/authController");
-const userController = require("../controllers/userController");
+const userController = require("../controllers/email_verify/user.controller");
 const sendEmailVerification = require("../emailVerify/sendEmailVerification");
 const emailVerification = require("../emailVerify/controllers/emailVerifyController");
 const sendPasswordResetEmail = require("../ResetPass/sendResetPassCode");
 const resetPassword = require("../ResetPass/controllers/ResetPassController");
-const contactFormValidationRules = require ("../contactForm/validations/contactFormValidation");
 const handleContactForm = require ("../contactForm/controllers/contactFormController");
 const verifyToken = require ("../token/verifyToken");
 const deleteAccountController = require ("../delete-account/controllers/delete-accountController");
@@ -46,7 +45,7 @@ router.post('/resetPassword', resetPassword.resetPasswordValidationRules, resetP
 router.delete('/deleteAccount/:userId', verifyToken, deleteAccountController.deleteAccount);
 
 // Rota do formulário de contato
-router.post('/contactForm', contactFormValidationRules, handleContactForm);
+router.post('/contactForm', handleContactForm.contactFormValidationRules, handleContactForm);
 
 // Rota do Newsletter 
 router.post('/subscribeNewsletter', (req, res) => {

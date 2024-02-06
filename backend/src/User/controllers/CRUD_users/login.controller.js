@@ -1,8 +1,9 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const User = require("../models/userModel");
+const User = require("../../models/user.model");
 const Token = require("../token/tokensModel");
-const { response } = require("express");
+const { validationResult } = require('express-validator');
+ 
 
 const MAX_LOGIN_ATTEMPTS = 5;
 const LOCK_TIME = 15 * 60 * 1000;
@@ -11,6 +12,13 @@ async function login(req, res) {
   try {
     const { username, password } = req.body;
 
+    
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    logError("Erros de validação no registro", res, 400);
+    return;
+  }
     // Buscar o usuário pelo nome de usuário
     const user = await User.findOne({ where: { username } });
 

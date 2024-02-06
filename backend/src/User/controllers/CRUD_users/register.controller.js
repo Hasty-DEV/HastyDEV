@@ -1,10 +1,10 @@
 const bcrypt = require("bcrypt");
 const { validationResult } = require('express-validator');
 const jwt = require("jsonwebtoken");
-const User = require('../models/userModel');
+const User = require('../../models/user.model');
 const Token = require('../token/tokensModel');
-const { registrationValidationRules } = require('../validations/userValidation');
-const { logError, logInfo } = require('../../utils/logger');
+const { registrationValidationRules } = require('../validations/validations.controller');
+const { logError, logInfo } = require('../../../utils/logger');
 
 const saltRounds = parseInt(process.env.SALTROUNDS_SECRET);
 

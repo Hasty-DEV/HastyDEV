@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { logError} = require('../../utils/logger.js');
+const { logError} = require('../../../utils/logger.js');
 
 function checkToken(req, res, next) {
   const authHeader = req.headers["authorization"];

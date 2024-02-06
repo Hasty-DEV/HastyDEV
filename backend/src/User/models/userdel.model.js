@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const sequelize = require('../../../Db');
+const sequelize = require('../../Db');
 
 // Defina o modelo de usuário excluído (UserDel)
 const UserDel = sequelize.define('userdel', {

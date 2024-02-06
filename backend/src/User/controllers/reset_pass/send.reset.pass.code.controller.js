@@ -1,8 +1,8 @@
-const User = require('../models/userModel');
-const generatePinCode = require('../../utils/PinGenerate');
+const User = require('../../models/user.model');
+const generatePinCode = require('../../../utils/PinGenerate');
 const VerificationCode = require('./models/resetPassCodeModel');
 const nodemailer = require('nodemailer');
-const { logError, logInfo } = require('../../utils/logger');
+const { logError, logInfo } = require('../../../utils/logger');
 
 async function sendPasswordResetEmail(req, res) {
   const { email } = req.body;

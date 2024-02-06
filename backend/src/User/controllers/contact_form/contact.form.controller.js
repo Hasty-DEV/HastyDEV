@@ -1,6 +1,9 @@
 const { validationResult } = require('express-validator');
 const nodemailer = require('nodemailer');
-const { logError, logInfo } = require('../../../utils/logger');
+const { logError, logInfo } = require('../../utils/logger');
+const contactFormValidationRules = require ("./validations/validations.controller");
+
+
 const handleContactForm = async (req, res) => {
   const errors = validationResult(req);
 
@@ -35,4 +38,4 @@ const handleContactForm = async (req, res) => {
   }
 };
 
-module.exports = handleContactForm;
+module.exports = { handleContactForm, contactFormValidationRules } ;
