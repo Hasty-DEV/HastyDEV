@@ -6,7 +6,7 @@ const readUser = async (req, res) => {
   const token = req.headers.authorization;
 
   try {
-    await verifyToken(token, res);
+    await verifyToken(token, userId, res);
 
     const user = await User.findByPk(userId);
 

@@ -1,11 +1,9 @@
 const jwt = require('jsonwebtoken');
 const Token = require('../../models/tokens.model'); // Importe o modelo da tabela de tokens
 
-const verifyToken = async (req, res, next) => {
-  const { token, id } = req.body; // Suponha que o token e o ID sejam enviados no corpo da solicitação
-
+const verifyToken = async (token, userId, res, next) => {
   // Verifica se o token e o ID foram fornecidos na solicitação
-  if (!token || !id) {
+  if (!token || !userId) {
     return res.status(401).json({ message: 'Token e ID não fornecidos' });
   }
 
@@ -14,7 +12,7 @@ const verifyToken = async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.SECRET); // Substitua 'seu_segredo_secreto' pelo seu segredo real
 
     // Verifica se o ID no corpo da solicitação corresponde ao ID decodificado do token
-    if (id != decoded.id) {
+    if (userId != decoded.id) {
       return res.status(401).json({ message: 'Token e ID não correspondem' });
     }
    
