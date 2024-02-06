@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const registrationController = require("../controllers/CRUD_users/register.controller");
-const loginController = require("../controllers/CRUD_Users/login.controller");
+const loginController = require("../controllers/CRUD_users/login.controller");
 const sendEmailVerification = require("../controllers/email_verify/send.email.verify.controller");
 const emailVerification = require("../controllers/email_verify/email.verify.controller");
 const sendPasswordResetEmail = require("../controllers/reset_pass/send.reset.pass.code.controller");
