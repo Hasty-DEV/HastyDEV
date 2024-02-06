@@ -44,7 +44,6 @@ res.json({
 });
 
 
-
 // rotas protegidas 
 router.use('/auth', verifyToken);
 
