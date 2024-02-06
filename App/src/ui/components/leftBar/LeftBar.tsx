@@ -20,33 +20,40 @@ import { useEffect, useState } from "react";
 
 const LeftBar = () => {
   const [userData, setUserData] = useState<any>(null);
-  const UserToken = localStorage.getItem("userToken");
-  const UserID = localStorage.getItem("userId");
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `https://hastydevapi.onrender.com/user/${UserID}`
-        );
-        console.log(response.data);
-        setUserData(response.data.user);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  const handleOnLoad = () => {
+    const userId = localStorage.getItem("userId");
 
-    fetchData();
-  }, [UserID, UserToken]);
+    if (userId) {
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(
+            `https://hastydevapi.onrender.com/user/${userId}`
+          );
+          console.log(response.data);
+          setUserData(response.data.user);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      fetchData();
+    }
+  };
+
+  useEffect(handleOnLoad, []);
 
   return (
-    <LeftBarContainer>
+    <LeftBarContainer onLoad={handleOnLoad}>
       <div className="leftBar">
         <div className="container">
           <div className="menu">
             <div className="user">
               <img src={UserIcon} alt="" />
-              <span>{userData ? `${userData.first_name} ${userData.last_name}` : "Usuário"}</span>
+              <span>
+                {userData
+                  ? `${userData.first_name} ${userData.last_name}`
+                  : "Usuário"}
+              </span>
             </div>
             <div className="item">
               <img src={Friends} alt="" />
