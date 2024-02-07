@@ -5,22 +5,23 @@ const generatePinCode = require('../../../utils/PinGenerate');
 const fs = require('fs');
 const path = require('path');
 const { logError, logInfo } = require('../../../utils/logger');
+const VerificationCode = require('../../models/email.verify.code.model')
 
 async function sendVerificationEmail(req, res) {
   const { email } = req.body;
 
   try {
-    const emailVerifyCode = generatePinCode();
+    const emailCode = generatePinCode();
     const user = await User.findOne({ where: { email } });
 
     if (user) {
       // Remova os códigos de verificação existentes para o usuário
-      await emailVerifyCode.destroy({ where: { userId: user.userid } });
+      await VerificationCode.destroy({ where: { userId: user.userid } });
 
       // Crie um novo código de verificação
-       await emailVerifyCode.create({
+       await VerificationCode.create({
         userId: user.userid,
-        code: emailVerifyCode,
+        code: emailCode,
       });
 
       // Configure o transporte do email
@@ -34,10 +35,10 @@ async function sendVerificationEmail(req, res) {
         },
       });
 
-      // Leia o conteúdo do email de um arquivo
-      const emailHTMLPath = path.join(__dirname, 'emailConfirmation.html');
-      const emailHTML = fs.readFileSync(emailHTMLPath, 'utf8');
-      const emailHTMLWithPIN = emailHTML.replace('@PIN_CODE', emailVerifyCode);
+// Leia o conteúdo do email de um arquivo
+const emailHTMLPath = path.join(__dirname, './emailConfirmation.html');
+const emailHTML = fs.readFileSync(emailHTMLPath, 'utf8');
+const emailHTMLWithPIN = emailHTML.replace('@PIN_CODE', emailCode); // Ajuste aqui
 
       // Envie o email de verificação
       await transport.sendMail({
@@ -52,6 +53,7 @@ async function sendVerificationEmail(req, res) {
       logError('Usuário não encontrado.', res, 404);
     }
   } catch (err) {
+    console.log(err)
     logError('Erro ao enviar email de verificação.', res, 500);
   }
 }

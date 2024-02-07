@@ -43,14 +43,12 @@ const deleteAccountController = {
         first_name: userToDelete.first_name,
         last_name: userToDelete.last_name,
       });
-      await Token.destroy({
-        where: {
-          user_id: userId,
-        },
-      });
+    
 
       // Excluir o usuário da tabela 'users'
-      await userToDelete.destroy();
+   // Excluir o usuário da tabela 'users'
+await userToDelete.destroy({ where: { userid: userId } });
+
 
       return res.status(200).json({ message: 'Conta excluída com sucesso.' });
     } catch (error) {

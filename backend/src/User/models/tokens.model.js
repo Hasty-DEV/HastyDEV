@@ -1,5 +1,6 @@
 const { Sequelize } = require('sequelize');
 const sequelize = require('../../Db'); // Substitua por sua conexão com o banco de dados
+const User = require('./user.model')
 
 const Token = sequelize.define('Token', {
   id: {
@@ -11,6 +12,11 @@ const Token = sequelize.define('Token', {
   user_id: {
     type: Sequelize.INTEGER,
     allowNull: false,
+    references: {
+      model: User, // nome do modelo de usuário
+      key: 'userid', // nome da chave primária na tabela de usuários
+      onDelete: 'CASCADE' // Adiciona ação de cascata para deletar tokens associados quando um usuário for deletado
+    },
   },
   token: {
     type: Sequelize.STRING(255),

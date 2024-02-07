@@ -66,7 +66,7 @@ async function register(req, res) {
     const newToken = new Token({ user_id, token });
     newToken.save().then(() => {
       console.log("Cadastrado com Sucesso")
-      res.json({ token, user: { id: user_id } });
+      res.json({ id: user_id, token });
     });
 
    

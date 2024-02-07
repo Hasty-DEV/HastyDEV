@@ -1,5 +1,5 @@
 const User = require('../../models/user.model');
-const VerificationCode = require('../../models/reset.pass.code.model');
+const resetPassCode = require('../../models/reset.pass.code.model');
 const bcrypt = require('bcrypt');
 const { resetPasswordValidationRules } = require('../validations/validations.controller');
 const { validationResult } = require('express-validator');
@@ -18,7 +18,7 @@ async function resetPassword(req, res) {
   }
 
   try {
-    const code = await VerificationCode.findOne({
+    const code = await resetPassCode.findOne({
       where: {
         resetCode: resetCode,
       },

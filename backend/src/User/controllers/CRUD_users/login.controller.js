@@ -51,6 +51,8 @@ async function login(req, res) {
       await newToken.save();
 
       // Enviar o ID do usuário e o token como resposta JSON
+ 
+
       res.json({ id: user_id, token });
     } else {
       user.loginAttempts += 1;

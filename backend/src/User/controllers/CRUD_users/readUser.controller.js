@@ -1,5 +1,5 @@
 const User = require("../../models/user.model");
-const verifyToken = require("../protected_route/verify.token.controller");
+const verifyToken = require("../../middlewares/verify.token.middleware");
 
 const readUser = async (req, res) => {
   const userId = req.params.id;

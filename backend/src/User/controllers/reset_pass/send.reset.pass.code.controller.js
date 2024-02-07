@@ -1,6 +1,6 @@
 const User = require('../../models/user.model');
 const generatePinCode = require('../../../utils/PinGenerate');
-const VerificationCode = require('../../models/reset.pass.code.model');
+const resetPassCode = require('../../models/reset.pass.code.model');
 const nodemailer = require('nodemailer');
 const { logError, logInfo } = require('../../../utils/logger');
 
@@ -23,10 +23,10 @@ async function sendPasswordResetEmail(req, res) {
       };
 
       // Remova códigos de redefinição anteriores para este usuário
-      await VerificationCode.destroy({ where: { userId: user.userid } });
+      await resetPassCode.destroy({ where: { userId: user.userid } });
 
       // Associe o código ao usuário no banco de dados
-      await VerificationCode.create(resetPassCode);
+      await resetPassCode.create(resetPassCode);
 
       // Configure o transporte de e-mail
       const transport = nodemailer.createTransport({

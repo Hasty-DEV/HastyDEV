@@ -11,10 +11,6 @@ const VerificationCode = sequelize.define('verificationCode', {
   userId: {
     type: Sequelize.INTEGER,
     allowNull: false,
-    references: {
-      model: 'users',
-      key: 'userid',
-    },
   },
   code: {
     type: Sequelize.STRING(6), 
