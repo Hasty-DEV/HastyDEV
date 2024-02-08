@@ -21,7 +21,7 @@ router.post("/register", registrationController.registrationValidationRules, reg
 router.post("/login", loginController.login);
 
 // Rota para enviar email de verificação
-router.post('/sendEmailVerification', verifyToken, sendEmailVerification);
+router.post('/sendEmailVerification',  sendEmailVerification);
 
 // Rota para verificar o PIN de email
 router.post('/emailVerification', emailVerification);

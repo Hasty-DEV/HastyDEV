@@ -1,6 +1,7 @@
 const User = require('../../models/user.model');
 const emailVerifyCode = require('../../models/email.verify.code.model');
 const { logError, logInfo } = require('../../../utils/logger');  
+ 
 
 async function emailVerification(req, res) {
   const { verificationCode, email } = req.body;
@@ -23,6 +24,7 @@ async function emailVerification(req, res) {
         if (timeDifference <= codeExpirationTime) {
           user.isVerified = true;
           await user.save();
+          console.log("codigo de verificação valido")
           logInfo('Código de verificação válido', res, 200);
         } else {
           logError('Código de verificação expirado', res, 400);

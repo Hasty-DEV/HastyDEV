@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../../Db');
+const User = require("../models/user.model")
 
 const VerificationCode = sequelize.define('verificationCode', {
   codeId: {
@@ -11,6 +12,11 @@ const VerificationCode = sequelize.define('verificationCode', {
   userId: {
     type: Sequelize.INTEGER,
     allowNull: false,
+    references: {
+      model: User, // nome do modelo de usuário
+      key: 'userid', // nome da chave primária na tabela de usuários
+      onDelete: 'CASCADE' // Adiciona ação de cascata para deletar tokens associados quando um usuário for deletado
+    },
   },
   code: {
     type: Sequelize.STRING(6), 

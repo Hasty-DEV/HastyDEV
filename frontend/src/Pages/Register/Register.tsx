@@ -73,6 +73,11 @@ const Register: React.FC = () => {
         confirmPassword,
       });
       console.log(response.data);
+
+      const responses = await FormFetch.post("/sendEmailVerification", {
+        email
+      });
+      console.log(responses.data);
       swal.fire({
         position: "center",
         icon: "success",
@@ -81,7 +86,9 @@ const Register: React.FC = () => {
         timer: 1500,
       });
       setRegistrationSuccess(true);
-      navigate("/login");
+ 
+navigate(`/emailVerification${email ? `?email=${encodeURIComponent(email)}` : ''}`);
+
     } catch (err: any) {
       setRegistrationInProgress(false);
       toast.error(err.response.data.error);
