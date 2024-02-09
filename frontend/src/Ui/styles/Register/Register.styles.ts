@@ -50,18 +50,18 @@ export const RegisterForm = styled.div`
   }
    
   .password-input {
+    display: initial;
+    align-items: center;
     position: relative;
 
-   
 
-    .password-toggle-icon {
-      position: absolute;
-      top: 50%;
-      right: 25px;
-      width: 40%;
-      transform: translateY(-50%);
-      cursor: pointer;
-    }
+  .password-toggle-icon {
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+    top: 1px;
+  }
+}
   }
   button {
     width: 365px;

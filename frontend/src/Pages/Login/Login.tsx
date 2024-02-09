@@ -8,6 +8,7 @@ import {
 } from "react-social-login-buttons";
 import { Container, Row, Col } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import LoginImg from "../../Ui/assets/images/LoginImg.png";
 import { useAuth } from "../../Data/Contexts/Auth/AuthProvider";
 import * as L from "../../Ui/styles/Login/Login.styles";
@@ -15,6 +16,7 @@ import Loader from "../../Ui/components/Loader/Loader";
 import { FormValues } from "../../Data/@types/FormValues/FormValues.type";
 import { toast, ToastContainer } from "react-toastify";
 import { GoogleLogin } from "react-google-login";
+ 
 
 const validationsLogin = yup.object().shape({
   username: yup.string().required("O Usuário é obrigatório"),
@@ -101,13 +103,9 @@ const Login: React.FC = () => {
                               name="password"
                             />
                             <FontAwesomeIcon
-                              icon={
-                                showPassword
-                                  ? ["fas", "eye-slash"]
-                                  : ["fas", "eye"]
-                              }
-                              onClick={handleTogglePassword}
-                              className="password-toggle-icon"
+                               icon={showPassword ? faEyeSlash : faEye}
+                                 onClick={handleTogglePassword}
+                                   className="password-toggle-icon"
                             />
                           </div>
                           {errors.password &&

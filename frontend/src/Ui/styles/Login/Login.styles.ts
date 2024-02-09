@@ -62,18 +62,16 @@ export const LoginForm = styled.div`
   }
 
   .password-input {
-    display: flex;
+    display: initial;
     align-items: center;
     position: relative;
 
-  input {
-    width: calc(100% - 38px);  
-  }
 
   .password-toggle-icon {
     position: absolute;
-    right: 10px;
+    right: 20px;
     cursor: pointer;
+    top: 1px;
   }
 }
 

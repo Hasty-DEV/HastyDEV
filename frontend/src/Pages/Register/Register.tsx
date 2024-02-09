@@ -5,8 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert2";
 import { toast, ToastContainer } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import Loader from "../../Ui/components/Loader/Loader";
 import * as R from "../../Ui/styles/Register/Register.styles";
 import { Container, Row, Col } from "react-bootstrap";
@@ -172,11 +171,7 @@ navigate(`/emailVerification${email ? `?email=${encodeURIComponent(email)}` : ''
                             name="password"
                           />
                           <FontAwesomeIcon
-                            icon={
-                              showPassword
-                                ? (FaEyeSlash as unknown as IconProp)
-                                : (FaEye as unknown as IconProp)
-                            }
+                          icon={showPassword ? faEyeSlash : faEye}
                             onClick={handleTogglePassword}
                             className="password-toggle-icon"
                           />
@@ -194,11 +189,7 @@ navigate(`/emailVerification${email ? `?email=${encodeURIComponent(email)}` : ''
                             name="confirmPassword"
                           />
                           <FontAwesomeIcon
-                            icon={
-                              showPassword
-                                ? (FaEyeSlash as unknown as IconProp)
-                                : (FaEye as unknown as IconProp)
-                            }
+                            icon={showPassword ? faEyeSlash : faEye}
                             onClick={handleTogglePassword2}
                             className="password-toggle-icon"
                           />
