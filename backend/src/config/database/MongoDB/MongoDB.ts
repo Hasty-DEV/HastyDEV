@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import EnvVariables from "../../env";
+import { EnvVariables } from "../../env";
 
-const MongoDB_env = EnvVariables.MongoDB
+const MongoDB_env = EnvVariables.MongoDB;
 
 export default class MongoDB {
   constructor() {}

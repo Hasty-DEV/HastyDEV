@@ -2,7 +2,7 @@ import * as dotenv from "dotenv";
 
 dotenv.config();
 
-const EnvVariables = {
+export const EnvVariables = {
   node_env: process.env.NODE_ENV,
   sequelize: {
     host: process.env.DB_HOST,
@@ -25,7 +25,7 @@ const EnvVariables = {
     user: process.env.MONGO_USER,
     password: process.env.MONGO_PASSWORD,
   },
-  Port: process.env.PORT
+  Port: process.env.PORT,
 };
 
-export default EnvVariables;
+

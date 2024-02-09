@@ -1,4 +1,5 @@
 import { Router } from "express";
+import LoginController from "../api/controllers/User/Login.controller";
 
 const routes = Router();
 
@@ -7,7 +8,7 @@ routes.get("/", (req, res) => {
 });
 
 //Rotas de Autenticação
-routes.post("/register", );
-routes.post("/login", );
+routes.post("/login", LoginController.login);
+routes.post("/register");
 
 export default routes;
