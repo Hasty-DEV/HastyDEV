@@ -15,7 +15,7 @@ import * as L from "../../Ui/styles/Login/Login.styles";
 import Loader from "../../Ui/components/Loader/Loader";
 import { FormValues } from "../../Data/@types/FormValues/FormValues.type";
 import { toast, ToastContainer } from "react-toastify";
-import { GoogleLogin } from "react-google-login";
+// import { GoogleLogin } from "react-google-login";
  
 
 const validationsLogin = yup.object().shape({
