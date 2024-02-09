@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { FormFetch } from "../../Data/Services/axios/config";
-import swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import  { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { FormFetch } from '../../Data/Services/axios/config';
+import swal from 'sweetalert2';
+import { EmailVerificationStyled  } from '../../Ui/styles/emailVerification/emailVerification.styles';
+
 
 function EmailVerification() {
   const [email, setEmail] = useState('');
@@ -18,20 +19,21 @@ function EmailVerification() {
   }, [location]);
 
   const verifyEmail = async () => {
-    
- 
     try {
-      const response = await FormFetch.post('/emailVerification', { verificationCode, email });
+      const response = await FormFetch.post('/emailVerification', {
+        verificationCode,
+        email,
+      });
       setMessage(response.data.message);
       swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Sua verificação realizada com sucesso",
+        position: 'center',
+        icon: 'success',
+        title: 'verificação realizada com sucesso',
         showConfirmButton: false,
         timer: 1500,
       });
- 
-navigate("/login")
+
+      navigate('/login');
     } catch (error) {
       console.error('Error verifying email:', error);
       setMessage('Error verifying email. Please try again later.');
@@ -39,21 +41,24 @@ navigate("/login")
   };
 
   return (
-    <div>
-      <h1>Email Verification</h1>
-      <h1>oiiiiiiiiiiiii</h1>
+    <EmailVerificationStyled>
       <div>
-        <label>Email:</label>
-       
+        <label htmlFor="verification">Insira o código enviado ao seu email</label>
+        <input
+          id="verification"
+          type="text"
+          maxLength={6}
+          value={verificationCode}
+          onChange={(e) => setVerificationCode(e.target.value)}
+        />
       </div>
-
-      <div>
-        <label>Verification Code:</label>
-        <input type="text" value={verificationCode} onChange={(e) => setVerificationCode(e.target.value)} />
-      </div>
-      <button onClick={verifyEmail}>Verify Email</button>
-      <div>{message}</div>
-    </div>
+      <button className="pushable" onClick={verifyEmail}>
+        <span className="shadow"></span>
+        <span className="edge"></span>
+        <span className="front">Verificar</span>
+      </button>
+      <div className="message">{message}</div>
+    </EmailVerificationStyled>
   );
 }
 

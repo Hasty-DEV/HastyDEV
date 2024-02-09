@@ -1,3 +1,4 @@
+import { string } from "prop-types";
 import "styled-components";
 declare module "styled-components" {
   export interface DefaultTheme {
@@ -13,6 +14,8 @@ declare module "styled-components" {
       color_button: string;
       borda: string;
       color_Form: string;
+      box_shadow: string;
+      color_emailVerification: string;
     };
   }
 }
