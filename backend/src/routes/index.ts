@@ -1,6 +1,4 @@
 import { Router } from "express";
-import { login } from "../api/controllers/CRUD_users/Login.controller";
-import { register } from "../api/controllers/CRUD_users/Register.controller";
 
 const routes = Router();
 
@@ -9,7 +7,7 @@ routes.get("/", (req, res) => {
 });
 
 //Rotas de Autenticação
-routes.post("/register", register);
-routes.post("/login", login);
+routes.post("/register", );
+routes.post("/login", );
 
 export default routes;
