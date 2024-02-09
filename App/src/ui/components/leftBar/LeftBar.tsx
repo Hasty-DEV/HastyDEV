@@ -14,9 +14,8 @@ import Courses from "../../assets/12.png";
 import Fund from "../../assets/13.png";
 import UserIcon from "../../assets/user/user_icon.png";
 import LeftBarContainer from "../../styles/leftBar/LeftBar.styles";
-
-import axios from "axios";
 import { useEffect, useState } from "react";
+import { api } from "../../../data/services/api";
 
 const LeftBar = () => {
   const [userData, setUserData] = useState<any>(null);
@@ -27,9 +26,7 @@ const LeftBar = () => {
     if (userId) {
       const fetchData = async () => {
         try {
-          const response = await axios.get(
-            `https://hastydevapi.onrender.com/user/${userId}`
-          );
+          const response = await api.get("/user");
           console.log(response.data);
           setUserData(response.data.user);
         } catch (error) {

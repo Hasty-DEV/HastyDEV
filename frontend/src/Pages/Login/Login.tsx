@@ -16,7 +16,6 @@ import Loader from "../../Ui/components/Loader/Loader";
 import { FormValues } from "../../Data/@types/FormValues/FormValues.type";
 import { toast, ToastContainer } from "react-toastify";
 // import { GoogleLogin } from "react-google-login";
- 
 
 const validationsLogin = yup.object().shape({
   username: yup.string().required("O Usuário é obrigatório"),
@@ -42,7 +41,7 @@ const Login: React.FC = () => {
 
       toast.success("Logado com Sucesso");
       window.location.href = `https://app-hastydev.vercel.app/auth?id=${response.id}&token=${response.token}`;
-
+      //window.location.href = `http://localhost:5174/auth?id=${response.id}&token=${response.token}`;
     } catch (err: any) {
       toast.error(err.response.data.error);
     } finally {
@@ -55,14 +54,14 @@ const Login: React.FC = () => {
   const handleEmCostrução = () => {
     alert("Este botão está em construção.");
   };
-  
-//   const onSucess = (res: any) => {
-//       console.log("Logado com Sucesso, Usuário: ", res.profileObj);
-//   }
 
-//   const onFailure = (res: any) => {
-//     console.log("Erro ao fazer o Login", res);
-// }
+  //   const onSucess = (res: any) => {
+  //       console.log("Logado com Sucesso, Usuário: ", res.profileObj);
+  //   }
+
+  //   const onFailure = (res: any) => {
+  //     console.log("Erro ao fazer o Login", res);
+  // }
 
   return (
     <>
@@ -103,9 +102,9 @@ const Login: React.FC = () => {
                               name="password"
                             />
                             <FontAwesomeIcon
-                               icon={showPassword ? faEyeSlash : faEye}
-                                 onClick={handleTogglePassword}
-                                   className="password-toggle-icon"
+                              icon={showPassword ? faEyeSlash : faEye}
+                              onClick={handleTogglePassword}
+                              className="password-toggle-icon"
                             />
                           </div>
                           {errors.password &&
@@ -127,8 +126,6 @@ const Login: React.FC = () => {
                       <div className="forgot-password">
                         <a href="#">Esqueceu a senha?</a>
                       </div>
-
-            
 
                       <div className="social-media">
                         <div className="d-flex flex-column align-items-center justify-content-center">
