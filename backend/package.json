@@ -5,7 +5,7 @@
   "main": "src/app.ts",
   "scripts": {
     "dev": "nodemon",
-    "build": "tsc",
+    "build": "npm install && tsc",
     "start": "node ./dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
