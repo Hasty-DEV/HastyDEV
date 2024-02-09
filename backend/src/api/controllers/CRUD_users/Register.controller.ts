@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { validationResult } from "express-validator";
 import User from "../../models/User.model";
-import Token from "../../models/Tokens.model";
+// import Token from "../../models/Tokens.model";
 import { registrationValidationRules } from "../validations/Validations.controller";
 import { logError } from "../../../utils/Logger/Logger";
 
@@ -70,8 +70,8 @@ async function register(req: Request, res: Response): Promise<void> {
 
     const token: string = jwt.sign({ id: user_id }, secret);
 
-    const newToken = new Token({ user_id, token });
-    await newToken.save();
+    // const newToken = new Token({ user_id, token });
+    // await newToken.save();
     console.log("Cadastrado com Sucesso");
     res.json({ id: user_id, token });
   } catch (err) {

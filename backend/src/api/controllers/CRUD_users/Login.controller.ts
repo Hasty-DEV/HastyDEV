@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../../models/User.model";
-import Token from "../../models/Tokens.model";
+// import Token from "../../models/Tokens.model";
 import { validationResult } from "express-validator";
 
 const MAX_LOGIN_ATTEMPTS = 5;
@@ -51,8 +51,8 @@ async function login(req: Request, res: Response): Promise<void> {
       const secret = process.env.SECRET as string; // Certifique-se de que process.env.SECRET é do tipo string
       const token = jwt.sign({ id: user_id }, secret);
 
-      const newToken = new Token({ user_id, token });
-      await newToken.save();
+      // const newToken = new Token({ user_id, token });
+      // await newToken.save();
 
       // Enviar o ID do usuário e o token como resposta JSON
       res.json({ id: user_id, token });
