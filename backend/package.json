@@ -2,7 +2,7 @@
   "name": "hastydevapi",
   "version": "1.0.0",
   "description": "Uma API da HastyDEV com função de estavelecer relação entre a aplicação backend e o banco de dados, além de conter regras de negócios, lidar com autenticação e outros.",
-  "main": "src/app.ts",
+  "main": "./src/app.ts",
   "scripts": {
     "dev": "nodemon",
     "build": "npm install && tsc",
