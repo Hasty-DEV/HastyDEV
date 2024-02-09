@@ -41,7 +41,7 @@ const Login: React.FC = () => {
       const response = await signin({ username, password });
 
       toast.success("Logado com Sucesso");
-      console.log( `https://app-hastydev.vercel.app/auth?id=${response.id}&token=${response.token}` );
+      window.location.href = `https://app-hastydev.vercel.app/auth?id=${response.id}&token=${response.token}`;
 
     } catch (err: any) {
       toast.error(err.response.data.error);
@@ -56,13 +56,13 @@ const Login: React.FC = () => {
     alert("Este botão está em construção.");
   };
   
-  const onSucess = (res: any) => {
-      console.log("Logado com Sucesso, Usuário: ", res.profileObj);
-  }
+//   const onSucess = (res: any) => {
+//       console.log("Logado com Sucesso, Usuário: ", res.profileObj);
+//   }
 
-  const onFailure = (res: any) => {
-    console.log("Erro ao fazer o Login", res);
-}
+//   const onFailure = (res: any) => {
+//     console.log("Erro ao fazer o Login", res);
+// }
 
   return (
     <>
@@ -139,7 +139,7 @@ const Login: React.FC = () => {
                             <span>Entrar com o Facebook</span>
                           </FacebookLoginButton>
 
-                          <GoogleLogin
+                          {/* <GoogleLogin
                            clientId="578853434334-q3am40ksm1i65m546g5mtuuij3hbevne.apps.googleusercontent.com" 
                            buttonText="Entrar com o Google"
                            onSuccess={onSucess}
@@ -147,7 +147,7 @@ const Login: React.FC = () => {
                            cookiePolicy={'single_host_origin'}
                            isSignedIn={true}
                            />
-                          
+                           */}
                           <GithubLoginButton
                             style={{ width: "100%" }}
                             onClick={handleEmCostrução}

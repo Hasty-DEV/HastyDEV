@@ -4,7 +4,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import Chat from "../Ui/components/Chat/Chat";
+// import Chat from "../Ui/components/Chat/Chat";
 import Header from "../Ui/Partials/Header/Header";
 import Footer from "../Ui/Partials/Footer/Footer";
 import EmailVerification from "./EmailVerification/EmailVerification";
@@ -72,14 +72,14 @@ const Pages: React.FC<PagesProps> = ({ theme, setTheme }) => {
             </RouteAccess>
           }
         />
-        <Route
+        {/* <Route
           path="/chat"
           element={
             <RouteAccess authLevel="authed">
               <Chat />
             </RouteAccess>
           }
-        />
+        /> */}
         <Route path="/project" element={<Project />} />
         <Route path="/emailVerification" element={<EmailVerification />} />
         <Route path="*" element={<Navigate to="/" />} />
