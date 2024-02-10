@@ -100,123 +100,139 @@ const Register: React.FC = () => {
   };
 
   return (
-    <Container fluid>
-      <Row>
-        <Col>
-          <img
-            src={RegisterImg}
-            alt=""
-            height="auto"
-            width="90%"
-            style={{ marginTop: "30%" }}
-          />
-        </Col>
-        <Col>
-          <R.RegisterForm>
-            {registrationInProgress ? (
-              <Loader />
-            ) : registrationSuccess ? (
-              <>
-                <h2>Cadastro realizado com sucesso!</h2>
-                <div className="sign_in">
-                  <Link to="/login">
-                    <span>Já Tem uma Conta? Login</span>
-                  </Link>
-                </div>
-              </>
-            ) : (
-              <Formik
-                initialValues={{
-                  username: "",
-                  password: "",
-                  first_name: "",
-                  last_name: "",
-                  email: "",
-                  confirmPassword: "",
-                }}
-                onSubmit={handleRegister}
-                validationSchema={validationsRegister}
-              >
-                {({ errors, touched, handleSubmit, isSubmitting }) => (
-                  <>
-                    <form onSubmit={handleSubmit}>
-                      <h2>Inscreva-se na HastyDEV!</h2>
-                      <div className="form-group">
-                        <label htmlFor="first_name">Nome:</label>
-                        <Field type="text" id="first_name" name="first_name" />
-                        {errors.first_name &&
-                          touched.first_name &&
-                          errors.first_name}
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="last_name">Sobrenome:</label>
-                        <Field type="text" id="last_name" name="last_name" />
-                        {errors.last_name &&
-                          touched.last_name &&
-                          errors.last_name}
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="username">Usuário:</label>
-                        <Field type="text" id="username" name="username" />
-                        {errors.username && touched.username && errors.username}
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="email">E-mail:</label>
-                        <Field type="email" id="email" name="email" />
-                        {errors.email && touched.email && errors.email}
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="password">Senha:</label>
-                        <div className="password-input">
+    <R.RegisterContainer>
+      <Container>
+        <Row>
+          <Col sm={12} xl={6}>
+            <R.RegisterForm>
+              {registrationInProgress ? (
+                <Loader />
+              ) : registrationSuccess ? (
+                <>
+                  <h2>Cadastro realizado com sucesso!</h2>
+                  <div className="sign_in">
+                    <Link to="/login">
+                      <span>Já Tem uma Conta? Login</span>
+                    </Link>
+                  </div>
+                </>
+              ) : (
+                <Formik
+                  initialValues={{
+                    username: "",
+                    password: "",
+                    first_name: "",
+                    last_name: "",
+                    email: "",
+                    confirmPassword: "",
+                  }}
+                  onSubmit={handleRegister}
+                  validationSchema={validationsRegister}
+                >
+                  {({ errors, touched, handleSubmit, isSubmitting }) => (
+                    <>
+                      <form onSubmit={handleSubmit}>
+                        <h2>Inscreva-se na HastyDEV!</h2>
+                        <div className="form-group mb-5">
+                          <label htmlFor="first_name">Nome:</label>
                           <Field
-                            type={showPassword ? "text" : "password"}
-                            id="password"
-                            name="password"
+                            type="text"
+                            id="first_name"
+                            name="first_name"
                           />
-                          <FontAwesomeIcon
-                            icon={showPassword ? faEyeSlash : faEye}
-                            onClick={handleTogglePassword}
-                            className="password-toggle-icon"
-                          />
+                          <span>
+                            {errors.first_name &&
+                              touched.first_name &&
+                              errors.first_name}
+                          </span>
                         </div>
-                        {errors.password && touched.password && errors.password}
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="confirmPassword">
-                          Confirme Sua Senha:
-                        </label>
-                        <div className="password-input">
-                          <Field
-                            type={showPassword ? "text" : "password"}
-                            id="confirmPassword"
-                            name="confirmPassword"
-                          />
-                          <FontAwesomeIcon
-                            icon={showPassword ? faEyeSlash : faEye}
-                            onClick={handleTogglePassword2}
-                            className="password-toggle-icon"
-                          />
+                        <div className="form-group mb-5">
+                          <label htmlFor="last_name">Sobrenome:</label>
+                          <Field type="text" id="last_name" name="last_name" />
+                          <span>
+                            {errors.last_name &&
+                              touched.last_name &&
+                              errors.last_name}
+                          </span>
                         </div>
-                        {errors.confirmPassword &&
-                          touched.confirmPassword &&
-                          errors.confirmPassword}
-                      </div>
+                        <div className="form-group mb-5">
+                          <label htmlFor="username">Usuário:</label>
+                          <Field type="text" id="username" name="username" />
+                          <span>
+                            {errors.username &&
+                              touched.username &&
+                              errors.username}
+                          </span>
+                        </div>
+                        <div className="form-group mb-5">
+                          <label htmlFor="email">E-mail:</label>
+                          <Field type="email" id="email" name="email" />
+                          <span>
+                            {errors.email && touched.email && errors.email}
+                          </span>
+                        </div>
+                        <div className="form-group mb-5">
+                          <label htmlFor="password">Senha:</label>
+                          <div className="password-input">
+                            <Field
+                              type={showPassword ? "text" : "password"}
+                              id="password"
+                              name="password"
+                            />
+                            <FontAwesomeIcon
+                              icon={showPassword ? faEyeSlash : faEye}
+                              onClick={handleTogglePassword}
+                              className="password-toggle-icon"
+                            />
+                          </div>
+                          <span>
+                            {errors.password &&
+                              touched.password &&
+                              errors.password}
+                          </span>
+                        </div>
+                        <div className="form-group mb-5">
+                          <label htmlFor="confirmPassword">
+                            Confirme Sua Senha:
+                          </label>
+                          <div className="password-input">
+                            <Field
+                              type={showPassword ? "text" : "password"}
+                              id="confirmPassword"
+                              name="confirmPassword"
+                            />
+                            <FontAwesomeIcon
+                              icon={showPassword ? faEyeSlash : faEye}
+                              onClick={handleTogglePassword2}
+                              className="password-toggle-icon"
+                            />
+                          </div>
+                          <span>
+                            {errors.confirmPassword &&
+                              touched.confirmPassword &&
+                              errors.confirmPassword}
+                          </span>
+                        </div>
 
-                      <div className="form-group">
-                        <button type="submit" disabled={isSubmitting}>
-                          Inscreva-se
-                        </button>
-                      </div>
-                    </form>
-                  </>
-                )}
-              </Formik>
-            )}
-          </R.RegisterForm>
-        </Col>
-      </Row>
-      <ToastContainer />
-    </Container>
+                        <div className="form-group">
+                          <button type="submit" disabled={isSubmitting}>
+                            Inscreva-se
+                          </button>
+                        </div>
+                      </form>
+                    </>
+                  )}
+                </Formik>
+              )}
+            </R.RegisterForm>
+          </Col>
+          <Col sm={12} xl={6}>
+            <img src={RegisterImg} alt="" className="img-fluid" />
+          </Col>
+        </Row>
+        <ToastContainer />
+      </Container>
+    </R.RegisterContainer>
   );
 };
 

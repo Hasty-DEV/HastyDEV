@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const LoginContainer = styled.section`
   margin-top: 20%;
 
@@ -10,17 +9,16 @@ export const LoginContainer = styled.section`
 `;
 
 export const LoginForm = styled.div`
-  background-color:  ${(props) => props.theme.colors.background};
+  background-color: ${(props) => props.theme.colors.background};
   padding: 20px;
   border-radius: 10px;
   text-align: center;
-  
 
   h2 {
     text-align: center;
     margin-top: 5%;
     margin-bottom: 54px;
-    color:  ${(props) => props.theme.colors.text};
+    color: ${(props) => props.theme.colors.text};
     font-family: Inter;
     font-size: 16px;
     font-style: normal;
@@ -31,10 +29,11 @@ export const LoginForm = styled.div`
   .form-group {
     margin-bottom: 15px;
     gap: 16px;
+    position: relative;
     label {
       display: block;
       margin-bottom: 16px;
-      color:  ${(props) => props.theme.colors.text};
+      color: ${(props) => props.theme.colors.text};
       font-family: Inter;
       font-size: 16px;
       font-style: normal;
@@ -47,16 +46,25 @@ export const LoginForm = styled.div`
       border-radius: 50px;
       border: 2px solid ${(props) => props.theme.colors.secondary};
       background: ${(props) => props.theme.colors.background};
-      color:  ${(props) => props.theme.colors.text};
+      color: ${(props) => props.theme.colors.text};
+    }
+    span {
+      position: absolute;
+      bottom: -20px;
+      left: 0;
+      color: red;
+      font-size: 14px;
+      margin-left: 40px;
     }
   }
 
-  button {    width: 100%;
+  button {
+    width: 100%;
     height: 34px;
     flex-shrink: 0;
     border-radius: 50px;
     background: ${(props) => props.theme.colors.secondary};
-    color:  ${(props) => props.theme.colors.text};
+    color: ${(props) => props.theme.colors.text};
     border: none;
     margin-top: 48px;
     margin-bottom: 48px;
@@ -67,14 +75,13 @@ export const LoginForm = styled.div`
     align-items: center;
     position: relative;
 
-
-  .password-toggle-icon {
-    position: absolute;
-    right: 20px;
-    cursor: pointer;
-    top: 1px;
+    .password-toggle-icon {
+      position: absolute;
+      right: 20px;
+      cursor: pointer;
+      top: 1px;
+    }
   }
-}
 
   .forgot-password {
     text-align: center;
@@ -82,7 +89,7 @@ export const LoginForm = styled.div`
     a {
       font-weight: bold;
       text-decoration: none;
-      color:  ${(props) => props.theme.colors.text};
+      color: ${(props) => props.theme.colors.text};
       font-family: Inter;
       font-size: 16px;
       font-style: normal;
@@ -92,7 +99,7 @@ export const LoginForm = styled.div`
   }
 
   .sign_in {
-    color:  ${(props) => props.theme.colors.text};
+    color: ${(props) => props.theme.colors.text};
     font-family: Inter;
     font-size: 16px;
     font-style: normal;
@@ -101,7 +108,7 @@ export const LoginForm = styled.div`
 
     a {
       text-decoration: none;
-      color:  ${(props) => props.theme.colors.text};
+      color: ${(props) => props.theme.colors.text};
       font-weight: bold;
     }
   }
@@ -111,4 +118,3 @@ export const LoginForm = styled.div`
     margin-top: 20px;
   }
 `;
-

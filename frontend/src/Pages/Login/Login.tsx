@@ -19,11 +19,11 @@ import { toast, ToastContainer } from "react-toastify";
 const nodeEnv = import.meta.env.VITE_NODE_ENV;
 
 const validationsLogin = yup.object().shape({
-  username: yup.string().required("O Usuário é obrigatório"),
+  username: yup.string().required("O Usuário é obrigatório*"),
   password: yup
     .string()
     .min(6, "A senha deve ter pelo menos 6 caracteres")
-    .required("A senha é obrigatória"),
+    .required("A senha é obrigatória*"),
 });
 
 const Login: React.FC = () => {
@@ -65,7 +65,7 @@ const Login: React.FC = () => {
   const handleEmCostrução = () => {
     alert("Este botão está em construção.");
   };
-  
+
   return (
     <L.LoginContainer>
       <Container fluid>
@@ -91,9 +91,11 @@ const Login: React.FC = () => {
                         <div className="form-group">
                           <label htmlFor="username">Username:</label>
                           <Field type="text" id="username" name="username" />
-                          {errors.username &&
-                            touched.username &&
-                            errors.username}
+                          <span>
+                            {errors.username &&
+                              touched.username &&
+                              errors.username}
+                          </span>
                         </div>
 
                         <div className="form-group">
@@ -110,11 +112,12 @@ const Login: React.FC = () => {
                               className="password-toggle-icon"
                             />
                           </div>
-                          {errors.password &&
-                            touched.password &&
-                            errors.password}
+                          <span>
+                            {errors.password &&
+                              touched.password &&
+                              errors.password}
+                          </span>
                         </div>
-
                         <div className="form-group">
                           <button type="submit" disabled={isSubmitting}>
                             Login
