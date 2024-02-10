@@ -67,10 +67,10 @@ const Login: React.FC = () => {
   };
   
   return (
-    <>
+    <L.LoginContainer>
       <Container fluid>
         <Row>
-          <Col>
+          <Col sm={7} xl={6}>
             <L.LoginForm>
               {isLoading ? (
                 <Loader />
@@ -152,25 +152,13 @@ const Login: React.FC = () => {
               </div>
             </L.LoginForm>
           </Col>
-          <Col style={{ position: "relative" }}>
-            <img
-              src={LoginImg}
-              alt=""
-              style={{
-                position: "absolute",
-                zIndex: "2",
-                height: "auto",
-                width: "90%",
-              }}
-            />
-            <div className="d-flex justify-content-end" style={{ zIndex: "1" }}>
-              <L.rightDivSyled></L.rightDivSyled>
-            </div>
+          <Col sm={5} xl={6}>
+            <img src={LoginImg} alt="" className="img-fluid" />
           </Col>
         </Row>
       </Container>
       <ToastContainer />
-    </>
+    </L.LoginContainer>
   );
 };
 

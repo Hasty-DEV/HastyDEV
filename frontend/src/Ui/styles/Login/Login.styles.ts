@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
-export const rightDivSyled = styled.div`
-  width: 438px;
-  height: 830px;
-  flex-shrink: 0;
-  background:  ${(props) => props.theme.colors.background};
+
+export const LoginContainer = styled.section`
+  margin-top: 20%;
+
+  @media (max-width: 1024px) {
+    margin-top: 15%;
+  }
 `;
 
 export const LoginForm = styled.div`
@@ -49,8 +51,7 @@ export const LoginForm = styled.div`
     }
   }
 
-  button {
-    width: 100%;
+  button {    width: 100%;
     height: 34px;
     flex-shrink: 0;
     border-radius: 50px;
