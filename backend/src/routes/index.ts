@@ -4,6 +4,7 @@ import ReadUserController from "../api/controllers/User/ReadUser.controller";
 import RegisterController from "../api/controllers/User/Register.controller";
 import SendEmailVerificationController from "../api/controllers/Email/SendEmailVerification.controller";
 import EmailCodeVerificationController from "../api/controllers/Email/EmailCodeVerification.controller";
+import ContactFormController from "../api/controllers/Form/ContactForm.controller";
 
 const routes = Router();
 
@@ -27,4 +28,6 @@ routes.post(
   "/emailCodeVerification",
   EmailCodeVerificationController.codeVerification
 );
+
+routes.post("/contactForm", ContactFormController.sendContactForm);
 export default routes;
