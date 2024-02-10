@@ -6,6 +6,7 @@ export const Container = styled.div`
   width: 100%;
   top: 0;
   z-index: 1000;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
 export const ButtonsHeader = styled.div`
