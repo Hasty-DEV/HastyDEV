@@ -1,22 +1,25 @@
+import { Suspense, lazy } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
 } from "react-router-dom";
-// import Chat from "../Ui/components/Chat/Chat";
-import Header from "../Ui/Partials/Header/Header";
-import Footer from "../Ui/Partials/Footer/Footer";
-import EmailVerification from "./EmailVerification/EmailVerification";
 import { useAuth } from "../Data/Contexts/Auth/AuthProvider";
 import light from "../Ui/styles/themes/light";
 import dark from "../Ui/styles/themes/dark";
-import About from "./About/About";
-import ContactUs from "./ContactUs/ContactUs";
-import Hero from "./Hero/Hero";
-import Login from "./Login/Login";
-import Project from "./Project/Project";
-import Register from "./Register/Register";
+import Header from "../Ui/Partials/Header/Header";
+import Footer from "../Ui/Partials/Footer/Footer";
+import Loader from "../Ui/components/Loader/Loader";
+const EmailVerification = lazy(
+  () => import("./EmailVerification/EmailVerification")
+);
+const About = lazy(() => import("./About/About"));
+const ContactUs = lazy(() => import("./ContactUs/ContactUs"));
+const Hero = lazy(() => import("./Hero/Hero"));
+const Login = lazy(() => import("./Login/Login"));
+const Project = lazy(() => import("./Project/Project"));
+const Register = lazy(() => import("./Register/Register"));
 
 type RouteAccessProps = {
   children: React.ReactNode;
@@ -52,38 +55,32 @@ const Pages: React.FC<PagesProps> = ({ theme, setTheme }) => {
   return (
     <Router>
       <Header toggleTheme={toggleTheme} />
-      <Routes>
-        <Route path="/" element={<Hero />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<ContactUs />} />
-        <Route
-          path="/login"
-          element={
-            <RouteAccess authLevel="unauthed">
-              <Login />
-            </RouteAccess>
-          }
-        />
-        <Route
-          path="/register"
-          element={
-            <RouteAccess authLevel="unauthed">
-              <Register />
-            </RouteAccess>
-          }
-        />
-        {/* <Route
-          path="/chat"
-          element={
-            <RouteAccess authLevel="authed">
-              <Chat />
-            </RouteAccess>
-          }
-        /> */}
-        <Route path="/project" element={<Project />} />
-        <Route path="/emailVerification" element={<EmailVerification />} />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="/" element={<Hero />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<ContactUs />} />
+          <Route
+            path="/login"
+            element={
+              <RouteAccess authLevel="unauthed">
+                <Login />
+              </RouteAccess>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <RouteAccess authLevel="unauthed">
+                <Register />
+              </RouteAccess>
+            }
+          />
+          <Route path="/project" element={<Project />} />
+          <Route path="/emailVerification" element={<EmailVerification />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </Suspense>
       <Footer />
     </Router>
   );

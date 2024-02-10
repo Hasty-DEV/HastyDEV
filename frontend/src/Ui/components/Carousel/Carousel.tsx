@@ -40,9 +40,9 @@ class Carousel extends Component<CarouselProps> {
     return (
       <Container className={className}>
         <Slider {...settings}>
-          <div className="slide-item">
-            <img src={HeroImg1} alt="" width="90%" height="250px" />
-          </div>
+            <div className="slide-item">
+              <img src={HeroImg1} alt="" width="90%" height="250px" />
+            </div>
           <div className="slide-item">
             <img src={HeroImg2} alt="" width="90%" height="250px" />
           </div>
