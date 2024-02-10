@@ -9,6 +9,14 @@ export interface ContactUsStyledProps {
   customColor?: keyof DefaultTheme["colors"];
 }
 
+export const ContactUsContainer = styled.section`
+  article.title {
+    margin-top: 20%;
+    @media (max-width: 1024px) {
+      margin-top: 10%;
+    }
+  }
+`;
 export const ContactUsDiv = styled(Col)`
   display: flex;
   justify-content: space-between;
