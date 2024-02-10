@@ -5,6 +5,9 @@ export const RegisterContainer = styled.section`
   @media (max-width: 1024px) {
     margin-top: 15%;
   }
+  @media (max-width: 768px) {
+    padding-top: 10%;
+  }
 `;
 
 export const RegisterForm = styled.div`
