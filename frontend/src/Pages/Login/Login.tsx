@@ -15,7 +15,7 @@ import * as L from "../../Ui/styles/Login/Login.styles";
 import Loader from "../../Ui/components/Loader/Loader";
 import { FormValues } from "../../Data/@types/FormValues/FormValues.type";
 import { toast, ToastContainer } from "react-toastify";
-// import { GoogleLogin } from "react-google-login";
+import { GoogleLogin } from "react-google-login";
 
 const nodeEnv = import.meta.env.VITE_NODE_ENV;
 
@@ -48,13 +48,12 @@ const Login: React.FC = () => {
       if (nodeEnv === "development") {
         baseURL = `http://localhost:5174/auth?id=${response.id}&token=${response.token}`;
       } else if (nodeEnv === "production") {
-        baseURL = `https://app-hastydev.vercel.app/auth?id=${response.id}&token=${response.token}`;;
+        baseURL = `https://app-hastydev.vercel.app/auth?id=${response.id}&token=${response.token}`;
       }
 
-     if (baseURL) {
-       window.location.href = baseURL;
-     }
-
+      if (baseURL) {
+        window.location.href = baseURL;
+      }
     } catch (err: any) {
       toast.error(err.response.data.error);
     } finally {
@@ -68,13 +67,13 @@ const Login: React.FC = () => {
     alert("Este botão está em construção.");
   };
 
-  //   const onSucess = (res: any) => {
-  //       console.log("Logado com Sucesso, Usuário: ", res.profileObj);
-  //   }
+  const onSucess = (res: any) => {
+    console.log("Logado com Sucesso, Usuário: ", res.profileObj);
+  };
 
-  //   const onFailure = (res: any) => {
-  //     console.log("Erro ao fazer o Login", res);
-  // }
+  const onFailure = (res: any) => {
+    console.log("Erro ao fazer o Login", res);
+  };
 
   return (
     <>
@@ -139,37 +138,38 @@ const Login: React.FC = () => {
                       <div className="forgot-password">
                         <a href="#">Esqueceu a senha?</a>
                       </div>
-
-                      <div className="social-media">
-                        <div className="d-flex flex-column align-items-center justify-content-center">
-                          <FacebookLoginButton
-                            style={{ width: "100%", marginBottom: "20px" }}
-                            onClick={handleEmCostrução}
-                          >
-                            <span>Entrar com o Facebook</span>
-                          </FacebookLoginButton>
-
-                          {/* <GoogleLogin
-                           clientId="578853434334-q3am40ksm1i65m546g5mtuuij3hbevne.apps.googleusercontent.com" 
-                           buttonText="Entrar com o Google"
-                           onSuccess={onSucess}
-                           onFailure={onFailure}
-                           cookiePolicy={'single_host_origin'}
-                           isSignedIn={true}
-                           />
-                           */}
-                          <GithubLoginButton
-                            style={{ width: "100%" }}
-                            onClick={handleEmCostrução}
-                          >
-                            <span>Entrar com o Github</span>
-                          </GithubLoginButton>
-                        </div>
-                      </div>
                     </>
                   )}
                 </Formik>
               )}
+
+              <div className="social-media">
+                <div className="d-flex flex-column align-items-center justify-content-center">
+                  <FacebookLoginButton
+                    style={{ width: "100%", marginBottom: "20px" }}
+                    onClick={handleEmCostrução}
+                  >
+                    <span>Entrar com o Facebook</span>
+                  </FacebookLoginButton>
+
+                  {
+                    <GoogleLogin
+                      clientId="578853434334-q3am40ksm1i65m546g5mtuuij3hbevne.apps.googleusercontent.com"
+                      buttonText="Entrar com o Google"
+                      onSuccess={onSucess}
+                      onFailure={onFailure}
+                      cookiePolicy={"single_host_origin"}
+                      isSignedIn={true}
+                    />
+                  }
+                  <GithubLoginButton
+                    style={{ width: "100%" }}
+                    onClick={handleEmCostrução}
+                  >
+                    <span>Entrar com o Github</span>
+                  </GithubLoginButton>
+                </div>
+              </div>
             </L.LoginForm>
           </Col>
           <Col style={{ position: "relative" }}>
