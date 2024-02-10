@@ -55,32 +55,34 @@ const Pages: React.FC<PagesProps> = ({ theme, setTheme }) => {
   return (
     <Router>
       <Header toggleTheme={toggleTheme} />
-      <Suspense fallback={<Loader />}>
-        <Routes>
-          <Route path="/" element={<Hero />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<ContactUs />} />
-          <Route
-            path="/login"
-            element={
-              <RouteAccess authLevel="unauthed">
-                <Login />
-              </RouteAccess>
-            }
-          />
-          <Route
-            path="/register"
-            element={
-              <RouteAccess authLevel="unauthed">
-                <Register />
-              </RouteAccess>
-            }
-          />
-          <Route path="/project" element={<Project />} />
-          <Route path="/emailVerification" element={<EmailVerification />} />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
-      </Suspense>
+      <main>
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route path="/" element={<Hero />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<ContactUs />} />
+            <Route
+              path="/login"
+              element={
+                <RouteAccess authLevel="unauthed">
+                  <Login />
+                </RouteAccess>
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                <RouteAccess authLevel="unauthed">
+                  <Register />
+                </RouteAccess>
+              }
+            />
+            <Route path="/project" element={<Project />} />
+            <Route path="/emailVerification" element={<EmailVerification />} />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </Suspense>
+      </main>
       <Footer />
     </Router>
   );
