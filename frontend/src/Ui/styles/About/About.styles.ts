@@ -3,11 +3,7 @@ import { Container } from "react-bootstrap";
 
 export const AboutContainer = styled.section`
   article.title {
-    margin-top: 20%;
-
-    @media (max-width: 1024px) {
-      margin-top: 35%;
-    }
+    margin-top: 15%;
   }
 `;
 
