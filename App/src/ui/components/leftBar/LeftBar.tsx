@@ -26,7 +26,7 @@ const LeftBar = () => {
     if (userId) {
       const fetchData = async () => {
         try {
-          const response = await api.get("/user");
+          const response = await api.get(`/user/${userId}`);
           console.log(response.data);
           setUserData(response.data.user);
         } catch (error) {

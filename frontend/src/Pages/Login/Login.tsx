@@ -17,6 +17,8 @@ import { FormValues } from "../../Data/@types/FormValues/FormValues.type";
 import { toast, ToastContainer } from "react-toastify";
 // import { GoogleLogin } from "react-google-login";
 
+const nodeEnv = import.meta.env.VITE_NODE_ENV;
+
 const validationsLogin = yup.object().shape({
   username: yup.string().required("O Usuário é obrigatório"),
   password: yup
@@ -40,8 +42,19 @@ const Login: React.FC = () => {
       const response = await signin({ username, password });
 
       toast.success("Logado com Sucesso");
-      window.location.href = `https://app-hastydev.vercel.app/auth?id=${response.id}&token=${response.token}`;
-      //window.location.href = `http://localhost:5174/auth?id=${response.id}&token=${response.token}`;
+
+      let baseURL;
+
+      if (nodeEnv === "development") {
+        baseURL = `http://localhost:5174/auth?id=${response.id}&token=${response.token}`;
+      } else if (nodeEnv === "production") {
+        baseURL = `https://app-hastydev.vercel.app/auth?id=${response.id}&token=${response.token}`;;
+      }
+
+     if (baseURL) {
+       window.location.href = baseURL;
+     }
+
     } catch (err: any) {
       toast.error(err.response.data.error);
     } finally {

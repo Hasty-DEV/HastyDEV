@@ -1,5 +1,6 @@
 import { Router } from "express";
 import LoginController from "../api/controllers/User/Login.controller";
+import ReadUserController from "../api/controllers/User/ReadUser.controller";
 
 const routes = Router();
 
@@ -10,5 +11,8 @@ routes.get("/", (req, res) => {
 //Rotas de Autenticação
 routes.post("/login", LoginController.login);
 routes.post("/register");
+
+//User Data
+routes.get("/user/:id", ReadUserController.getUserData);
 
 export default routes;
