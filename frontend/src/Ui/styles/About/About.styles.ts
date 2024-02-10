@@ -1,45 +1,13 @@
 import styled from "styled-components";
 import { Container } from "react-bootstrap";
 
-export const AboutContainer = styled.div`
-  .tabela-transparente {
-    border-collapse: collapse;
-    width: 100%;
-  }
+export const AboutContainer = styled.section`
+  article.title {
+    margin-top: 20%;
 
-  .tabela-transparente td,
-  .tabela-transparente tr {
-    padding: 8px;
-  }
-
-  td {
-    width: 50%;
-  }
-
-  .tabela-transparente td:first-child {
-    text-align: left;
-  }
-
-  @media (max-width: 768px) {
-    .tabela-transparente td {
-      display: block;
-      width: 100%;
+    @media (max-width: 1024px) {
+      margin-top: 35%;
     }
-
-    .tabela-transparente td:first-child {
-      text-align: left;
-    }
-
-    .tabela-transparente tr {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-  }
-
-  .tabela .HeadingSubInterTitle {
-    text-align: center;
-    margin-bottom: 5px;
   }
 `;
 

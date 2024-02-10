@@ -6,12 +6,13 @@ import {
   HeadingTitle,
   HeadingSubtitle,
   HeadingInterTitle,
-  HeadingSubInterTitle,
   Paragraph,
 } from "../../Ui/components/Texts/Texts";
 import ContactForm from "../../Ui/Partials/ContactForm/ContactForm";
 import SliderContact from "../../Ui/components/Slider/SliderContact";
 import { ImageStyled } from "../../Ui/styles/About/About.styles";
+import OurMissionTable from "../../Ui/Partials/OurMissionTable/OurMissionTable";
+import OurColaborationTable from "../../Ui/Partials/OurColaborationTable/OurColaborationTable";
 
 const About: React.FC = () => {
   return (
@@ -19,14 +20,14 @@ const About: React.FC = () => {
       <Container className="text-center">
         <Row>
           <Col xs={12}>
-            <div style={{ marginTop: "20%" }}>
+            <article className="title" style={{ marginTop: "20%" }}>
               <HeadingTitle
                 title="Aqui Nós Garantimos"
                 span="Seu Sucesso Profissional"
                 hasUnderline={true}
                 className="mt-5"
               />
-            </div>
+            </article>
           </Col>
 
           <Col xs={12}>
@@ -75,60 +76,7 @@ const About: React.FC = () => {
             />
           </Col>
           <Col xs={12}>
-            <table className="tabela-transparente mb-3">
-              <tbody>
-                <tr>
-                  <td className="tabela">
-                    <HeadingSubInterTitle SubInterTitle="Colaboração" />
-                  </td>
-                  <td>
-                    <Paragraph
-                      paragraph="Promovemos a união de talentos para criar um impacto positivo.
-                  Facilitamos a colaboração entre desenvolvedores e organizações
-                  sociais/empresas parceiras, tornando ideias em ações."
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="tabela">
-                    <HeadingSubInterTitle SubInterTitle="Gamificação" />
-                  </td>
-                  <td>
-                    <Paragraph
-                      paragraph="Tornamos o aprendizado e o trabalho envolventes e divertidos
-                  com sistemas de recompensas. Motivamos os desenvolvedores a se
-                  desafiarem e contribuírem para projetos de impacto."
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="tabela">
-                    <HeadingSubInterTitle SubInterTitle="Profissionalismo" />
-                  </td>
-                  <td>
-                    <Paragraph
-                      paragraph="Valorizamos o desenvolvimento profissional com
-                    responsabilidade e ética. Garantimos que os desenvolvedores
-                    adquiram experiência valiosa e que as organizações parceiras
-                    recebam suporte técnico qualificado."
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="tabela">
-                    <HeadingSubInterTitle SubInterTitle="Impacto Social" />
-                  </td>
-                  <td>
-                    <Paragraph
-                      paragraph="Nosso propósito é causar mudanças sociais positivas.
-                    Trabalhamos com organizações sociais e empresas parceiras para
-                    resolver desafios sociais. Acreditamos na transformação de
-                    vidas e comunidades."
-                    />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <OurMissionTable />
           </Col>
           <Col xs={12}>
             <HeadingInterTitle
@@ -140,46 +88,7 @@ const About: React.FC = () => {
             />
           </Col>
           <Col xs={12}>
-            <table className="tabela-transparente">
-              <tbody>
-                <tr>
-                  <td className="tabela">
-                    <HeadingSubInterTitle SubInterTitle="Inovação" />
-                  </td>
-                  <td>
-                    <Paragraph
-                      paragraph="Na HastyDEV, a inovação é nossa força motriz. Buscamos
-                    constantemente soluções criativas para enfrentar desafios e
-                    moldar o futuro."
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="tabela">
-                    <HeadingSubInterTitle SubInterTitle="Excelência" />
-                  </td>
-                  <td>
-                    <Paragraph
-                      paragraph="Comprometidos com a excelência em tudo o que fazemos, na
-                    HastyDEV. Buscamos a mais alta qualidade em cada aspecto do
-                    nosso trabalho."
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="tabela">
-                    <HeadingSubInterTitle SubInterTitle="Impacto" />
-                  </td>
-                  <td>
-                    <Paragraph
-                      paragraph="O impacto é o coração da nossa missão na HastyDEV. Unimos
-                    desenvolvedores a organizações sociais e empresas para causar
-                    mudanças positivas."
-                    />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <OurColaborationTable />
           </Col>
         </Row>
         <Col xs={12}>
