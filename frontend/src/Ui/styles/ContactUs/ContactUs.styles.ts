@@ -16,8 +16,6 @@ export const ContactUsDiv = styled(Col)`
   box-shadow: 0px 0px 60px 30px rgba(0, 0, 0, 0.03);
   padding-left: 0;
   border-radius: 10px;
-
-
 `;
 
 export const FormDiv = styled.div``;
@@ -37,6 +35,11 @@ export const HeadingSubtitle = styled(HS)`
   @media (max-width: 767px) {
     font-size: 2rem;
     line-height: 48px;
+  }
+
+  @media (max-width: 1024px) {
+    font-size: 3rem;
+    line-height: 1.1;
   }
 `;
 
@@ -90,11 +93,10 @@ export const InfoDiv = styled.div`
 
 export const Infos = styled.div<ContactUsStyledProps>`
   svg {
-    fill: #fff;
+    fill: #000;
   }
 
   p {
     margin-left: 2%;
-    color: #fff;
   }
 `;

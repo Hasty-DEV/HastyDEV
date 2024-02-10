@@ -19,6 +19,10 @@ export const FormContainer = styled.div`
     font-size: 12px;
   }
 
+  .form-input textarea {
+    width: 100%;
+  }
+
   @media (max-width: 768px) {
     form {
       flex-direction: column-reverse;

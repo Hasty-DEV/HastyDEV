@@ -33,7 +33,7 @@ const ContactUSForm = () => {
   }: ContactFormValues) => {
     try {
       setLoading(true);
-   await FormFetch.post("/contactForm", {
+      await FormFetch.post("/contactForm", {
         Name,
         Email,
         Phone,
@@ -77,25 +77,26 @@ const ContactUSForm = () => {
               <>
                 <form onSubmit={handleSubmit}>
                   <Container>
-                    <Row className="flex-column flex-md-row">
-                      <Col xs={12} md={6} className="mt-2">
+                    <Row>
+                      <Col xs={12} className="form-input mb-4">
                         <Field type="text" placeholder="Nome" name="Name" />
-                        {errors.Name && touched.Name && errors.Name}
+                        <span>
+                          {errors.Name && touched.Name && errors.Name}
+                        </span>
                       </Col>
-                      <Col xs={12} md={6} className="mt-2">
-                        <Field
-                          type="email"
-                          placeholder="E-mail"
-                          name="Email"
-                          className="mt-3"
-                        />
-                        {errors.Email && touched.Email && errors.Email}
+                      <Col xs={12} className="form-input mb-4">
+                        <Field type="email" placeholder="E-mail" name="Email" />
+                        <span>
+                          {errors.Email && touched.Email && errors.Email}
+                        </span>
                       </Col>
-                      <Col xs={12} md={6} className="mt-2">
+                      <Col xs={12} className="form-input  mb-4">
                         <Field type="tel" placeholder="Telefone" name="Phone" />
-                        {errors.Phone && touched.Phone && errors.Phone}
+                        <span>
+                          {errors.Phone && touched.Phone && errors.Phone}
+                        </span>
                       </Col>
-                      <Col xs={12} md={6} className="mt-2">
+                      <Col xs={12} className="mb-3">
                         <select
                           title="Category"
                           id="Category"
@@ -104,7 +105,7 @@ const ContactUSForm = () => {
                           onChange={(e) =>
                             setFieldValue("Category", e.target.value)
                           }
-                          className="mt-3"
+                          className=""
                         >
                           <option value="">Selecione uma Categoria</option>
                           <option value="Comercial">Comercial</option>
@@ -113,27 +114,31 @@ const ContactUSForm = () => {
                           <option value="Outro">Outro</option>
                         </select>
                       </Col>
-                      <Col xs={12} className="mt-4">
+                      <Col xs={12} className="form-input mb-4">
                         <Field
                           type="text"
                           placeholder="Assunto"
                           name="Subject"
                         />
-                        {errors.Subject && touched.Subject && errors.Subject}
+                        <span>
+                          {errors.Subject && touched.Subject && errors.Subject}
+                        </span>
                       </Col>
-                      <Col xs={12} className="mt-4">
+                      <Col xs={12} className="form-input mt-2">
                         <Field
                           component="textarea"
                           name="Message"
                           placeholder="Digite sua Mensagem..."
                           required
                         />
-                        {errors.Message && touched.Message && errors.Message}
+                        <span>
+                          {errors.Message && touched.Message && errors.Message}
+                        </span>
                       </Col>
-                      <Col xs={12} className="mt-4"></Col>
+                      <Col xs={12} className="mb-2"></Col>
                       <Col
                         xs={12}
-                        className="mt-4 d-flex justify-content-center"
+                        className="mt-3 d-flex justify-content-center"
                       >
                         <ButtonPrimaryLongNoLink
                           type="submit"
@@ -144,7 +149,6 @@ const ContactUSForm = () => {
                     </Row>
                   </Container>
                 </form>
-                
               </>
             )}
           </Formik>
