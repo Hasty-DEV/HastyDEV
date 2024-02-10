@@ -5,6 +5,13 @@ export const AboutContainer = styled.section`
   article.title {
     margin-top: 15%;
   }
+
+  article.map {
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
 `;
 
 export const RectangleDiv = styled(Container)`

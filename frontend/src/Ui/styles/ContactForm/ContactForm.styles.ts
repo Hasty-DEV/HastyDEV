@@ -7,6 +7,18 @@ export const FormContainer = styled.div`
   gap: 1rem;
   align-items: center;
 
+  .form-input {
+    position: relative;
+  }
+
+  .form-input span {
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    color: red;
+    font-size: 12px;
+  }
+
   @media (max-width: 768px) {
     form {
       flex-direction: column-reverse;

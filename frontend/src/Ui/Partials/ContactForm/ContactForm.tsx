@@ -6,7 +6,7 @@ import { ContactFormValues } from "../../../Data/@types/ContactFormValues/Contac
 import { FormContainer } from "../../styles/ContactForm/ContactForm.styles";
 import { useState } from "react";
 import Loader from "../../components/Loader/Loader";
- 
+import swal from "sweetalert2";
 
 const validationsContact = yup.object().shape({
   Name: yup.string().required("O campo de nome é obrigatório"),
@@ -33,7 +33,7 @@ const ContactForm = () => {
   }: ContactFormValues) => {
     try {
       setLoading(true);
-     await FormFetch.post("/contactForm", {
+      await FormFetch.post("/contactForm", {
         Name,
         Email,
         Phone,
@@ -41,9 +41,15 @@ const ContactForm = () => {
         Subject,
         Message,
       });
- 
+      swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Sua Mensagem foi enviada com sucesso!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } catch (err) {
-       console.log(err)
+      console.log(err);
     } finally {
       setLoading(false);
     }
@@ -76,34 +82,50 @@ const ContactForm = () => {
             }) => (
               <>
                 <form onSubmit={handleSubmit}>
-                  <Field type="text" placeholder="Nome" name="Name" />
-                  {errors.Name && touched.Name && errors.Name}
-                  <Field type="email" placeholder="E-mail" name="Email" />
-                  {errors.Email && touched.Email && errors.Email}
-                  <Field type="tel" placeholder="Telefone" name="Phone" />
-                  {errors.Phone && touched.Phone && errors.Phone}
-                  <select
-                    title="Category"
-                    id="Category"
-                    name="Category"
-                    value={values.Category}
-                    onChange={(e) => setFieldValue("Category", e.target.value)}
-                  >
-                    <option value="">Selecione uma Categoria</option>
-                    <option value="Comercial">Comercial</option>
-                    <option value="Financeiro">Financeiro</option>
-                    <option value="Suporte">Suporte</option>
-                    <option value="Outro">Outro</option>
-                  </select>
-                  <Field type="text" placeholder="Assunto" name="Subject" />
-                  {errors.Subject && touched.Subject && errors.Subject}
-                  <Field
-                    component="textarea"
-                    name="Message"
-                    placeholder="Digite sua Mensagem..."
-                    required
-                  />
-                  {errors.Message && touched.Message && errors.Message}
+                  <div className="form-input">
+                    <Field type="text" placeholder="Nome" name="Name" />
+                    <span>{errors.Name && touched.Name && errors.Name}</span>
+                  </div>
+                  <div className="form-input">
+                    <Field type="email" placeholder="E-mail" name="Email" />
+                    <span>{errors.Email && touched.Email && errors.Email}</span>
+                  </div>
+                  <div className="form-input">
+                    <Field type="tel" placeholder="Telefone" name="Phone" />
+                    <span>{errors.Phone && touched.Phone && errors.Phone}</span>
+                  </div>
+                  <div>
+                    <select
+                      title="Category"
+                      id="Category"
+                      name="Category"
+                      value={values.Category}
+                      onChange={(e) =>
+                        setFieldValue("Category", e.target.value)
+                      }
+                    >
+                      <option value="">Selecione uma Categoria</option>
+                      <option value="Comercial">Comercial</option>
+                      <option value="Financeiro">Financeiro</option>
+                      <option value="Suporte">Suporte</option>
+                      <option value="Outro">Outro</option>
+                    </select>
+                  </div>
+                  <div className="form-input">
+                    <Field type="text" placeholder="Assunto" name="Subject" />
+                    <span>
+                      {errors.Subject && touched.Subject && errors.Subject}
+                    </span>
+                  </div>
+                  <div className="form-input">
+                    <Field
+                      component="textarea"
+                      name="Message"
+                      placeholder="Digite sua Mensagem..."
+                      required
+                    />
+                    <span>{errors.Message && touched.Message && errors.Message}</span>
+                  </div>
                   <ButtonPrimaryLongNoLink
                     type="submit"
                     buttonText="Entre em Contato"
@@ -116,7 +138,6 @@ const ContactForm = () => {
         </FormContainer>
       )}
     </>
-    
   );
 };
 

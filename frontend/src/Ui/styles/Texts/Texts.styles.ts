@@ -13,6 +13,7 @@ export const HeadingTitleStyled = styled.h1<TextStyledProps>`
     content: "";
     display: block;
     width: 50%;
+    margin-top: 10px;
     margin-left: 25%;
     height: 7px;
     background: ${(props) => props.theme.colors[props.customColor || "text"]};
@@ -20,7 +21,7 @@ export const HeadingTitleStyled = styled.h1<TextStyledProps>`
   }
   @media (max-width: 768px) {
     font-size: 3rem;
-    line-height: 1.2;
+    line-height: 1.1;
   }
 `;
 
@@ -36,6 +37,7 @@ export const HeadingSubtitleStyled = styled.h2<TextStyledProps>`
     content: "";
     display: block;
     width: 50%;
+    margin-top: 10px;
     margin-left: 25%;
     height: 7px;
     background: ${(props) => props.theme.colors[props.customColor || "text"]};
@@ -44,7 +46,7 @@ export const HeadingSubtitleStyled = styled.h2<TextStyledProps>`
 
   @media (max-width: 998px) {
     font-size: 3.5rem;
-    line-height: 64px;
+    line-height: 56px;
   }
 `;
 
@@ -54,6 +56,10 @@ export const HeadingInterTitleStyled = styled.h3<TextStyledProps>`
   font-style: normal;
   font-weight: 600;
   line-height: 96px;
+
+  @media (max-width: 1024px) {
+    line-height: 75px;
+  }
 
   &::after {
     content: "";

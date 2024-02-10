@@ -40,7 +40,7 @@ const About: React.FC = () => {
               também garante que cada passo que você dá conosco seja uma jornada
               rumo ao sucesso. Nossa missão é simples, mas poderosa: enriquecer
               sua experiência profissional enquanto você contribui para um mundo
-              melhor"
+              melhor."
                 />
               </A.RectangleDiv>
             </Col>
@@ -48,7 +48,7 @@ const About: React.FC = () => {
               <ImageStyled src={AboutImg} alt="" className="img-fluid" />
             </Col>
           </article>
-          <article>
+          <article className="map">
             <Col xs={12} className="mt-1">
               <HeadingSubtitle
                 subtitle="Não Precisa Correr Atrás"
@@ -58,13 +58,7 @@ const About: React.FC = () => {
               ></HeadingSubtitle>
             </Col>
             <Col xs={12}>
-              <img
-                src={WorldMapLight}
-                alt=""
-                width="100%"
-                height="auto"
-                className="mt-1"
-              />
+              <img src={WorldMapLight} alt="" className="mt-5" />
             </Col>
           </article>
           <article></article>
@@ -110,8 +104,7 @@ const About: React.FC = () => {
             </Col>
             <Col xs={12}>
               <Paragraph
-                paragraph="Ficaremos Felizes de Falar Contigo. Preencha o Formulário Para
-      Atendemos Você"
+                paragraph="Ficaremos Felizes de Falar Contigo. Preencha o Formulário Para Atendemos Você"
                 className="text-center text-dark"
               />
             </Col>
