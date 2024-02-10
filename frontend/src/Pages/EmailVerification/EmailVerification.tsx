@@ -1,8 +1,8 @@
 import  { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { FormFetch } from '../../Data/Services/axios/config';
 import swal from 'sweetalert2';
 import { EmailVerificationStyled  } from '../../Ui/styles/emailVerification/emailVerification.styles';
+import { api } from '../../Data/Services/api';
 
 
 function EmailVerification() {
@@ -20,7 +20,7 @@ function EmailVerification() {
 
   const verifyEmail = async () => {
     try {
-      const response = await FormFetch.post('/emailVerification', {
+      const response = await api.post('/emailCodeVerification', {
         verificationCode,
         email,
       });

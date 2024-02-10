@@ -10,6 +10,7 @@ interface UserAttributes {
   last_name: string;
   lockUntil?: Date | null;
   loginAttempts?: number | null;
+  isVerified?: boolean;
 }
 
 interface UserCreationAttributes extends Optional<UserAttributes, "userid"> {}
@@ -26,6 +27,7 @@ class User
   public last_name!: string;
   public lockUntil?: Date | null;
   public loginAttempts?: number | null;
+  public isVerified?: boolean;
 }
 
 User.init(
@@ -63,6 +65,10 @@ User.init(
     loginAttempts: {
       type: DataTypes.INTEGER,
       allowNull: true,
+    },
+    isVerified: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false, 
     },
   },
   {

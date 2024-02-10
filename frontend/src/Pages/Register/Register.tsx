@@ -74,7 +74,7 @@ const Register: React.FC = () => {
       console.log(response.data);
 
       const responses = await FormFetch.post("/sendEmailVerification", {
-        email
+        email,
       });
       console.log(responses.data);
       swal.fire({
@@ -85,9 +85,12 @@ const Register: React.FC = () => {
         timer: 1500,
       });
       setRegistrationSuccess(true);
- 
-navigate(`/emailVerification${email ? `?email=${encodeURIComponent(email)}` : ''}`);
 
+      navigate(
+        `/emailVerification${
+          email ? `?email=${encodeURIComponent(email)}` : ""
+        }`
+      );
     } catch (err: any) {
       setRegistrationInProgress(false);
       toast.error(err.response.data.error);
@@ -171,7 +174,7 @@ navigate(`/emailVerification${email ? `?email=${encodeURIComponent(email)}` : ''
                             name="password"
                           />
                           <FontAwesomeIcon
-                          icon={showPassword ? faEyeSlash : faEye}
+                            icon={showPassword ? faEyeSlash : faEye}
                             onClick={handleTogglePassword}
                             className="password-toggle-icon"
                           />

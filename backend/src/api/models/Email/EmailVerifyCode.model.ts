@@ -2,22 +2,22 @@ import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../../../config/database/MySQL/MySQL";
 import User from "../User/User.model";
 
-class Token extends Model {
-  public id!: number;
-  public user_id!: number;
-  public token!: string;
+class VerificationCode extends Model {
+  public codeId!: number;
+  public userId!: number;
+  public code!: string;
   public createdAt!: Date;
-  public updatedAt!: Date;
 }
 
-Token.init(
+VerificationCode.init(
   {
-    id: {
+    codeId: {
       type: DataTypes.INTEGER.UNSIGNED,
       autoIncrement: true,
       primaryKey: true,
+      allowNull: false,
     },
-    user_id: {
+    userId: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       references: {
@@ -25,27 +25,21 @@ Token.init(
         key: "userid",
       },
     },
-    token: {
-      type: DataTypes.STRING,
+    code: {
+      type: DataTypes.STRING(6),
       allowNull: false,
     },
     createdAt: {
       type: DataTypes.DATE,
+      defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
       allowNull: false,
-      field: "createdAt",
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      field: "updatedAt",
     },
   },
   {
-    tableName: "tokens",
+    tableName: "verificationCodes",
     sequelize,
     timestamps: false,
-    underscored: true,
   }
 );
 
-export default Token;
+export default VerificationCode;
