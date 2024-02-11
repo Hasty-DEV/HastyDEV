@@ -31,7 +31,7 @@ const NavbarContainer = styled.div`
       border: 1px solid ${({ theme }) => theme.border};
       border-radius: 5px;
       padding: 5px;
-
+      margin-right: 15px;
       input {
         border: none;
         width: 500px;

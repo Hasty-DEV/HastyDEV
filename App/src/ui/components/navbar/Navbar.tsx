@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import styled from "styled-components";
 import {
   FaHome,
@@ -10,10 +11,11 @@ import {
   FaSearch,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DarkModeContext } from "../../../data/context/darkModeContext";
 import UserIcon from "../../assets/user/user_icon.png";
 import NavbarContainer from "../../styles/navbar/Navbar.styles";
+import { api } from "../../../data/services/api";
 
 const StyledIcon = styled.div`
   cursor: pointer;
@@ -33,12 +35,32 @@ const Navbar = () => {
     alert("Em construção!");
   };
 
+  const [userData, setUserData] = useState<any>(null);
+
+  const handleOnLoad = () => {
+    const userId = localStorage.getItem("userId");
+
+    if (userId) {
+      const fetchData = async () => {
+        try {
+          const response = await api.get(`/user/${userId}`);
+          console.log(response.data);
+          setUserData(response.data.user);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      fetchData();
+    }
+  };
+  useEffect(handleOnLoad, []);
+
   const darkModeContext = useContext(DarkModeContext);
 
   const { toggle, darkMode } = darkModeContext;
 
   return (
-    <NavbarContainer>
+    <NavbarContainer onLoad={handleOnLoad}>
       <div className="navbar">
         <div className="left">
           <Link to="/" style={{ textDecoration: "none" }}>
@@ -66,7 +88,11 @@ const Navbar = () => {
           <StyledIcon as={FaBell} />
           <div className="user">
             <img src={UserIcon} alt="" />
-            <span>name</span>
+            <span>
+              {userData
+                ? `${userData.first_name} ${userData.last_name}`
+                : "Usuário"}
+            </span>
           </div>
         </div>
       </div>
