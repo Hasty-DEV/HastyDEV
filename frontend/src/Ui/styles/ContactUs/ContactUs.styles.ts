@@ -12,7 +12,8 @@ export interface ContactUsStyledProps {
 export const ContactUsContainer = styled.section`
   article.title {
     margin-top: 20%;
-    @media (max-width: 1024px) {
+    
+    @media (min-width: 769px) and (max-width: 1024px) {
       margin-top: 10%;
     }
   }

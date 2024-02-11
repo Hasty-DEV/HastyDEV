@@ -1,10 +1,8 @@
 import { Container } from "react-bootstrap";
 import { HeadingTitle, Paragraph } from "../../Ui/components/Texts/Texts";
 import { ButtonPrimary } from "../../Ui/components/Buttons/Buttons";
-import { lazy } from "react";
 import { HeroContainer } from "../../Ui/styles/Hero/Hero.styles";
-
-const Carousel = lazy(() => import("../../Ui/components/Carousel/Carousel"));
+import Carousel from "../../Ui/components/Carousel/Carousel";
 
 const Hero: React.FC = () => {
   return (

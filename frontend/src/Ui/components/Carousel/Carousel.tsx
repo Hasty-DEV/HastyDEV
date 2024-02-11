@@ -7,6 +7,8 @@ import HeroImg3 from "../../../Ui/assets/images/Hero/HeroImg3.webp";
 import HeroImg4 from "../../../Ui/assets/images/Hero/HeroImg4.webp";
 import { CarouselProps } from "../../../Data/@types/Carousel/Carousel.type";
 
+
+
 class Carousel extends Component<CarouselProps> {
   render() {
     const { className } = this.props;
@@ -16,11 +18,11 @@ class Carousel extends Component<CarouselProps> {
       infinite: true,
       slidesToShow: 3,
       slidesToScroll: 1,
-      autoplay: true,
+      autoplay: false,
       speed: 5000,
       autoplaySpeed: 0,
       cssEase: "linear",
-      arrows: false,
+      arrows: true,
       responsive: [
         {
           breakpoint: 1024,
