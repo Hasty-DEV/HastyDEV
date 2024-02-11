@@ -9,6 +9,9 @@ const UserData: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userToken");
+
     if (id && token) {
       localStorage.setItem("userId", id);
       localStorage.setItem("userToken", token);
