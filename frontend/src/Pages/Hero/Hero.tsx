@@ -1,8 +1,11 @@
-import { Container } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { HeadingTitle, Paragraph } from "../../Ui/components/Texts/Texts";
 import { ButtonPrimary } from "../../Ui/components/Buttons/Buttons";
 import { HeroContainer } from "../../Ui/styles/Hero/Hero.styles";
-import Carousel from "../../Ui/components/Carousel/Carousel";
+import HeroImg1 from "../../Ui/assets/images/Hero/HeroImg1.webp";
+import HeroImg2 from "../../Ui/assets/images/Hero/HeroImg2.webp";
+import HeroImg3 from "../../Ui/assets/images/Hero/HeroImg3.webp";
+import HeroImg4 from "../../Ui/assets/images/Hero/HeroImg4.webp";
 
 const Hero: React.FC = () => {
   return (
@@ -22,8 +25,21 @@ const Hero: React.FC = () => {
             className="mx-auto d-block"
           />
         </article>
-        <article>
-          <Carousel className="mt-4" />
+        <article className="mt-4">
+          <Row>
+            <Col xs={6} sm={4} md={3}>
+              <img src={HeroImg1} alt="" className="img-fluid" />
+            </Col>
+            <Col xs={6} sm={4} md={3}>
+              <img src={HeroImg2} alt="" className="img-fluid" />
+            </Col>
+            <Col xs={6} sm={4} md={3} className="d-none d-sm-block">
+              <img src={HeroImg3} alt="" className="img-fluid" />
+            </Col>
+            <Col xs={6} sm={4} md={3} className="d-none d-lg-block">
+              <img src={HeroImg4} alt="" className="img-fluid" />
+            </Col>
+          </Row>
         </article>
       </Container>
     </HeroContainer>

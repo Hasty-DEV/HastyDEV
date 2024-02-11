@@ -9,7 +9,6 @@ import light from "../Ui/styles/themes/light";
 import dark from "../Ui/styles/themes/dark";
 import Header from "../Ui/Partials/Header/Header";
 import Footer from "../Ui/Partials/Footer/Footer";
-import Loader from "../Ui/components/Loader/Loader";
 import Register from "./Register/Register";
 import EmailVerification from "./EmailVerification/EmailVerification";
 import About from "./About/About";
