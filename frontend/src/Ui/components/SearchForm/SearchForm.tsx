@@ -1,36 +1,29 @@
 import { Formik } from "formik";
 import * as yup from "yup";
-import { FormFetch } from "../../../Data/Services/axios/config";
 import { ButtonPrimaryLongNoLink } from "../Buttons/Buttons";
 import {
   SearchFormDiv,
   SearchFormHeadingInterTitle,
 } from "../../styles/SearchForm/SearchForm.styles";
-import { SearchFormValues } from "../../../Data/@types/SearchFormValues/SearchFormValues.type";
+import { useNavigate } from "react-router-dom";
 
 const validationsSearch = yup.object().shape({
   Name: yup.string().required("O campo de nome é obrigatório"),
 });
 
 function SearchForm() {
-  const construcao = () => {
-    alert("Em Construção!");
-  };
-  const handleSearch = async ({
-    Partner,
-    WorkArea,
-    wantMoney,
-  }: SearchFormValues) => {
+  const navigate = useNavigate();
+
+  const handleOnClick = () => {
     try {
-      const response = await FormFetch.post("/searchForm", {
-        Partner,
-        WorkArea,
-        wantMoney,
-      });
-      console.log(response.data);
+      navigate("/register");
     } catch (err) {
       alert(err);
     }
+  };
+
+  const handleSearch = async () => {
+    handleOnClick();
   };
   return (
     <SearchFormDiv>
@@ -112,7 +105,7 @@ function SearchForm() {
                 buttonText="Procure o Projeto"
                 disabled={isSubmitting}
                 className="mt-4"
-                onClick={construcao}
+                onClick={handleOnClick}
               />
             </form>
           </>
