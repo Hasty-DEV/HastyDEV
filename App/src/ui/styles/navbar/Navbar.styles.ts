@@ -9,9 +9,9 @@ const NavbarContainer = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.border};
   position: sticky;
   top: 0;
-  background-color: ${({ theme }) => theme.bg};
+  background-color: #fff;
   color: ${({ theme }) => theme.textColor};
-  z-index: 999;
+  z-index: 10;
 
   .left {
     display: flex;
