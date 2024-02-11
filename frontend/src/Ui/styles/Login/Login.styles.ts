@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const LoginContainer = styled.section`
-  margin-top: 20%;
+  margin-top: 5%;
 
   @media (max-width: 1024px) {
     margin-top: 15%;

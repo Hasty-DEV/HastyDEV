@@ -3,7 +3,15 @@ import { Container } from "react-bootstrap";
 
 export const AboutContainer = styled.section`
   article.title {
-    margin-top: 15%;
+    margin-top: 6%;
+
+    @media (max-width: 1024px) {
+      margin-top: 10%;
+    }
+
+    @media (max-width: 768px) {
+      margin-top: 15%;
+    }
   }
 
   article.map {
@@ -15,7 +23,7 @@ export const AboutContainer = styled.section`
 `;
 
 export const RectangleDiv = styled(Container)`
-  width: 1280px;
+  max-width: 1000px;
   height: 402px;
   flex-shrink: 0;
   background: ${(props) => props.theme.colors.secondary};
@@ -31,10 +39,10 @@ export const RectangleDiv = styled(Container)`
 `;
 
 export const ImageStyled = styled.img`
-  margin-top: -10%;
+  margin-top: -20%;
 
   @media (max-width: 768px) {
-    margin-top: -15%;
+    margin-top: -13%;
 
     width: 100%;
     height: auto;
