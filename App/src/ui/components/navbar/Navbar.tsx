@@ -11,7 +11,7 @@ import {
   FaSearch,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { DarkModeContext } from "../../../data/context/darkModeContext";
 import UserIcon from "../../assets/user/user_icon.png";
 import NavbarContainer from "../../styles/navbar/Navbar.styles";
@@ -37,29 +37,30 @@ const Navbar = () => {
 
   const [userData, setUserData] = useState<any>(null);
 
-  const handleOnLoad = async () => {
+  const handleOnLoad = useCallback(async () => {
     const userId = localStorage.getItem("userId");
 
     if (userId) {
       try {
         const response = await getUserData(userId);
+        console.log(response);
         setUserData(response);
       } catch (error) {
         console.error("Erro ao obter dados do usuário:", error);
       }
     }
-  };
+  }, []);
 
   useEffect(() => {
     handleOnLoad();
-  }, []);
+  }, [handleOnLoad]);
 
   const darkModeContext = useContext(DarkModeContext);
 
   const { toggle, darkMode } = darkModeContext;
 
   return (
-    <NavbarContainer onLoad={handleOnLoad}>
+    <NavbarContainer>
       <div className="navbar">
         <div className="left">
           <Link to="/" style={{ textDecoration: "none" }}>

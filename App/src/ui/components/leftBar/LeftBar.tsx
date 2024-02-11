@@ -14,31 +14,32 @@ import Courses from "../../assets/12.png";
 import Fund from "../../assets/13.png";
 import UserIcon from "../../assets/user/user_icon.png";
 import LeftBarContainer from "../../styles/leftBar/LeftBar.styles";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getUserData } from "../../../data/services/userService";
 
 const LeftBar = () => {
   const [userData, setUserData] = useState<any>(null);
 
-  const handleOnLoad = async () => {
+  const handleOnLoad = useCallback(async () => {
     const userId = localStorage.getItem("userId");
 
     if (userId) {
       try {
         const response = await getUserData(userId);
+        console.log(response);
         setUserData(response);
       } catch (error) {
         console.error("Erro ao obter dados do usuário:", error);
       }
     }
-  };
+  }, []);
 
   useEffect(() => {
     handleOnLoad();
-  }, []);
+  }, [handleOnLoad]);
 
   return (
-    <LeftBarContainer onLoad={handleOnLoad}>
+    <LeftBarContainer>
       <div className="leftBar">
         <div className="container">
           <div className="menu">

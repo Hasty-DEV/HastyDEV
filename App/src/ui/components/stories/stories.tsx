@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import StoriesContainer from "../../styles/stories/Stories.styles";
 import { getUserData } from "../../../data/services/userService";
 
@@ -29,25 +29,26 @@ const stories = [
 const Stories = () => {
   const [userData, setUserData] = useState<any>(null);
 
-  const handleOnLoad = async () => {
+  const handleOnLoad = useCallback(async () => {
     const userId = localStorage.getItem("userId");
 
     if (userId) {
       try {
         const response = await getUserData(userId);
+        console.log(response);
         setUserData(response);
       } catch (error) {
         console.error("Erro ao obter dados do usuário:", error);
       }
     }
-  };
+  }, []);
 
   useEffect(() => {
     handleOnLoad();
-  }, []);
+  }, [handleOnLoad]);
 
   return (
-    <StoriesContainer onLoad={handleOnLoad}>
+    <StoriesContainer>
       <div className="story">
         <img src={stories[0].img} alt="" />
         <span>
