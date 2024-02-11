@@ -15,7 +15,7 @@ import { useContext, useEffect, useState } from "react";
 import { DarkModeContext } from "../../../data/context/darkModeContext";
 import UserIcon from "../../assets/user/user_icon.png";
 import NavbarContainer from "../../styles/navbar/Navbar.styles";
-import { api } from "../../../data/services/api";
+import { getUserData } from "../../../data/services/userService";
 
 const StyledIcon = styled.div`
   cursor: pointer;
@@ -37,23 +37,22 @@ const Navbar = () => {
 
   const [userData, setUserData] = useState<any>(null);
 
-  const handleOnLoad = () => {
+  const handleOnLoad = async () => {
     const userId = localStorage.getItem("userId");
 
     if (userId) {
-      const fetchData = async () => {
-        try {
-          const response = await api.get(`/user/${userId}`);
-          console.log(response.data);
-          setUserData(response.data.user);
-        } catch (error) {
-          console.error(error);
-        }
-      };
-      fetchData();
+      try {
+        const response = await getUserData(userId);
+        setUserData(response);
+      } catch (error) {
+        console.error("Erro ao obter dados do usuário:", error);
+      }
     }
   };
-  useEffect(handleOnLoad, []);
+
+  useEffect(() => {
+    handleOnLoad();
+  }, []);
 
   const darkModeContext = useContext(DarkModeContext);
 

@@ -15,29 +15,27 @@ import Fund from "../../assets/13.png";
 import UserIcon from "../../assets/user/user_icon.png";
 import LeftBarContainer from "../../styles/leftBar/LeftBar.styles";
 import { useEffect, useState } from "react";
-import { api } from "../../../data/services/api";
+import { getUserData } from "../../../data/services/userService";
 
 const LeftBar = () => {
   const [userData, setUserData] = useState<any>(null);
 
-  const handleOnLoad = () => {
+  const handleOnLoad = async () => {
     const userId = localStorage.getItem("userId");
 
     if (userId) {
-      const fetchData = async () => {
-        try {
-          const response = await api.get(`/user/${userId}`);
-          console.log(response.data);
-          setUserData(response.data.user);
-        } catch (error) {
-          console.error(error);
-        }
-      };
-      fetchData();
+      try {
+        const response = await getUserData(userId);
+        setUserData(response);
+      } catch (error) {
+        console.error("Erro ao obter dados do usuário:", error);
+      }
     }
   };
 
-  useEffect(handleOnLoad, []);
+  useEffect(() => {
+    handleOnLoad();
+  }, []);
 
   return (
     <LeftBarContainer onLoad={handleOnLoad}>
