@@ -1,46 +1,22 @@
-import { Suspense, lazy } from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
 } from "react-router-dom";
-import { useAuth } from "../Data/Contexts/Auth/AuthProvider";
 import light from "../Ui/styles/themes/light";
 import dark from "../Ui/styles/themes/dark";
 import Header from "../Ui/Partials/Header/Header";
 import Footer from "../Ui/Partials/Footer/Footer";
 import Loader from "../Ui/components/Loader/Loader";
-const EmailVerification = lazy(
-  () => import("./EmailVerification/EmailVerification")
-);
-const About = lazy(() => import("./About/About"));
-const ContactUs = lazy(() => import("./ContactUs/ContactUs"));
-const Hero = lazy(() => import("./Hero/Hero"));
-const Login = lazy(() => import("./Login/Login"));
-const Project = lazy(() => import("./Project/Project"));
-const Register = lazy(() => import("./Register/Register"));
-
-type RouteAccessProps = {
-  children: React.ReactNode;
-  authLevel?: "authed" | "unauthed";
-};
-
-const RouteAccess = ({ children, authLevel = "authed" }: RouteAccessProps) => {
-  const { user } = useAuth();
-
-  const isUserAuthed = user !== null;
-
-  if (!isUserAuthed && authLevel === "authed") {
-    return <Navigate to="/" replace />;
-  }
-
-  if (!isUserAuthed && authLevel === "authed") {
-    return <Navigate to="/login" replace />;
-  }
-
-  return children;
-};
+import Register from "./Register/Register";
+import EmailVerification from "./EmailVerification/EmailVerification";
+import About from "./About/About";
+import ContactUs from "./ContactUs/ContactUs";
+import Hero from "./Hero/Hero";
+import Login from "./Login/Login";
+import Project from "./Project/Project";
 
 type PagesProps = {
   theme: any;
@@ -48,6 +24,8 @@ type PagesProps = {
 };
 
 const Pages: React.FC<PagesProps> = ({ theme, setTheme }) => {
+  const [allowEmailVerification, setAllowEmailVerification] = useState(false);
+
   const toggleTheme = () => {
     setTheme(theme.title === "dark" ? light : dark);
   };
@@ -56,32 +34,25 @@ const Pages: React.FC<PagesProps> = ({ theme, setTheme }) => {
     <Router>
       <Header toggleTheme={toggleTheme} />
       <main>
-        <Suspense fallback={<Loader />}>
-          <Routes>
-            <Route path="/" element={<Hero />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<ContactUs />} />
-            <Route
-              path="/login"
-              element={
-                <RouteAccess authLevel="unauthed">
-                  <Login />
-                </RouteAccess>
-              }
-            />
-            <Route
-              path="/register"
-              element={
-                <RouteAccess authLevel="unauthed">
-                  <Register />
-                </RouteAccess>
-              }
-            />
-            <Route path="/project" element={<Project />} />
+        <Routes>
+          <Route path="/" element={<Hero />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<ContactUs />} />
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/register"
+            element={
+              <Register setAllowEmailVerification={setAllowEmailVerification} />
+            } 
+          />
+          <Route path="/project" element={<Project />} />
+          {allowEmailVerification ? (
             <Route path="/emailVerification" element={<EmailVerification />} />
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
-        </Suspense>
+          ) : (
+            <Route path="/emailVerification" element={<Navigate to="/" />} />
+          )}
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
       </main>
       <Footer />
     </Router>

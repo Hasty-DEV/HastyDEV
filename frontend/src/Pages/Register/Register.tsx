@@ -38,11 +38,15 @@ const validationsRegister = yup.object().shape({
     .oneOf([yup.ref("password")], "As senhas não coincidem"),
 });
 
-const Register: React.FC = () => {
-  const [showPassword, setShowPassword] = useState(false);
+interface RegisterProps {
+  setAllowEmailVerification: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
+const Register: React.FC<RegisterProps> = ({ setAllowEmailVerification }) => {
+  const [showPassword, setShowPassword] = useState(false);
   const [registrationInProgress, setRegistrationInProgress] = useState(false);
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
+  const navigate = useNavigate();
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
@@ -52,7 +56,6 @@ const Register: React.FC = () => {
     setShowPassword(!showPassword);
   };
 
-  const navigate = useNavigate();
   const handleRegister = async ({
     first_name,
     last_name,
@@ -85,7 +88,7 @@ const Register: React.FC = () => {
         timer: 1500,
       });
       setRegistrationSuccess(true);
-
+      setAllowEmailVerification(true);
       navigate(
         `/emailVerification${
           email ? `?email=${encodeURIComponent(email)}` : ""
