@@ -44,7 +44,7 @@ export const SwitchContainer = styled.label`
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #73C0FC;
+    background-color: #4995cfb8;
     transition: .4s;
     border-radius: 30px;
   }
@@ -118,7 +118,7 @@ export const SwitchContainer = styled.label`
   }
 
   .input:checked + .slider {
-    background-color: #183153;
+    background-color: #1a0f39;
   }
 
   .input:focus + .slider {

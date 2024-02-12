@@ -2,11 +2,11 @@ import styled from 'styled-components';
 
 export const EmailVerificationStyled = styled.div`
   width: 400px;
-  height: 300px;
+  height: 370px;
   padding: 20px;
   border-radius: 30px;
   background: ${(props) => props.theme.colors.color_emailVerification};
-  box-shadow: ${(props) => props.theme.colors.box_shadow} ;
+  box-shadow: ${(props) => props.theme.colors.box_shadow};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,7 +45,49 @@ export const EmailVerificationStyled = styled.div`
     border-bottom-color: blue;
   }
 
-  button {
+  button.resend-button {
+    /* Estilização específica para o botão de reenviar código */
+    background-color: #FFFFFF;
+    border: 2px solid rgb(209,213,219);
+    border-radius: .5rem;
+    color: #111827;
+    font-family: ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: .850rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    padding: .75rem 1rem;
+    text-align: center;
+    -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    margin-top: 15px;
+  }
+  
+  button.resend-button:hover {
+    background-color: #f9fafb;
+  }
+  
+  button.resend-button:focus {
+    outline: 2px solid rgba(0,0,0,0.1);
+    outline-offset: 2px;
+  }
+  
+  button.resend-button:focus-visible {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+
+
+
+  button.verify-button {
+    /* Estilização específica para o botão de verificar */
     padding: 10px 20px;
     font-size: 16px;
     border-radius: 5px;
@@ -63,7 +105,7 @@ export const EmailVerificationStyled = styled.div`
     outline-color: deeppink;
   }
 
-  button .shadow {
+  button.verify-button .shadow {
     position: absolute;
     top: 0;
     left: 0;
@@ -77,7 +119,7 @@ export const EmailVerificationStyled = styled.div`
     transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
   }
 
-  button .edge {
+  button.verify-button .edge {
     position: absolute;
     top: 0;
     left: 0;
@@ -87,7 +129,7 @@ export const EmailVerificationStyled = styled.div`
     background: ${(props) => props.theme.colors.color_button}
   }
 
-  button .front {
+  button.verify-button .front {
     display: block;
     position: relative;
     border-radius: 8px;
@@ -104,31 +146,31 @@ export const EmailVerificationStyled = styled.div`
     transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
   }
 
-  button:hover {
+  button.verify-button:hover {
     filter: brightness(110%);
   }
 
-  button:hover .front {
+  button.verify-button:hover .front {
     transform: translateY(-6px);
     transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
   }
 
-  button:active .front {
+  button.verify-button:active .front {
     transform: translateY(-2px);
     transition: transform 34ms;
   }
 
-  button:hover .shadow {
+  button.verify-button:hover .shadow {
     transform: translateY(4px);
     transition: transform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
   }
 
-  button:active .shadow {
+  button.verify-button:active .shadow {
     transform: translateY(1px);
     transition: transform 34ms;
   }
 
-  button:focus:not(:focus-visible) {
+  button.verify-button:focus:not(:focus-visible) {
     outline: none;
   }
 
