@@ -28,6 +28,11 @@ class LoginController {
         return;
       }
 
+      if (!user.isVerified) {
+        res.status(403).json({ error: "Conta não verificada. Por favor, verifique sua conta antes de fazer o login." });
+        return;
+      }
+
       if (user.lockUntil && user.lockUntil.getTime() > Date.now()) {
         res.status(403).json({ error: "Conta bloqueada" });
         return;

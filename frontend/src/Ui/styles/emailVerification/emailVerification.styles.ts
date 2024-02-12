@@ -27,6 +27,7 @@ export const EmailVerificationStyled = styled.div`
   }
 
   input {
+    letter-spacing: 1rem;
     border: none;
     outline: none;
     background: transparent;
