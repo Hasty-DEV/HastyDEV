@@ -22,7 +22,8 @@
     "mysql2": "^3.9.1",
     "nodemailer": "^6.9.9",
     "pino": "^8.18.0",
-    "sequelize": "^6.36.0"
+    "sequelize": "^6.36.0",
+    "ts-node": "^10.9.2"
   },
   "devDependencies": {
     "@types/bad-words": "^3.0.3",
