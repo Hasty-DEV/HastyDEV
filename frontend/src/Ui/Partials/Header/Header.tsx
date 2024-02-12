@@ -14,6 +14,7 @@ import { SwitchContainer } from './Header.styles'
  
 import { ThemeContext } from "styled-components";
 import { useContext } from "react";
+import { useEffect, useRef } from 'react';
  
 
 interface Props {
@@ -22,9 +23,33 @@ interface Props {
 
 const Header: React.FC<Props> = ({ toggleTheme }) => {
   const theme = useContext(ThemeContext);
+  const headerRef = useRef<HTMLDivElement>(null);
   if (!theme) {
     return null;
   }
+
+  const handleOutsideClick = (event: MouseEvent) => {
+    const navbar = document.getElementById("navbarSupportedContent");
+    const navbarToggle = document.querySelector(".custom-navbar-toggler");
+    if (
+      navbar &&
+      navbar.classList.contains("show") &&
+      !navbar.contains(event.target as Node) &&
+      !headerRef.current?.contains(event.target as Node) &&
+      navbarToggle && navbarToggle instanceof HTMLElement
+    ) {
+      navbarToggle.click(); // Simula um clique no botão do navbar para recolhê-lo
+    }
+  };
+
+  useEffect(() => {
+    // Adiciona o ouvinte de clique ao documento quando o componente é montado
+    document.addEventListener('click', handleOutsideClick);
+    // Remove o ouvinte de clique ao documento quando o componente é desmontado
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
+    };
+  }, []);
 
   const ImgDarkLight = theme.title === "light" ? LogoLight : LogoDark;
 
