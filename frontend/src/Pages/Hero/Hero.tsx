@@ -2,10 +2,10 @@ import { Container, Row, Col } from "react-bootstrap";
 import { HeadingTitle, Paragraph } from "../../Ui/components/Texts/Texts";
 import { ButtonPrimary } from "../../Ui/components/Buttons/Buttons";
 import { HeroContainer } from "../../Ui/styles/Hero/Hero.styles";
-import HeroImg1 from "../../Ui/assets/images/Hero/HeroImg1.webp";
-import HeroImg2 from "../../Ui/assets/images/Hero/HeroImg2.webp";
-import HeroImg3 from "../../Ui/assets/images/Hero/HeroImg3.webp";
-import HeroImg4 from "../../Ui/assets/images/Hero/HeroImg4.webp";
+import HeroImg1 from "../../Ui/assets/images/Hero/Hero-Img1.webp";
+import HeroImg2 from "../../Ui/assets/images/Hero/Hero-Img2.webp";
+import HeroImg3 from "../../Ui/assets/images/Hero/Hero-Img3.webp";
+import HeroImg4 from "../../Ui/assets/images/Hero/Hero-Img4.webp";
 
 const Hero: React.FC = () => {
   return (
