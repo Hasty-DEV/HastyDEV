@@ -57,10 +57,9 @@ function SearchForm() {
                   id="Partner"
                   name="Partner"
                   value={values.Partner}
-                  placeholder="Qual Parceiro Deseja Ajudar?"
                   onChange={(e) => setFieldValue("Partner", e.target.value)}
                 >
-                  <option value="">Selecione uma Categoria</option>
+                  <option value="" disabled>Selecione uma Categoria</option>
                   <option value="ONGs">ONGs</option>
                   <option value="MEIs">MEIs</option>
                 </select>
@@ -75,7 +74,7 @@ function SearchForm() {
                   value={values.WorkArea}
                   onChange={(e) => setFieldValue("WorkArea", e.target.value)}
                 >
-                  <option value="">Selecione uma Categoria</option>
+                  <option value="" disabled>Selecione uma Categoria</option>
                   <option value="Front-End">Front-End</option>
                   <option value="Back-End">Back-End</option>
                   <option value="Devops">Devops</option>
@@ -94,7 +93,7 @@ function SearchForm() {
                   value={values.wantMoney}
                   onChange={(e) => setFieldValue("wantMoney", e.target.value)}
                 >
-                  <option value="">Selecione uma Categoria</option>
+                  <option value="" disabled>Selecione uma Categoria</option>
                   <option value="Sim">Sim</option>
                   <option value="Não">Não</option>
                 </select>
