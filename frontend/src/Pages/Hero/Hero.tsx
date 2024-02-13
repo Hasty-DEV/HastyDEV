@@ -31,7 +31,7 @@ const Hero: React.FC = () => {
               <img src={HeroImg1} alt="" className="img-fluid" />
             </Col>
             <Col xs={6} sm={4} md={3}>
-              <img src={HeroImg2} alt="" className="img-fluid"  />
+              <img src={HeroImg2} alt="" className="img-fluid" />
             </Col>
             <Col xs={6} sm={4} md={3} className="d-none d-sm-block">
               <img src={HeroImg3} alt="" className="img-fluid" />
