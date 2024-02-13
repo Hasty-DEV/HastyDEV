@@ -79,6 +79,9 @@ function EmailVerification() {
           value={verificationCode}
           onChange={(e) => setVerificationCode(e.target.value)}
         />
+        <p style={{ fontSize: '0.9rem', textAlign: 'center' }}>
+          O código de verificação foi enviado para: {email}</p>
+
       </div>
       <button className="pushable verify-button" onClick={verifyEmail}>
         <span className="shadow"></span>
