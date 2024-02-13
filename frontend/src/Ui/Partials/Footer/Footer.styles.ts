@@ -1,12 +1,10 @@
 import styled from "styled-components";
- 
 
 export const FooterStyled = styled.footer`
-  background: ${props => props.theme.colors.background};
-  color: ${props => props.theme.colors.text};
+  background: ${(props) => props.theme.colors.background};
+  color: ${(props) => props.theme.colors.text};
   margin-top: 5%;
-  padding: 5% ;
-  
+  padding: 5%;
 
   p {
     margin-top: 10%;
@@ -14,12 +12,10 @@ export const FooterStyled = styled.footer`
 
   @media (max-width: 580px) {
     p {
-      margin-top: 0; /* Reduzir o margin-top para 0 quando a largura da tela for igual ou inferior a 768px */
+      margin-top: 0; 
     }
   }
-`; 
-
-
+`;
 
 export const SocialMediaContainer = styled.div`
   .card {
@@ -32,10 +28,9 @@ export const SocialMediaContainer = styled.div`
     justify-content: center;
     padding: 5px 5px;
     gap: 15px;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.100);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
   }
 
-  /* for all social containers*/
   .socialContainer {
     width: 30px;
     height: 30px;
@@ -48,25 +43,21 @@ export const SocialMediaContainer = styled.div`
     transition-duration: 0.3s;
   }
 
-  /* instagram*/
   .containerOne:hover {
     background-color: #d62976;
     transition-duration: 0.3s;
   }
 
-  /* twitter*/
   .containerTwo:hover {
     background-color: #00acee;
     transition-duration: 0.3s;
   }
 
-  /* linkdin*/
   .containerThree:hover {
     background-color: #0072b1;
     transition-duration: 0.3s;
   }
 
-  /* Whatsapp*/
   .containerFour:hover {
     background-color: #128c7e;
     transition-duration: 0.3s;
@@ -77,11 +68,11 @@ export const SocialMediaContainer = styled.div`
     transition-duration: 0.3s;
   }
 
-  .socialSvg {
+  svg {
     width: 15px;
   }
- 
-  .socialSvg path {
+
+  svg path {
     fill: ${(props) => props.theme.colors.background};
   }
 
