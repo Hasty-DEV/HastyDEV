@@ -41,12 +41,13 @@ export const RegisterForm = styled.div`
       color: ${(props) => props.theme.colors.text};
     }
     span {
-      position: absolute;
-      bottom: -25px;
-      left: 0;
+      position: absolute; /* Adicionado */
+      bottom: -25px; /* Adicionado */
+      left: 50%; /* Adicionado */
+      transform: translateX(-50%); /* Adicionado */
       color: red;
       font-size: 14px;
-      margin-left: 15px;
+      white-space: nowrap;
     }
   }
 

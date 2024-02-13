@@ -49,12 +49,9 @@ export const LoginForm = styled.div`
       color: ${(props) => props.theme.colors.text};
     }
     span {
-      position: absolute;
-      bottom: -20px;
-      left: 0;
       color: red;
-      font-size: 14px;
-      margin-left: 40px;
+      font-size: 15px;
+    
     }
   }
 
