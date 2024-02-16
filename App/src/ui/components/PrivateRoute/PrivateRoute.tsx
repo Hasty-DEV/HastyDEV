@@ -13,7 +13,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   useEffect(() => {
     const isAuthenticated =
       localStorage.getItem("userId") && localStorage.getItem("userToken");
-    const isAuthRoute = location.pathname.includes("auth");
+    const isAuthRoute = location.pathname.includes("/auth");
 
     if (!isAuthenticated && !isAuthRoute) {
       window.location.href = `${URL_FRONTEND}/login`;

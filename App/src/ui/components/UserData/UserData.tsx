@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../../../data/context/AuthContext";
 
 const UserData: React.FC = () => {
   const location = useLocation();
@@ -7,6 +8,7 @@ const UserData: React.FC = () => {
   const id = params.get("id");
   const token = params.get("token");
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   useEffect(() => {
     localStorage.removeItem("userId");
@@ -16,8 +18,9 @@ const UserData: React.FC = () => {
       localStorage.setItem("userId", id);
       localStorage.setItem("userToken", token);
     }
+    login();
     navigate("/", { replace: true });
-  }, [id, token, navigate]);
+  }, [id, token, navigate, login]);
 
   return null;
 };
