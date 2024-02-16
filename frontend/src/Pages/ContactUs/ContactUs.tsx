@@ -28,7 +28,6 @@ const ContactUs: React.FC = () => {
               className="text-center"
             />
           </Col>
-
           <C.ContactUsDiv className="mt-4 d-flex flex-wrap">
             <Col xs={12} md={6}>
               <C.InfoDiv>
@@ -44,17 +43,14 @@ const ContactUs: React.FC = () => {
                   <Col xs={12}>
                     <C.Infos>
                       <FiPhoneCall height={16} width={16} />
-                      <Paragraph
-                        paragraph="+11 9 9999-9999"
-                        IsInline={true}
-                      />
+                      <Paragraph paragraph="+11 9 7732-8121" IsInline={true} />
                     </C.Infos>
                   </Col>
                   <Col xs={12}>
                     <C.Infos>
                       <AiOutlineMail height={16} width={16} />
                       <Paragraph
-                        paragraph="contato@hastydev.com.br"
+                        paragraph="HastyDEV@jeffldscompany.com.br"
                         IsInline={true}
                       />
                     </C.Infos>
@@ -62,10 +58,7 @@ const ContactUs: React.FC = () => {
                   <Col xs={12}>
                     <C.Infos>
                       <BiMap height={16} width={16} />
-                      <Paragraph
-                        paragraph="132 Dartmouth Street Boston, Massachusetts 02156 United States"
-                        IsInline={true}
-                      />
+                      <Paragraph paragraph="ETEC Zona Leste" IsInline={true} />
                     </C.Infos>
                   </Col>
                 </C.ContactUsInfoDiv>
@@ -85,7 +78,6 @@ const ContactUs: React.FC = () => {
                 </C.ContactUsSocialIconsDiv>
               </C.InfoDiv>
             </Col>
-
             <Col xs={12} md={6}>
               <C.FormDiv>
                 <ContactUSForm />
