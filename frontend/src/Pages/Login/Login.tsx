@@ -16,8 +16,6 @@ import Loader from "../../Ui/components/Loader/Loader";
 import { FormValues } from "../../Data/@types/FormValues/FormValues.type";
 import { toast, ToastContainer } from "react-toastify";
 
-const nodeEnv = import.meta.env.VITE_NODE_ENV;
-
 const validationsLogin = yup.object().shape({
   username: yup.string().required("O Usuário é obrigatório*"),
   password: yup
@@ -42,13 +40,8 @@ const Login: React.FC = () => {
 
       toast.success("Logado com Sucesso");
 
-      let baseURL;
-
-      if (nodeEnv === "development") {
-        baseURL = `http://localhost:5174/auth?id=${response.id}&token=${response.token}`;
-      } else if (nodeEnv === "production") {
-        baseURL = `https://app-hastydev.vercel.app/auth?id=${response.id}&token=${response.token}`;
-      }
+      let AppURL = import.meta.env.VITE_APP_URL;
+      let baseURL = `${AppURL}/auth?id=${response.id}&token=${response.token}`;
 
       if (baseURL) {
         window.location.href = baseURL;
