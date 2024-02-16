@@ -43,7 +43,6 @@ export const ContactUsInfoDiv = styled.div`
 `;
 
 export const HeadingSubtitle = styled(HS)`
-  color: #fff;
 
   @media (max-width: 767px) {
     font-size: 2rem;
@@ -57,7 +56,6 @@ export const HeadingSubtitle = styled(HS)`
 `;
 
 export const Paragraph = styled(P)`
-  color: #fff;
 
   @media (max-width: 767px) {
     font-size: 1rem;

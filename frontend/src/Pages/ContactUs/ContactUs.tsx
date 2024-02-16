@@ -34,11 +34,11 @@ const ContactUs: React.FC = () => {
               <C.InfoDiv>
                 <C.HeadingSubtitle
                   subtitle="Informações de Contato"
-                  className="text-dark"
+                  className=""
                 />
                 <C.Paragraph
                   paragraph="Entre em Contato conosco e em breve lhe atenderemos!"
-                  className="text-center text-dark"
+                  className="text-center"
                 />
                 <C.ContactUsInfoDiv>
                   <Col xs={12}>
@@ -47,7 +47,6 @@ const ContactUs: React.FC = () => {
                       <Paragraph
                         paragraph="+11 9 9999-9999"
                         IsInline={true}
-                        className="text-dark"
                       />
                     </C.Infos>
                   </Col>
@@ -57,7 +56,6 @@ const ContactUs: React.FC = () => {
                       <Paragraph
                         paragraph="contato@hastydev.com.br"
                         IsInline={true}
-                        className="text-dark"
                       />
                     </C.Infos>
                   </Col>
@@ -67,7 +65,6 @@ const ContactUs: React.FC = () => {
                       <Paragraph
                         paragraph="132 Dartmouth Street Boston, Massachusetts 02156 United States"
                         IsInline={true}
-                        className="text-dark"
                       />
                     </C.Infos>
                   </Col>
