@@ -20,7 +20,7 @@ routes.post("/login", LoginController.login);
 routes.post("/register", RegisterController.RegisterUser);
 
 //User Data
-routes.get("/user/:id", ReadUserController.getUserData);
+routes.get("user/:id", TokenVerifier.verifyToken, ReadUserController.getUserData);
 
 // Rotas para verificar email
 routes.post(
@@ -41,6 +41,7 @@ routes.post(
   "/resetPassCodeVerification",
  ResetPassCodeVerificationController.resetPassword
 );
+
 
 routes.post("/contactForm", ContactFormController.sendContactForm);
 
