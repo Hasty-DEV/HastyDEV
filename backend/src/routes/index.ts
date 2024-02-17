@@ -7,7 +7,8 @@ import EmailCodeVerificationController from "../api/controllers/Email/EmailCodeV
 import ContactFormController from "../api/controllers/Form/ContactForm.controller";
 import SendResetPassVerificationController from "../api/controllers/ResetPass/SendResetPassVerification.controller";
 import ResetPassCodeVerificationController from "../api/controllers/ResetPass/ResetPassCodeVerification.controller";
-import TokenVerifier from "../api/services/verify.token.middleware";
+import verifyTokenMiddleware from "../api/services/verify.token.middleware";
+//import TokenVerifier from "../api/services/verify.token.middleware";
 
 const routes = Router();
 
@@ -20,7 +21,7 @@ routes.post("/login", LoginController.login);
 routes.post("/register", RegisterController.RegisterUser);
 
 //User Data
-routes.get("user/:id", TokenVerifier.verifyToken, ReadUserController.getUserData);
+routes.get("/user/:id", verifyTokenMiddleware.verifyToken, ReadUserController.getUserData);
 
 // Rotas para verificar email
 routes.post(
@@ -47,6 +48,6 @@ routes.post("/contactForm", ContactFormController.sendContactForm);
 
 
 // Rotas protegidas por token
-routes.use("/auth", TokenVerifier.verifyToken);
+//routes.use("/auth", TokenVerifier.verifyToken);
 
 export default routes;

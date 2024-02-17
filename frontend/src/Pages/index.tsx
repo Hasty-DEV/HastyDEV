@@ -11,8 +11,9 @@ import Header from "../Ui/Partials/Header/Header";
 import Footer from "../Ui/Partials/Footer/Footer";
 import Hero from "./Hero/Hero";
 import Loader from "../Ui/components/Loader/Loader";
+import ForgotPassword from "./ForgotPassword/ForgotPassword";
 
-const About = lazy(()=> import("./About/About"));
+const About = lazy(() => import("./About/About"));
 const Register = lazy(() => import("./Register/Register"));
 const EmailVerification = lazy(
   () => import("./EmailVerification/EmailVerification")
@@ -20,7 +21,6 @@ const EmailVerification = lazy(
 const ContactUs = lazy(() => import("./ContactUs/ContactUs"));
 const Login = lazy(() => import("./Login/Login"));
 const Project = lazy(() => import("./Project/Project"));
-
 
 type PagesProps = {
   theme: any;
@@ -38,7 +38,7 @@ const Pages: React.FC<PagesProps> = ({ theme, setTheme }) => {
     <Router>
       <Header toggleTheme={toggleTheme} />
       <main>
-        <Suspense fallback={ <Loader/>}>
+        <Suspense fallback={<Loader />}>
           <Routes>
             <Route path="/" element={<Hero />} />
             <Route path="/about" element={<About />} />
@@ -61,6 +61,7 @@ const Pages: React.FC<PagesProps> = ({ theme, setTheme }) => {
             ) : (
               <Route path="/emailVerification" element={<Navigate to="/" />} />
             )}
+            <Route path="/ForgotPassword" element={<ForgotPassword />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </Suspense>

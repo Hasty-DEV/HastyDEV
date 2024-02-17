@@ -5,7 +5,6 @@ import User from "../../models/User/User.model";
 class ReadUser {
   public async getUserData(req: Request, res: Response): Promise<void> {
     const userId = req.params.id;
-
     try {
       if (!userId) {
         res
@@ -14,7 +13,7 @@ class ReadUser {
         return;
       }
 
-      const user = await User.findByPk(userId); 
+      const user = await User.findByPk(userId);
 
       if (!user) {
         res.status(404).json({ message: "Usuário não encontrado" });

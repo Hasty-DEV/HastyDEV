@@ -17,16 +17,12 @@ const LeftBar = () => {
   const [loading, setLoading] = useState(false);
   const { logout } = useAuth();
   const handleOnLoad = useCallback(async () => {
-    const userId = localStorage.getItem("userId");
-
-    if (userId) {
-      try {
-        const response = await getUserData(userId);
-        console.log(response);
-        setUserData(response);
-      } catch (error) {
-        console.error("Erro ao obter dados do usuário:", error);
-      }
+    try {
+      const response = await getUserData();
+      console.log(response);
+      setUserData(response);
+    } catch (error) {
+      console.error("Erro ao obter dados do usuário:", error);
     }
   }, []);
 
