@@ -6,18 +6,27 @@ import User from "../../models/User/User.model";
  
 import { logError, logInfo } from "../../../utils/Logger/Logger";
 
-// ...
+import validationRules from "../Validation/ validations.controller";
+
+
 class resetPassVerification{
 
 public async resetPassword(req: Request, res: Response): Promise<void> {
+
+  await Promise.all(validationRules.resetPasswordValidationRules.map(rule => rule.run(req)))
   const { email, resetCode, newPassword } = req.body;
 
-  //onst errors = validationResult(req);
+  
+const errors = validationResult(req);
 
- // if (!errors.isEmpty()) {
-   // logError(errors.array(), res, 400);
-    //return;
- // }
+
+
+if (!errors.isEmpty()) {
+  const errorMessages = errors.array().map(error => error.msg);
+  res.send(`Erros de validação no resete de senha: ${errorMessages.join(', ')}`);
+  return;
+}
+
 
   try {
     const code = await ResetPassCode.findOne({

@@ -3,17 +3,22 @@ import { Request, Response } from "express";
 import { logError, logInfo } from "../../../utils/Logger/Logger";
 import * as nodemailer from "nodemailer";
 import { EnvVariables } from "../../../config/env";
+import validationRules from "../Validation/ validations.controller";
+
 
 const mail = EnvVariables.mail
 
 class ContactForm {
   public async sendContactForm(req: Request, res: Response): Promise<void> {
-    const errors: Result<ValidationError> = validationResult(req);
+
+    await Promise.all(validationRules.contactFormValidationRules.map(rule => rule.run(req)))
+
+
+    const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      const errorsArray = errors.array();
-      const errorMessages = errorsArray.map((error) => error.msg).join(", ");
-      logError(errorMessages, res, 422);
+      const errorMessages = errors.array().map(error => error.msg);
+      res.send(`Erro no envio da mensagem: ${errorMessages.join(', ')}`);
       return;
     }
 

@@ -5,15 +5,19 @@ import User from "../../models/User/User.model";
 import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
 import Token from "../../models/Token/Token.model";
+import validationRules from "../Validation/ validations.controller";
 
 class Register {
   public async RegisterUser(req: Request, res: Response): Promise<void> {
+
+    await Promise.all(validationRules.registrationValidationRules.map(rule => rule.run(req)));
     const { username, email, password, first_name, last_name } = req.body;
 
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      logError("Erros de validação no registro", res, 400);
+      const errorMessages = errors.array().map(error => error.msg);
+      res.send(`Erros de validação no Register ${errorMessages.join(', ')}`);
       return;
     }
 
