@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-
 import User from "../../models/User/User.model";
 
 class ReadUser {
@@ -7,13 +6,13 @@ class ReadUser {
     const userId = req.params.id;
     try {
       if (!userId) {
-        res
-          .status(400)
-          .json({ message: "ID de usuário ausente na solicitação" });
+        res.status(400).json({ message: "ID de usuário ausente na solicitação" });
         return;
       }
 
-      const user = await User.findByPk(userId);
+      const user = await User.findByPk(userId, {
+        attributes: { exclude: ['loginAttempts', 'password'] }
+      });
 
       if (!user) {
         res.status(404).json({ message: "Usuário não encontrado" });
