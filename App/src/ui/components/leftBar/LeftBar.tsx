@@ -19,7 +19,6 @@ const LeftBar = () => {
   const handleOnLoad = useCallback(async () => {
     try {
       const response = await getUserData();
-      console.log(response);
       setUserData(response);
     } catch (error) {
       console.error("Erro ao obter dados do usuário:", error);
