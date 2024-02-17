@@ -1,8 +1,7 @@
 import { DataTypes, Model, Sequelize } from "sequelize";
 import { sequelize } from "../../../config/database/MySQL/MySQL";
-import User from "../User/User.model";
 
-interface ResetPassCodeAttributes {
+export interface ResetPassCodeAttributes {
   resetCodeId?: number;
   userId: number;
   resetCode: string;
@@ -10,7 +9,10 @@ interface ResetPassCodeAttributes {
   createdAt: Date;
 }
 
-class ResetPassCode extends Model<ResetPassCodeAttributes> implements ResetPassCodeAttributes {
+class ResetPassCode
+  extends Model<ResetPassCodeAttributes>
+  implements ResetPassCodeAttributes
+{
   public resetCodeId?: number;
   public userId!: number;
   public resetCode!: string;
@@ -18,34 +20,37 @@ class ResetPassCode extends Model<ResetPassCodeAttributes> implements ResetPassC
   public createdAt!: Date;
 }
 
-ResetPassCode.init({
-  resetCodeId: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-    allowNull: false,
+ResetPassCode.init(
+  {
+    resetCodeId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false,
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    resetCode: {
+      type: DataTypes.STRING(6),
+      allowNull: false,
+    },
+    expiresAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+      allowNull: false,
+    },
   },
-  userId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  resetCode: {
-    type: DataTypes.STRING(6),
-    allowNull: false,
-  },
-  expiresAt: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
-  createdAt: {
-    type: DataTypes.DATE,
-    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-    allowNull: false,
-  },
-}, {
-  sequelize,
-  timestamps: false,
-  tableName: 'resetpasscode',  
-});
+  {
+    sequelize,
+    timestamps: false,
+    tableName: "resetpasscode",
+  }
+);
 
 export default ResetPassCode;
