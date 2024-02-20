@@ -6,9 +6,6 @@ class TokenVerifier {
   public async verifyToken(req: Request, res: Response, next: NextFunction) {
     const token = req.headers.authorization;
     const id = req.params.id;
-
-    console.log(token);
-
     if (!token || !id) {
       console.error("Token e ID não fornecidos");
       return res.status(401).json({ message: "Token e ID não fornecidos" });
@@ -16,9 +13,7 @@ class TokenVerifier {
 
     try {
       const tokenWithoutBearer = token.split(" ")[1];
-
       const decoded: any = jwt.verify(tokenWithoutBearer, process.env.SECRET!);
-
       if (id != decoded.id) {
         console.error("Token e ID não correspondem");
         return res.status(401).json({ message: "Token e ID não correspondem" });
