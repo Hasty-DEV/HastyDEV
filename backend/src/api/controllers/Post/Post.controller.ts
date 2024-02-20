@@ -1,5 +1,5 @@
 //Post Controller
-import Post from '../../models/Posts/Post.model';
+import Post from '../../models/Posts/Posts.model';
 import { Request, Response } from 'express';
 
 
