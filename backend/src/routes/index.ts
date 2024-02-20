@@ -9,6 +9,7 @@ import SendResetPassVerificationController from "../api/controllers/ResetPass/Se
 import ResetPassCodeVerificationController from "../api/controllers/ResetPass/ResetPassCodeVerification.controller";
 import verifyTokenMiddleware from "../api/services/verify.token.middleware";
 import UserIconController from "../api/controllers/Images/UserIcon.controller";
+import PostController from "../api/controllers/Post/Post.controller";
 //import TokenVerifier from "../api/services/verify.token.middleware";
 
 const routes = Router();
@@ -55,5 +56,6 @@ routes.post("/contactForm", ContactFormController.sendContactForm);
 
 routes.post("/upload", UserIconController.setUserIcon);
 
+routes.get("/posts", PostController.getAllPosts);
 
 export default routes;
