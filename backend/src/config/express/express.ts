@@ -1,5 +1,6 @@
 import express, { Application } from "express";
 import cors from "cors";
+import bodyParser from "body-parser";
 
 export default class ExpressConfig {
   public app: Application;
@@ -12,5 +13,7 @@ export default class ExpressConfig {
   private setup(): void {
     this.app.use(express.json());
     this.app.use(cors());
+    this.app.use(bodyParser.json());
+    this.app.use(bodyParser.urlencoded({ extended: true }));
   }
 }

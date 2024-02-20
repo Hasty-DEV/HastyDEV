@@ -9,7 +9,7 @@ import SendResetPassVerificationController from "../api/controllers/ResetPass/Se
 import ResetPassCodeVerificationController from "../api/controllers/ResetPass/ResetPassCodeVerification.controller";
 import verifyTokenMiddleware from "../api/services/verify.token.middleware";
 import UserIconController from "../api/controllers/Images/UserIcon.controller";
-import PostController from "../api/controllers/Post/Post.controller";
+import PostController from "../api/controllers/Posts/Posts.controller";
 //import TokenVerifier from "../api/services/verify.token.middleware";
 
 const routes = Router();
@@ -25,7 +25,7 @@ routes.post("/register", RegisterController.RegisterUser);
 //User Data
 routes.get(
   "/user/:id",
-  verifyTokenMiddleware.verifyToken,
+  verifyTokenMiddleware.verifyTokenWithParam,
   ReadUserController.getUserData
 );
 
@@ -54,8 +54,10 @@ routes.post("/contactForm", ContactFormController.sendContactForm);
 // Rotas protegidas por token
 //routes.use("/auth", TokenVerifier.verifyToken);
 
-routes.post("/upload", UserIconController.setUserIcon);
+routes.post("/upload", verifyTokenMiddleware.verifyTokenWithBody, UserIconController.setUserIcon);
 
-routes.get("/posts", PostController.getAllPosts);
+routes.get("/posts", verifyTokenMiddleware.verifyTokenWithOnlyToken, PostController.getAllPosts);
+
+routes.post("/posts", verifyTokenMiddleware.verifyTokenWithBody, PostController.createPost);
 
 export default routes;

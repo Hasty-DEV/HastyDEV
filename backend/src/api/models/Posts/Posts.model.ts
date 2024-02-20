@@ -4,6 +4,8 @@ import { sequelize } from "../../../config/database/MySQL/MySQL";
 interface PostAttributes {
   postid: number;
   userid: number;
+  title: string;
+  content: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -18,6 +20,8 @@ class Post
   public userid!: number;
   public createdAt!: Date;
   public updatedAt!: Date;
+  public title!: string;
+  public content!: string;
 }
 
 Post.init(
@@ -29,6 +33,14 @@ Post.init(
     },
     userid: {
       type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    content: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
     createdAt: {

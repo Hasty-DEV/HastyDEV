@@ -1,17 +1,57 @@
+import { FormEvent, useRef } from "react";
 import Image from "../../assets/img.png";
-import Map from "../../assets/map.png";
-import Friend from "../../assets/friend.png";
 import UserIcon from "../../assets/user/user_icon.png";
 import ShareContainer from "../../styles/share/Share.styles";
+import { api } from "../../../data/services/api";
 
 const Share = () => {
+  const titleRef = useRef<HTMLInputElement>(null);
+  const contentRef = useRef<HTMLInputElement>(null);
+
+  const handleOnSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    const title = titleRef.current?.value;
+    const content = contentRef.current?.value;
+
+    if (!title || !content) {
+      console.error("Título e conteúdo são obrigatórios");
+      return;
+    }
+
+    const userId = await localStorage.getItem("userId");
+    const userToken = await localStorage.getItem("userToken");
+
+    try {
+      const response = await api.post("/posts", {
+        id: userId,
+        token: `Bearer ${userToken}`,
+        title: title,
+        content: content,
+      });
+      console.log("Resposta do servidor:", response.data);
+    } catch (error) {
+      console.error("Erro ao enviar o formulário:", error);
+    }
+  };
+
   return (
     <ShareContainer>
       <div className="share">
-        <div className="container">
+        <form className="container" onSubmit={(e) => handleOnSubmit(e)}>
           <div className="top">
             <img src={UserIcon} alt="" />
-            <input type="text" placeholder={`O que você está pensando...?`} />
+            <div>
+              <input
+                type="text"
+                placeholder={`Escolha um título...`}
+                ref={titleRef}
+              />
+              <input
+                type="text"
+                placeholder={`Publicar Pedido de Projeto...`}
+                ref={contentRef}
+              />
+            </div>
           </div>
           <hr />
           <div className="bottom">
@@ -23,20 +63,12 @@ const Share = () => {
                   <span>Adicionar Imagem</span>
                 </div>
               </label>
-              <div className="item">
-                <img src={Map} alt="" />
-                <span>Adicionar Lugar</span>
-              </div>
-              <div className="item">
-                <img src={Friend} alt="" />
-                <span>Marcar Amigos</span>
-              </div>
             </div>
             <div className="right">
-              <button>Compartilhar</button>
+              <button type="submit">Compartilhar</button>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </ShareContainer>
   );
