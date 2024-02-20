@@ -1,5 +1,6 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from "../../../config/database/MySQL/MySQL";
+import User from "../User/User.model";
 
 interface PostAttributes {
   postid: number;
@@ -61,5 +62,8 @@ Post.init(
     timestamps: true,
   }
 );
+
+
+Post.belongsTo(User, { foreignKey: 'userid', as: 'author' });
 
 export default Post;

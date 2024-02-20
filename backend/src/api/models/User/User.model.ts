@@ -1,5 +1,6 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from "../../../config/database/MySQL/MySQL";
+import Post from "../Posts/Posts.model";
 
 interface UserAttributes {
   userid: number;
@@ -28,6 +29,10 @@ class User
   public lockUntil?: Date | null;
   public loginAttempts?: number | null;
   public isVerified?: boolean;
+
+  static associate(models: any) {
+    this.hasMany(models.Post, { foreignKey: "userid", as: "posts" });
+  }
 }
 
 User.init(
@@ -68,7 +73,7 @@ User.init(
     },
     isVerified: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false, 
+      defaultValue: false,
     },
   },
   {

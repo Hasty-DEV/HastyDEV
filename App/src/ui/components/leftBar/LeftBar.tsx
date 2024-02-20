@@ -7,7 +7,7 @@ import Messages from "../../assets/10.png";
 import UserIcon from "../../assets/user/user_icon.png";
 import LeftBarContainer from "../../styles/leftBar/LeftBar.styles";
 import { useCallback, useEffect, useState } from "react";
-import { getUserData } from "../../../data/services/userService";
+import { UserDATA } from "../../../data/services/userService";
 import { Button } from "react-bootstrap";
 import { useAuth } from "../../../data/context/AuthContext";
 import Loader from "../Loader/Loader";
@@ -18,8 +18,7 @@ const LeftBar = () => {
   const { logout } = useAuth();
   const handleOnLoad = useCallback(async () => {
     try {
-      const response = await getUserData();
-      setUserData(response);
+      setUserData(UserDATA);
     } catch (error) {
       console.error("Erro ao obter dados do usuário:", error);
     }

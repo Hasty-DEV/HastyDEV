@@ -3,13 +3,23 @@ import { Link } from "react-router-dom";
 import Comments from "../comments/Comments";
 import { useState } from "react";
 import PostContainer from "../../styles/post/Post.styles";
-interface PostType {
-  profilePic: string;
-  userId: string;
-  name: string;
-  desc: string;
-  img: string;
+
+interface AuthorType {
+  first_name: string;
+  last_name: string;
 }
+
+interface PostType {
+  profilePic?: string;
+  userId: string;
+  author: AuthorType;
+  content: string;
+  img?: string;
+  updatedAt: string;
+  title: string;
+}
+
+import userIcon from "../../assets/user/user_icon.png";
 
 const Post = ({ post }: { post: PostType }) => {
   const [commentOpen, setCommentOpen] = useState(false);
@@ -23,20 +33,21 @@ const Post = ({ post }: { post: PostType }) => {
         <div className="container">
           <div className="user">
             <div className="userInfo">
-              <img src={post.profilePic} alt="" />
+              <img src={post.profilePic || userIcon} alt="" />
               <div className="details">
                 <Link
                   to={`/profile/${post.userId}`}
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
-                  <span className="name">{post.name}</span>
+                  <span className="name">{`${post.author.first_name} ${post.author.last_name}`}</span>
                 </Link>
-                <span className="date">2 Horas Atrás</span>
+                <span className="date">{post.updatedAt}</span>
               </div>
             </div>
           </div>
           <div className="content">
-            <p>{post.desc}</p>
+            <h2>{post.title}</h2>
+            <p>{post.content}</p>
             <img src={post.img} alt="" />
           </div>
           <div className="info">

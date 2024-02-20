@@ -1,34 +1,45 @@
+import { useState, useEffect, useCallback } from "react";
 import PostsContainer from "../../styles/posts/Posts.styles";
 import Post from "../post/Post";
+import { getPosts } from "../../../data/services/postsService";
+
+interface AuthorType {
+  first_name: string;
+  last_name: string;
+}
+
+interface PostType {
+  postid: number;
+  profilePic?: string;
+  userId: string;
+  author: AuthorType;
+  content: string;
+  img?: string;
+  updatedAt: string;
+  title: string;
+}
 
 const Posts = () => {
-  // TEMPORARY
-  const posts = [
-    {
-      id: 1,
-      name: "Jamilly, a reacter",
-      userId: "1",
-      profilePic:
-        "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      desc: "Alguem Poderia Montar um site com esse layout?",
-      img: "https://s3-alpha.figma.com/hub/file/3581213814/e622a7cd-e8ce-4613-8289-94660d0e0191-cover.png",
-    },
-    {
-      id: 2,
-      name: "Jane Doe",
-      userId: "2",
-      profilePic:
-        "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      desc: "Preciso de Algúem para fazer um site em react...",
-      img: "",
-    },
-  ];
+  const [posts, setPosts] = useState<PostType[]>([]);
+
+  const fetchPosts = useCallback(async () => {
+    try {
+      const response = await getPosts();
+      setPosts(response);
+    } catch (error) {
+      console.error("Erro ao buscar os posts:", error);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchPosts();
+  }, [fetchPosts]);
 
   return (
     <PostsContainer>
       <div className="posts">
         {posts.map((post) => (
-          <Post post={post} key={post.id} />
+          <Post post={post} key={post.postid} />
         ))}
       </div>
     </PostsContainer>

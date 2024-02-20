@@ -15,3 +15,10 @@ export const getUserData = async () => {
     throw error;
   }
 };
+
+const UserDataReq = async () => {
+  const response = await getUserData();
+  return response;
+};
+
+export const UserDATA = await UserDataReq();
