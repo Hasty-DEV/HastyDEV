@@ -36,7 +36,7 @@ class Posts {
         title,
         content,
       });
-      res.status(201).json(post);
+      res.status(201).json("Post Criado com Sucesso!");
     } catch (error) {
       console.error("Erro ao criar post:", error);
       res.status(500).json({ error: "Erro Interno do Servidor" });
