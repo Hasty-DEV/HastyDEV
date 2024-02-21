@@ -1,7 +1,7 @@
 import { FaHeart, FaRegHeart, FaComment, FaShare } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Comments from "../comments/Comments";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PostContainer from "../../styles/post/Post.styles";
 
 interface AuthorType {
@@ -23,6 +23,28 @@ import userIcon from "../../assets/user/user_icon.png";
 
 const Post = ({ post }: { post: PostType }) => {
   const [commentOpen, setCommentOpen] = useState(false);
+  const [formattedUpdatedAt, setFormattedUpdatedAt] = useState<string>("");
+
+  const formatUpdatedAt = (updatedAt: string) => {
+    const date = new Date(updatedAt);
+    const options: Intl.DateTimeFormatOptions = { 
+      year: "numeric", 
+      month: "long", 
+      day: "numeric", 
+      hour: "numeric", 
+      minute: "numeric", 
+      second: "numeric",
+      localeMatcher: "best fit",
+      weekday: "long",
+      era: undefined, 
+      timeZone: "America/Sao_Paulo" 
+    };
+    return date.toLocaleDateString("pt-BR", options);
+  };
+
+  useEffect(() => {
+    setFormattedUpdatedAt(formatUpdatedAt(post.updatedAt));
+  }, [post.updatedAt]);
 
   // TEMPORARY
   const liked = false;
@@ -41,7 +63,7 @@ const Post = ({ post }: { post: PostType }) => {
                 >
                   <span className="name">{`${post.author.first_name} ${post.author.last_name}`}</span>
                 </Link>
-                <span className="date">{post.updatedAt}</span>
+                <span className="date">{formattedUpdatedAt}</span>
               </div>
             </div>
           </div>
