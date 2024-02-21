@@ -7,27 +7,36 @@ import Messages from "../../assets/10.png";
 import UserIcon from "../../assets/user/user_icon.png";
 import LeftBarContainer from "../../styles/leftBar/LeftBar.styles";
 import { useCallback, useEffect, useState } from "react";
-import { UserDATA } from "../../../data/services/userService";
+import { getUserData } from "../../../data/services/userService";
 import { Button } from "react-bootstrap";
 import { useAuth } from "../../../data/context/AuthContext";
 import Loader from "../Loader/Loader";
-
+interface UserDataTypes {
+  first_name: string;
+  last_name: string;
+}
 const LeftBar = () => {
-  const [userData, setUserData] = useState<any>(null);
+  const [userData, setUserData] = useState<UserDataTypes | null>(null);
   const [loading, setLoading] = useState(false);
   const { logout } = useAuth();
-  const handleOnLoad = useCallback(async () => {
+
+  const fetchData = useCallback(async () => {
     try {
-      setUserData(UserDATA);
+      setLoading(true);
+      const user = await getUserData();
+      setUserData(user);
     } catch (error) {
       console.error("Erro ao obter dados do usuário:", error);
+    } finally {
+      setLoading(false);
     }
   }, []);
 
   useEffect(() => {
-    handleOnLoad();
-  }, [handleOnLoad]);
+    fetchData();
+  }, [fetchData]);
 
+  
   const handleLogout = async () => {
     try {
       setLoading(true);

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useCallback, useEffect, useState } from "react";
 import StoriesContainer from "../../styles/stories/Stories.styles";
-import { UserDATA } from "../../../data/services/userService";
+import { getUserData } from "../../../data/services/userService";
 
 const stories = [
   {
@@ -29,17 +29,18 @@ const stories = [
 const Stories = () => {
   const [userData, setUserData] = useState<any>(null);
 
-  const handleOnLoad = useCallback(async () => {
+  const fetchData = useCallback(async () => {
     try {
-      setUserData(UserDATA);
+      const user = await getUserData();
+      setUserData(user);
     } catch (error) {
       console.error("Erro ao obter dados do usuário:", error);
     }
   }, []);
 
   useEffect(() => {
-    handleOnLoad();
-  }, [handleOnLoad]);
+    fetchData();
+  }, [fetchData]);
 
   return (
     <StoriesContainer>

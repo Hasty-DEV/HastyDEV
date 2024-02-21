@@ -15,11 +15,22 @@ export const getPosts = async () => {
   }
 };
 
-const getPostsReq = async () => {
-  const response = await getPosts();
-  return response;
+const fetchPosts = async () => {
+  try {
+    const response = await getPosts();
+    return response;
+  } catch (error) {
+    console.error("Erro ao pegar dados de Posts:", error);
+    throw error;
+  }
 };
 
-export const postsData = await getPostsReq();
-
-console.log(postsData);
+export const postsData = async () => {
+  try {
+    const posts = await fetchPosts();
+    return posts;
+  } catch (error) {
+    console.error("Erro ao atribuir dados de posts:", error);
+    throw error;
+  }
+};

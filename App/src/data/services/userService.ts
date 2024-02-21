@@ -16,9 +16,22 @@ export const getUserData = async () => {
   }
 };
 
-const UserDataReq = async () => {
-  const response = await getUserData();
-  return response;
+const fetchUserData = async () => {
+  try {
+    const response = await getUserData();
+    return response;
+  } catch (error) {
+    console.error("Erro ao pegar dados de Usuário:", error);
+    throw error;
+  }
 };
 
-export const UserDATA = await UserDataReq();
+export const UserDATA = async () => {
+  try {
+    const userData = await fetchUserData();
+    return userData;
+  } catch (error) {
+    console.error("Erro ao atribuir dados de usuário:", error);
+    throw error;
+  }
+};
