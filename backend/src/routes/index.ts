@@ -10,6 +10,7 @@ import ResetPassCodeVerificationController from "../api/controllers/ResetPass/Re
 import verifyTokenMiddleware from "../api/services/verify.token.middleware";
 import UserIconController from "../api/controllers/Images/UserIcon.controller";
 import PostController from "../api/controllers/Posts/Posts.controller";
+import CommetsController from "../api/controllers/Commets/Comments.controller";
 //import TokenVerifier from "../api/services/verify.token.middleware";
 
 const routes = Router();
@@ -59,5 +60,9 @@ routes.post("/upload", verifyTokenMiddleware.verifyTokenWithBody, UserIconContro
 routes.get("/posts", verifyTokenMiddleware.verifyTokenWithOnlyToken, PostController.getAllPosts);
 
 routes.post("/posts", verifyTokenMiddleware.verifyTokenWithBody, PostController.createPost);
+
+routes.get("/Comments", verifyTokenMiddleware.verifyTokenWithBody, CommetsController.getAllCommentsForPost);
+
+routes.post("/Comments", verifyTokenMiddleware.verifyTokenWithBody, CommetsController.createCommentForPost);
 
 export default routes;
