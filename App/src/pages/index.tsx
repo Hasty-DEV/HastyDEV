@@ -4,6 +4,7 @@ import UserData from "../ui/components/UserData/UserData";
 import Home from "./home/Home";
 import PrivateRoute from "../ui/components/PrivateRoute/PrivateRoute";
 import Perfil from "./perfil/Perfil";
+import CreatePost from "./CreatePost/CreatePost"
 
 const routes = createBrowserRouter([
   {
@@ -30,6 +31,14 @@ const routes = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path: "createPost",
+        element: (
+          <PrivateRoute>
+            <CreatePost /> 
+          </PrivateRoute>
+        )
+      }
     ],
   },
 ]);

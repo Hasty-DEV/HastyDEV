@@ -4,11 +4,13 @@ import UserIcon from "../../assets/user/user_icon.png";
 import ShareContainer from "../../styles/share/Share.styles";
 import { api } from "../../../data/services/api";
 import Loader from "../Loader/Loader";
+import { useNavigate } from "react-router-dom";
 
 const Share = () => {
   const titleRef = useRef<HTMLInputElement>(null);
   const contentRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
 
   const handleOnSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -36,6 +38,7 @@ const Share = () => {
       console.error("Erro ao enviar o formulário:", error);
     } finally {
       setLoading(false);
+      navigate("/createPost");
     }
   };
 
