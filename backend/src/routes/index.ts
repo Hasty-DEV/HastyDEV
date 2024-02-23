@@ -57,12 +57,12 @@ routes.post("/contactForm", ContactFormController.sendContactForm);
 
 routes.post("/upload", verifyTokenMiddleware.verifyTokenWithBody, UserIconController.setUserIcon);
 
-routes.get("/posts", verifyTokenMiddleware.verifyTokenWithOnlyToken, PostController.getAllPosts);
+routes.get("/posts",  PostController.getAllPosts);
 
-routes.post("/posts", verifyTokenMiddleware.verifyTokenWithBody, PostController.createPost);
+routes.post("/posts",  PostController.createPost);
 
-routes.get("/Comments", verifyTokenMiddleware.verifyTokenWithBody, CommetsController.getAllCommentsForPost);
 
-routes.post("/Comments", verifyTokenMiddleware.verifyTokenWithBody, CommetsController.createCommentForPost);
+routes.get("/comments/:postid", CommetsController.getAllCommentsForPost);
+routes.post("/comments/:postid", CommetsController.createCommentForPost);
 
 export default routes;
