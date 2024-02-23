@@ -11,6 +11,7 @@ import verifyTokenMiddleware from "../api/services/verify.token.middleware";
 import UserIconController from "../api/controllers/Images/UserIcon.controller";
 import PostController from "../api/controllers/Posts/Posts.controller";
 import CommetsController from "../api/controllers/Commets/Comments.controller";
+import AnswersController from "../api/controllers/Awnsers/Awnsers.controller";
 //import TokenVerifier from "../api/services/verify.token.middleware";
 
 const routes = Router();
@@ -64,5 +65,8 @@ routes.post("/posts",  PostController.createPost);
 
 routes.get("/comments/:postid", CommetsController.getAllCommentsForPost);
 routes.post("/comments/:postid", CommetsController.createCommentForPost);
+
+routes.post("/awnsers/:commentid", verifyTokenMiddleware.verifyTokenWithBody, AnswersController.createAnswerForComment);
+
 
 export default routes;
