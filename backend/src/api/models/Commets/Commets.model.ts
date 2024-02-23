@@ -49,7 +49,7 @@ Comment.init(
   }
 );
 
-Comment.belongsTo(User, { foreignKey: 'userid', as: 'author' });
+Comment.belongsTo(User, { foreignKey: 'userid', as: 'author', onDelete: 'CASCADE' }); 
 Comment.belongsTo(Post, { foreignKey: 'postid', as: 'post' });
 
 export default Comment;

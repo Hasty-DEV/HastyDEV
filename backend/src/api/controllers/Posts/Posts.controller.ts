@@ -8,7 +8,7 @@ import User from "../../models/User/User.model";
 // Definição da classe Posts
 class Posts {
   // Método para buscar todos os posts
-  public async getAllPosts(req: Request, res: Response): Promise<void> {
+  public async getAllPosts( res: Response): Promise<void> {
     try {
       // Utilização de encapsulamento para ocultar detalhes de implementação da busca de posts
       const posts = await Post.findAll({
@@ -46,7 +46,7 @@ class Posts {
 
     try {
       // Criação de um novo post
-      const post = await Post.create({
+        await Post.create({
         userid: id,
         title,
         content,

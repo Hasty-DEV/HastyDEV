@@ -25,9 +25,8 @@ class AnswersController {
     
       // Cria a resposta de comentário no banco de dados
     try {
-      const answer = await Answer.create({
-        replyid: 0, 
-        commentid: parseInt(commentid, 10),
+       await Answer.create({ 
+        commentid: parseInt(commentid),
         userid,
         content,
       });

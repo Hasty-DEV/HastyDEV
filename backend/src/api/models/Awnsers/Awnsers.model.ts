@@ -4,7 +4,7 @@ import User from "../User/User.model";
 import Comment from "../Commets/Commets.model";
 
 interface AnswerAttributes {
- replyid: number;
+ replyid?: number;
  userid: number;
  commentid: number;
  content: string;
