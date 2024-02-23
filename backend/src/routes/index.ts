@@ -56,17 +56,39 @@ routes.post("/contactForm", ContactFormController.sendContactForm);
 // Rotas protegidas por token
 //routes.use("/auth", TokenVerifier.verifyToken);
 
-routes.post("/upload", verifyTokenMiddleware.verifyTokenWithBody, UserIconController.setUserIcon);
+routes.post(
+  "/upload",
+  verifyTokenMiddleware.verifyTokenWithBody,
+  UserIconController.setUserIcon
+);
 
-routes.get("/posts",  PostController.getAllPosts);
+routes.get(
+  "/posts",
+  verifyTokenMiddleware.verifyTokenWithOnlyToken,
+  PostController.getAllPosts
+);
 
-routes.post("/posts",  PostController.createPost);
+routes.post(
+  "/posts",
+  verifyTokenMiddleware.verifyTokenWithBody,
+  PostController.createPost
+);
 
+routes.get(
+  "/comments/:postid",
+  verifyTokenMiddleware.verifyTokenWithOnlyToken,
+  CommetsController.getAllCommentsForPost
+);
+routes.post(
+  "/comments/:postid",
+  verifyTokenMiddleware.verifyTokenWithBody,
+  CommetsController.createCommentForPost
+);
 
-routes.get("/comments/:postid", CommetsController.getAllCommentsForPost);
-routes.post("/comments/:postid", CommetsController.createCommentForPost);
-
-routes.post("/awnsers/:commentid",  AnswersController.createAnswerForComment);
-
+routes.post(
+  "/awnsers/:commentid",
+  verifyTokenMiddleware.verifyTokenWithOnlyToken,
+  AnswersController.createAnswerForComment
+);
 
 export default routes;
