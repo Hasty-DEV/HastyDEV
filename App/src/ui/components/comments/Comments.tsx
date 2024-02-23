@@ -1,42 +1,78 @@
+import  { useState, useEffect, useCallback } from "react";
 import UserIcon from "../../assets/user/user_icon.png";
 import CommentsContainer from "../../styles/comments/Commets.styles";
+import { commentsData, createCommentForPost } from "../../../data/services/commentsService";
 
-const Comments = () => {
-  const comments = [
-    {
-      id: 1,
-      desc: "Eu Consigo Fazer isso!",
-      name: "Cleiton, o DEV",
-      userId: 1,
-      profilePicture:
-        "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    },
-    {
-      id: 2,
-      desc: "Irei te chamar Cleiton!",
-      name: "Jamilly, a reacter",
-      userId: 2,
-      profilePicture:
-        "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    },
-  ];
+interface AuthorType {
+  first_name: string;
+  last_name: string;
+}
+
+interface CommentType {
+  id: string;
+  userId: string | number;
+  author: AuthorType;
+  content: string;
+  updatedAt: string;
+  title: string;
+}
+
+const Comments: React.FC = () => {
+  const [comments, setComments] = useState<CommentType[]>([]);
+  const [newComment, setNewComment] = useState<string>("");
+
+  const fetchComments = useCallback(async () => {
+    try {
+      const response = await commentsData("postId");
+      setComments(response as unknown as CommentType[]);
+    } catch (error) {
+      console.error("Erro ao buscar os comentários:", error);
+    }
+  }, []);
+
+  const handleCommentSubmit = async () => {
+    try {
+      // Supondo que o userId esteja presente nos dados do comentário retornado pela API
+      const commentsResponse = await commentsData("postId");
+
+      if (commentsResponse.length > 0) {
+        const userIdFromAPI = commentsResponse[0].userId; // Obtendo o userId da primeira resposta (ajuste conforme necessário)
+
+        await createCommentForPost("postId", userIdFromAPI, newComment, "token");
+        fetchComments();
+      } else {
+        console.error("Não foi possível obter o userId dos comentários.");
+      }
+    } catch (error) {
+      console.error("Erro ao enviar o comentário:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchComments();
+  }, [fetchComments]);
 
   return (
     <CommentsContainer>
       <div className="comments">
         <div className="write">
           <img src={UserIcon} alt="" />
-          <input type="text" placeholder="write a comment" />
-          <button>Enviar</button>
+          <input
+            type="text"
+            placeholder="write a comment"
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+          />
+          <button onClick={handleCommentSubmit}>Enviar</button>
         </div>
         {comments.map((comment) => (
           <div className="comment" key={comment.id}>
-            <img src={comment.profilePicture} alt="" />
+            <img src={UserIcon} alt="" />
             <div className="info">
-              <span>{comment.name}</span>
-              <p>{comment.desc}</p>
+              <span>{comment.author.first_name} {comment.author.last_name}</span>
+              <p>{comment.content}</p>
             </div>
-            <span className="date">1 Hora Atrás</span>
+            <span className="date">{comment.updatedAt}</span>
           </div>
         ))}
       </div>
