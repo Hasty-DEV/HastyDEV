@@ -66,7 +66,7 @@ routes.post("/posts",  PostController.createPost);
 routes.get("/comments/:postid", CommetsController.getAllCommentsForPost);
 routes.post("/comments/:postid", CommetsController.createCommentForPost);
 
-routes.post("/awnsers/:commentid", verifyTokenMiddleware.verifyTokenWithBody, AnswersController.createAnswerForComment);
+routes.post("/awnsers/:commentid",  AnswersController.createAnswerForComment);
 
 
 export default routes;
