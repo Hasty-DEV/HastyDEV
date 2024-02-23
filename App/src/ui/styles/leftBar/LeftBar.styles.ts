@@ -41,6 +41,14 @@ const LeftBarContainer = styled.div`
         align-items: center;
         gap: 10px;
 
+
+        button{
+
+          border: none;
+          background-color: transparent;
+
+        }
+
         img {
           width: 30px;
           height: 30px;
@@ -65,6 +73,7 @@ const LeftBarContainer = styled.div`
         span {
           font-size: 14px;
         }
+
       }
     }
   }

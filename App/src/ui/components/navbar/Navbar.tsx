@@ -82,7 +82,9 @@ const Navbar = () => {
           <StyledIcon as={FaEnvelope} />
           <StyledIcon as={FaBell} />
           <div className="user">
-            <img src={UserIcon} alt="" />
+          <Link to="/perfil">
+                <button><img src={UserIcon} alt="" /></button>
+              </Link>
             <span>
               {userData
                 ? `${userData.first_name} ${userData.last_name}`

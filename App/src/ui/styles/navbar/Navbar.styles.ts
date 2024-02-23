@@ -65,6 +65,11 @@ const NavbarContainer = styled.div`
       font-weight: 500;
       cursor: pointer;
 
+      button{
+        border: none;
+        background-color: transparent;
+      }
+
       @media (max-width: 1024px) {
         display: none;
       }

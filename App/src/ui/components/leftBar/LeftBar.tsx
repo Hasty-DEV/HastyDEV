@@ -11,6 +11,7 @@ import { getUserData } from "../../../data/services/userService";
 import { Button } from "react-bootstrap";
 import { useAuth } from "../../../data/context/AuthContext";
 import Loader from "../Loader/Loader";
+import { Link } from 'react-router-dom';
 interface UserDataTypes {
   first_name: string;
   last_name: string;
@@ -56,7 +57,9 @@ const LeftBar = () => {
           <div className="container">
             <div className="menu">
               <div className="user">
-                <img src={UserIcon} alt="" />
+              <Link to="/perfil">
+                <button><img src={UserIcon} alt="" /></button>
+              </Link>
                 <span>
                   {userData
                     ? `${userData.first_name} ${userData.last_name}`
