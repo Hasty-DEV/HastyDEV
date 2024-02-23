@@ -25,7 +25,8 @@ const Posts = () => {
   const fetchPosts = useCallback(async () => {
     try {
       const response = await getPosts();
-      setPosts(response);
+      const reversedPosts = response.reverse();
+      setPosts(reversedPosts);
     } catch (error) {
       console.error("Erro ao buscar os posts:", error);
     }
