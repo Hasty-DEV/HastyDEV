@@ -4,28 +4,35 @@ import Gaming from "../../assets/7.png";
 import Gallery from "../../assets/8.png";
 import Videos from "../../assets/9.png";
 import Messages from "../../assets/10.png";
-import UserIcon from "../../assets/user/user_icon.png";
 import LeftBarContainer from "../../styles/leftBar/LeftBar.styles";
 import { useCallback, useEffect, useState } from "react";
 import { getUserData } from "../../../data/services/userService";
 import { Button } from "react-bootstrap";
 import { useAuth } from "../../../data/context/AuthContext";
 import Loader from "../Loader/Loader";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { getUserIcon } from "../../../data/services/getUserIconService";
+import DefaultUserIcon from "../../assets/user/user_icon.png";
+
 interface UserDataTypes {
   first_name: string;
   last_name: string;
 }
 const LeftBar = () => {
+  const { logout } = useAuth();
   const [userData, setUserData] = useState<UserDataTypes | null>(null);
   const [loading, setLoading] = useState(false);
-  const { logout } = useAuth();
+  const [userIcon, setUserIcon] = useState<string | null>(null);
 
   const fetchData = useCallback(async () => {
     try {
       setLoading(true);
       const user = await getUserData();
       setUserData(user);
+      const icon = await getUserIcon();
+      if (icon && icon.data) {
+        setUserIcon(URL.createObjectURL(new Blob([icon.data])));
+      }
     } catch (error) {
       console.error("Erro ao obter dados do usuário:", error);
     } finally {
@@ -37,7 +44,6 @@ const LeftBar = () => {
     fetchData();
   }, [fetchData]);
 
-  
   const handleLogout = async () => {
     try {
       setLoading(true);
@@ -57,9 +63,11 @@ const LeftBar = () => {
           <div className="container">
             <div className="menu">
               <div className="user">
-              <Link to="/perfil">
-                <button><img src={UserIcon} alt="" /></button>
-              </Link>
+                <Link to="/perfil">
+                  <button>
+                    <img src={userIcon || DefaultUserIcon} alt="" />
+                  </button>
+                </Link>
                 <span>
                   {userData
                     ? `${userData.first_name} ${userData.last_name}`

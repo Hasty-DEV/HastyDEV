@@ -63,6 +63,12 @@ routes.post(
 );
 
 routes.get(
+  "/userIcon/:id",
+  verifyTokenMiddleware.verifyTokenWithParam,
+  UserIconController.getUserIcon
+);
+
+routes.get(
   "/posts",
   verifyTokenMiddleware.verifyTokenWithOnlyToken,
   PostController.getAllPosts
