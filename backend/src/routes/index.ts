@@ -58,7 +58,7 @@ routes.post("/contactForm", ContactFormController.sendContactForm);
 
 routes.post(
   "/upload",
-  verifyTokenMiddleware.verifyTokenWithBody,
+  verifyTokenMiddleware.verifyTokenWithIdAndTokenInHeaders,
   UserIconController.setUserIcon
 );
 
