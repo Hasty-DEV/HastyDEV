@@ -1,56 +1,95 @@
-import  { useState, useEffect, useCallback } from "react";
+// Comments.tsx - Componente de Comentários
+import  { useEffect, useState } from "react";
 import UserIcon from "../../assets/user/user_icon.png";
 import CommentsContainer from "../../styles/comments/Commets.styles";
-import { commentsData, createCommentForPost } from "../../../data/services/commentsService";
+import { api } from "../../../data/services/api";
 
-interface AuthorType {
-  first_name: string;
-  last_name: string;
-}
-
-interface CommentType {
+interface Comment {
   id: string;
-  userId: string | number;
-  author: AuthorType;
+  userid: string;
   content: string;
-  updatedAt: string;
-  title: string;
+  createdAt: string;
 }
 
-const Comments: React.FC = () => {
-  const [comments, setComments] = useState<CommentType[]>([]);
+const Comments: React.FC<{ postId: string }> = ({ postId }) => {
+  const [userId, setUserId] = useState<string | null>(null);
+  const [token, setToken] = useState<string | null>(null);
+  const [userName, setUserName] = useState<string | null>(null); 
+  const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState<string>("");
 
-  const fetchComments = useCallback(async () => {
-    try {
-      const response = await commentsData("postId");
-      setComments(response as unknown as CommentType[]);
-    } catch (error) {
-      console.error("Erro ao buscar os comentários:", error);
-    }
-  }, []);
-
-  const handleCommentSubmit = async () => {
-    try {
-      // Supondo que o userId esteja presente nos dados do comentário retornado pela API
-      const commentsResponse = await commentsData("postId");
-
-      if (commentsResponse.length > 0) {
-        const userIdFromAPI = commentsResponse[0].userId; // Obtendo o userId da primeira resposta (ajuste conforme necessário)
-
-        await createCommentForPost("postId", userIdFromAPI, newComment, "token");
-        fetchComments();
-      } else {
-        console.error("Não foi possível obter o userId dos comentários.");
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const storedUserId = localStorage.getItem("userId");
+        const storedToken = localStorage.getItem("userToken");
+  
+        if (storedUserId && storedToken && postId) {
+          setUserId(storedUserId);
+          setToken(storedToken);
+  
+          
+          const commentsForPost = await getCommentsForPost(postId);
+          setComments(commentsForPost);
+  
+          try {
+            
+            const userResponse = await api.get(`/user/${storedUserId}`);
+            
+  
+           
+            if (userResponse.data && userResponse.data.user) {
+              const userData = userResponse.data.user;
+              setUserName(`${userData.first_name} ${userData.last_name}`);
+            }
+          } catch (error) {
+            console.error("Error fetching user data:", error);
+          }
+        }
+      } catch (error) {
+        console.error(error);
       }
+    };
+  
+    fetchData();
+  }, [postId]);
+  
+
+  const getCommentsForPost = async (postId: string): Promise<Comment[]> => {
+    try {
+      const response = await api.get<Comment[]>(`/comments/${postId}`);
+      return response.data;
     } catch (error) {
-      console.error("Erro ao enviar o comentário:", error);
+      console.error(error);
+      return [];
     }
   };
 
-  useEffect(() => {
-    fetchComments();
-  }, [fetchComments]);
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNewComment(event.target.value);
+  };
+
+  const handleCommentSubmit = async () => {
+    try {
+      if (userId && token && postId) {
+        const payload = {
+          userid: userId,
+          content: newComment,
+          token: token,
+        };
+        await api.post(`/comments/${postId}`, payload);
+
+       
+        const updatedComments = await getCommentsForPost(postId);
+        setComments(updatedComments);
+
+       
+        setNewComment("");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <CommentsContainer>
@@ -59,25 +98,44 @@ const Comments: React.FC = () => {
           <img src={UserIcon} alt="" />
           <input
             type="text"
-            placeholder="write a comment"
+            placeholder="Escreva um comentário"
             value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
+            onChange={handleInputChange}
           />
           <button onClick={handleCommentSubmit}>Enviar</button>
         </div>
+
         {comments.map((comment) => (
-          <div className="comment" key={comment.id}>
+          <div key={comment.id} className="comment">
             <img src={UserIcon} alt="" />
             <div className="info">
-              <span>{comment.author.first_name} {comment.author.last_name}</span>
+              <span>{userName}</span>
               <p>{comment.content}</p>
             </div>
-            <span className="date">{comment.updatedAt}</span>
+            <span className="date">{formatCreatedAt(comment.createdAt)}</span>
           </div>
         ))}
       </div>
     </CommentsContainer>
   );
+};
+
+// Função para formatar a data de criação
+const formatCreatedAt = (createdAt: string): string => {
+  const date = new Date(createdAt);
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    localeMatcher: "best fit",
+    weekday: "long",
+    era: undefined,
+    timeZone: "America/Sao_Paulo",
+  };
+  return date.toLocaleDateString("pt-BR", options);
 };
 
 export default Comments;

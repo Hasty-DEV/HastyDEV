@@ -87,7 +87,7 @@ routes.get(
 );
 routes.post(
   "/comments/:postid",
-  verifyTokenMiddleware.verifyTokenWithBody,
+  
   CommetsController.createCommentForPost
 );
 
