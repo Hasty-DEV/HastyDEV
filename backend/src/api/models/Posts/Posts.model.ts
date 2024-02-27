@@ -23,6 +23,12 @@ class Post
   public updatedAt!: Date;
   public title!: string;
   public content!: string;
+
+  // Método para exibir o conteúdo do post
+  //public displayContent(): void {
+  // console.log("Conteúdo do Post:");
+  //  console.log(this.content);
+  //}
 }
 
 Post.init(
@@ -63,7 +69,22 @@ Post.init(
   }
 );
 
-
-Post.belongsTo(User, { foreignKey: 'userid', as: 'author' });
+Post.belongsTo(User, { foreignKey: "userid", as: "author" });
 
 export default Post;
+
+//class Article extends Post {
+//  public displayContent(): void {
+//    console.log("Artigo:");
+//    console.log(this.title);
+//    console.log(this.content);
+//  }
+//}
+
+//class EventPost extends Post {
+//  public displayContent(): void {
+//   console.log("Detalhes do Evento:");
+//   console.log("Título do Evento: " + this.title);
+//   console.log("Data e hora do Evento: " + this.content);
+// }
+//}

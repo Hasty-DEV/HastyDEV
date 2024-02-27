@@ -11,7 +11,7 @@ interface AuthorType {
 interface PostType {
   postid: number;
   profilePic?: string;
-  userId: string;
+  userid: string;
   author: AuthorType;
   content: string;
   img?: string;

@@ -1,7 +1,7 @@
 import { FaHeart, FaRegHeart, FaComment, FaShare } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Comments from "../comments/Comments";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import PostContainer from "../../styles/post/Post.styles";
 
 interface AuthorType {
@@ -10,9 +10,8 @@ interface AuthorType {
 }
 
 interface PostType {
-  postid: any;
-  profilePic?: string;
-  userId: string;
+  postid: number | string;
+  userid: number | string;
   author: AuthorType;
   content: string;
   img?: string;
@@ -20,25 +19,29 @@ interface PostType {
   title: string;
 }
 
-import userIcon from "../../assets/user/user_icon.png";
+import userIconDefault from "../../assets/user/user_icon.png";
+import { getUserIconByID } from "../../../data/services/getUserIconService";
 
 const Post = ({ post }: { post: PostType }) => {
   const [commentOpen, setCommentOpen] = useState(false);
   const [formattedUpdatedAt, setFormattedUpdatedAt] = useState<string>("");
+  const [userIcon, setUserIcon] = useState<string | null>(null);
+
+  const liked = false;
 
   const formatUpdatedAt = (updatedAt: string) => {
     const date = new Date(updatedAt);
-    const options: Intl.DateTimeFormatOptions = { 
-      year: "numeric", 
-      month: "long", 
-      day: "numeric", 
-      hour: "numeric", 
-      minute: "numeric", 
+    const options: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
       second: "numeric",
       localeMatcher: "best fit",
       weekday: "long",
-      era: undefined, 
-      timeZone: "America/Sao_Paulo" 
+      era: undefined,
+      timeZone: "America/Sao_Paulo",
     };
     return date.toLocaleDateString("pt-BR", options);
   };
@@ -47,8 +50,23 @@ const Post = ({ post }: { post: PostType }) => {
     setFormattedUpdatedAt(formatUpdatedAt(post.updatedAt));
   }, [post.updatedAt]);
 
-  // TEMPORARY
-  const liked = false;
+  console.log(post)
+
+  const fetchData = useCallback(async () => {
+    try {
+      const icon = await getUserIconByID(post.userid);
+      console.log(`Fetch para: ${post.userid}`);
+      if (icon && icon.data) {
+        setUserIcon(URL.createObjectURL(new Blob([icon.data])));
+      }
+    } catch (error) {
+      console.error("Erro ao obter dados do usuário:", error);
+    }
+  }, [post.userid]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   return (
     <PostContainer>
@@ -56,10 +74,10 @@ const Post = ({ post }: { post: PostType }) => {
         <div className="container">
           <div className="user">
             <div className="userInfo">
-              <img src={post.profilePic || userIcon} alt="" />
+              <img src={userIcon || userIconDefault} alt="" />
               <div className="details">
                 <Link
-                  to={`/profile/${post.userId}`}
+                  to={`/profile/${post.userid}`}
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
                   <span className="name">{`${post.author.first_name} ${post.author.last_name}`}</span>
@@ -86,7 +104,6 @@ const Post = ({ post }: { post: PostType }) => {
             </div>
           </div>
           {commentOpen && <Comments postId={post.postid.toString()} />}
-
         </div>
       </div>
     </PostContainer>
