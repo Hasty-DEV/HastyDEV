@@ -58,8 +58,14 @@ routes.post("/contactForm", ContactFormController.sendContactForm);
 
 routes.post(
   "/upload",
-  verifyTokenMiddleware.verifyTokenWithBody,
+  verifyTokenMiddleware.verifyTokenWithIdAndTokenInHeaders,
   UserIconController.setUserIcon
+);
+
+routes.get(
+  "/userIcon/:id",
+  verifyTokenMiddleware.verifyTokenWithParam,
+  UserIconController.getUserIcon
 );
 
 routes.get(
@@ -81,7 +87,7 @@ routes.get(
 );
 routes.post(
   "/comments/:postid",
-  verifyTokenMiddleware.verifyTokenWithBody,
+  
   CommetsController.createCommentForPost
 );
 

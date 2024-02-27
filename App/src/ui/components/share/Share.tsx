@@ -1,16 +1,17 @@
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import Image from "../../assets/img.png";
-import UserIcon from "../../assets/user/user_icon.png";
+import DefaultUserIcon from "../../assets/user/user_icon.png";
 import ShareContainer from "../../styles/share/Share.styles";
 import { api } from "../../../data/services/api";
 import Loader from "../Loader/Loader";
 import { useNavigate } from "react-router-dom";
+import { getUserIcon } from "../../../data/services/getUserIconService";
 
 const Share = () => {
   const titleRef = useRef<HTMLInputElement>(null);
   const contentRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleOnSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -42,14 +43,31 @@ const Share = () => {
     }
   };
 
+  const [userIcon, setUserIcon] = useState<string | null>(null);
+
+  const fetchData = useCallback(async () => {
+    try {
+      const icon = await getUserIcon();
+      if (icon && icon.data) {
+        setUserIcon(URL.createObjectURL(new Blob([icon.data])));
+      }
+    } catch (error) {
+      console.error("Erro ao obter dados do usuário:", error);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
   return (
     <>
       {loading && <Loader />}
-      <ShareContainer> 
+      <ShareContainer>
         <div className="share">
           <form className="container" onSubmit={(e) => handleOnSubmit(e)}>
             <div className="top">
-              <img src={UserIcon} alt="" />
+              <img src={userIcon || DefaultUserIcon} alt="" />
               <div>
                 <input
                   type="text"

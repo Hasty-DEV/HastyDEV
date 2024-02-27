@@ -10,6 +10,7 @@ interface AuthorType {
 }
 
 interface PostType {
+  postid: any;
   profilePic?: string;
   userId: string;
   author: AuthorType;
@@ -84,7 +85,8 @@ const Post = ({ post }: { post: PostType }) => {
               Compartilhe
             </div>
           </div>
-          {commentOpen && <Comments />}
+          {commentOpen && <Comments postId={post.postid.toString()} />}
+
         </div>
       </div>
     </PostContainer>

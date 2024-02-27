@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import styled from "styled-components";
 import {
@@ -13,9 +14,10 @@ import {
 import { Link } from "react-router-dom";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { DarkModeContext } from "../../../data/context/darkModeContext";
-import UserIcon from "../../assets/user/user_icon.png";
+import DefaultUserIcon from "../../assets/user/user_icon.png";
 import NavbarContainer from "../../styles/navbar/Navbar.styles";
 import { getUserData } from "../../../data/services/userService";
+import { getUserIcon } from "../../../data/services/getUserIconService";
 
 const StyledIcon = styled.div`
   cursor: pointer;
@@ -30,17 +32,27 @@ const StyledInput = styled.input`
   outline: none;
 `;
 
+interface UserDataTypes {
+  first_name: string;
+  last_name: string;
+}
+
 const Navbar = () => {
   const construcao = () => {
     alert("Em construção!");
   };
 
-  const [userData, setUserData] = useState<any>(null);
+  const [userData, setUserData] = useState<UserDataTypes | null>(null);
+  const [userIcon, setUserIcon] = useState<string | null>(null);
 
   const fetchData = useCallback(async () => {
     try {
       const user = await getUserData();
       setUserData(user);
+      const icon = await getUserIcon();
+      if (icon && icon.data) {
+        setUserIcon(URL.createObjectURL(new Blob([icon.data])));
+      }
     } catch (error) {
       console.error("Erro ao obter dados do usuário:", error);
     }
@@ -49,6 +61,7 @@ const Navbar = () => {
   useEffect(() => {
     fetchData();
   }, [fetchData]);
+
 
   const darkModeContext = useContext(DarkModeContext);
 
@@ -82,9 +95,11 @@ const Navbar = () => {
           <StyledIcon as={FaEnvelope} />
           <StyledIcon as={FaBell} />
           <div className="user">
-          <Link to="/perfil">
-                <button><img src={UserIcon} alt="" /></button>
-              </Link>
+            <Link to="/perfil">
+              <button>
+                <img src={userIcon || DefaultUserIcon} alt="" />
+              </button>
+            </Link>
             <span>
               {userData
                 ? `${userData.first_name} ${userData.last_name}`

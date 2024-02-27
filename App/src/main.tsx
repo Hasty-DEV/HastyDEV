@@ -8,9 +8,9 @@ import { AuthProvider } from "./data/context/AuthContext.tsx";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <AuthProvider>
-      <DarkModeContextProvider>
-        <App />
-      </DarkModeContextProvider>
+        <DarkModeContextProvider>
+          <App />
+        </DarkModeContextProvider>
     </AuthProvider>
   </React.StrictMode>
 );
