@@ -60,7 +60,7 @@ routes.post("/contactForm", ContactFormController.sendContactForm);
 
 // Rotas protegidas por token
 routes.post(
-  "/upload",
+  "/upload/:id",
   verifyTokenMiddleware.verifyTokenWithIdAndTokenInHeaders,
   UserIconController.setUserIcon
 );
