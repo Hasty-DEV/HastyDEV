@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
 
   return (
     <FooterStyled>
-      <Container fluid className="custom-mt-15percent">
+      <Container fluid>
         <hr className="linha" />
         <Row className="mt-4">
           <Col

@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const FooterStyled = styled.footer`
   background: ${(props) => props.theme.colors.background};
   color: ${(props) => props.theme.colors.text};
-  margin-top: 5%;
-  padding: 5%;
+  margin-top: 1%;
+  padding: 2%;
 
   p {
     margin-top: 10%;
