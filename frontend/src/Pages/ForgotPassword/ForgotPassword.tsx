@@ -136,12 +136,16 @@ const ForgotPassword = () => {
                     <span>{errors.newPassword}</span>
                   )}
 
+                  <div className="button">
                   <ButtonPrimaryLongNoLink
+                  
                     className="mt-3"
                     type="submit"
                     buttonText="Entre em Contato"
                     disabled={isSubmitting}
+                    
                   />
+                  </div>
                 </form>
               )}
             </Formik>
@@ -157,4 +161,30 @@ export default ForgotPassword;
 
 const ForgotPasswordContainer = styled.section`
   margin-top: 10%;
+
+ span{
+
+  margin-top:5px;
+  display: flex;
+  justify-content: center;  
+
+ }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 50px;
+    border: 2px solid ${(props) => props.theme.colors.secondary};
+    background: ${(props) => props.theme.colors.background};
+    color: ${(props) => props.theme.colors.text};
+    margin-top:4%;
+    text-align: center;
+
+  }
+
+  .button {
+    display: flex;
+    justify-content: center;  
+  }
+ 
 `;
