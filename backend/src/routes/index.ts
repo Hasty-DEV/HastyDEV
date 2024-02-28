@@ -12,7 +12,7 @@ import UserIconController from "../api/controllers/Images/UserIcon.controller";
 import PostController from "../api/controllers/Posts/Posts.controller";
 import CommetsController from "../api/controllers/Commets/Comments.controller";
 import AnswersController from "../api/controllers/Awnsers/Awnsers.controller";
-//import TokenVerifier from "../api/services/verify.token.middleware";
+import UpdateUserController from "../api/controllers/User/UpdateUser.controller";
 
 const routes = Router();
 
@@ -20,15 +20,20 @@ routes.get("/", (req, res) => {
   res.send("Bem-Vindo a HastyDEV API");
 });
 
-//Rotas de Autenticação
+// Rotas de Autenticação
 routes.post("/login", LoginController.login);
 routes.post("/register", RegisterController.RegisterUser);
 
-//User Data
+// User Data
 routes.get(
   "/user/:id",
   verifyTokenMiddleware.verifyTokenWithParam,
   ReadUserController.getUserData
+);
+routes.put(
+  "/user/:id",
+  verifyTokenMiddleware.verifyTokenWithParam,
+  UpdateUserController.updateUser
 );
 
 // Rotas para verificar email
@@ -41,7 +46,7 @@ routes.post(
   EmailCodeVerificationController.codeVerification
 );
 
-// Rotas para resetar senha do usuario
+// Rotas para resetar senha do usuário
 routes.post(
   "/sendResetPassVerification",
   SendResetPassVerificationController.sendPasswordResetEmail
@@ -54,8 +59,6 @@ routes.post(
 routes.post("/contactForm", ContactFormController.sendContactForm);
 
 // Rotas protegidas por token
-//routes.use("/auth", TokenVerifier.verifyToken);
-
 routes.post(
   "/upload",
   verifyTokenMiddleware.verifyTokenWithIdAndTokenInHeaders,
@@ -73,7 +76,6 @@ routes.get(
   verifyTokenMiddleware.verifyTokenWithOnlyToken,
   UserIconController.getUserIcon
 );
-
 
 routes.get(
   "/posts",
@@ -94,7 +96,6 @@ routes.get(
 );
 routes.post(
   "/comments/:postid",
-  
   CommetsController.createCommentForPost
 );
 

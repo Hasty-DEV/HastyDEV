@@ -1,9 +1,8 @@
-import { useState, ChangeEvent, FormEvent, useEffect, useCallback } from "react";
+import  { useState, ChangeEvent, FormEvent, useEffect, useCallback } from "react";
 import { api } from "../../data/services/api";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import DefaultUserIcon from "../../ui/assets/user/user_icon.png";
-// Importe o componente de estilo PerfilContainer do arquivo de estilo
 import PerfilContainer from '../../ui/styles/perfil/Perfil.styles';
 import { getUserIcon } from "../../data/services/getUserIconService";
 import { getUserData } from "../../data/services/userService";
@@ -15,24 +14,19 @@ const Perfil: React.FC = () => {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [userIcon, setUserIcon] = useState<string | null>(null);
   const [userData, setUserData] = useState<UserDataTypes | null>(null);
-  
-
-  
-  const [name, setName] = useState<string>("Pepper");
-
-  const [surname, setSurname] = useState<string>("Potts");
-
-  const [username, setUsername] = useState<string>("pepper_potts");
-
+  const [name, setName] = useState<string>("");
+  const [surname, setSurname] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
   const [editMode, setEditMode] = useState<boolean>(false);
+  const [userId, setUserId] = useState<string>("");
 
 
   interface UserDataTypes {
+    id: string;
     first_name: string;
     last_name: string;
-    username: string
+    username: string;
   }
-
   useEffect(() => {
     const userId = localStorage.getItem("userId");
     const userToken = localStorage.getItem("userToken");
@@ -40,16 +34,26 @@ const Perfil: React.FC = () => {
     api.defaults.headers.common["id"] = userId;
     api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
 
+    setUserId(userId ?? "")
+
     return () => {
       delete api.defaults.headers.common["id"];
       delete api.defaults.headers.common["Authorization"];
     };
   }, []);
 
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   const fetchData = useCallback(async () => {
     try {
       const user = await getUserData();
       setUserData(user);
+   
+      setName(user.first_name);
+      setSurname(user.last_name);
+      setUsername(user.username);
       const icon = await getUserIcon();
       if (icon && icon.data) {
         setUserIcon(URL.createObjectURL(new Blob([icon.data])));
@@ -58,10 +62,6 @@ const Perfil: React.FC = () => {
       console.error("Erro ao obter dados do usuário:", error);
     }  
   }, []);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files && event.target.files[0];
@@ -95,51 +95,21 @@ const Perfil: React.FC = () => {
     }
   };
 
-
-  
-  const handleEditName = () => {
-
-    setEditMode(true);
-
-  };
-
- 
-
-  const handleEditSurname = () => {
-
-    setEditMode(true);
-
-  };
-
- 
-
-  const handleEditUsername = () => {
-
-    setEditMode(true);
-
-  };
-
- 
-
   const handleSaveChanges = async () => {
-
-    setEditMode(false);
-
- 
-
-    try {
-
-      await api.post("/perfil", { name, surname, username });
-
-      console.log("Alterações salvas com sucesso!");
-
-    } catch (error) {
-
-      console.error("Erro ao salvar alterações:", error);
-
+    if (userId === null || userId === "") {
+      console.error("ID do usuário não está definido.");
+      return;
     }
 
-  };
+  setEditMode(false);
+  try {
+    await api.put(`/user/${userId}`, { first_name: name, last_name: surname, username });
+    console.log("Alterações salvas com sucesso!");
+    fetchData();
+  } catch (error) {
+    console.error("Erro ao salvar alterações:", error);
+  }
+};
 
   return (
     <PerfilContainer>
@@ -164,12 +134,12 @@ const Perfil: React.FC = () => {
               <input
                 className="input"
                 type="text"
-                value={editMode ? name : userData?.first_name || ""}
+                value={name}
                 onChange={(e) => setName(e.target.value)}
                 disabled={!editMode}
               />
               {!editMode && (
-                <button type="button" onClick={handleEditName} className="edit-button">
+                <button type="button" onClick={() => setEditMode(true)} className="edit-button">
                   <FontAwesomeIcon icon={faEdit} className="editValues" />
                 </button>
               )}
@@ -178,12 +148,12 @@ const Perfil: React.FC = () => {
               <input
                 className="input"
                 type="text"
-                value={editMode ? surname : userData?.last_name || ""}
+                value={surname}
                 onChange={(e) => setSurname(e.target.value)}
                 disabled={!editMode}
               />
               {!editMode && (
-                <button type="button" onClick={handleEditSurname} className="edit-button">
+                <button type="button" onClick={() => setEditMode(true)} className="edit-button">
                   <FontAwesomeIcon icon={faEdit} className="editValues" />
                 </button>
               )}
@@ -192,20 +162,19 @@ const Perfil: React.FC = () => {
               <input
                 className="input"
                 type="text"
-                value={editMode ? username : userData?.username || ""}
+                value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 disabled={!editMode}
               />
               {!editMode && (
-                <button type="button" onClick={handleEditUsername} className="edit-button">
+                <button type="button" onClick={() => setEditMode(true)} className="edit-button">
                   <FontAwesomeIcon icon={faEdit} className="editValues" />
                 </button>
               )}
             </p>
           </div>
   
-          {/* Adicione botões para editar e salvar sobrenome e nome de usuário */}
-          <button type="submit" disabled={uploading} onClick={handleSaveChanges} className="saveButton">
+          <button type="submit" disabled={uploading} className="saveButton" onClick={handleSaveChanges}>
             {uploading ? "Enviando..." : "Enviar"}
           </button>
           {error && <div style={{ color: "red" }}>{error}</div>}
