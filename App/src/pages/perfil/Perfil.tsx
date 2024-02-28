@@ -1,4 +1,4 @@
-import  { useState, ChangeEvent, FormEvent, useEffect, useCallback } from "react";
+import { useState, ChangeEvent, FormEvent, useEffect, useCallback } from "react";
 import { api } from "../../data/services/api";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
@@ -13,7 +13,8 @@ const Perfil: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [userIcon, setUserIcon] = useState<string | null>(null);
- 
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
+
   const [name, setName] = useState<string>("");
   const [surname, setSurname] = useState<string>("");
   const [username, setUsername] = useState<string>("");
@@ -51,12 +52,22 @@ const Perfil: React.FC = () => {
       }
     } catch (error) {
       console.error("Erro ao obter dados do usuário:", error);
-    }  
+    }
   }, []);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files && event.target.files[0];
     setFile(selectedFile);
+
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewImage(reader.result as string);
+      };
+      reader.readAsDataURL(selectedFile);
+    } else {
+      setPreviewImage(null);
+    }
   };
 
   const handleUpload = async (e: FormEvent) => {
@@ -75,7 +86,7 @@ const Perfil: React.FC = () => {
     formData.append("userIcon", file);
 
     try {
-      const response = await api.post("/upload", formData);
+      const response = await api.post(`/upload/${userId}`, formData);
       setSuccessMessage("Arquivo enviado com sucesso.");
       console.log("Arquivo enviado com sucesso:", response.data);
     } catch (error) {
@@ -92,22 +103,22 @@ const Perfil: React.FC = () => {
       return;
     }
 
-  setEditMode(false);
-  try {
-    await api.put(`/user/${userId}`, { first_name: name, last_name: surname, username });
-    console.log("Alterações salvas com sucesso!");
-    fetchData();
-  } catch (error) {
-    console.error("Erro ao salvar alterações:", error);
-  }
-};
+    setEditMode(false);
+    try {
+      await api.put(`/user/${userId}`, { first_name: name, last_name: surname, username });
+      console.log("Alterações salvas com sucesso!");
+      fetchData();
+    } catch (error) {
+      console.error("Erro ao salvar alterações:", error);
+    }
+  };
 
   return (
     <PerfilContainer>
       <form onSubmit={(e) => handleUpload(e)} encType="multipart/form-data">
         <div className="card">
           <label htmlFor="fileInput" className="profileImageContainer">
-            <img className="profileImage" src={userIcon || DefaultUserIcon} alt="" />
+            <img className="profileImage" src={previewImage || userIcon || DefaultUserIcon} alt="" />
             <FontAwesomeIcon icon={faEdit} className="editIcon" />
             <input
               id="fileInput"
@@ -119,7 +130,7 @@ const Perfil: React.FC = () => {
               disabled={uploading}
             />
           </label>
-  
+
           <div className="textContainer">
             <p className="name">
               <input
@@ -164,7 +175,7 @@ const Perfil: React.FC = () => {
               )}
             </p>
           </div>
-  
+
           <button type="submit" disabled={uploading} className="saveButton" onClick={handleSaveChanges}>
             {uploading ? "Enviando..." : "Enviar"}
           </button>
