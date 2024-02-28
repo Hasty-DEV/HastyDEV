@@ -10,11 +10,10 @@ interface Comment {
   content: string;
   createdAt: string;
 }
-
 const Comments: React.FC<{ postId: string }> = ({ postId }) => {
   const [userId, setUserId] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(null);
-  const [userName, setUserName] = useState<string | null>(null); 
+  const [userName, setUserName] = useState<string | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState<string>("");
 
@@ -23,21 +22,22 @@ const Comments: React.FC<{ postId: string }> = ({ postId }) => {
       try {
         const storedUserId = localStorage.getItem("userId");
         const storedToken = localStorage.getItem("userToken");
-  
+
         if (storedUserId && storedToken && postId) {
           setUserId(storedUserId);
           setToken(storedToken);
-  
-          
+
           const commentsForPost = await getCommentsForPost(postId);
           setComments(commentsForPost);
-  
+
           try {
-            
-            const userResponse = await api.get(`/user/${storedUserId}`);
-            
-  
-           
+            const userResponse = await api.get(`/user/${storedUserId}`, {
+              headers: {
+                id: storedUserId,
+                Authorization: `Bearer ${storedToken}`,
+              },
+            });
+
             if (userResponse.data && userResponse.data.user) {
               const userData = userResponse.data.user;
               setUserName(`${userData.first_name} ${userData.last_name}`);
@@ -50,14 +50,17 @@ const Comments: React.FC<{ postId: string }> = ({ postId }) => {
         console.error(error);
       }
     };
-  
+
     fetchData();
   }, [postId]);
-  
-
   const getCommentsForPost = async (postId: string): Promise<Comment[]> => {
     try {
-      const response = await api.get<Comment[]>(`/comments/${postId}`);
+      const response = await api.get<Comment[]>(`/comments/${postId}`, {
+        headers: {
+          id: userId || "",
+          Authorization: `Bearer ${token || ""}`,
+        },
+      });
       return response.data;
     } catch (error) {
       console.error(error);
@@ -76,14 +79,18 @@ const Comments: React.FC<{ postId: string }> = ({ postId }) => {
           userid: userId,
           content: newComment,
           token: token,
+          id:userId,
         };
-        await api.post(`/comments/${postId}`, payload);
+        await api.post(`/comments/${postId}`, payload, {
+          headers: {
+            id: userId,
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-       
         const updatedComments = await getCommentsForPost(postId);
         setComments(updatedComments);
 
-       
         setNewComment("");
       }
     } catch (error) {

@@ -95,7 +95,7 @@ routes.get(
   CommetsController.getAllCommentsForPost
 );
 routes.post(
-  "/comments/:postid",
+  "/comments/:postid",  verifyTokenMiddleware.verifyTokenWithIdAndTokenInHeaders,
   CommetsController.createCommentForPost
 );
 
