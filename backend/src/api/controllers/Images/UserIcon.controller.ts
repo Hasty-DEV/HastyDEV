@@ -3,6 +3,7 @@ import multer from "multer";
 import { uploadPerfilIcon } from "../../../config/multer/multer";
 import * as path from "path";
 import * as fs from "fs";
+
 class UserIconController {
   public async setUserIcon(req: Request, res: Response): Promise<void> {
     try {
@@ -11,7 +12,13 @@ class UserIconController {
         __dirname,
         `../../../../uploads/${userId}/perfil`
       );
-      // Verifique se já existe um arquivo na pasta
+
+      // Verificar se o diretório existe, se não, criar
+      if (!fs.existsSync(uploadDir)) {
+        fs.mkdirSync(uploadDir, { recursive: true });
+      }
+
+      // Verificar se já existe um arquivo na pasta
       const files = fs.readdirSync(uploadDir);
       const userIconFile = files.find((file) => file.startsWith("userIcon"));
       if (userIconFile) {
@@ -39,6 +46,7 @@ class UserIconController {
         .send("Ocorreu um erro interno ao configurar o upload do ícone do usuário");
     }
   }
+
   public async getUserIcon(req: Request, res: Response): Promise<void> {
     try {
       const userId = req.params.id;
