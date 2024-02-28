@@ -15,14 +15,16 @@ const App = () => {
   const [theme, setTheme] = usePersisteState("themes", light);
 
   return (
-    <ThemeProvider theme={theme}>
-      <AuthProvider>
-        <Pages theme={theme} />
-    </ThemeProvider>setTheme={setTheme} />
-      </AuthProvider>
-      <GlobalStyle />
+    <>
+      <ThemeProvider theme={theme}>
+        <AuthProvider>
+          <Pages theme={theme} setTheme={setTheme} />
+        </AuthProvider>
+        <GlobalStyle />
+      </ThemeProvider>
       <MemoizedAnalytics />
-      <MemoizedSpeedInsights 
+      <MemoizedSpeedInsights />
+    </>
   );
 };
 
