@@ -13,20 +13,13 @@ const Perfil: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [userIcon, setUserIcon] = useState<string | null>(null);
-  const [userData, setUserData] = useState<UserDataTypes | null>(null);
+ 
   const [name, setName] = useState<string>("");
   const [surname, setSurname] = useState<string>("");
   const [username, setUsername] = useState<string>("");
   const [editMode, setEditMode] = useState<boolean>(false);
   const [userId, setUserId] = useState<string>("");
 
-
-  interface UserDataTypes {
-    id: string;
-    first_name: string;
-    last_name: string;
-    username: string;
-  }
   useEffect(() => {
     const userId = localStorage.getItem("userId");
     const userToken = localStorage.getItem("userToken");
@@ -49,8 +42,6 @@ const Perfil: React.FC = () => {
   const fetchData = useCallback(async () => {
     try {
       const user = await getUserData();
-      setUserData(user);
-   
       setName(user.first_name);
       setSurname(user.last_name);
       setUsername(user.username);
