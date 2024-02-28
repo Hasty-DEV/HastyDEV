@@ -18,6 +18,7 @@ interface UserDataTypes {
   first_name: string;
   last_name: string;
 }
+
 const LeftBar = () => {
   const { logout } = useAuth();
   const [userData, setUserData] = useState<UserDataTypes | null>(null);
