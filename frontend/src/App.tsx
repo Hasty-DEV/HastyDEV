@@ -1,3 +1,4 @@
+import { memo } from "react";
 import GlobalStyle from "./Ui/styles/global";
 import { ThemeProvider } from "styled-components";
 import Pages from "./Pages/index";
@@ -7,19 +8,22 @@ import light from "./Ui/styles/themes/light";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 
-function App() {
+const MemoizedAnalytics = memo(Analytics);
+const MemoizedSpeedInsights = memo(SpeedInsights);
+
+const App = () => {
   const [theme, setTheme] = usePersisteState("themes", light);
 
   return (
     <ThemeProvider theme={theme}>
       <AuthProvider>
-        <Pages theme={theme} setTheme={setTheme} />
+        <Pages theme={theme} />
+    </ThemeProvider>setTheme={setTheme} />
       </AuthProvider>
       <GlobalStyle />
-      <Analytics />
-      <SpeedInsights />
-    </ThemeProvider>
+      <MemoizedAnalytics />
+      <MemoizedSpeedInsights 
   );
-}
+};
 
 export default App;

@@ -3,13 +3,13 @@ import "./ui/styles/styles.scss";
 import routes from "./pages";
 import GlobalStyle from "./ui/styles/Global";
 
-function App() {
+const App = () => {
   return (
     <div>
       <RouterProvider router={routes} />
       <GlobalStyle />
     </div>
   );
-}
+};
 
 export default App;

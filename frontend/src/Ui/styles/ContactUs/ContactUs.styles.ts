@@ -43,7 +43,6 @@ export const ContactUsInfoDiv = styled.div`
 `;
 
 export const HeadingSubtitle = styled(HS)`
-
   @media (max-width: 767px) {
     font-size: 2rem;
     line-height: 48px;
@@ -56,7 +55,6 @@ export const HeadingSubtitle = styled(HS)`
 `;
 
 export const Paragraph = styled(P)`
-
   @media (max-width: 767px) {
     font-size: 1rem;
     line-height: 16px;
@@ -81,12 +79,15 @@ export const ContactUsSocialIconsDiv = styled.div`
     cursor: pointer;
     transition: 0.5s all;
 
-    svg {
-      margin-top: 2px;
-    }
-
     &:hover {
       background: #fff;
+    }
+  }
+
+  a {
+    svg {
+      margin-top: 2px;
+      color: ${(props) => props.theme.colors.text};
     }
   }
 `;

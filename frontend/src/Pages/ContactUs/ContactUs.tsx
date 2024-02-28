@@ -7,9 +7,9 @@ import { FiPhoneCall } from "react-icons/fi";
 import { AiOutlineMail } from "react-icons/ai";
 import {
   BiMap,
-  BiLogoTwitter,
   BiLogoInstagram,
-  BiLogoDiscordAlt,
+  BiLogoWhatsapp,
+  BiLogoGmail,
 } from "react-icons/bi";
 
 const ContactUs: React.FC = () => {
@@ -66,13 +66,25 @@ const ContactUs: React.FC = () => {
                 <C.ContactUsSocialIconsDiv>
                   <ul>
                     <li>
-                      <BiLogoTwitter height={16} width={16} />
+                      <a href="mailto:hastydev@jeffldscompany.com.br">
+                      <BiLogoGmail height={16} width={16} />
+                      </a>
                     </li>
                     <li>
-                      <BiLogoInstagram height={16} width={16} />
+                      <a
+                        href="https://www.instagram.com/hastydev/"
+                        target="_blank"
+                      >
+                        <BiLogoInstagram height={16} width={16} />
+                      </a>
                     </li>
                     <li>
-                      <BiLogoDiscordAlt height={16} width={16} />
+                      <a
+                        href="https://api.whatsapp.com/send?phone=5511977328121"
+                        target="_blank"
+                      >
+                        <BiLogoWhatsapp height={16} width={16} />
+                      </a>
                     </li>
                   </ul>
                 </C.ContactUsSocialIconsDiv>
