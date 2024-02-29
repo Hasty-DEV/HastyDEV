@@ -7,9 +7,9 @@ import HeroImg2 from "../../Ui/assets/images/Hero/Hero-Img2.webp";
 import HeroImg3 from "../../Ui/assets/images/Hero/Hero-Img3.webp";
 import HeroImg4 from "../../Ui/assets/images/Hero/Hero-Img4.webp";
 
-const Hero: React.FC = () => {
+const Hero = () => {
   return (
-    <HeroContainer>
+    <HeroContainer className="mb-5">
       <Container className="text-center mt-5 ">
         <article className="title">
           <HeadingTitle title="Bem-vindo à HastyDEV - Desenvolva Projetos Reais" />
@@ -27,8 +27,8 @@ const Hero: React.FC = () => {
         </article>
         <article className="mt-4 img-container">
           <img src={HeroImg1} alt="" className="Img-hero img-1 " />
-          <img src={HeroImg2} alt="" className="Img-hero img-2" />
-          <img src={HeroImg3} alt="" className="Img-hero img-3" />
+          <img src={HeroImg2} alt="" className="Img-hero img-2" width="190" height="143"/>
+          <img src={HeroImg3} alt="" className="Img-hero img-3" width="190" height="127"/>
           <img src={HeroImg4} alt="" className="Img-hero img-4" />
         </article>
       </Container>

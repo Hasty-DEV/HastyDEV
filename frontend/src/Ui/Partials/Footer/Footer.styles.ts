@@ -3,32 +3,20 @@ import styled from "styled-components";
 export const FooterStyled = styled.footer`
   background: ${(props) => props.theme.colors.background};
   color: ${(props) => props.theme.colors.text};
-  margin-top: 1%;
-  padding: 2%;
+  width: 100vw;
 
-  p {
-    margin-top: 10%;
+  .footer-container {
+    padding: 20px;
   }
 
-  @media (max-width: 580px) {
-    p {
-      margin-top: 0; 
-    }
+  p img {
+    margin-bottom: 4px;
   }
 `;
 
 export const SocialMediaContainer = styled.div`
-  .card {
-    width: 190px;
-    height: 50px;
-    background-color: ${(props) => props.theme.colors.background};
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    justify-content: center;
-    padding: 5px 5px;
+  div {
     gap: 15px;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
   }
 
   .socialContainer {

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { FooterStyled, SocialMediaContainer } from "./Footer.styles";
 import LogoDark from "../../assets/LogoDark.svg";
 import LogoLight from "../../assets/LogoLight.svg";
@@ -6,7 +6,7 @@ import { Row, Col, Container } from "react-bootstrap";
 import { ThemeContext } from "styled-components";
 import { FaInstagram, FaLinkedin, FaTwitter, FaWhatsapp } from "react-icons/fa";
 
-const Footer: React.FC = () => {
+const Footer = () => {
   const theme = useContext(ThemeContext);
 
   if (!theme) {
@@ -18,8 +18,8 @@ const Footer: React.FC = () => {
   return (
     <FooterStyled>
       <Container fluid>
-        <hr className="linha" />
-        <Row className="mt-4">
+        <hr />
+        <Row className="mt-4 footer-container">
           <Col
             xs={12}
             sm={4}
@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
           >
             <p>
               <SocialMediaContainer>
-                <div className="card">
+                <div className="d-flex">
                   <a
                     href="#"
                     className="socialContainer containerOne"
