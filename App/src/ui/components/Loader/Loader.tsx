@@ -4,7 +4,7 @@ const Loader = () => {
   return (
     <LoaderOverlay>
       <LoaderStyled>
-        <div className="loader-inner"></div>
+        <div className="loader"></div>
       </LoaderStyled>
     </LoaderOverlay>
   );
