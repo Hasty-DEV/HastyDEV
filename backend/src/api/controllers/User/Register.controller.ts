@@ -11,7 +11,7 @@ class Register {
   public async RegisterUser(req: Request, res: Response): Promise<void> {
 
     await Promise.all(validationRules.registrationValidationRules.map(rule => rule.run(req)));
-    const { username, email, password, first_name, last_name } = req.body;
+    const { username, email, password, first_name, last_name, role } = req.body;
 
     const errors = validationResult(req);
 
@@ -54,6 +54,7 @@ class Register {
           email: email,
           first_name: first_name,
           last_name: last_name,
+          role: role,
         });
 
         const user_id = user.dataValues.userid;
