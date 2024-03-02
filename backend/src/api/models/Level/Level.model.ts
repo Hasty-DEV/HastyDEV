@@ -1,6 +1,7 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from "../../../config/database/MySQL/MySQL";
 import User from "../User/User.model";
+import { NextFunction } from "express";
 
 interface LevelAttributes {
   userid: number;
@@ -31,7 +32,7 @@ class LevelModel
 
   public static async incrementExp(
     userid: number,
-    expToAdd: number
+    expToAdd: number,
   ): Promise<void> {
     const user = await LevelModel.findOne({ where: { userid } });
     if (user) {

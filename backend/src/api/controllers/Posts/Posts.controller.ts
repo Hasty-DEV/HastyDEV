@@ -19,9 +19,9 @@ class Posts extends Level {
     next: NextFunction
   ): Promise<void> => {
     try {
-      await PostService(req, res, next);
       const userid: number = req.body.id;
       await this.incrementExp(userid, 10);
+      await PostService(req, res, next);
       res.status(201).json("Post Criado com Sucesso!");
     } catch (error) {
       console.error("Erro ao criar post:", error);
