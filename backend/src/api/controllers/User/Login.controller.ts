@@ -5,6 +5,7 @@ import User from "../../models/User/User.model";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import Token from "../../models/Token/Token.model";
+import { InitializeLevel } from "../../services/Level/InitializeLevel.service";
 
 const MAX_LOGIN_ATTEMPTS = 5;
 const LOCK_TIME = 15 * 60 * 1000;
@@ -29,7 +30,10 @@ class LoginController {
       }
 
       if (!user.isVerified) {
-        res.status(403).json({ error: "Conta não verificada. Por favor, verifique sua conta antes de fazer o login." });
+        res.status(403).json({
+          error:
+            "Conta não verificada. Por favor, verifique sua conta antes de fazer o login.",
+        });
         return;
       }
 
@@ -53,6 +57,9 @@ class LoginController {
         user.loginAttempts = 0;
 
         const user_id = user.dataValues.userid;
+
+        await InitializeLevel(user_id);
+
         const secret = process.env.SECRET;
         if (secret) {
           const token = jwt.sign({ id: user_id }, secret);
@@ -61,7 +68,7 @@ class LoginController {
 
           newToken.createdAt = new Date();
           newToken.updatedAt = new Date();
-          
+
           await newToken.save();
 
           res.json({ id: user_id, token });

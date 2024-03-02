@@ -1,17 +1,23 @@
 import { Request, Response } from "express";
 import User from "../../models/User/User.model";
+import LevelModel from "../../models/Level/Level.model";
 
 class ReadUser {
   public async getUserData(req: Request, res: Response): Promise<void> {
     const userId = req.params.id;
     try {
       if (!userId) {
-        res.status(400).json({ message: "ID de usuário ausente na solicitação" });
+        res
+          .status(400)
+          .json({ message: "ID de usuário ausente na solicitação" });
         return;
       }
-
       const user = await User.findByPk(userId, {
-        attributes: { exclude: ['loginAttempts', 'password'] }
+        attributes: { exclude: ["loginAttempts", "password"] },
+        include: [{
+          model: LevelModel,
+          attributes: ["exp", "level"]
+        }]
       });
 
       if (!user) {
