@@ -1,7 +1,6 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from "../../../config/database/MySQL/MySQL";
 import User from "../User/User.model";
-import { NextFunction } from "express";
 
 interface LevelAttributes {
   userid: number;

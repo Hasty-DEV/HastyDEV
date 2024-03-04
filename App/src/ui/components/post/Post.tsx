@@ -49,13 +49,9 @@ const Post = ({ post }: { post: PostType }) => {
   useEffect(() => {
     setFormattedUpdatedAt(formatUpdatedAt(post.updatedAt));
   }, [post.updatedAt]);
-
-  console.log(post)
-
   const fetchData = useCallback(async () => {
     try {
       const icon = await getUserIconByID(post.userid);
-      console.log(`Fetch para: ${post.userid}`);
       if (icon && icon.data) {
         setUserIcon(URL.createObjectURL(new Blob([icon.data])));
       }

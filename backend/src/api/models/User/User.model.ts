@@ -1,7 +1,6 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from "../../../config/database/MySQL/MySQL";
 
-
 interface UserAttributes {
   userid: number;
   username: string;
@@ -34,6 +33,7 @@ class User
 
   static associate(models: any) {
     this.hasMany(models.Post, { foreignKey: "userid", as: "posts" });
+    this.hasMany(models.Level, {foreignKey: "userid", as: "levels" })
   }
 }
 
