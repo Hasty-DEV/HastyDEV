@@ -3,10 +3,11 @@ import styled from 'styled-components';
 const RightBarContainer = styled.div`
   flex: 3;
   position: sticky;
-  top: 70px;
+  top: 65px;
   height: calc(100vh - 70px);
   overflow: scroll;
-  background-color: ${({ theme }) => theme.bgSoft};
+  background-color: #fff;
+
 
   @media (max-width: 768px) {
     display: none;
@@ -27,7 +28,7 @@ const RightBarContainer = styled.div`
       box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
       padding: 20px;
       margin-bottom: 20px;
-      background-color: ${({ theme }) => theme.bg};
+      background-color: #fff;
 
       span {
         color: gray;
@@ -63,12 +64,12 @@ const RightBarContainer = styled.div`
           }
 
           p {
-            color: ${({ theme }) => theme.textColorSoft};
+            color: #000;
           }
 
           span {
             font-weight: 500;
-            color: ${({ theme }) => theme.textColor};
+            color: #000;
           }
         }
 

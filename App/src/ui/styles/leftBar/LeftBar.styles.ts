@@ -3,7 +3,7 @@ import styled from "styled-components";
 const LeftBarContainer = styled.div`
   flex: 2;
   position: sticky;
-  top: 70px;
+  top: 65px;
   height: calc(100vh - 70px);
   overflow: scroll;
   background-color: #fff;
