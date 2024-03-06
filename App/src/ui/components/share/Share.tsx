@@ -39,7 +39,7 @@ const Share = () => {
       console.error("Erro ao enviar o formulário:", error);
     } finally {
       setLoading(false);
-      navigate("/createPost");
+      window.location.reload()
     }
   };
 
