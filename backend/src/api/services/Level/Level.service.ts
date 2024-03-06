@@ -14,8 +14,7 @@ abstract class Level extends LevelModel {
   }
 
   public async incrementExp(userid: number, exp: number): Promise<void> {
-    const UserExp = await this.getUserExp(userid);
-    const ExpToAdd = UserExp + exp;
+    const ExpToAdd = exp;
     await LevelModel.incrementExp(userid, ExpToAdd);
     await this.HasUpgradedLevel(userid);
   }
