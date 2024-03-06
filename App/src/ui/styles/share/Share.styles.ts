@@ -1,11 +1,11 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const ShareContainer = styled.div`
   box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
   border-radius: 20px;
-  background-color: ${({ theme }) => theme.bg};
-  color: ${({ theme }) => theme.textColor};
-  margin-bottom: 20px;
+  background-color: #fff;
+  color: #000;
+  margin: 20px 50px;
 
   .container {
     padding: 20px;

@@ -13,9 +13,10 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/HastyDEV/LogoLight.svg";
 import { MdPerson } from "react-icons/md";
+import { IoIosSettings } from "react-icons/io";
 
 const Header = () => {
-  const [, setUserData] = useState<UserDataTypes | null>(null);
+  const [userData, setUserData] = useState<UserDataTypes | null>(null);
   const [, setUserIcon] = useState<string | null>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
 
@@ -27,6 +28,7 @@ const Header = () => {
     try {
       const user = await getUserData();
       setUserData(user);
+      console.log(user);
       const icon = await getUserIcon();
       if (icon && icon.data) {
         setUserIcon(URL.createObjectURL(new Blob([icon.data])));
@@ -99,13 +101,28 @@ const Header = () => {
                   title=""
                   id="offcanvasNavbarDropdown-expand"
                 >
-                  <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                  <NavDropdown.Item href="#action4">
-                    Another action
+                  <NavDropdown.ItemText>{`Olá, ${userData?.username}!`}</NavDropdown.ItemText>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item as={Link} to="/">
+                    Meus Projetos
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/">
+                    Outros
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/">
+                    Outros
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/">
+                    Outros
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action5">
-                    Something else here
+                  <NavDropdown.Item
+                    as={Link}
+                    to="/settings"
+                    className="d-flex align-items-center justify-content-start"
+                  >
+                    <IoIosSettings className="mx-1" />
+                    Configurações
                   </NavDropdown.Item>
                 </NavDropdown>
               </div>

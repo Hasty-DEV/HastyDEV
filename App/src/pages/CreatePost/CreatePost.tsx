@@ -8,8 +8,6 @@ import {
   FileInput,
   TextArea,
   Button,
-  
- 
 } from "../../ui/styles/CreatePost/CreatePost.styles";
 
 const CreatePost = () => {
@@ -20,7 +18,9 @@ const CreatePost = () => {
   const [photos, setPhotos] = useState<File[]>([]);
   const [companyInfo, setCompanyInfo] = useState("");
   const [categories, setCategories] = useState<string[]>([]);
-  const [programmingLanguages, setProgrammingLanguages] = useState<string[]>([]);
+  const [programmingLanguages, setProgrammingLanguages] = useState<string[]>(
+    []
+  );
   const [deadline, setDeadline] = useState("");
 
   const handleFormSubmit = (event: React.FormEvent) => {
@@ -58,7 +58,9 @@ const CreatePost = () => {
     setPhotos([...photos, ...Array.from(e.target.files || [])]);
   };
 
-  const handleCompanyInfoChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleCompanyInfoChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
     setCompanyInfo(e.target.value);
   };
 
@@ -66,7 +68,9 @@ const CreatePost = () => {
     setCategories(e.target.value.split(","));
   };
 
-  const handleProgrammingLanguagesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleProgrammingLanguagesChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setProgrammingLanguages(e.target.value.split(","));
   };
 
@@ -106,7 +110,7 @@ const CreatePost = () => {
               checked={isPaid}
               onChange={handleIsPaidChange}
             />
-            <span class="checkmark"></span>
+            <span className="checkmark"></span>
           </Label>
         </FormGroup>
         {isPaid && (
@@ -150,7 +154,9 @@ const CreatePost = () => {
           />
         </FormGroup>
         <FormGroup>
-          <Label htmlFor="programmingLanguages">Linguagens de Programação:</Label>
+          <Label htmlFor="programmingLanguages">
+            Linguagens de Programação:
+          </Label>
           <Input
             type="text"
             id="programmingLanguages"
@@ -176,4 +182,3 @@ const CreatePost = () => {
 };
 
 export default CreatePost;
-

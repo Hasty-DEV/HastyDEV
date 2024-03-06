@@ -6,8 +6,9 @@ const LeftBarContainer = styled.div`
   top: 70px;
   height: calc(100vh - 70px);
   overflow: scroll;
-  background-color: ${({ theme }) => theme.bg};
-  color: ${({ theme }) => theme.textColor};
+  background-color: #fff;
+  color: #000;
+  box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1);
 
   @media (max-width: 768px) {
     display: none;
@@ -41,12 +42,9 @@ const LeftBarContainer = styled.div`
         align-items: center;
         gap: 10px;
 
-
-        button{
-
+        button {
           border: none;
           background-color: transparent;
-
         }
 
         img {
@@ -73,7 +71,6 @@ const LeftBarContainer = styled.div`
         span {
           font-size: 14px;
         }
-
       }
     }
   }
