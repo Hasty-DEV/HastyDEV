@@ -11,6 +11,7 @@ export const InitializeLevel = async (userid: number) => {
       userid: userid,
       exp: 0,
       level: 0,
+      expNeeded: 0, 
     });
   } catch (error) {
     console.error("Erro ao inicializar o nível do usuário:", error);

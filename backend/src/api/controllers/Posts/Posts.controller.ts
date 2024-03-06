@@ -20,7 +20,7 @@ class Posts extends Level {
   ): Promise<void> => {
     try {
       const userid: number = req.body.id;
-      await this.incrementExp(userid, 10);
+      await this.incrementExpService(userid, 10);
       await PostService(req, res, next);
       res.status(201).json("Post Criado com Sucesso!");
     } catch (error) {

@@ -1,26 +1,12 @@
 import RightBarContainer from "../../styles/rightBar/RightBar.styles";
+import UserLevelInfo from "../UserLevelInfo/UserLevelInfo";
 
 const RightBar = () => {
   return (
     <RightBarContainer>
       <div className="rightBar">
         <div className="container">
-          <div className="item">
-            <span>Sugestão Para Você</span>
-            <div className="user">
-              <div className="userInfo">
-                <img
-                  src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                  alt=""
-                />
-                <span>Jane Doe</span>
-              </div>
-              <div className="buttons">
-                <button>Seguir</button>
-                <button>Recusar</button>
-              </div>
-            </div>
-          </div>
+          <UserLevelInfo />
           <div className="item">
             <span>Últimas Atividades</span>
             <div className="user">
