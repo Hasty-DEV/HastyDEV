@@ -1,7 +1,7 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from "../../../config/database/MySQL/MySQL";
 
-interface UserAttributes {
+export interface UserAttributes {
   userid: number;
   username: string;
   password: string;
@@ -11,7 +11,7 @@ interface UserAttributes {
   lockUntil?: Date | null;
   loginAttempts?: number | null;
   isVerified?: boolean;
-  role: 'admin' | 'user' | 'empresa';
+  role: "admin" | "user" | "empresa";
 }
 
 interface UserCreationAttributes extends Optional<UserAttributes, "userid"> {}
@@ -29,11 +29,10 @@ class User
   public lockUntil?: Date | null;
   public loginAttempts?: number | null;
   public isVerified?: boolean;
-  public role!: 'admin' | 'user' | 'empresa'; 
+  public role!: "admin" | "user" | "empresa";
 
   static associate(models: any) {
     this.hasMany(models.Post, { foreignKey: "userid", as: "posts" });
-    this.hasMany(models.Level, {foreignKey: "userid", as: "levels" })
   }
 }
 
@@ -44,14 +43,10 @@ User.init(
       autoIncrement: true,
       primaryKey: true,
     },
-  
- 
-  role: {
-    type: DataTypes.STRING,
-    defaultValue: 'user', 
-  },
-
-
+    role: {
+      type: DataTypes.STRING,
+      defaultValue: "user",
+    },
     username: {
       type: DataTypes.STRING,
       allowNull: false,

@@ -1,4 +1,4 @@
-import { DataTypes, Model, Optional } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../../../config/database/MySQL/MySQL";
 import User from "../User/User.model";
 
@@ -10,17 +10,16 @@ interface LevelAttributes {
   updatedAt?: Date;
 }
 
-interface LevelCreationAttributes extends Optional<LevelAttributes, "userid"> {}
-
-class LevelModel
-  extends Model<LevelAttributes, LevelCreationAttributes>
-  implements LevelAttributes
-{
+class LevelModel extends Model<LevelAttributes> implements LevelAttributes {
   public userid!: number;
   public exp!: number;
   public level!: number;
-  public createdAt!: Date;
-  public updatedAt!: Date;
+  public createdAt?: Date;
+  public updatedAt?: Date;
+
+  static associate(models: any) {
+    this.belongsTo(models.User, { foreignKey: "userid", as: "user" });
+  }
 
   public static async updateLevel(
     userid: number,
@@ -31,7 +30,7 @@ class LevelModel
 
   public static async incrementExp(
     userid: number,
-    expToAdd: number,
+    expToAdd: number
   ): Promise<void> {
     const user = await LevelModel.findOne({ where: { userid } });
     if (user) {
@@ -76,7 +75,7 @@ LevelModel.init(
   },
   {
     sequelize: sequelize,
-    modelName: "Level",
+    modelName: "LevelModel",
     tableName: "levels",
     timestamps: true,
   }
