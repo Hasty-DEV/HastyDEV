@@ -22,11 +22,20 @@ abstract class Level extends LevelModel {
 
   private async HasUpgradedLevel(userid: number): Promise<number | void> {
     const UserLevel = await this.getUserLevel(userid);
-    const expNeededToUpgrade = await this.expNeededToUpgrade(UserLevel);
-    const UserExp = await this.getUserExp(userid);
+    let UserExp = await this.getUserExp(userid);
+    let newLevel = UserLevel;
 
-    if (UserExp > expNeededToUpgrade) {
-      const newLevel = UserLevel + 1;
+    while (UserExp > 0) {
+      const expNeededToUpgrade = await this.expNeededToUpgrade(newLevel);
+      if (UserExp >= expNeededToUpgrade) {
+        UserExp -= expNeededToUpgrade;
+        newLevel++;
+      } else {
+        break;
+      }
+    }
+
+    if (newLevel > UserLevel) {
       await LevelModel.updateLevel(userid, newLevel);
       return newLevel;
     } else {
