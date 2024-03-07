@@ -6,7 +6,7 @@ import User from "../../models/User/User.model";
 
 import { logError, logInfo } from "../../../utils/Logger/Logger";
 
-import validationRules from "../Validation/ validations.controller";
+import validationRules from "../Validation/validations.controller";
 
 class resetPassVerification {
   public async resetPassword(req: Request, res: Response): Promise<void> {

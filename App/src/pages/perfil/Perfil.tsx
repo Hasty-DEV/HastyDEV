@@ -6,6 +6,7 @@ import DefaultUserIcon from "../../ui/assets/user/user_icon.png";
 import PerfilContainer from '../../ui/styles/perfil/Perfil.styles';
 import { getUserIcon } from "../../data/services/getUserIconService";
 import { getUserData } from "../../data/services/userService";
+import swal from "sweetalert2";
 
 const Perfil: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -94,6 +95,7 @@ const Perfil: React.FC = () => {
       console.error("Erro ao enviar o arquivo:", error);
     } finally {
       setUploading(false);
+      window.location.reload()
     }
   };
 
@@ -107,8 +109,18 @@ const Perfil: React.FC = () => {
     try {
       await api.put(`/user/${userId}`, { first_name: name, last_name: surname, username });
       console.log("Alterações salvas com sucesso!");
+  
       fetchData();
+       window.location.reload()
+       swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Suas alterações foram realizadas com sucesso",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } catch (error) {
+      
       console.error("Erro ao salvar alterações:", error);
     }
   };

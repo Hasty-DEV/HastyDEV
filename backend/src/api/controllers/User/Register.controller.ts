@@ -5,7 +5,7 @@ import User from "../../models/User/User.model";
 import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
 import Token from "../../models/Token/Token.model";
-import validationRules from "../Validation/ validations.controller";
+import validationRules from "../Validation/validations.controller";
 
 class Register {
   public async RegisterUser(req: Request, res: Response): Promise<void> {

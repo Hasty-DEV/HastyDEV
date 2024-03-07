@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import { logError, logInfo } from "../../../utils/Logger/Logger";
 import * as nodemailer from "nodemailer";
 import { EnvVariables } from "../../../config/env";
-import validationRules from "../Validation/ validations.controller";
+import validationRules from "../Validation/validations.controller";
 
 
 const mail = EnvVariables.mail

@@ -115,8 +115,56 @@ const registrationValidationRules = [
           return true;
         }),]
 
+        const updateUserValidationRules = [
+          body('username')
+              .isLength({ min: 5 })
+              .withMessage('O username deve ter pelo menos 5 caracteres')
+              .trim()
+              .notEmpty()
+              .withMessage('O campo de nome de usuário é obrigatório')
+              .custom((value: any) => {
+                  const containsForbiddenWord = filter.isProfane(value);
+                  if (containsForbiddenWord) {
+                      throw new Error('O username contém palavras proibidas ou inadequadas');
+                  }
+                  return true;
+              }),
+        
+          body('first_name')
+              .trim()
+              .notEmpty()
+              .withMessage('O campo de nome é obrigatório')
+              .matches(/^[a-zA-Z\s\-áàâãéèêíïóôõöúçñ]*$/i)
+              .withMessage('O campo de primeiro nome não deve conter caracteres especiais')
+              .customSanitizer((value: string) => value.toUpperCase())
+              .custom((value: any) => {
+                  const containsForbiddenWord = filter.isProfane(value);
+                  if (containsForbiddenWord) {
+                      throw new Error('O nome contém palavras proibidas ou inadequadas');
+                  }
+                  return true;
+              }),
+        
+          body('last_name')
+              .trim()
+              .notEmpty()
+              .withMessage('O campo de nome é obrigatório')
+              .matches(/^[a-zA-Z\s\-áàâãéèêíïóôõöúçñ]*$/i)
+              .withMessage('O campo de último nome não deve conter caracteres especiais')
+              .customSanitizer((value: string) => value.toUpperCase())
+              .custom((value: any) => {
+                  const containsForbiddenWord = filter.isProfane(value);
+                  if (containsForbiddenWord) {
+                      throw new Error('O sobrenome contém palavras proibidas ou inadequadas');
+                  }
+                  return true;
+              }),
+      ];
+
+
         export default {
             registrationValidationRules,
             resetPasswordValidationRules,
             contactFormValidationRules,
+            updateUserValidationRules
           };
