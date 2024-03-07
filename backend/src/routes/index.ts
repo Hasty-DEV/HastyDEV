@@ -99,10 +99,17 @@ routes.post(
   CommetsController.createCommentForPost
 );
 
+routes.get(
+  "/answers/:commentid",
+  verifyTokenMiddleware.verifyTokenWithOnlyToken,
+  AnswersController.getAllAnswersForComment
+);
+
 routes.post(
-  "/awnsers/:commentid",
+  "/answers/:commentid",
   verifyTokenMiddleware.verifyTokenWithOnlyToken,
   AnswersController.createAnswerForComment
 );
+
 
 export default routes;

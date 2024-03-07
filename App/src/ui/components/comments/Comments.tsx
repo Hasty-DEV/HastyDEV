@@ -3,12 +3,16 @@ import  { useEffect, useState } from "react";
 import UserIcon from "../../assets/user/user_icon.png";
 import CommentsContainer from "../../styles/comments/Commets.styles";
 import { api } from "../../../data/services/api";
+import Answers from "../answers/Answers";
+import { FaComment } from "react-icons/fa";
+
 
 interface Comment {
   id: string;
   userid: string;
   content: string;
   createdAt: string;
+  commentid: number | string;
 }
 const Comments: React.FC<{ postId: string }> = ({ postId }) => {
   const [userId, setUserId] = useState<string | null>(null);
@@ -16,6 +20,9 @@ const Comments: React.FC<{ postId: string }> = ({ postId }) => {
   const [userName, setUserName] = useState<string | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState<string>("");
+  const [answerOpen, setAnswerOpen] = useState<string[]>([]);
+
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -98,6 +105,14 @@ const Comments: React.FC<{ postId: string }> = ({ postId }) => {
     }
   };
 
+  const toggleComments = (commentId: string) => {
+    setAnswerOpen(answerOpen.includes(commentId)
+      ? answerOpen.filter(id => id !== commentId)
+      : [...answerOpen, commentId]
+    );
+  };
+
+
   return (
     <CommentsContainer>
       <div className="comments">
@@ -120,6 +135,12 @@ const Comments: React.FC<{ postId: string }> = ({ postId }) => {
               <p>{comment.content}</p>
             </div>
             <span className="date">{formatCreatedAt(comment.createdAt)}</span>
+
+            <div className="item" onClick={() => toggleComments(comment.commentid.toString())}>
+              <FaComment /> {answerOpen.includes(comment.commentid.toString()) ? "Cancelar" : "Respostas"}
+            </div>
+
+            {answerOpen.includes(comment.commentid.toString()) && <Answers commentId={comment.commentid.toString()} />}
           </div>
         ))}
       </div>

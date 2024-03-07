@@ -11,8 +11,8 @@ class AnswersController {
     const { commentid } = req.params;
     const { userid, content } = req.body;
 
-    if (!userid || !content) {
-      res.status(400).json({ error: "Requisição Incompleta" });
+    if (!userid || !content || isNaN(parseInt(commentid))) {
+      res.status(400).json({ error: "Requisição Incompleta ou Inválida" });
       return;
     }
 
