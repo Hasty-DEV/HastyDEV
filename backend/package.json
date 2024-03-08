@@ -25,6 +25,7 @@
     "nodemailer": "^6.9.9",
     "pino": "^8.18.0",
     "sequelize": "^6.36.0",
+    "sharp": "^0.33.2",
     "ts-node": "^10.9.2"
   },
   "devDependencies": {

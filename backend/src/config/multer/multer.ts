@@ -13,7 +13,7 @@ const storagePerfilIcon = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     const extension = path.extname(file.originalname);
-    cb(null, `userIcon${extension}`);
+    cb(null, `unprocessed_userIcon${extension}`);
   },
 });
 

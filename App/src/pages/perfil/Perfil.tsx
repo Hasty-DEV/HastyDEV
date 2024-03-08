@@ -84,7 +84,7 @@ const Perfil: React.FC = () => {
     }
 
     const formData = new FormData();
-    formData.append("userIcon", file);
+    formData.append("unprocessed_userIcon", file);
 
     try {
       const response = await api.post(`/upload/${userId}`, formData);
@@ -136,7 +136,7 @@ const Perfil: React.FC = () => {
               id="fileInput"
               type="file"
               onChange={handleFileChange}
-              name="userIcon"
+              name="unprocessed_userIcon"
               title="Upload de Avatar"
               style={{ display: "none" }}
               disabled={uploading}
