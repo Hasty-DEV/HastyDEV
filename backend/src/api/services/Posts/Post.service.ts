@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { isPostRequestIncomplete } from "./ReqPostVerification";
-import { PostHasError } from "./PostHasError";
+import { ReqValidation } from "../ReqValidation/ReqValidation.service";
 import { createNewPost } from "./CreatePost";
 
 export const PostService = async (
@@ -9,7 +9,7 @@ export const PostService = async (
   next: NextFunction
 ) => {
   await isPostRequestIncomplete(req, res, next);
-  await PostHasError(req, res);
+  await ReqValidation(req, res);
   await createNewPost(req);
   next();
 };
