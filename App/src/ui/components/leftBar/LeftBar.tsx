@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Events from "../../assets/6.png";
+import Events from "../../assets/6.svg";
 import Gaming from "../../assets/7.png";
 import Gallery from "../../assets/8.png";
 import Videos from "../../assets/9.png";
@@ -79,10 +79,18 @@ const LeftBar = () => {
             <hr />
             <div className="menu">
               <span>Em Construção...</span>
+
+              
               <div className="item">
+              <Link to="/createpost">
+                <button>
                 <img src={Events} alt="" />
-                <span>Em Construção...</span>
+                </button>
+                </Link>
+                <span>Criar Post</span>
               </div>
+              
+
               <div className="item">
                 <img src={Gaming} alt="" />
                 <span>Em Construção...</span>
