@@ -5,6 +5,8 @@ import CommentsContainer from "../../styles/comments/Commets.styles";
 import { api } from "../../../data/services/api";
 import Answers from "../answers/Answers";
 import { FaComment } from "react-icons/fa";
+import { getUserIconByID } from "../../../data/services/getUserIconService";
+import userIconDefault from "../../assets/user/user_icon.png";
 
 
 interface Comment {
@@ -18,6 +20,7 @@ const Comments: React.FC<{ postId: string }> = ({ postId }) => {
   const [userId, setUserId] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [userName, setUserName] = useState<string | null>(null);
+  const [userIcon, setUserIcon] = useState<string | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState<string>("");
   const [answerOpen, setAnswerOpen] = useState<string[]>([]);
@@ -49,6 +52,12 @@ const Comments: React.FC<{ postId: string }> = ({ postId }) => {
               const userData = userResponse.data.user;
               setUserName(`${userData.first_name} ${userData.last_name}`);
             }
+
+            const icon = await getUserIconByID(storedUserId);
+            if (icon && icon.data) {
+              setUserIcon(URL.createObjectURL(new Blob([icon.data])));
+            }
+
           } catch (error) {
             console.error("Error fetching user data:", error);
           }
@@ -117,7 +126,7 @@ const Comments: React.FC<{ postId: string }> = ({ postId }) => {
     <CommentsContainer>
       <div className="comments">
         <div className="write">
-          <img src={UserIcon} alt="" />
+        <img src={userIcon || userIconDefault} alt="" />
           <input
             type="text"
             placeholder="Escreva um comentário"
@@ -129,7 +138,7 @@ const Comments: React.FC<{ postId: string }> = ({ postId }) => {
 
         {comments.map((comment) => (
           <div key={comment.id} className="comment">
-            <img src={UserIcon} alt="" />
+          <img src={userIcon || userIconDefault} alt="" />
             <div className="info">
               <span>{userName}</span>
               <p>{comment.content}</p>

@@ -2,6 +2,8 @@ import  { useEffect, useState } from "react";
 import UserIcon from "../../assets/user/user_icon.png";
 import AnswersContainer from "../../styles/answers/Answers.styles";
 import { api } from "../../../data/services/api";
+import { getUserIconByID } from "../../../data/services/getUserIconService";
+import userIconDefault from "../../assets/user/user_icon.png";
 
 
 interface Answer {
@@ -11,13 +13,14 @@ interface Answer {
   createdAt: string;
 }
 
-
 const Answers: React.FC<{ commentId: string }> = ({ commentId }) => {
   const [userId, setUserId] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [userName, setUserName] = useState<string | null>(null);
+  const [userIcon, setUserIcon] = useState<string | null>(null);
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [newAnswer, setNewAnswer] = useState<string>("");
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,6 +46,11 @@ const Answers: React.FC<{ commentId: string }> = ({ commentId }) => {
             if (userResponse.data && userResponse.data.user) {
               const userData = userResponse.data.user;
               setUserName(`${userData.first_name} ${userData.last_name}`);
+            }
+
+            const icon = await getUserIconByID(storedUserId);
+            if (icon && icon.data) {
+              setUserIcon(URL.createObjectURL(new Blob([icon.data])));
             }
           } catch (error) {
             console.error("Error fetching user data:", error);
@@ -100,7 +108,6 @@ const Answers: React.FC<{ commentId: string }> = ({ commentId }) => {
     <AnswersContainer>
       <div className="answers">
           <div className="write">
-            <img src={UserIcon} alt="" />
             <input
               type="text"
               placeholder="Escreva uma resposta"
@@ -112,14 +119,13 @@ const Answers: React.FC<{ commentId: string }> = ({ commentId }) => {
     
         {answers.map((reply) => (
           <div key={reply.id} className="answer">
-            <img src={UserIcon} alt="" />
+          <img src={userIcon || userIconDefault} alt="" />
             <div className="info">
               <span>{userName}</span>
               <p>{reply.content}</p>
             </div>
             <span className="date">{formatCreatedAt(reply.createdAt)}</span>
           </div>
-
           
         ))}
       </div>
