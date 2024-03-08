@@ -64,6 +64,11 @@ const LeftBarContainer = styled.div`
         align-items: center;
         gap: 10px;
 
+        button {
+          border: none;
+          background-color: transparent;
+        }
+
         img {
           width: 30px;
         }
