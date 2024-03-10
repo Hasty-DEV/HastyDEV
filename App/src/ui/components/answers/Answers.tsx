@@ -1,5 +1,4 @@
 import  { useEffect, useState } from "react";
-import UserIcon from "../../assets/user/user_icon.png";
 import AnswersContainer from "../../styles/answers/Answers.styles";
 import { api } from "../../../data/services/api";
 import { getUserIconByID } from "../../../data/services/getUserIconService";

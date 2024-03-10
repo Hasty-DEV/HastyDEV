@@ -4,14 +4,12 @@ import DefaultUserIcon from "../../assets/user/user_icon.png";
 import ShareContainer from "../../styles/share/Share.styles";
 import { api } from "../../../data/services/api";
 import Loader from "../Loader/Loader";
-import { useNavigate } from "react-router-dom";
 import { getUserIcon } from "../../../data/services/getUserIconService";
 
 const Share = () => {
   const titleRef = useRef<HTMLInputElement>(null);
   const contentRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   const handleOnSubmit = async (e: FormEvent) => {
     e.preventDefault();

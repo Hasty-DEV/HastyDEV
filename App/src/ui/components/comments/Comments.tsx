@@ -1,6 +1,4 @@
-// Comments.tsx - Componente de Comentários
 import  { useEffect, useState } from "react";
-import UserIcon from "../../assets/user/user_icon.png";
 import CommentsContainer from "../../styles/comments/Commets.styles";
 import { api } from "../../../data/services/api";
 import Answers from "../answers/Answers";
