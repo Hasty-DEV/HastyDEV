@@ -1,11 +1,11 @@
-import Server from "./server";
-import Databases from "./config/database/db";
-import routes from "./routes";
-import { EnvVariables } from "./config/env";
-const PORT = Number(EnvVariables.Port);
+import { setupExpress } from "./config/express/express";
+import { SocketSetup } from "./config/Socket/Socket";
+import db from "./config/database/db";
 
-const server = new Server(PORT, routes);
-const db = new Databases();
+function main() {
+  setupExpress();
+  SocketSetup();
+  db.initDB();
+}
 
-server.start();
-db.initDB();
+main();

@@ -65,9 +65,7 @@ const LeftBar = () => {
             <div className="menu">
               <div className="user">
                 <Link to="/perfil">
-                  <button>
-                    <img src={userIcon || DefaultUserIcon} alt="" />
-                  </button>
+                  <img src={userIcon || DefaultUserIcon} alt="" />
                 </Link>
                 <span>
                   {userData
@@ -80,16 +78,12 @@ const LeftBar = () => {
             <div className="menu">
               <span>Em Construção...</span>
 
-              
               <div className="item">
-              <Link to="/createpost">
-                <button>
-                <img src={Events} alt="" />
-                </button>
+                <Link to="/createpost">
+                  <img src={Events} alt="" />
                 </Link>
                 <span>Criar Post</span>
               </div>
-              
 
               <div className="item">
                 <img src={Gaming} alt="" />

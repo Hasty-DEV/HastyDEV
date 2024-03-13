@@ -1,19 +1,26 @@
-import express, { Application } from "express";
+import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
+import { createServer } from "http";
+import routes from "../../routes";
+import { EnvVariables } from "../env";
+const PORT = Number(EnvVariables.Port);
 
-export default class ExpressConfig {
-  public app: Application;
+export const app = express();
 
-  constructor() {
-    this.app = express();
-    this.setup();
-  }
+export const httpServer = createServer(app);
 
-  private setup(): void {
-    this.app.use(express.json());
-    this.app.use(cors());
-    this.app.use(bodyParser.json());
-    this.app.use(bodyParser.urlencoded({ extended: true }));
-  }
+export function setupExpress(): void {
+  app.use(express.json());
+  app.use(cors({ origin: "*" }));
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use("/api", routes);
 }
+
+
+
+httpServer.listen(PORT, () => {
+  console.log(`Servidor está Rodando na Porta: ${PORT}`);
+});
+

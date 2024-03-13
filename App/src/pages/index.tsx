@@ -5,6 +5,7 @@ import Home from "./home/Home";
 import PrivateRoute from "../ui/components/PrivateRoute/PrivateRoute";
 import Perfil from "./perfil/Perfil";
 import CreatePost from "./CreatePost/CreatePost";
+import Chat from "./Chat/Chat";
 
 const routes = createBrowserRouter([
   {
@@ -40,6 +41,15 @@ const routes = createBrowserRouter([
         ),
       },
     ],
+  },
+  {
+    path: "/chat",
+
+    element: (
+      <PrivateRoute>
+        <Chat />
+      </PrivateRoute>
+    ),
   },
 ]);
 

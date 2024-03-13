@@ -1,7 +1,7 @@
 import MongoDB from "./MongoDB/MongoDB";
 import MySQL from "./MySQL/MySQL";
 
-export default class Databases {
+class Databases {
   constructor() {}
 
   public initDB(): void {
@@ -11,3 +11,5 @@ export default class Databases {
     mongoDB.connect();
   }
 }
+
+export default new Databases();
