@@ -2,12 +2,14 @@ import { Request, Response } from "express";
 import User from "../../models/User/User.model";
 import validationRules from "../Validation/validations.controller";
 import { validationResult } from "express-validator";
+import logger from "../../../utils/Logger/Logger";
 
 class UpdateUser {
   public async updateUser(req: Request, res: Response): Promise<void> {
     const userId = req.params.id;
     try {
       if (!userId) {
+        logger.error("ID de usuário ausente na solicitação");
         res.status(400).json({ message: "ID de usuário ausente na solicitação" });
         return;
       }
@@ -20,6 +22,7 @@ class UpdateUser {
   
       if (!errors.isEmpty()) {
         const errorMessages = errors.array().map(error => error.msg);
+        logger.error(`Erros de validação no Register ${errorMessages.join(', ')}`);
         res.status(400).json(`Erros de validação no Register ${errorMessages.join(', ')}`);
         return;
       }
@@ -27,6 +30,7 @@ class UpdateUser {
       const user = await User.findByPk(userId);
 
       if (!user) {
+        logger.error("Usuário não encontrado");
         res.status(404).json({ message: "Usuário não encontrado" });
         return;
       }
@@ -35,6 +39,7 @@ class UpdateUser {
       if (username !== user.username) {
         const existingUser = await User.findOne({ where: { username } });
         if (existingUser) {
+          logger.error("Este nome de usuário já está em uso");
           res.status(400).json({ message: "Este nome de usuário já está em uso" });
           return;
         }
@@ -49,9 +54,10 @@ class UpdateUser {
       // Salva as alterações no banco de dados
       await user.save();
 
+      logger.info("Usuário atualizado com sucesso");
       res.status(200).json({ message: "Usuário atualizado com sucesso" });
     } catch (error) {
-      console.error("Erro ao atualizar o usuário:", error);
+      logger.error("Erro ao atualizar o usuário: " + error);
       res.status(500).json({ message: "Erro ao processar a solicitação" });
     }
   }

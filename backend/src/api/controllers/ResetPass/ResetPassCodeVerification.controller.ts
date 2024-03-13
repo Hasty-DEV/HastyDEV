@@ -3,9 +3,7 @@ import { validationResult } from "express-validator";
 import bcrypt from "bcrypt";
 import ResetPassCode from "../../models/ResetPass/ResetPassCode.model";
 import User from "../../models/User/User.model";
-
-import { logError, logInfo } from "../../../utils/Logger/Logger";
-
+import logger from "../../../utils/Logger/Logger";
 import validationRules from "../Validation/validations.controller";
 
 class resetPassVerification {
@@ -23,12 +21,14 @@ class resetPassVerification {
       });
 
       if (!code) {
-        logError("Código de redefinição de senha inválido", res, 400);
+        logger.error("Código de redefinição de senha inválido");
+        res.status(400).send("Código de redefinição de senha inválido");
         return;
       }
 
       if (new Date() > code.expiresAt) {
-        logError("Código de redefinição de senha expirou", res, 400);
+        logger.error("Código de redefinição de senha expirou");
+        res.status(400).send("Código de redefinição de senha expirou");
         return;
       }
 
@@ -43,12 +43,15 @@ class resetPassVerification {
 
         await code.destroy();
 
-        logInfo("Senha redefinida com sucesso", res, 200);
+        logger.info("Senha redefinida com sucesso");
+        res.status(200).send("Senha redefinida com sucesso");
       } else {
-        logError("Usuário não encontrado", res, 404);
+        logger.error("Usuário não encontrado");
+        res.status(404).send("Usuário não encontrado");
       }
     } catch (err) {
-      logError("Erro ao redefinir a senha: " + err, res, 500);
+      logger.error("Erro ao redefinir a senha: " + err);
+      res.status(500).send("Erro ao redefinir a senha");
     }
   }
 }

@@ -1,16 +1,45 @@
-import pino from "pino";
-import { Response } from "express";
+import { createLogger, format, transports } from 'winston';
+import DailyRotateFile from 'winston-daily-rotate-file';
 
-const logger = pino();
+const { combine, timestamp, printf, colorize } = format;
 
-function logError(message: string, res: Response, statusCode: number = 500): void {
-  logger.error(message);
-  res.status(statusCode).json({ error: message });
-}
+const logFormat = printf(({ level, message, timestamp }) => {
+  return `[${timestamp}] [${level.toUpperCase()}]: ${message}`;
+});
 
-function logInfo(message: string, res: Response, statusCode: number = 200): void {
-  logger.info(message);
-  res.status(statusCode).json({ info: message });
-}
+// ...
 
-export { logError, logInfo };
+const logger = createLogger({
+  level: 'info',
+  format: combine(
+    timestamp(),
+    logFormat
+  ),
+  transports: [
+    new transports.Console({
+      format: combine(colorize(), logFormat),
+    }),
+    new DailyRotateFile({
+      filename: 'logs/error-%DATE%.log',
+      datePattern: 'YYYY-MM-DD',
+      level: 'error',
+      zippedArchive: true,
+      maxSize: '20m',
+      maxFiles: '14d',
+    }),
+    new DailyRotateFile({
+      filename: 'logs/combined-%DATE%.log',
+      datePattern: 'YYYY-MM-DD',
+      zippedArchive: true,
+      maxSize: '20m',
+      maxFiles: '14d',
+    }),
+  ],
+});
+
+// Adicione a verificação de erros
+logger.on('error', (err) => {
+  console.error('Erro no logger:', err);
+});
+
+export default logger;

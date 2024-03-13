@@ -12,7 +12,7 @@ export const EmailVerificationStyled = styled.div`
   align-items: center;
   justify-content: center;
   margin: auto;
-  margin-top: 200px;]
+  margin-top: 200px;
   
 
   label {

@@ -1,4 +1,5 @@
 import LevelModel from "../../models/Level/Level.model";
+import logger from "../../../utils/Logger/Logger";
 
 export const UserExp = async (userid: number): Promise<number | null> => {
   try {
@@ -9,7 +10,7 @@ export const UserExp = async (userid: number): Promise<number | null> => {
 
     return userExp ? userExp.exp : null;
   } catch (error) {
-    console.error("Erro ao obter a experiência do usuário:", error);
+    logger.error("Erro ao obter a experiência do usuário: " + error);
     return null;
   }
 };

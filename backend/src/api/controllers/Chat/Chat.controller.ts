@@ -1,21 +1,21 @@
 import { Socket } from "socket.io";
 import * as SocketIO from "socket.io";
+import logger from "../../../utils/Logger/Logger";
 import MessageModel from "../../models/Chat/Chat.model";
 
 async function chatController(io: SocketIO.Server, socket: Socket) {
-  console.log("Usuário Conectado");
+  logger.info("Usuário Conectado");
 
   socket.on("disconnect", () => {
-    console.log("Usuário Desconectado");
+    logger.info("Usuário Desconectado");
   });
 
   socket.on("chatMessage", async (msg: string) => {
     try {
       await MessageModel.saveMessage(msg);
       io.emit("chatMessage", msg);
-    } catch (error) {
-      console.error("Erro ao salvar a mensagem:", error);
-      // Lidar com o erro de forma adequada, se necessário
+    } catch (error: any) {
+      logger.error("Erro ao salvar a mensagem:", { error: error.message });
     }
   });
 }

@@ -3,7 +3,7 @@ import nodemailer from "nodemailer";
 import User from "../../models/User/User.model";
 import { generatePinCode } from "../../../utils/PinGenerate/PinGenerate";
 import ResetPassCode from "../../models/ResetPass/ResetPassCode.model";
-import { logError, logInfo } from "../../../utils/Logger/Logger";
+import logger from "../../../utils/Logger/Logger";
 import * as path from "path";
 import * as fs from "fs";
 import { EnvVariables } from "../../../config/env";
@@ -56,17 +56,18 @@ class SendPasswordResetEmail {
           html: emailHTMLWithPIN,
         });
 
-        logInfo("E-mail de redefinição de senha enviado com sucesso", res, 200);
+        logger.info("E-mail de redefinição de senha enviado com sucesso");
+        res.status(200).send("E-mail de redefinição de senha enviado com sucesso");
       } else {
-        logError("E-mail não encontrado", res, 404);
+        logger.error("E-mail não encontrado");
+        res.status(404).send("E-mail não encontrado");
       }
     } catch (err) {
       console.error(err);
-      logError(
-        "Erro ao enviar e-mail de redefinição de senha: " + err,
-        res,
-        500
+      logger.error(
+        "Erro ao enviar e-mail de redefinição de senha: " + err
       );
+      res.status(500).send("Erro ao enviar e-mail de redefinição de senha");
     }
   }
 }

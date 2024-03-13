@@ -1,6 +1,6 @@
 import { validationResult } from "express-validator";
 import { Request, Response } from "express";
-import { logError } from "../../../utils/Logger/Logger";
+import logger from "../../../utils/Logger/Logger";
 import Comment from "../../models/Commets/Commets.model";
 import User from "../../models/User/User.model";
 import Post from "../../models/Posts/Posts.model";
@@ -29,8 +29,8 @@ class Comments {
         ],
       });
       res.status(200).json(comments);
-    } catch (error) {
-      console.error("Erro ao buscar comentários:", error);
+    } catch (error: any) {
+      logger.error("Erro ao buscar comentários:", { error: error.message });
       res.status(500).json({ error: "Erro Interno do Servidor" });
     }
   }
@@ -60,7 +60,8 @@ class Comments {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      logError("Erros de validação no comentário", res, 400);
+      logger.error("Erros de validação no comentário", { errors: errors.array() });
+      res.status(400).json({ errors: errors.array() });
       return;
     }
 
@@ -73,8 +74,8 @@ class Comments {
       res
         .status(201)
         .json({ message: "Comentário Criado com Sucesso!", comment });
-    } catch (error) {
-      console.error("Erro ao criar comentário:", error);
+    } catch (error: any) {
+      logger.error("Erro ao criar comentário:", { error: error.message });
       res.status(500).json({ error: "Erro Interno do Servidor" });
     }
   }

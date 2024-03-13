@@ -5,8 +5,8 @@ const PostContainer = styled.div`
   -moz-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
   box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
   border-radius: 20px;
-  background-color: ${({ theme }) => theme.bg};
-  color: ${({ theme }) => theme.textColor};
+  background-color: #fff;
+  color: #000;
 
   .container {
     padding: 20px;
@@ -19,6 +19,8 @@ const PostContainer = styled.div`
       .userInfo {
         display: flex;
         gap: 20px;
+
+
 
         img {
           width: 40px;
@@ -44,7 +46,6 @@ const PostContainer = styled.div`
 
     .content {
       margin: 20px 0px;
-
       img {
         width: 100%;
         max-height: 500px;
@@ -67,6 +68,37 @@ const PostContainer = styled.div`
       }
     }
   }
+
+  .title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.price {
+    margin-top: -50px;
+    margin-right: 20px;
+   font-size: 25px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .price {
+      margin-right: 10px;  
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .title-container{
+display: block;
+    }
+    .price{
+      margin: 0;
+    }
+  }
+
+
+
 `;
 
 export default PostContainer;

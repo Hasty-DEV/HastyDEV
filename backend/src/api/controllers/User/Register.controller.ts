@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
-import { logError } from "../../../utils/Logger/Logger";
+import  logger from "../../../utils/Logger/Logger";
 import User from "../../models/User/User.model";
 import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
@@ -17,7 +17,8 @@ class Register {
 
     if (!errors.isEmpty()) {
       const errorMessages = errors.array().map(error => error.msg);
-      res.send(`Erros de validação no Register ${errorMessages.join(', ')}`);
+      logger.error(`Erros de validação no Register ${errorMessages.join(', ')}`);
+      res.status(400).send(`Erros de validação no Register ${errorMessages.join(', ')}`);
       return;
     }
 
@@ -30,15 +31,18 @@ class Register {
       });
       existingUserByEmail = await User.findOne({ where: { email: email } });
     } catch (err) {
-      logError("Erro ao consultar o banco de dados: " + err, res, 500);
+      logger.error("Erro ao consultar o banco de dados: " + err);
+      res.status(500).send("Erro ao consultar o banco de dados");
       return;
     }
 
     if (existingUserByUsername) {
-      logError("Nome de usuário já em uso", res, 400);
+      logger.error("Nome de usuário já em uso");
+      res.status(400).send("Nome de usuário já em uso");
       return;
     } else if (existingUserByEmail) {
-      logError("Email já em uso", res, 400);
+      logger.error("Email já em uso");
+      res.status(400).send("Email já em uso");
       return;
     }
 
@@ -61,7 +65,8 @@ class Register {
 
         const secret = process.env.SECRET;
         if (!secret) {
-          logError("Secret key não está definida", res, 500);
+          logger.error("Secret key não está definida");
+          res.status(500).send("Secret key não está definida");
           return;
         }
 
@@ -73,12 +78,13 @@ class Register {
         newToken.updatedAt = new Date();
 
         await newToken.save().then(() => {
-          console.log("Cadastrado com Sucesso");
-          res.json({ id: user_id, token });
+          logger.info("Cadastrado com Sucesso");
+          res.status(201).json({ id: user_id, token });
         });
       }
     } catch (err) {
-      logError("Erro ao inserir dados no banco de dados: " + err, res, 500);
+      logger.error("Erro ao inserir dados no banco de dados: " + err);
+      res.status(500).send("Erro ao inserir dados no banco de dados");
     }
   }
 }

@@ -1,24 +1,22 @@
 import { validationResult, Result, ValidationError } from "express-validator";
 import { Request, Response } from "express";
-import { logError, logInfo } from "../../../utils/Logger/Logger";
+import logger from "../../../utils/Logger/Logger";
 import * as nodemailer from "nodemailer";
 import { EnvVariables } from "../../../config/env";
 import validationRules from "../Validation/validations.controller";
 
-
-const mail = EnvVariables.mail
+const mail = EnvVariables.mail;
 
 class ContactForm {
   public async sendContactForm(req: Request, res: Response): Promise<void> {
-
-    await Promise.all(validationRules.contactFormValidationRules.map(rule => rule.run(req)))
-
+    await Promise.all(validationRules.contactFormValidationRules.map(rule => rule.run(req)));
 
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
       const errorMessages = errors.array().map(error => error.msg);
-      res.send(`Erro no envio da mensagem: ${errorMessages.join(', ')}`);
+      logger.error(`Erro no envio da mensagem: ${errorMessages.join(', ')}`);
+      res.status(400).json({ error: `Erro no envio da mensagem: ${errorMessages.join(', ')}` });
       return;
     }
 
@@ -42,9 +40,11 @@ class ContactForm {
         text: `De: ${Name}\nEmail: ${Email}\nTelefone: ${Phone}\nCategoria: ${Category}\nAssunto: ${Subject}\nMensagem: ${Message}`,
       });
 
-      logInfo("E-mail enviado com sucesso", res, 200);
-    } catch (error) {
-      logError("Erro ao enviar o e-mail", res, 500);
+      logger.info("E-mail enviado com sucesso");
+      res.status(200).send();
+    } catch (error: any) {
+      logger.error("Erro ao enviar o e-mail", error);
+      res.status(500).json({ error: "Erro Interno do Servidor" });
     }
   }
 }

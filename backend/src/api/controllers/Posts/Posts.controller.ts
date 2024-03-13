@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { getAllPostsService } from "../../services/Posts/GetAllPosts";
 import { PostService } from "../../services/Posts/Post.service";
 import Level from "../../services/Level/Level.service";
+import logger from "../../../utils/Logger/Logger";
 
 class Posts extends Level {
   public async getAllPosts(req: Request, res: Response): Promise<void> {
@@ -9,7 +10,7 @@ class Posts extends Level {
       const posts = await getAllPostsService();
       res.status(200).json(posts);
     } catch (error) {
-      console.error("Erro ao buscar posts:", error);
+      logger.error("Erro ao buscar posts: " + error);
       res.status(500).json({ error: "Erro Interno do Servidor" });
     }
   }
@@ -22,9 +23,10 @@ class Posts extends Level {
       const userid: number = req.body.id;
       await this.incrementExpService(userid, 10);
       await PostService(req, res, next);
+      logger.info("Post Criado com Sucesso!");
       res.status(201).json("Post Criado com Sucesso!");
     } catch (error) {
-      console.error("Erro ao criar post:", error);
+      logger.error("Erro ao criar post: " + error);
       res.status(500).json({ error: "Erro Interno do Servidor" });
     }
   };

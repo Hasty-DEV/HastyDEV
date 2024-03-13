@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import Token from "../models/Token/Token.model";
+import logger from "../../utils/Logger/Logger";
 
 class TokenVerifier {
   public async verifyTokenWithParam(
@@ -11,7 +12,7 @@ class TokenVerifier {
     const token = req.headers.authorization;
     const id = req.params.id;
     if (!token || !id) {
-      console.error("Token e ID não fornecidos");
+      logger.error("Token e ID não fornecidos");
       return res.status(401).json({ message: "Token e ID não fornecidos" });
     }
 
@@ -19,7 +20,7 @@ class TokenVerifier {
       const tokenWithoutBearer = token.split(" ")[1];
       const decoded: any = jwt.verify(tokenWithoutBearer, process.env.SECRET!);
       if (id != decoded.id) {
-        console.error("Token e ID não correspondem");
+        logger.error("Token e ID não correspondem");
         return res.status(401).json({ message: "Token e ID não correspondem" });
       }
 
@@ -29,14 +30,14 @@ class TokenVerifier {
       });
 
       if (!latestToken) {
-        console.error("Token não encontrado no banco de dados");
+        logger.error("Token não encontrado no banco de dados");
         return res
           .status(401)
           .json({ message: "Token não encontrado no banco de dados" });
       }
 
       if (tokenWithoutBearer !== latestToken.token) {
-        console.error("Token inválido");
+        logger.error("Token inválido");
         return res.status(401).json({ message: "Token inválido" });
       }
 
@@ -48,14 +49,14 @@ class TokenVerifier {
       );
 
       if (tokenAgeInDays > 7) {
-        console.error("Token expirado");
+        logger.error("Token expirado");
         return res.status(401).json({ message: "Token expirado" });
       }
 
-      console.info("Token verificado com sucesso");
+      logger.info("Token verificado com sucesso");
       next();
     } catch (error) {
-      console.error("Erro ao verificar o token:", error);
+      logger.error("Erro ao verificar o token:", error);
       return res.status(401).json({ message: "Token inválido" });
     }
   }
@@ -67,7 +68,7 @@ class TokenVerifier {
     const { id, token } = req.body;
 
     if (!token || !id) {
-      console.error("Token e ID não fornecidos");
+      logger.error("Token e ID não fornecidos");
       return res.status(401).json({ message: "Token e ID não fornecidos" });
     }
 
@@ -75,7 +76,7 @@ class TokenVerifier {
       const tokenWithoutBearer = token.split(" ")[1];
       const decoded: any = jwt.verify(tokenWithoutBearer, process.env.SECRET!);
       if (id != decoded.id) {
-        console.error("Token e ID não correspondem");
+        logger.error("Token e ID não correspondem");
         return res.status(401).json({ message: "Token e ID não correspondem" });
       }
 
@@ -85,14 +86,14 @@ class TokenVerifier {
       });
 
       if (!latestToken) {
-        console.error("Token não encontrado no banco de dados");
+        logger.error("Token não encontrado no banco de dados");
         return res
           .status(401)
           .json({ message: "Token não encontrado no banco de dados" });
       }
 
       if (tokenWithoutBearer !== latestToken.token) {
-        console.error("Token inválido");
+        logger.error("Token inválido");
         return res.status(401).json({ message: "Token inválido" });
       }
 
@@ -104,14 +105,14 @@ class TokenVerifier {
       );
 
       if (tokenAgeInDays > 7) {
-        console.error("Token expirado");
+        logger.error("Token expirado");
         return res.status(401).json({ message: "Token expirado" });
       }
 
-      console.info("Token verificado com sucesso");
+      logger.info("Token verificado com sucesso");
       next();
     } catch (error) {
-      console.error("Erro ao verificar o token:", error);
+      logger.error("Erro ao verificar o token:", error);
       return res.status(401).json({ message: "Token inválido" });
     }
   }
@@ -124,7 +125,7 @@ class TokenVerifier {
     const token = req.headers.authorization;
 
     if (!token) {
-      console.error("Token não fornecido");
+      logger.error("Token não fornecido");
       return res.status(401).json({ message: "Token não fornecido" });
     }
 
@@ -136,16 +137,16 @@ class TokenVerifier {
       });
 
       if (!latestToken) {
-        console.error("Token não encontrado no banco de dados");
+        logger.error("Token não encontrado no banco de dados");
         return res
           .status(401)
           .json({ message: "Token não encontrado no banco de dados" });
       }
 
-      console.info("Token verificado com sucesso");
+      logger.info("Token verificado com sucesso");
       next();
     } catch (error) {
-      console.error("Erro ao verificar o token:", error);
+      logger.error("Erro ao verificar o token:", error);
       return res.status(401).json({ message: "Token inválido" });
     }
   }
@@ -158,7 +159,7 @@ class TokenVerifier {
     const token = req.headers.authorization;
 
     if (!token || !id) {
-      console.error("Token e ID não fornecidos");
+      logger.error("Token e ID não fornecidos");
       return res.status(401).json({ message: "Token e ID não fornecidos" });
     }
 
@@ -166,7 +167,7 @@ class TokenVerifier {
       const tokenWithoutBearer = token.split(" ")[1];
       const decoded: any = jwt.verify(tokenWithoutBearer, process.env.SECRET!);
       if (id != decoded.id) {
-        console.error("Token e ID não correspondem");
+        logger.error("Token e ID não correspondem");
         return res.status(401).json({ message: "Token e ID não correspondem" });
       }
 
@@ -176,14 +177,14 @@ class TokenVerifier {
       });
 
       if (!latestToken) {
-        console.error("Token não encontrado no banco de dados");
+        logger.error("Token não encontrado no banco de dados");
         return res
           .status(401)
           .json({ message: "Token não encontrado no banco de dados" });
       }
 
       if (tokenWithoutBearer !== latestToken.token) {
-        console.error("Token inválido");
+        logger.error("Token inválido");
         return res.status(401).json({ message: "Token inválido" });
       }
 
@@ -195,14 +196,14 @@ class TokenVerifier {
       );
 
       if (tokenAgeInDays > 7) {
-        console.error("Token expirado");
+        logger.error("Token expirado");
         return res.status(401).json({ message: "Token expirado" });
       }
 
-      console.info("Token verificado com sucesso");
+      logger.info("Token verificado com sucesso");
       next();
     } catch (error) {
-      console.error("Erro ao verificar o token:", error);
+      logger.error("Erro ao verificar o token:", error);
       return res.status(401).json({ message: "Token inválido" });
     }
   }

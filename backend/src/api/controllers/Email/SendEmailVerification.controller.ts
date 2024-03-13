@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { logError, logInfo } from "../../../utils/Logger/Logger";
+import logger from "../../../utils/Logger/Logger";
 import { generatePinCode } from "../../../utils/PinGenerate/PinGenerate";
 import User from "../../models/User/User.model";
 import VerificationCode from "../../models/Email/EmailVerifyCode.model";
@@ -10,7 +10,7 @@ import { EnvVariables } from "../../../config/env";
 
 const mail = EnvVariables.mail;
 
-class sendEmailVerification {
+class SendEmailVerificationController {
   public async sendEmail(req: Request, res: Response): Promise<void> {
     const { email } = req.body;
 
@@ -47,15 +47,18 @@ class sendEmailVerification {
           html: emailHTMLWithPIN,
         });
 
-        logInfo("Email de verificação enviado com sucesso.", res, 200);
+        logger.info("Email de verificação enviado com sucesso.");
+        res.status(200).send("Email de verificação enviado com sucesso.");
       } else {
-        logError("Usuário não encontrado.", res, 404);
+        logger.error("Usuário não encontrado.");
+        res.status(404).send("Usuário não encontrado.");
       }
     } catch (error) {
-      console.log(error);
-      logError("Erro ao enviar email de verificação.", res, 500);
+      console.error(error);
+      logger.error("Erro ao enviar email de verificação.");
+      res.status(500).send("Erro ao enviar email de verificação.");
     }
   }
 }
 
-export default new sendEmailVerification();
+export default new SendEmailVerificationController();

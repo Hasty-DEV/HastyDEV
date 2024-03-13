@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import User from "../../models/User/User.model";
 import VerificationCode from "../../models/Email/EmailVerifyCode.model";
-import { logError, logInfo } from "../../../utils/Logger/Logger";
+import logger from "../../../utils/Logger/Logger";
 
 class EmailCodeVerification {
   public async codeVerification(req: Request, res: Response): Promise<void> {
@@ -24,23 +24,23 @@ class EmailCodeVerification {
           if (timeDifference <= codeExpirationTime) {
             user.isVerified = true;
             await user.save();
-            console.log("Código de verificação válido");
-            logInfo("Código de verificação válido", res, 200);
+            logger.info("Código de verificação válido");
+            res.status(200).send("Código de verificação válido");
           } else {
-            console.log("Código de verificação expirado");
-            logError("Código de verificação expirado", res, 400);
+            logger.error("Código de verificação expirado");
+            res.status(400).send("Código de verificação expirado");
           }
         } else {
-          console.log("Código de verificação inválido");
-          logError("Código de verificação inválido", res, 400);
+          logger.error("Código de verificação inválido");
+          res.status(400).send("Código de verificação inválido");
         }
       } else {
-        console.log("Usuário não encontrado");
-        logError("Usuário não encontrado", res, 404);
+        logger.error("Usuário não encontrado");
+        res.status(404).send("Usuário não encontrado");
       }
     } catch (error) {
-      console.error("Erro ao verificar o código de verificação:", error);
-      logError("Erro ao verificar o código de verificação: " + error, res, 500);
+      logger.error("Erro ao verificar o código de verificação: " + error);
+      res.status(500).send("Erro ao verificar o código de verificação");
     }
   }
 }
