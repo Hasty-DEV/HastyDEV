@@ -9,14 +9,16 @@ interface AuthorType {
 }
 
 interface PostType {
-  postid: number;
-  profilePic?: string;
-  userid: string;
+  postid: number | string;
+  userid: number | string;
   author: AuthorType;
   content: string;
   img?: string;
   updatedAt: string;
   title: string;
+  subtitle: String;
+  price: String;
+  companyContent: String;
 }
 
 const Posts = () => {
