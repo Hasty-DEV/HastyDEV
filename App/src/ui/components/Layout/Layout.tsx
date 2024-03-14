@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import LeftBar from "../leftBar/LeftBar";
 import Header from "../../partials/navbar/Navbar";
 import RightBar from "../rightBar/RightBar";
+import ChatButton from "../ChatButton/ChatButton";
 
 const Layout = () => {
   return (
@@ -14,6 +15,7 @@ const Layout = () => {
         </div>
         <RightBar />
       </div>
+      <ChatButton />
     </>
   );
 };
