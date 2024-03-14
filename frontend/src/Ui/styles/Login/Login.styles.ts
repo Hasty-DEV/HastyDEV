@@ -112,6 +112,5 @@ export const LoginForm = styled.div`
 
   .social-media {
     text-align: center;
-    margin-top: 20px;
   }
 `;

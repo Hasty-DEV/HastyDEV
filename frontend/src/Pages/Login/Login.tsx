@@ -2,10 +2,6 @@ import { useState } from "react";
 import { Formik, Field } from "formik";
 import * as yup from "yup";
 import { Link } from "react-router-dom";
-import {
-  FacebookLoginButton,
-  GithubLoginButton,
-} from "react-social-login-buttons";
 import { Container, Row, Col } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
@@ -55,9 +51,6 @@ const Login: React.FC = () => {
 
   const isPasswordVisible = showPassword ? "text" : "password";
 
-  const handleEmCostrução = () => {
-    alert("Este botão está em construção.");
-  };
 
   return (
     <L.LoginContainer>
@@ -129,23 +122,6 @@ const Login: React.FC = () => {
                   )}
                 </Formik>
               )}
-
-              <div className="social-media">
-                <div className="d-flex flex-column align-items-center justify-content-center">
-                  <FacebookLoginButton
-                    style={{ width: "100%", marginBottom: "20px" }}
-                    onClick={handleEmCostrução}
-                  >
-                    <span>Entrar com o Facebook</span>
-                  </FacebookLoginButton>
-                  <GithubLoginButton
-                    style={{ width: "100%" }}
-                    onClick={handleEmCostrução}
-                  >
-                    <span>Entrar com o Github</span>
-                  </GithubLoginButton>
-                </div>
-              </div>
             </L.LoginForm>
           </Col>
           <Col sm={5} xl={6}>
