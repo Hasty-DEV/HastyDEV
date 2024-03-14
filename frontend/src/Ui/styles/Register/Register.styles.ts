@@ -26,11 +26,8 @@ export const RegisterForm = styled.div`
       display: block;
       margin-bottom: 16px;
       color: ${(props) => props.theme.colors.text};
-      font-family: Inter;
       font-size: 16px;
-      font-style: normal;
       font-weight: 400;
-      line-height: normal;
     }
     input {
       width: 370px;
@@ -41,10 +38,10 @@ export const RegisterForm = styled.div`
       color: ${(props) => props.theme.colors.text};
     }
     span {
-      position: absolute; /* Adicionado */
-      bottom: -25px; /* Adicionado */
-      left: 50%; /* Adicionado */
-      transform: translateX(-50%); /* Adicionado */
+      position: absolute;
+      bottom: -25px;
+      left: 50%;
+      transform: translateX(-50%); 
       color: red;
       font-size: 14px;
       white-space: nowrap;
@@ -83,21 +80,15 @@ export const RegisterForm = styled.div`
       font-weight: bold;
       text-decoration: none;
       color: #000;
-      font-family: Inter;
       font-size: 16px;
-      font-style: normal;
       font-weight: 400;
-      line-height: normal;
     }
   }
 
   .sign_in {
     color: ${(props) => props.theme.colors.text};
-    font-family: Inter;
     font-size: 16px;
-    font-style: normal;
     font-weight: 400;
-    line-height: normal;
 
     a {
       text-decoration: none;
@@ -108,6 +99,5 @@ export const RegisterForm = styled.div`
 
   .social-media {
     text-align: center;
-    margin-top: 20px;
   }
 `;

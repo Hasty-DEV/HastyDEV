@@ -19,11 +19,8 @@ export const LoginForm = styled.div`
     margin-top: 5%;
     margin-bottom: 54px;
     color: ${(props) => props.theme.colors.text};
-    font-family: Inter;
     font-size: 16px;
-    font-style: normal;
     font-weight: 700;
-    line-height: normal;
   }
 
   .form-group {
@@ -34,11 +31,8 @@ export const LoginForm = styled.div`
       display: block;
       margin-bottom: 16px;
       color: ${(props) => props.theme.colors.text};
-      font-family: Inter;
       font-size: 16px;
-      font-style: normal;
       font-weight: 400;
-      line-height: normal;
     }
     input {
       width: 100%;
@@ -87,11 +81,8 @@ export const LoginForm = styled.div`
       font-weight: bold;
       text-decoration: none;
       color: ${(props) => props.theme.colors.text};
-      font-family: Inter;
       font-size: 16px;
-      font-style: normal;
       font-weight: 400;
-      line-height: normal;
     }
   }
 
