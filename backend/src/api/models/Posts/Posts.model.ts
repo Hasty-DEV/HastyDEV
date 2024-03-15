@@ -6,23 +6,34 @@ interface PostAttributes {
   postid: number;
   userid: number;
   title: string;
-  content: string;
+  subtitle: string;
+  isPaid: boolean;
+  price?: number;
+  photos: string; // Alterado para string simples
+  companyContent: string;
+  categories: string; // Alterado para string simples
+  programmingLanguages: string; // Alterado para string simples
+  deadline: Date;
   createdAt?: Date;
   updatedAt?: Date;
 }
 
 interface PostCreationAttributes extends Optional<PostAttributes, "postid"> {}
 
-class Post
-  extends Model<PostAttributes, PostCreationAttributes>
-  implements PostAttributes
-{
+class Post extends Model<PostAttributes, PostCreationAttributes> implements PostAttributes {
   public postid!: number;
   public userid!: number;
   public createdAt!: Date;
   public updatedAt!: Date;
   public title!: string;
-  public content!: string;
+  public subtitle!: string;
+  public isPaid!: boolean;
+  public price?: number;
+  public photos!: string;
+  public companyContent!: string;
+  public categories!: string;
+  public programmingLanguages!: string;
+  public deadline!: Date;
 }
 
 Post.init(
@@ -40,8 +51,40 @@ Post.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    content: {
+    subtitle: {
       type: DataTypes.STRING,
+      allowNull: false,
+    },
+    isPaid: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false, // Padrão para não remunerado
+    },
+    price: {
+      type: DataTypes.FLOAT,
+      allowNull: true,
+    },
+    photos: {
+      type: DataTypes.STRING, // Alterado para string simples
+      allowNull: false,
+      defaultValue: "", // Padrão para nenhum foto
+    },
+    companyContent: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    categories: {
+      type: DataTypes.STRING, // Alterado para string simples
+      allowNull: false,
+      defaultValue: "", // Padrão para nenhuma categoria
+    },
+    programmingLanguages: {
+      type: DataTypes.STRING, // Alterado para string simples
+      allowNull: false,
+      defaultValue: "", // Padrão para nenhuma linguagem de programação
+    },
+    deadline: {
+      type: DataTypes.DATE,
       allowNull: false,
     },
     createdAt: {

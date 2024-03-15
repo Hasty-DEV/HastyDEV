@@ -14,6 +14,7 @@ class Posts extends Level {
       res.status(500).json({ error: "Erro Interno do Servidor" });
     }
   }
+
   public createPost = async (
     req: Request,
     res: Response,
@@ -22,12 +23,11 @@ class Posts extends Level {
     try {
       const userid: number = req.body.id;
       await this.incrementExpService(userid, 10);
-      await PostService(req, res, next);
+      await PostService(req, res, next); // Deixe PostService lidar com a resposta
       logger.info("Post Criado com Sucesso!");
-      res.status(201).json("Post Criado com Sucesso!");
     } catch (error) {
       logger.error("Erro ao criar post: " + error);
-      res.status(500).json({ error: "Erro Interno do Servidor" });
+   //   res.status(500).json({ error: "Erro Interno do Servidor" + error });
     }
   };
 }

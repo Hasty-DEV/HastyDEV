@@ -1,12 +1,10 @@
 import LevelModel from "../../models/Level/Level.model";
-import logger from "../../../utils/Logger/Logger";
-import { Response } from "express";
 
-export const InitializeLevel = async (userid: number ) => {
+export const InitializeLevel = async (userid: number) => {
   try {
     const existingUser = await LevelModel.findOne({ where: { userid } });
     if (existingUser) {
-      logger.info("O usuário já tem uma entrada na tabela Level.");
+      console.log("O usuário já tem uma entrada na tabela Level.");
       return;
     }
     await LevelModel.create({
@@ -16,7 +14,7 @@ export const InitializeLevel = async (userid: number ) => {
       expNeeded: 0, 
     });
   } catch (error) {
-    logger.error("Erro ao inicializar o nível do usuário: " + error);
-   
+    console.error("Erro ao inicializar o nível do usuário:", error);
+    throw new Error("Erro ao inicializar o nível do usuário");
   }
 };

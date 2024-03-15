@@ -9,33 +9,51 @@ import {
   TextArea,
   Button,
 } from "../../ui/styles/CreatePost/CreatePost.styles";
+import { api } from "../../data/services/api";
 
 const CreatePost = () => {
+  const [loading, setLoading] = useState(false); // Estado para controlar o estado de carregamento do envio do formulário
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
   const [isPaid, setIsPaid] = useState(false);
   const [price, setPrice] = useState("");
-  const [photos, setPhotos] = useState<File[]>([]);
-  const [companyInfo, setCompanyInfo] = useState("");
-  const [categories, setCategories] = useState<string[]>([]);
-  const [programmingLanguages, setProgrammingLanguages] = useState<string[]>(
-    []
-  );
+  const [photos, setPhotos] = useState<string>(""); // Alterado para string
+  const [companyContent, setcompanyContent] = useState("");
+  const [categories, setCategories] = useState<string>(""); // Alterado para string
+  const [programmingLanguages, setProgrammingLanguages] = useState<string>(""); // Alterado para string
   const [deadline, setDeadline] = useState("");
 
-  const handleFormSubmit = (event: React.FormEvent) => {
+  const handleFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    console.log({
-      title,
-      subtitle,
-      isPaid,
-      price,
-      photos,
-      companyInfo,
-      categories,
-      programmingLanguages,
-      deadline,
-    });
+    setLoading(true);  
+
+    try {
+      const userId = localStorage.getItem("userId");
+      const userToken = localStorage.getItem("userToken");
+
+      const response = await api.post("/posts", {
+        id: userId,
+        token: `Bearer ${userToken}`,
+        title,
+        subtitle,
+        isPaid,
+        price,
+        photos,
+        companyContent,
+        categories,
+        programmingLanguages,
+        deadline,
+      });
+
+      console.log("Resposta do servidor:", response.data);
+      // Lógica para lidar com a resposta do servidor após o envio do formulário
+
+      setLoading(false); // Atualiza o estado de carregamento para false após o envio bem-sucedido
+      window.location.reload(); // Atualiza a página após o envio bem-sucedido
+    } catch (error) {
+      console.error("Erro ao enviar o formulário:", error);
+      setLoading(false); // Atualiza o estado de carregamento para false em caso de erro
+    }
   };
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,23 +73,23 @@ const CreatePost = () => {
   };
 
   const handlePhotosChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPhotos([...photos, ...Array.from(e.target.files || [])]);
+    setPhotos(Array.from(e.target.files || []).join(",")); // Alterado para string separada por vírgula
   };
 
-  const handleCompanyInfoChange = (
+  const handlecompanyContentChange = (
     e: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
-    setCompanyInfo(e.target.value);
+    setcompanyContent(e.target.value);
   };
 
   const handleCategoriesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCategories(e.target.value.split(","));
+    setCategories(e.target.value);
   };
 
   const handleProgrammingLanguagesChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setProgrammingLanguages(e.target.value.split(","));
+    setProgrammingLanguages(e.target.value);
   };
 
   const handleDeadlineChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,6 +98,7 @@ const CreatePost = () => {
 
   return (
     <CreatePostContainer>
+      {loading && <div>Carregando...</div>} {/* Mostra uma mensagem de carregamento se o estado de carregamento estiver true */}
       <Form onSubmit={handleFormSubmit}>
         <FormGroup>
           <Label htmlFor="title">Título:</Label>
@@ -102,10 +121,10 @@ const CreatePost = () => {
           />
         </FormGroup>
         <FormGroup>
-          <Label class="checkbox-container">
+          <Label className="checkbox-container">
             Remunerado:
             <Input
-              class="custom-checkbox"
+              className="custom-checkbox"
               type="checkbox"
               checked={isPaid}
               onChange={handleIsPaidChange}
@@ -135,11 +154,11 @@ const CreatePost = () => {
           />
         </FormGroup>
         <FormGroup>
-          <Label htmlFor="companyInfo">Informações da Empresa:</Label>
+          <Label htmlFor="companyContent">Informações da Empresa:</Label>
           <TextArea
-            id="companyInfo"
-            value={companyInfo}
-            onChange={handleCompanyInfoChange}
+            id="companyContent"
+            value={companyContent}
+            onChange={handlecompanyContentChange}
             required
           />
         </FormGroup>
@@ -148,7 +167,7 @@ const CreatePost = () => {
           <Input
             type="text"
             id="categories"
-            value={categories.join(",")}
+            value={categories}
             onChange={handleCategoriesChange}
             required
           />
@@ -160,7 +179,7 @@ const CreatePost = () => {
           <Input
             type="text"
             id="programmingLanguages"
-            value={programmingLanguages.join(",")}
+            value={programmingLanguages}
             onChange={handleProgrammingLanguagesChange}
             required
           />

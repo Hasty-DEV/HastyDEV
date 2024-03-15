@@ -19,6 +19,9 @@ interface PostType {
   subtitle: String;
   price: String;
   companyContent: String;
+  categories: String;
+  progammingLanguages: String;
+  deadline: Date;
 }
 
 const Posts = () => {

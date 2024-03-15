@@ -53,7 +53,7 @@ class TokenVerifier {
         return res.status(401).json({ message: "Token expirado" });
       }
 
-      logger.info("Token verificado com sucesso");
+     console.info("Token verificado com sucesso");
       next();
     } catch (error) {
       logger.error("Erro ao verificar o token:", error);
@@ -109,7 +109,7 @@ class TokenVerifier {
         return res.status(401).json({ message: "Token expirado" });
       }
 
-      logger.info("Token verificado com sucesso");
+     logger.info("Token verificado com sucesso");
       next();
     } catch (error) {
       logger.error("Erro ao verificar o token:", error);
@@ -143,7 +143,7 @@ class TokenVerifier {
           .json({ message: "Token não encontrado no banco de dados" });
       }
 
-      logger.info("Token verificado com sucesso");
+     console.info("Token verificado com sucesso");
       next();
     } catch (error) {
       logger.error("Erro ao verificar o token:", error);

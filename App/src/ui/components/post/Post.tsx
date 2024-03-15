@@ -23,6 +23,9 @@ interface PostType {
   subtitle: String;
   price: String;
   companyContent: String;
+  categories: String;
+  progammingLanguages: String;
+  deadline: Date;
 }
 
 import userIconDefault from "../../assets/user/user_icon.png";
@@ -75,6 +78,8 @@ const Post = ({ post }: { post: PostType }) => {
     fetchData();
   }, [fetchData]);
 
+
+ 
   
   return (
     <PostContainer>
@@ -105,28 +110,26 @@ const Post = ({ post }: { post: PostType }) => {
 
   <p className="price">{post.price}</p>
   </div>
-  <br />
-             {expanded ? (
-              <>
-                <p>{post.content}</p>
+  <br />{expanded ? (
+  <>
+    <p>{post.content}</p>
 
-                <img src={post.img} alt="" />
+    <img src={post.img} alt="" />
 
-                <hr />
-                <h4>Dados do Contratante</h4>
-               
-            {/*como no catho, quero colocar o nivel game do contratante ou ao inves de colocar addos  do contratante, colocar as fotos e palavras chave... nao sei se precisa colcoar os dados... so da pessoa clicar no perfil ve quem é*/}
+    <hr />
+    <h4>Dados do Contratante</h4>
+   
+    {/*como no catho, quero colocar o nivel game do contratante ou ao inves de colocar addos  do contratante, colocar as fotos e palavras chave... nao sei se precisa colcoar os dados... so da pessoa clicar no perfil ve quem é*/}
 
-                
+    <button onClick={() => setExpanded(false)}>Ler menos</button>
+  </>
+) : (
+  <>
+    {post.content && <p>{post.content.slice(0, 200)}...</p>}
+    <button onClick={() => setExpanded(true)}>Ler mais</button>
+  </>
+)}
 
-                <button onClick={() => setExpanded(false)}>Ler menos</button>
-              </>
-            ) : (
-              <>
-                <p>{post.content.slice(0, 200)}...</p>
-                <button onClick={() => setExpanded(true)}>Ler mais</button>
-              </>
-            )}
           </div>
           <div className="info">
             <div className="item">
