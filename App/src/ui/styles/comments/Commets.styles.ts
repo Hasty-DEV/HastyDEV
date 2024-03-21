@@ -10,9 +10,6 @@ const CommentsContainer = styled.div`
     }
 
     .write {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
       gap: 20px;
       margin: 20px 0px;
 
@@ -36,14 +33,10 @@ const CommentsContainer = styled.div`
 
     .comment {
       margin: 30px 0px;
-      display: flex;
-      justify-content: space-between;
       gap: 20px;
 
       .info {
         flex: 5;
-        display: flex;
-        flex-direction: column;
         gap: 3px;
         align-items: flex-start;
 

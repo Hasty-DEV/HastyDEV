@@ -6,7 +6,6 @@ import PostContainer from "../../styles/post/Post.styles";
 import { getUserData } from "../../../data/services/userService";
 import { UserDataTypes } from "../../../data/@types/UserData/UserData.type";
 
-
 interface AuthorType {
   first_name: string;
   last_name: string;
@@ -20,11 +19,11 @@ interface PostType {
   img?: string;
   updatedAt: string;
   title: string;
-  subtitle: String;
-  price: String;
-  companyContent: String;
-  categories: String;
-  progammingLanguages: String;
+  subtitle: string;
+  price: string;
+  companyContent: string;
+  categories: string;
+  progammingLanguages: string;
   deadline: Date;
 }
 
@@ -36,7 +35,7 @@ const Post = ({ post }: { post: PostType }) => {
   const [commentOpen, setCommentOpen] = useState(false);
   const [formattedUpdatedAt, setFormattedUpdatedAt] = useState<string>("");
   const [userIcon, setUserIcon] = useState<string | null>(null);
-  const [expanded, setExpanded] = useState(false);  
+  const [expanded, setExpanded] = useState(false);
 
   const liked = false;
 
@@ -78,17 +77,14 @@ const Post = ({ post }: { post: PostType }) => {
     fetchData();
   }, [fetchData]);
 
-
- 
-  
   return (
     <PostContainer>
       <div className="post">
         <div className="container">
-          <div className="user">
-            <div className="userInfo">
+          <div className="user d-flex align-items-center justify-content-between ">
+            <div className="userInfo d-flex">
               <img src={userIcon || userIconDefault} alt="" />
-              <div className="details">
+              <div className="details d-flex flex-column">
                 <Link
                   to={`/profile/${post.userid}`}
                   style={{ textDecoration: "none", color: "inherit" }}
@@ -100,43 +96,36 @@ const Post = ({ post }: { post: PostType }) => {
             </div>
           </div>
           <div className="content">
+            <h2>{post.title}</h2>
 
-    <h2>
-      {post.title}
-    </h2>
+            <div className="title-container d-flex justify-content-between  align-items-center">
+              <h5>{post.subtitle}</h5>
 
-    <div className="title-container">
-  <h5>{post.subtitle}</h5>
-
-  <p className="price">{post.price}</p>
-  </div>
-  <br />{expanded ? (
-  <>
-    <p>{post.content}</p>
-
-    <img src={post.img} alt="" />
-
-    <hr />
-    <h4>Dados do Contratante</h4>
-   
-    {/*como no catho, quero colocar o nivel game do contratante ou ao inves de colocar addos  do contratante, colocar as fotos e palavras chave... nao sei se precisa colcoar os dados... so da pessoa clicar no perfil ve quem é*/}
-
-    <button onClick={() => setExpanded(false)}>Ler menos</button>
-  </>
-) : (
-  <>
-    {post.content && <p>{post.content.slice(0, 200)}...</p>}
-    <button onClick={() => setExpanded(true)}>Ler mais</button>
-  </>
-)}
-
+              <p className="price">{post.price}</p>
+            </div>
+            <br />
+            {expanded ? (
+              <>
+                <p>{post.content}</p>
+                <img src={post.img} alt="" />
+                <hr />
+                <h4>Dados do Contratante</h4>
+                {/*como no catho, quero colocar o nivel game do contratante ou ao inves de colocar addos  do contratante, colocar as fotos e palavras chave... nao sei se precisa colcoar os dados... so da pessoa clicar no perfil ve quem é*/}
+                <button onClick={() => setExpanded(false)}>Ler menos</button>
+              </>
+            ) : (
+              <>
+                {post.content && <p>{post.content.slice(0, 200)}...</p>}
+                <button onClick={() => setExpanded(true)}>Ler mais</button>
+              </>
+            )}
           </div>
-          <div className="info">
-            <div className="item">
+          <div className="info d-flex align-items-center">
+            <div className="item d-flex align-items-center">
               {liked ? <FaHeart /> : <FaRegHeart />}1 Likes
             </div>
             <div
-              className="item"
+              className="item d-flex align-items-center"
               onClick={() => setCommentOpen(!commentOpen)}
             >
               <FaComment />2 Comentários

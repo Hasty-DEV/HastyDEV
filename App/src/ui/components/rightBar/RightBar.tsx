@@ -3,14 +3,14 @@ import UserLevelInfo from "../UserLevelInfo/UserLevelInfo";
 
 const RightBar = () => {
   return (
-    <RightBarContainer>
+    <RightBarContainer className="">
       <div className="rightBar">
         <div className="container">
           <UserLevelInfo />
           <div className="item">
             <span>Últimas Atividades</span>
-            <div className="user">
-              <div className="userInfo">
+            <div className="user d-flex align-items-center justify-content-between ">
+              <div className="userInfo d-flex align-items-center position-relative">
                 <img
                   src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
                   alt=""
@@ -21,8 +21,8 @@ const RightBar = () => {
               </div>
               <span>1 min atrás</span>
             </div>
-            <div className="user">
-              <div className="userInfo">
+            <div className="user d-flex align-items-center justify-content-between ">
+              <div className="userInfo d-flex align-items-center position-relative">
                 <img
                   src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
                   alt=""
@@ -33,8 +33,8 @@ const RightBar = () => {
               </div>
               <span>1 min atrás</span>
             </div>
-            <div className="user">
-              <div className="userInfo">
+            <div className="user d-flex align-items-center justify-content-between ">
+              <div className="userInfo d-flex align-items-center position-relative">
                 <img
                   src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
                   alt=""
@@ -45,8 +45,8 @@ const RightBar = () => {
               </div>
               <span>1 min atrás</span>
             </div>
-            <div className="user">
-              <div className="userInfo">
+            <div className="user d-flex align-items-center justify-content-between ">
+              <div className="userInfo d-flex align-items-center position-relative">
                 <img
                   src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
                   alt=""
@@ -61,12 +61,12 @@ const RightBar = () => {
           <div className="item">
             <span>DEVS Online</span>
             <div className="user">
-              <div className="userInfo">
+              <div className="userInfo d-flex align-items-center position-relative">
                 <img
                   src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
                   alt=""
                 />
-                <div className="online" />
+                <div className="online position-absolute " />
                 <span>Jane Doe</span>
               </div>
             </div>

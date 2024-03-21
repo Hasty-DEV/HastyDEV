@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import Events from "../../assets/6.svg";
 import Gaming from "../../assets/7.png";
 import Gallery from "../../assets/8.png";
@@ -59,11 +58,11 @@ const LeftBar = () => {
   return (
     <>
       {loading && <Loader />}
-      <LeftBarContainer>
+      <LeftBarContainer className="position-sticky ">
         <div className="leftBar">
           <div className="container">
-            <div className="menu">
-              <div className="user">
+            <div className="menu d-flex flex-column ">
+              <div className="user d-flex align-items-center">
                 <Link to="/perfil">
                   <img src={userIcon || DefaultUserIcon} alt="" />
                 </Link>
@@ -75,35 +74,34 @@ const LeftBar = () => {
               </div>
             </div>
             <hr />
-            <div className="menu">
+            <div className="menu d-flex flex-column ">
               <span>Em Construção...</span>
 
-              <div className="item">
+              <div className="item d-flex align-items-center">
                 <Link to="/createpost">
                   <img src={Events} alt="" />
                 </Link>
                 <span>Criar Post</span>
               </div>
-
-              <div className="item">
+              <div className="item d-flex align-items-center">
                 <img src={Gaming} alt="" />
                 <span>Em Construção...</span>
               </div>
-              <div className="item">
+              <div className="item d-flex align-items-center">
                 <img src={Gallery} alt="" />
                 <span>Em Construção...</span>
               </div>
-              <div className="item">
+              <div className="item d-flex align-items-center">
                 <img src={Videos} alt="" />
                 <span>Em Construção...</span>
               </div>
-              <div className="item">
+              <div className="item d-flex align-items-center">
                 <img src={Messages} alt="" />
                 <span>Em Construção...</span>
               </div>
             </div>
             <hr />
-            <div className="menu mt-3">
+            <div className="menu d-flex flex-column mt-3">
               <Button variant="danger" onClick={handleLogout}>
                 Logout
               </Button>

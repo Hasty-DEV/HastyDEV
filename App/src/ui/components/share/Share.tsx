@@ -1,7 +1,7 @@
 import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import Image from "../../assets/img.png";
 import DefaultUserIcon from "../../assets/user/user_icon.png";
-import ShareContainer from "../../styles/share/Share.styles";
+import ShareContainer from "../../styles/Share/Share.styles";
 import { api } from "../../../data/services/api";
 import Loader from "../Loader/Loader";
 import { getUserIcon } from "../../../data/services/getUserIconService";
@@ -64,7 +64,7 @@ const Share = () => {
       <ShareContainer>
         <div className="share">
           <form className="container" onSubmit={(e) => handleOnSubmit(e)}>
-            <div className="top">
+            <div className="top d-flex align-items-center">
               <img src={userIcon || DefaultUserIcon} alt="" />
               <div>
                 <input
@@ -80,11 +80,11 @@ const Share = () => {
               </div>
             </div>
             <hr />
-            <div className="bottom">
-              <div className="left">
+            <div className="bottom d-flex align-items-center justify-content-between ">
+              <div className="left d-flex align-items-center">
                 <input type="file" id="file" style={{ display: "none" }} />
                 <label htmlFor="file">
-                  <div className="item">
+                  <div className="item d-flex align-items-center">
                     <img src={Image} alt="" />
                     <span>Adicionar Imagem</span>
                   </div>

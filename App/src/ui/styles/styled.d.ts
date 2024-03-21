@@ -1,4 +1,3 @@
-import { string } from "prop-types";
 import "styled-components";
 declare module "styled-components" {
   export interface DefaultTheme {

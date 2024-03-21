@@ -13,6 +13,6 @@ export default {
     borda: "#9D5BF0",
     color_Form: "#21173E",
     box_shadow: "-30px 30px 60px #0c0719, 30px -30px 60px #120b27",
-    color_emailVerification: "#0F0920"
+    color_emailVerification: "#0F0920",
   },
 } as DefaultTheme;

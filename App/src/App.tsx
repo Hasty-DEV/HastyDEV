@@ -4,10 +4,10 @@ import GlobalStyle from "./ui/styles/Global";
 
 const App = () => {
   return (
-    <div>
+    <>
       <RouterProvider router={routes} />
       <GlobalStyle />
-    </div>
+    </>
   );
 };
 

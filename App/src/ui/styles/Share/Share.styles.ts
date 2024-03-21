@@ -11,8 +11,6 @@ const ShareContainer = styled.div`
     padding: 20px;
 
     .top {
-      display: flex;
-      align-items: center;
       gap: 20px;
 
       img {
@@ -39,43 +37,33 @@ const ShareContainer = styled.div`
       background-color: ${({ theme }) => theme.border};
     }
 
-    .bottom {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .left {
+      gap: 20px;
 
-      .left {
-        display: flex;
-        align-items: center;
-        gap: 20px;
+      .item {
+        gap: 10px;
+        cursor: pointer;
 
-        .item {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          cursor: pointer;
+        img {
+          height: 20px;
+        }
 
-          img {
-            height: 20px;
-          }
-
-          span {
-            font-size: 12px;
-            color: gray;
-          }
+        span {
+          font-size: 12px;
+          color: gray;
         }
       }
+    }
+  }
 
-      .right {
-        button {
-          border: none;
-          padding: 5px;
-          color: white;
-          cursor: pointer;
-          background-color: #5271ff;
-          border-radius: 3px;
-        }
-      }
+  .right {
+    button {
+      border: none;
+      padding: 5px;
+      color: white;
+      cursor: pointer;
+      background-color: #5271ff;
+      border-radius: 3px;
     }
   }
 `;
