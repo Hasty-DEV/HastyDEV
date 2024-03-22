@@ -1,11 +1,10 @@
-import  { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import CommentsContainer from "../../styles/comments/Commets.styles";
 import { api } from "../../../data/services/api";
 import Answers from "../answers/Answers";
 import { FaComment } from "react-icons/fa";
 import { getUserIconByID } from "../../../data/services/getUserIconService";
 import userIconDefault from "../../assets/user/user_icon.png";
-
 
 interface Comment {
   id: string;
@@ -23,8 +22,24 @@ const Comments: React.FC<{ postId: string }> = ({ postId }) => {
   const [newComment, setNewComment] = useState<string>("");
   const [answerOpen, setAnswerOpen] = useState<string[]>([]);
 
-
-
+  const getCommentsForPost = useCallback(
+    async (postId: string): Promise<Comment[]> => {
+      try {
+        const response = await api.get<Comment[]>(`/comments/${postId}`, {
+          headers: {
+            id: userId || "",
+            Authorization: `Bearer ${token || ""}`,
+          },
+        });
+        return response.data;
+      } catch (error) {
+        console.error(error);
+        return [];
+      }
+    },
+    [userId, token]
+  );
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -55,7 +70,6 @@ const Comments: React.FC<{ postId: string }> = ({ postId }) => {
             if (icon && icon.data) {
               setUserIcon(URL.createObjectURL(new Blob([icon.data])));
             }
-
           } catch (error) {
             console.error("Error fetching user data:", error);
           }
@@ -66,21 +80,7 @@ const Comments: React.FC<{ postId: string }> = ({ postId }) => {
     };
 
     fetchData();
-  }, [postId]);
-  const getCommentsForPost = async (postId: string): Promise<Comment[]> => {
-    try {
-      const response = await api.get<Comment[]>(`/comments/${postId}`, {
-        headers: {
-          id: userId || "",
-          Authorization: `Bearer ${token || ""}`,
-        },
-      });
-      return response.data;
-    } catch (error) {
-      console.error(error);
-      return [];
-    }
-  };
+  }, [postId, getCommentsForPost]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewComment(event.target.value);
@@ -93,7 +93,7 @@ const Comments: React.FC<{ postId: string }> = ({ postId }) => {
           userid: userId,
           content: newComment,
           token: token,
-          id:userId,
+          id: userId,
         };
         await api.post(`/comments/${postId}`, payload, {
           headers: {
@@ -113,18 +113,18 @@ const Comments: React.FC<{ postId: string }> = ({ postId }) => {
   };
 
   const toggleComments = (commentId: string) => {
-    setAnswerOpen(answerOpen.includes(commentId)
-      ? answerOpen.filter(id => id !== commentId)
-      : [...answerOpen, commentId]
+    setAnswerOpen(
+      answerOpen.includes(commentId)
+        ? answerOpen.filter((id) => id !== commentId)
+        : [...answerOpen, commentId]
     );
   };
-
 
   return (
     <CommentsContainer>
       <div className="comments">
-        <div className="write">
-        <img src={userIcon || userIconDefault} alt="" />
+        <div className="write d-flex align-items-center justify-content-between ">
+          <img src={userIcon || userIconDefault} alt="" />
           <input
             type="text"
             placeholder="Escreva um comentário"
@@ -135,19 +135,30 @@ const Comments: React.FC<{ postId: string }> = ({ postId }) => {
         </div>
 
         {comments.map((comment) => (
-          <div key={comment.id} className="comment">
-          <img src={userIcon || userIconDefault} alt="" />
-            <div className="info">
+          <div
+            key={comment.id}
+            className="comment d-flex justify-content-between "
+          >
+            <img src={userIcon || userIconDefault} alt="" />
+            <div className="info d-flex flex-column">
               <span>{userName}</span>
               <p>{comment.content}</p>
             </div>
             <span className="date">{formatCreatedAt(comment.createdAt)}</span>
 
-            <div className="item" onClick={() => toggleComments(comment.commentid.toString())}>
-              <FaComment /> {answerOpen.includes(comment.commentid.toString()) ? "Cancelar" : "Respostas"}
+            <div
+              className="item"
+              onClick={() => toggleComments(comment.commentid.toString())}
+            >
+              <FaComment />{" "}
+              {answerOpen.includes(comment.commentid.toString())
+                ? "Cancelar"
+                : "Respostas"}
             </div>
 
-            {answerOpen.includes(comment.commentid.toString()) && <Answers commentId={comment.commentid.toString()} />}
+            {answerOpen.includes(comment.commentid.toString()) && (
+              <Answers commentId={comment.commentid.toString()} />
+            )}
           </div>
         ))}
       </div>

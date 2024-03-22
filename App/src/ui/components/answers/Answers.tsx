@@ -1,9 +1,8 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import AnswersContainer from "../../styles/answers/Answers.styles";
 import { api } from "../../../data/services/api";
 import { getUserIconByID } from "../../../data/services/getUserIconService";
 import userIconDefault from "../../assets/user/user_icon.png";
-
 
 interface Answer {
   id: string;
@@ -19,7 +18,6 @@ const Answers: React.FC<{ commentId: string }> = ({ commentId }) => {
   const [userIcon, setUserIcon] = useState<string | null>(null);
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [newAnswer, setNewAnswer] = useState<string>("");
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -106,26 +104,25 @@ const Answers: React.FC<{ commentId: string }> = ({ commentId }) => {
   return (
     <AnswersContainer>
       <div className="answers">
-          <div className="write">
-            <input
-              type="text"
-              placeholder="Escreva uma resposta"
-              value={newAnswer}
-              onChange={handleInputChange}
-            />
-            <button onClick={handleAnswerSubmit}>Enviar</button>
-          </div>
-    
+        <div className="write d-flex align-items-center ">
+          <input
+            type="text"
+            placeholder="Escreva uma resposta"
+            value={newAnswer}
+            onChange={handleInputChange}
+          />
+          <button onClick={handleAnswerSubmit}>Enviar</button>
+        </div>
+
         {answers.map((reply) => (
-          <div key={reply.id} className="answer">
-          <img src={userIcon || userIconDefault} alt="" />
+          <div key={reply.id} className="answer d-flex">
+            <img src={userIcon || userIconDefault} alt="" />
             <div className="info">
               <span>{userName}</span>
               <p>{reply.content}</p>
             </div>
             <span className="date">{formatCreatedAt(reply.createdAt)}</span>
           </div>
-          
         ))}
       </div>
     </AnswersContainer>

@@ -2,11 +2,8 @@
 import styled from "styled-components";
 
 const AnswersContainer = styled.div`
-.answers {
   .write {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px; /* Adicione um espaço entre o input de resposta e os comentários */
+    margin-bottom: 20px;
   }
 
   input[type="text"] {
@@ -28,7 +25,6 @@ const AnswersContainer = styled.div`
   }
 
   .answer {
-    display: flex;
     align-items: flex-start;
     margin-bottom: 20px;
   }
@@ -53,7 +49,6 @@ const AnswersContainer = styled.div`
     margin: 0;
     margin-top: 5px;
   }
-}
 `;
 
 export default AnswersContainer;

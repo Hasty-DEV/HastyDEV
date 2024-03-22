@@ -5,8 +5,8 @@ export const HeaderContainer = styled.header`
   background-color: #fff;
 
   div.dropdown-menu[data-bs-popper] {
-    top: 150%!important;
-    right: 0!important;
+    top: 150% !important;
+    right: 0 !important;
     left: -245px;
-}
+  }
 `;

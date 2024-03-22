@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 const LeftBarContainer = styled.div`
   flex: 2;
-  position: sticky;
   top: 65px;
   height: calc(100vh - 70px);
   overflow: scroll;
@@ -29,8 +28,6 @@ const LeftBarContainer = styled.div`
     }
 
     .menu {
-      display: flex;
-      flex-direction: column;
       gap: 20px;
 
       span {
@@ -38,8 +35,6 @@ const LeftBarContainer = styled.div`
       }
 
       .user {
-        display: flex;
-        align-items: center;
         gap: 10px;
 
         button {
@@ -60,8 +55,6 @@ const LeftBarContainer = styled.div`
       }
 
       .item {
-        display: flex;
-        align-items: center;
         gap: 10px;
 
         button {

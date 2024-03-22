@@ -3,7 +3,7 @@ import { StyledChatButton } from "../../styles/ChatButton/ChatButton.styles";
 
 const ChatButton = () => {
   return (
-    <StyledChatButton>
+    <StyledChatButton className="position-fixed d-flex justify-content-center align-items-center ">
       <BsChatDots size={24} />
     </StyledChatButton>
   );

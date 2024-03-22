@@ -16,11 +16,11 @@ interface PostType {
   img?: string;
   updatedAt: string;
   title: string;
-  subtitle: String;
-  price: String;
-  companyContent: String;
-  categories: String;
-  progammingLanguages: String;
+  subtitle: string;
+  price: string;
+  companyContent: string;
+  categories: string;
+  progammingLanguages: string;
   deadline: Date;
 }
 
@@ -42,7 +42,7 @@ const Posts = () => {
   }, [fetchPosts]);
 
   return (
-    <PostsContainer>
+    <PostsContainer className="d-flex flex-column">
       <div className="posts">
         {posts.map((post) => (
           <Post post={post} key={post.postid} />

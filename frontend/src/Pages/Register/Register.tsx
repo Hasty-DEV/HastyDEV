@@ -179,7 +179,7 @@ const Register: React.FC<RegisterProps> = ({ setAllowEmailVerification }) => {
                         </div>
                         <div className="form-group mb-5">
           <label htmlFor="role">Status:</label>
-          <div className="radio-input">
+          <div className="radio-input"> 
             <label>
               <Field
                 value="user"

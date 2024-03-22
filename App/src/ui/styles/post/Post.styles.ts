@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const PostContainer = styled.div`
   -webkit-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
@@ -11,36 +11,22 @@ const PostContainer = styled.div`
   .container {
     padding: 20px;
 
-    .user {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .userInfo {
+      gap: 20px;
 
-      .userInfo {
-        display: flex;
-        gap: 20px;
+      img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
 
+      .name {
+        font-weight: 500;
+      }
 
-
-        img {
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          object-fit: cover;
-        }
-
-        .details {
-          display: flex;
-          flex-direction: column;
-
-          .name {
-            font-weight: 500;
-          }
-
-          .date {
-            font-size: 12px;
-          }
-        }
+      .date {
+        font-size: 12px;
       }
     }
 
@@ -55,13 +41,9 @@ const PostContainer = styled.div`
     }
 
     .info {
-      display: flex;
-      align-items: center;
       gap: 20px;
 
       .item {
-        display: flex;
-        align-items: center;
         gap: 10px;
         cursor: pointer;
         font-size: 14px;
@@ -69,36 +51,26 @@ const PostContainer = styled.div`
     }
   }
 
-  .title-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-}
-
-.price {
+  .price {
     margin-top: -50px;
     margin-right: 20px;
-   font-size: 25px;
+    font-size: 25px;
   }
 
   @media screen and (max-width: 768px) {
     .price {
-      margin-right: 10px;  
+      margin-right: 10px;
     }
   }
 
   @media screen and (max-width: 480px) {
-    .title-container{
-display: block;
+    .title-container {
+      display: block;
     }
-    .price{
+    .price {
       margin: 0;
     }
   }
-
-
-
 `;
 
 export default PostContainer;

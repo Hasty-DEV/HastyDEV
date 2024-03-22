@@ -10,22 +10,21 @@ import {
   Button,
 } from "../../ui/styles/CreatePost/CreatePost.styles";
 import { api } from "../../data/services/api";
-
 const CreatePost = () => {
-  const [loading, setLoading] = useState(false); // Estado para controlar o estado de carregamento do envio do formulário
+  const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
   const [isPaid, setIsPaid] = useState(false);
   const [price, setPrice] = useState("");
-  const [photos, setPhotos] = useState<string>(""); // Alterado para string
+  const [photos, setPhotos] = useState<string>("");
   const [companyContent, setcompanyContent] = useState("");
-  const [categories, setCategories] = useState<string>(""); // Alterado para string
-  const [programmingLanguages, setProgrammingLanguages] = useState<string>(""); // Alterado para string
+  const [categories, setCategories] = useState<string>("");
+  const [programmingLanguages, setProgrammingLanguages] = useState<string>("");
   const [deadline, setDeadline] = useState("");
 
   const handleFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    setLoading(true);  
+    setLoading(true);
 
     try {
       const userId = localStorage.getItem("userId");
@@ -46,13 +45,11 @@ const CreatePost = () => {
       });
 
       console.log("Resposta do servidor:", response.data);
-      // Lógica para lidar com a resposta do servidor após o envio do formulário
-
-      setLoading(false); // Atualiza o estado de carregamento para false após o envio bem-sucedido
-      window.location.reload(); // Atualiza a página após o envio bem-sucedido
+      setLoading(false);
+      window.location.reload();
     } catch (error) {
       console.error("Erro ao enviar o formulário:", error);
-      setLoading(false); // Atualiza o estado de carregamento para false em caso de erro
+      setLoading(false);
     }
   };
 
@@ -73,7 +70,7 @@ const CreatePost = () => {
   };
 
   const handlePhotosChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPhotos(Array.from(e.target.files || []).join(",")); // Alterado para string separada por vírgula
+    setPhotos(Array.from(e.target.files || []).join(","));
   };
 
   const handlecompanyContentChange = (
@@ -97,34 +94,36 @@ const CreatePost = () => {
   };
 
   return (
-    <CreatePostContainer>
-      {loading && <div>Carregando...</div>} {/* Mostra uma mensagem de carregamento se o estado de carregamento estiver true */}
+    <CreatePostContainer className="d-flex justify-content-center align-items-center">
+      {loading && <div>Carregando...</div>}
       <Form onSubmit={handleFormSubmit}>
-        <FormGroup>
-          <Label htmlFor="title">Título:</Label>
+        <FormGroup className="position-relative">
+          <Label className="d-block" htmlFor="title">Título:</Label>
           <Input
             type="text"
             id="title"
             value={title}
             onChange={handleTitleChange}
             required
+            className="w-100"
           />
         </FormGroup>
-        <FormGroup>
-          <Label htmlFor="subtitle">Subtítulo:</Label>
+        <FormGroup className="position-relative">
+          <Label className="d-block" htmlFor="subtitle">Subtítulo:</Label>
           <Input
             type="text"
             id="subtitle"
             value={subtitle}
             onChange={handleSubtitleChange}
             required
+            className="w-100"
           />
         </FormGroup>
-        <FormGroup>
-          <Label className="checkbox-container">
+        <FormGroup className="position-relative">
+          <Label className="checkbox-container d-block">
             Remunerado:
             <Input
-              className="custom-checkbox"
+              className="custom-checkbox w-100"
               type="checkbox"
               checked={isPaid}
               onChange={handleIsPaidChange}
@@ -133,47 +132,51 @@ const CreatePost = () => {
           </Label>
         </FormGroup>
         {isPaid && (
-          <FormGroup>
-            <Label htmlFor="price">Preço:</Label>
+          <FormGroup className="position-relative">
+            <Label className="d-block" htmlFor="price">Preço:</Label>
             <Input
               type="number"
               id="price"
               value={price}
               onChange={handlePriceChange}
               required
+              className="w-100"
             />
           </FormGroup>
         )}
-        <FormGroup>
-          <Label htmlFor="photos">Fotos do projeto:</Label>
+        <FormGroup className="position-relative">
+          <Label className="d-block" htmlFor="photos">Fotos do projeto:</Label>
           <FileInput
             type="file"
             id="photos"
             multiple
             onChange={handlePhotosChange}
+            className="w-100"
           />
         </FormGroup>
-        <FormGroup>
-          <Label htmlFor="companyContent">Informações da Empresa:</Label>
+        <FormGroup className="position-relative">
+          <Label className="d-block" htmlFor="companyContent">Informações da Empresa:</Label>
           <TextArea
             id="companyContent"
             value={companyContent}
             onChange={handlecompanyContentChange}
             required
+            className="w-100"
           />
         </FormGroup>
-        <FormGroup>
-          <Label htmlFor="categories">Categorias:</Label>
+        <FormGroup className="position-relative">
+          <Label className="d-block" htmlFor="categories">Categorias:</Label>
           <Input
             type="text"
             id="categories"
             value={categories}
             onChange={handleCategoriesChange}
             required
+            className="w-100"
           />
         </FormGroup>
-        <FormGroup>
-          <Label htmlFor="programmingLanguages">
+        <FormGroup className="position-relative">
+          <Label className="d-block" htmlFor="programmingLanguages">
             Linguagens de Programação:
           </Label>
           <Input
@@ -182,19 +185,21 @@ const CreatePost = () => {
             value={programmingLanguages}
             onChange={handleProgrammingLanguagesChange}
             required
+            className="w-100"
           />
         </FormGroup>
-        <FormGroup>
-          <Label htmlFor="deadline">Prazo:</Label>
+        <FormGroup className="position-relative">
+          <Label className="d-block" htmlFor="deadline">Prazo:</Label>
           <Input
             type="date"
             id="deadline"
             value={deadline}
             onChange={handleDeadlineChange}
             required
+            className="w-100"
           />
         </FormGroup>
-        <Button type="submit">Criar Post</Button>
+        <Button type="submit" className="d-block w-100">Criar Post</Button>
       </Form>
     </CreatePostContainer>
   );
