@@ -6,6 +6,10 @@ import PrivateRoute from "../ui/components/PrivateRoute/PrivateRoute";
 import Perfil from "./perfil/Perfil";
 import CreatePost from "./CreatePost/CreatePost";
 import Chat from "./Chat/Chat";
+import Projects from "./Projects/Projects";
+import PrivacyPolicy from "./PrivacyPolicy/PrivacyPolicy";
+import Help from "./Help/Help";
+import Settings from "./Settings/Settings";
 
 const routes = createBrowserRouter([
   {
@@ -40,11 +44,41 @@ const routes = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path: "projects",
+        element: (
+          <PrivateRoute>
+            <Projects />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "privacypolicy",
+        element: (
+          <PrivateRoute>
+            <PrivacyPolicy />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "help",
+        element: (
+          <PrivateRoute>
+            <Help />
+          </PrivateRoute>
+        )
+      }, {
+        path: "settings",
+        element: (
+          <PrivateRoute>
+            <Settings />
+          </PrivateRoute>
+        )
+      }
     ],
   },
   {
     path: "/chat",
-
     element: (
       <PrivateRoute>
         <Chat />

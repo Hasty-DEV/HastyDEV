@@ -114,7 +114,7 @@ const Header = () => {
                   </NavDropdown.Item>
                   <NavDropdown.Item
                     as={Link}
-                    to="/privacypolice"
+                    to="/privacypolicy"
                     className="d-flex align-items-center justify-content-start"
                   >
                     <MdOutlineSecurity className="mx-1" />
