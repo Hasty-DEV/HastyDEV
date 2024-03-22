@@ -13,7 +13,6 @@ export const EmailVerificationStyled = styled.div`
   justify-content: center;
   margin: auto;
   margin-top: 200px;
-  
 
   label {
     color: ${(props) => props.theme.colors.text};

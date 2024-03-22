@@ -63,6 +63,7 @@ const Register: React.FC<RegisterProps> = ({ setAllowEmailVerification }) => {
     email,
     password,
     confirmPassword,
+    role
   }: FormValues) => {
     try {
       setRegistrationInProgress(true);
@@ -73,6 +74,7 @@ const Register: React.FC<RegisterProps> = ({ setAllowEmailVerification }) => {
         email,
         password,
         confirmPassword,
+        role
       });
       console.log(response.data);
 
@@ -121,14 +123,15 @@ const Register: React.FC<RegisterProps> = ({ setAllowEmailVerification }) => {
                 </>
               ) : (
                 <Formik
-                  initialValues={{
-                    username: "",
-                    password: "",
-                    first_name: "",
-                    last_name: "",
-                    email: "",
-                    confirmPassword: "",
-                  }}
+                initialValues={{
+                  username: "",
+                  password: "",
+                  first_name: "",
+                  last_name: "",
+                  email: "",
+                  role: "user",  
+                  confirmPassword: "",
+                }}
                   onSubmit={handleRegister}
                   validationSchema={validationsRegister}
                 >
@@ -174,6 +177,33 @@ const Register: React.FC<RegisterProps> = ({ setAllowEmailVerification }) => {
                             {errors.email && touched.email && errors.email}
                           </span>
                         </div>
+                        <div className="form-group mb-5">
+          <label htmlFor="role">Status:</label>
+          <div className="radio-input">
+            <label>
+              <Field
+                value="user"
+                name="role"
+                id="user"
+                type="radio"
+              />
+              <p>Usuário</p>
+            </label>
+            <label>
+              <Field
+                value="business"
+                name="role"
+                id="business"
+                type="radio"
+              />
+              <p>Empresa</p>
+            </label>
+            <div className="selection"></div>
+          </div>
+          <span>
+            {errors.role && touched.role && errors.role}
+          </span>
+        </div>
                         <div className="form-group mb-5">
                           <label htmlFor="password">Senha:</label>
                           <div className="password-input">

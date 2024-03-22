@@ -8,8 +8,8 @@ function EmailVerification() {
   const [email, setEmail] = useState('');
   const [verificationCode, setVerificationCode] = useState('');
   const [message, setMessage] = useState('');
-  const [isResendDisabled, setIsResendDisabled] = useState(false); // Estado para controlar a desativação do botão de reenvio
-  const [resendCountdown, setResendCountdown] = useState(0); // Contador de tempo para reenviar o código
+  const [isResendDisabled, setIsResendDisabled] = useState(false);  
+  const [resendCountdown, setResendCountdown] = useState(0);  
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -91,8 +91,8 @@ function EmailVerification() {
       <button
         className="pushable resend-button"
         onClick={resendVerificationCode}
-        disabled={isResendDisabled} // Desabilita o botão de reenvio se isResendDisabled for true
-        style={{ backgroundColor: isResendDisabled ? '#cccccc' : '#fff' }} // Cor de fundo do botão durante a espera
+        disabled={isResendDisabled}  
+        style={{ backgroundColor: isResendDisabled ? '#cccccc' : '#fff' }}  
       >
         <span className="front">Reenviar Código de Verificação</span>
       </button>

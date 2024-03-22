@@ -11,7 +11,7 @@ export interface UserAttributes {
   lockUntil?: Date | null;
   loginAttempts?: number | null;
   isVerified?: boolean;
-  role: "admin" | "user" | "empresa";
+  role: "admin" | "user" | "business";
 }
 
 interface UserCreationAttributes extends Optional<UserAttributes, "userid"> {}
@@ -29,7 +29,7 @@ class User
   public lockUntil?: Date | null;
   public loginAttempts?: number | null;
   public isVerified?: boolean;
-  public role!: "admin" | "user" | "empresa";
+  public role!: "admin" | "user" | "business";
 
   static associate(models: any) {
     this.hasMany(models.Post, { foreignKey: "userid", as: "posts" });

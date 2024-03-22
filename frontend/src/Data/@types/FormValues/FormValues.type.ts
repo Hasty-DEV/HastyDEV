@@ -5,4 +5,5 @@ export type FormValues = {
   last_name?: string;
   email?: string;
   confirmPassword?: string;
+  role?: string;
 }
