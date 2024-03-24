@@ -36,9 +36,9 @@ const Pages: React.FC<PagesProps> = ({ theme, setTheme }) => {
 
   return (
     <Router>
-      <Header toggleTheme={toggleTheme} />
-      <main>
-        <Suspense fallback={<Loader />}>
+      <Suspense fallback={<Loader />}>
+        <Header toggleTheme={toggleTheme} />
+        <main>
           <Routes>
             <Route path="/" element={<Hero />} />
             <Route path="/about" element={<About />} />
@@ -64,9 +64,9 @@ const Pages: React.FC<PagesProps> = ({ theme, setTheme }) => {
             <Route path="/ForgotPassword" element={<ForgotPassword />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
-        </Suspense>
-      </main>
-      <Footer />
+        </main>
+        <Footer />
+      </Suspense>
     </Router>
   );
 };

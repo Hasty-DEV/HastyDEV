@@ -1,13 +1,17 @@
-import { RouterProvider } from "react-router-dom";
-import routes from "./pages";
 import GlobalStyle from "./ui/styles/Global";
+import Pages from "./pages";
+import usePersisteState from "./data/hooks/PersisteState/usePersisteState";
+import light from "./ui/styles/themes/light";
+import { ThemeProvider } from "styled-components";
 
 const App = () => {
+  const [theme, setTheme] = usePersisteState("themes", light);
+
   return (
-    <>
-      <RouterProvider router={routes} />
+    <ThemeProvider theme={theme}>
+      <Pages theme={theme} setTheme={setTheme} />
       <GlobalStyle />
-    </>
+    </ThemeProvider>
   );
 };
 
