@@ -56,7 +56,7 @@ const RightBar: React.FC = () => {
               )}
             
 
-            <div className="col-3 text-right align-self-center"> {/* Utilizing Bootstrap's grid system for positioning */}
+            <div className="col-3 text-right align-self-center">
               <div>{filterVisibility[filterIndex] && <SlArrowDown />}
                 {!filterVisibility[filterIndex] && <SlArrowRight />}</div>
             </div>
