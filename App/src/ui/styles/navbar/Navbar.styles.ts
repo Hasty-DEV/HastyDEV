@@ -12,6 +12,7 @@ export const HeaderContainer = styled.header`
 `;
 
 export const SwitchContainer = styled.label`
+  margin-left: 2%;
   .switch {
     font-size: 17px;
     position: relative;

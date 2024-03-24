@@ -62,8 +62,9 @@ const Header = ({ toggleTheme }: HeaderProps) => {
   };
 
   const theme = useContext(ThemeContext);
-  if (!theme) {
-    return null;
+
+  if (!theme || !("title" in theme)) {
+    return null; 
   }
 
   return (
