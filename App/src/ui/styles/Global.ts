@@ -7,6 +7,12 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
   }
+
+  body {
+    background: ${(props) => props.theme.colors.background};
+    color: ${(props) => props.theme.colors.text};
+    overflow-x: hidden;
+  }
 `;
 
 export default GlobalStyle;
