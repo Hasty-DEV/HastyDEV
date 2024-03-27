@@ -45,20 +45,26 @@ const RightBar: React.FC = () => {
 
             
               {filterVisibility[filterIndex] && (
-                <div>
+                <Categorias>
                   {filter.categories.map((category, categoryIndex) => (
+
+                      <div>
                     <label key={categoryIndex}>
                       <input type="checkbox" />
+                      
                       {category}
                     </label>
+                    </div>
+
+
                   ))}
-                </div>
+                </Categorias>
               )}
             
 
             <div className="col-3 text-right align-self-center">
-              <div>{filterVisibility[filterIndex] && <SlArrowDown />}
-                {!filterVisibility[filterIndex] && <SlArrowRight />}</div>
+              {filterVisibility[filterIndex] && <SlArrowDown />}
+                {!filterVisibility[filterIndex] && <SlArrowRight />}
             </div>
           </div>
           <Line />
@@ -75,7 +81,9 @@ const RightBar: React.FC = () => {
 
 export default RightBar;
 
-const TodoListContainer = styled.div`
+
+
+export const TodoListContainer = styled.div`
   margin-bottom: 10px;
 
   h1 {
@@ -93,9 +101,21 @@ const TodoListContainer = styled.div`
   }
 `;
 
-const Line = styled.hr`
+export const Line = styled.hr`
   width: 100%;
   height: 1px;
   border: none;
   background-color: #000;
+`;
+
+export const Categorias = styled.div`
+display:block;
+padding:10px;
+margin: 0% 10% 0% 10%;
+`;
+
+export const ContainetCategory = styled.div`
+
+display:block;
+padding: 10px;
 `;
