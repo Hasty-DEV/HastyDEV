@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const RightBarContainer = styled.div`
+const RightBarContainer = styled.aside`
   flex: 3;
   position: sticky;
   top: 65px;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const LeftBarContainer = styled.div`
+const LeftBarContainer = styled.aside`
   flex: 2;
   top: 65px;
   height: calc(100vh - 70px);

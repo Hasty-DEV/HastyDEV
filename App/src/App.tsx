@@ -7,10 +7,6 @@ import { ThemeProvider } from "styled-components";
 const App = () => {
   const [theme, setTheme] = usePersisteState("themes", light);
   
-  if (!theme.hasOwnProperty("title")) {
-    theme.title = "light";
-  }
-  
   return (
     <ThemeProvider theme={theme}>
       <Pages theme={theme} setTheme={setTheme} />
