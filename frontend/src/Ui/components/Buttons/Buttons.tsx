@@ -1,11 +1,11 @@
 import { ButtonProps } from "../../../Data/@types/Button/Button.type";
 import * as B from "../../styles/Button/Buttons.styles";
 
-export const ButtonPrimary: React.FC<ButtonProps> = ({
+export const ButtonPrimary= ({
   route,
   buttonText,
   ...rest
-}) => {
+}: ButtonProps) => {
   return (
     <B.StyledLink to={route || "/"}>
       <B.ButtonPrimaryStyled {...rest}>{buttonText}</B.ButtonPrimaryStyled>
@@ -13,11 +13,11 @@ export const ButtonPrimary: React.FC<ButtonProps> = ({
   );
 };
 
-export const ButtonPrimaryLong: React.FC<ButtonProps> = ({
+export const ButtonPrimaryLong = ({
   route,
   buttonText,
   ...rest
-}) => {
+}: ButtonProps) => {
   return (
     <B.StyledLink to={route || "/"}>
       <B.ButtonPrimaryLongStyled {...rest}>
@@ -27,11 +27,11 @@ export const ButtonPrimaryLong: React.FC<ButtonProps> = ({
   );
 };
 
-export const ButtonPrimaryLongNoLink: React.FC<ButtonProps> = ({
+export const ButtonPrimaryLongNoLink = ({
   route,
   buttonText,
   ...rest
-}) => {
+}: ButtonProps) => {
   return (
     <B.ButtonPrimaryLongStyled {...rest}>
       {buttonText}
@@ -39,11 +39,11 @@ export const ButtonPrimaryLongNoLink: React.FC<ButtonProps> = ({
   );
 };
 
-export const ButtonSecondary: React.FC<ButtonProps> = ({
+export const ButtonSecondary = ({
   route,
   buttonText,
   ...rest
-}) => {
+}: ButtonProps) => {
   return (
     <B.StyledLink to={route || "/"}>
       <B.ButtonSecondaryStyled {...rest}>{buttonText}</B.ButtonSecondaryStyled>
@@ -51,11 +51,11 @@ export const ButtonSecondary: React.FC<ButtonProps> = ({
   );
 };
 
-export const ButtonTertiary: React.FC<ButtonProps> = ({
+export const ButtonTertiary = ({
   route,
   buttonText,
   ...rest
-}) => {
+}: ButtonProps) => {
   return (
     <B.StyledLink to={route || "/"}>
       <B.ButtonTertiaryStyled {...rest}>{buttonText}</B.ButtonTertiaryStyled>

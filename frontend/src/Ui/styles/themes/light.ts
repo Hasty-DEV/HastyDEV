@@ -14,6 +14,6 @@ export default {
     borda: "#FED30A",
     color_Form: "#fff",
     box_shadow: "22px 22px 65px #d1d1d1, -22px -22px 65px #d1d1d1",
-    color_emailVerification: "#f3f3f3"
+    color_emailVerification: "#f3f3f3",
   },
 } as DefaultTheme;

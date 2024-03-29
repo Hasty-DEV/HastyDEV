@@ -1,5 +1,4 @@
 import { Formik } from "formik";
-import * as yup from "yup";
 import { ButtonPrimaryLongNoLink } from "../Buttons/Buttons";
 import {
   SearchFormDiv,
@@ -8,12 +7,9 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Loader from "../Loader/Loader";
+import { validationsSearch } from "../../../Data/Services/Validation/ValidationSearch.service";
 
-const validationsSearch = yup.object().shape({
-  Name: yup.string().required("O campo de nome é obrigatório"),
-});
-
-function SearchForm() {
+const SearchForm = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -127,6 +123,6 @@ function SearchForm() {
       </SearchFormDiv>
     </>
   );
-}
+};
 
 export default SearchForm;

@@ -16,7 +16,6 @@ import { Link } from "react-router-dom";
  
 import { MdPerson, MdOutlineSecurity, MdHelpOutline } from "react-icons/md";
 import { IoIosSettings, IoMdPerson } from "react-icons/io";
-
 import { useAuth } from "../../../data/context/AuthContext";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { IoBag } from "react-icons/io5";
@@ -25,10 +24,8 @@ import { DefaultTheme } from "styled-components";
  
 import LogoLight from "../../assets/LogoLight.svg";
 import LogoDark from "../../assets/LogoDark.svg";
+import { HeaderProps } from "../../../data/@types/Navbar/Navbar.type";
 
-interface HeaderProps {
-  toggleTheme(): void;
-}
 
 const Header = ({ toggleTheme }: HeaderProps) => {
   const { logout } = useAuth();
@@ -66,13 +63,9 @@ const Header = ({ toggleTheme }: HeaderProps) => {
   };
 
 
-  const theme = useContext<DefaultTheme>(ThemeContext);
+  const theme: DefaultTheme = useContext(ThemeContext);
 
   const ImgDarkLight = theme.title === "light" ? LogoLight : LogoDark;
-
-  if (!theme || !("title" in theme)) {
-    return null; 
-  }
 
   return (
     <HeaderContainer className="mb-3 fixed-top">

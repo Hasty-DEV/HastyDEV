@@ -1,4 +1,3 @@
-import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { HeadingTitle, Paragraph } from "../../Ui/components/Texts/Texts";
 import * as C from "../../Ui/styles/ContactUs/ContactUs.styles";
@@ -12,7 +11,7 @@ import {
   BiLogoGmail,
 } from "react-icons/bi";
 
-const ContactUs: React.FC = () => {
+const ContactUs = () => {
   return (
     <C.ContactUsContainer>
       <Container className="text-center">
@@ -67,7 +66,7 @@ const ContactUs: React.FC = () => {
                   <ul>
                     <li>
                       <a href="mailto:hastydev@jeffldscompany.com.br">
-                      <BiLogoGmail height={16} width={16} />
+                        <BiLogoGmail height={16} width={16} />
                       </a>
                     </li>
                     <li>

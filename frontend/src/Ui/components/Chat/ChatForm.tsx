@@ -1,19 +1,16 @@
 // import { useState } from "react";
-
 // function ChatForm({
 //   onSendMessage,
 // }: {
 //   onSendMessage: (message: string) => void;
 // }) {
 //   const [message, setMessage] = useState("");
-
 //   const handleSendMessage = () => {
 //     if (message) {
 //       onSendMessage(message);
 //       setMessage("");
 //     }
 //   };
-
 //   return (
 //     <form onSubmit={(e) => e.preventDefault()}>
 //       <input
@@ -25,5 +22,4 @@
 //     </form>
 //   );
 // }
-
 // export default ChatForm;

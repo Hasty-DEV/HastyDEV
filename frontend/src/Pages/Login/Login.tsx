@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Formik, Field } from "formik";
-import * as yup from "yup";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,16 +10,9 @@ import * as L from "../../Ui/styles/Login/Login.styles";
 import Loader from "../../Ui/components/Loader/Loader";
 import { FormValues } from "../../Data/@types/FormValues/FormValues.type";
 import { toast, ToastContainer } from "react-toastify";
+import { validationsLogin } from "../../Data/Services/Validation/Validationlogin.service";
 
-const validationsLogin = yup.object().shape({
-  username: yup.string().required("O Usuário é obrigatório*"),
-  password: yup
-    .string()
-    .min(6, "A senha deve ter pelo menos 6 caracteres")
-    .required("A senha é obrigatória*"),
-});
-
-const Login: React.FC = () => {
+const Login = () => {
   const { signin } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -51,13 +43,12 @@ const Login: React.FC = () => {
 
   const isPasswordVisible = showPassword ? "text" : "password";
 
-
   return (
     <L.LoginContainer>
       <Container fluid>
         <Row>
           <Col sm={7} xl={6}>
-            <L.LoginForm>
+            <L.LoginForm className="text-center">
               {isLoading ? (
                 <Loader />
               ) : (
@@ -72,10 +63,14 @@ const Login: React.FC = () => {
                   {({ errors, touched, handleSubmit, isSubmitting }) => (
                     <>
                       <form onSubmit={handleSubmit}>
-                        <h2>Bem-Vindo de Volta à HastyDEV!</h2>
+                        <h2 className="text-center">
+                          Bem-Vindo de Volta à HastyDEV!
+                        </h2>
 
-                        <div className="form-group">
-                          <label htmlFor="username">Username:</label>
+                        <div className="form-group position-relative ">
+                          <label htmlFor="username" className="d-block">
+                            Username:
+                          </label>
                           <Field type="text" id="username" name="username" />
                           <span>
                             {errors.username &&
@@ -84,9 +79,11 @@ const Login: React.FC = () => {
                           </span>
                         </div>
 
-                        <div className="form-group">
-                          <label htmlFor="password">Senha:</label>
-                          <div className="password-input">
+                        <div className="form-group position-relative">
+                          <label htmlFor="password" className="d-block">
+                            Senha:
+                          </label>
+                          <div className="password-input align-items-center position-relative ">
                             <Field
                               type={isPasswordVisible}
                               id="password"
@@ -95,7 +92,7 @@ const Login: React.FC = () => {
                             <FontAwesomeIcon
                               icon={showPassword ? faEyeSlash : faEye}
                               onClick={handleTogglePassword}
-                              className="password-toggle-icon"
+                              className="password-toggle-icon position-absolute "
                             />
                           </div>
                           <span>
@@ -104,18 +101,18 @@ const Login: React.FC = () => {
                               errors.password}
                           </span>
                         </div>
-                        <div className="form-group">
-                          <button type="submit" disabled={isSubmitting}>
+                        <div className="form-group position-relative">
+                          <button type="submit" disabled={isSubmitting} className="w-100">
                             Login
                           </button>
                         </div>
                       </form>
                       <div className="sign_in">
                         <Link to="/Register">
-                          Nao tem uma Conta? <a href="#"> Inscreva-se</a>
+                          Nao tem uma Conta? <span> Inscreva-se</span>
                         </Link>
                       </div>
-                      <div className="forgot-password">
+                      <div className="forgot-password text-center">
                         <Link to="/ForgotPassword">Esqueceu a senha?</Link>
                       </div>
                     </>

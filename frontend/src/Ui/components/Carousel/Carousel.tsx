@@ -7,12 +7,9 @@ import HeroImg3 from "../../../Ui/assets/images/Hero/HeroImg3.webp";
 import HeroImg4 from "../../../Ui/assets/images/Hero/HeroImg4.webp";
 import { CarouselProps } from "../../../Data/@types/Carousel/Carousel.type";
 
-
-
 class Carousel extends Component<CarouselProps> {
   render() {
     const { className } = this.props;
-
     const settings = {
       dots: false,
       infinite: true,
@@ -42,9 +39,9 @@ class Carousel extends Component<CarouselProps> {
     return (
       <Container className={className}>
         <Slider {...settings}>
-            <div className="slide-item">
-              <img src={HeroImg1} alt="" width="90%" height="250px" />
-            </div>
+          <div className="slide-item">
+            <img src={HeroImg1} alt="" width="90%" height="250px" />
+          </div>
           <div className="slide-item">
             <img src={HeroImg2} alt="" width="90%" height="250px" />
           </div>

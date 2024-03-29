@@ -1,74 +1,72 @@
-import { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import swal from 'sweetalert2';
-import { EmailVerificationStyled } from '../../Ui/styles/emailVerification/emailVerification.styles';
-import { api } from '../../Data/Services/api';
+import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import swal from "sweetalert2";
+import { EmailVerificationContainer } from "../../Ui/styles/emailVerification/emailVerification.styles";
+import { api } from "../../Data/Services/api";
 
 function EmailVerification() {
-  const [email, setEmail] = useState('');
-  const [verificationCode, setVerificationCode] = useState('');
-  const [message, setMessage] = useState('');
-  const [isResendDisabled, setIsResendDisabled] = useState(false);  
-  const [resendCountdown, setResendCountdown] = useState(0);  
+  const [email, setEmail] = useState("");
+  const [verificationCode, setVerificationCode] = useState("");
+  const [message, setMessage] = useState("");
+  const [isResendDisabled, setIsResendDisabled] = useState(false);
+  const [resendCountdown, setResendCountdown] = useState(0);
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
-    const emailFromQuery = searchParams.get('email');
-    setEmail(emailFromQuery || '');
+    const emailFromQuery = searchParams.get("email");
+    setEmail(emailFromQuery || "");
   }, [location]);
 
   const verifyEmail = async () => {
     try {
-      const response = await api.post('/emailCodeVerification', {
+      const response = await api.post("/emailCodeVerification", {
         verificationCode,
         email,
       });
       setMessage(response.data.message);
       swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Verificação realizada com sucesso',
+        position: "center",
+        icon: "success",
+        title: "Verificação realizada com sucesso",
         showConfirmButton: false,
         timer: 1500,
       });
-      navigate('/login');
+      navigate("/login");
     } catch (error) {
-      console.error('Erro ao verificar o email:', error);
-      setMessage(
-        'codigo de verificação inválido'
-      );
+      console.error("Erro ao verificar o email:", error);
+      setMessage("codigo de verificação inválido");
     }
   };
 
   const resendVerificationCode = async () => {
     try {
-      setIsResendDisabled(true);  
-      await api.post('/sendEmailVerification', { email });
-      setMessage('reenviado com sucesso')
-      setResendCountdown(30);  
+      setIsResendDisabled(true);
+      await api.post("/sendEmailVerification", { email });
+      setMessage("reenviado com sucesso");
+      setResendCountdown(30);
       const intervalId = setInterval(() => {
         setResendCountdown((prevCount) => {
           if (prevCount === 1) {
-            clearInterval(intervalId);  
-            setIsResendDisabled(false);  
+            clearInterval(intervalId);
+            setIsResendDisabled(false);
           }
           return prevCount - 1;
         });
       }, 1000);
     } catch (error) {
-      console.error('Erro ao reenviar o código de verificação:', error);
+      console.error("Erro ao reenviar o código de verificação:", error);
       setMessage(
-        'Erro ao reenviar o código de verificação. Por favor, tente novamente mais tarde.'
+        "Erro ao reenviar o código de verificação. Por favor, tente novamente mais tarde."
       );
     }
   };
 
   return (
-    <EmailVerificationStyled>
+    <EmailVerificationContainer className="d-flex flex-column align-items-center justify-content-center mx-auto">
       <div>
-        <label htmlFor="verification">
+        <label htmlFor="verification" className="fw-bold ">
           Insira o código enviado ao seu email
         </label>
         <input
@@ -78,21 +76,22 @@ function EmailVerification() {
           placeholder="XXXXXX"
           value={verificationCode}
           onChange={(e) => setVerificationCode(e.target.value)}
+          className="text-center"
         />
-        <p style={{ fontSize: '0.9rem', textAlign: 'center' }}>
-          O código de verificação foi enviado para: {email}</p>
-
+        <p style={{ fontSize: "0.9rem", textAlign: "center" }}>
+          O código de verificação foi enviado para: {email}
+        </p>
       </div>
-      <button className="pushable verify-button" onClick={verifyEmail}>
-        <span className="shadow"></span>
-        <span className="edge"></span>
-        <span className="front">Verificar</span>
+      <button className="pushable verify-button position-relative " onClick={verifyEmail}>
+        <span className="shadow position-absolute top-0 h-100 w-100"></span>
+        <span className="edge position-absolute top-0 h-100 w-100"></span>
+        <span className="front d-block position-relative ">Verificar</span>
       </button>
       <button
-        className="pushable resend-button"
+        className="pushable resend-button text-center"
         onClick={resendVerificationCode}
-        disabled={isResendDisabled}  
-        style={{ backgroundColor: isResendDisabled ? '#cccccc' : '#fff' }}  
+        disabled={isResendDisabled}
+        style={{ backgroundColor: isResendDisabled ? "#cccccc" : "#fff" }}
       >
         <span className="front">Reenviar Código de Verificação</span>
       </button>
@@ -102,7 +101,7 @@ function EmailVerification() {
         </div>
       )}
       <div className="message">{message}</div>
-    </EmailVerificationStyled>
+    </EmailVerificationContainer>
   );
 }
 

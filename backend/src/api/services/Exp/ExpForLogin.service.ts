@@ -4,7 +4,7 @@ import logger from "../../../utils/Logger/Logger";
 import { Response } from "express";
 
 class ExpForLogin extends Level {
-  public async VerifyAndIncrement(userid: number ) {
+  public async VerifyAndIncrement(userid: number) {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
@@ -22,8 +22,10 @@ class ExpForLogin extends Level {
         }
       }
     } catch (error) {
-      logger.error("Erro ao verificar e incrementar a experiência do usuário durante o login: " + error);
- 
+      logger.error(
+        "Erro ao verificar e incrementar a experiência do usuário durante o login: " +
+          error
+      );
     }
   }
 

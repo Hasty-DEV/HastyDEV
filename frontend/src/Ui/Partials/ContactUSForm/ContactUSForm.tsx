@@ -1,4 +1,3 @@
-import * as yup from "yup";
 import { FormFetch } from "../../../Data/Services/axios/config";
 import { Formik, Field } from "formik";
 import { ButtonPrimaryLongNoLink } from "../../components/Buttons/Buttons";
@@ -8,18 +7,9 @@ import { FormContainer } from "../../styles/ContactUsForm/ContactUsForm.styles";
 import { useState } from "react";
 import Loader from "../../components/Loader/Loader";
 import { toast, ToastContainer } from "react-toastify";
+import { validationsContact } from "../../../Data/Services/Validation/ValidationContact.service";
 
-const validationsContact = yup.object().shape({
-  Name: yup.string().required("O campo de nome é obrigatório"),
-  Email: yup.string().email("Email inválido").required("O email é obrigatório"),
-  Phone: yup.string().required("O campo de Telefone é obrigatório"),
-  Category: yup.string().required("O campo de Categoria é obrigatório"),
-  Subject: yup.string().required("O campo de Assunto é obrigatório"),
-  Message: yup
-    .string()
-    .required("O campo de Menssagem é obrigatório")
-    .min(10, "O Campo deve ter pelo menos 10 caracteres"),
-});
+
 
 const ContactUSForm = () => {
   const [loading, setLoading] = useState(false);

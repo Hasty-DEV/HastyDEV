@@ -6,6 +6,6 @@ export const ReqValidation = (req: Request, res: Response) => {
   const errors = validationResult(req);
   if (!errors.isEmpty() && res) {
     logger.error("Erros de validação no registro");
-     return;
+    return;
   }
 };

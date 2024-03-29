@@ -1,14 +1,14 @@
 import { TextProps } from "../../../Data/@types/Texts/Texts.type";
 import * as T from "../../styles/Texts/Texts.styles";
 
-export const HeadingTitle: React.FC<TextProps> = ({
+export const HeadingTitle = ({
   title,
   span,
   className,
   style,
   IsInline,
   ...Rest
-}) => {
+}: TextProps) => {
   return (
     <T.HeadingTitleStyled className={className} style={style} {...Rest}>
       {title}
@@ -17,14 +17,14 @@ export const HeadingTitle: React.FC<TextProps> = ({
   );
 };
 
-export const HeadingSubtitle: React.FC<TextProps> = ({
+export const HeadingSubtitle = ({
   subtitle,
   span,
   className,
   style,
   IsInline,
   ...Rest
-}) => {
+}: TextProps) => {
   return (
     <T.HeadingSubtitleStyled className={className} style={style} {...Rest}>
       {subtitle}
@@ -33,14 +33,14 @@ export const HeadingSubtitle: React.FC<TextProps> = ({
   );
 };
 
-export const HeadingInterTitle: React.FC<TextProps> = ({
+export const HeadingInterTitle = ({
   intertitle,
   span,
   className,
   style,
   IsInline,
   ...Rest
-}) => {
+}: TextProps) => {
   return (
     <T.HeadingInterTitleStyled className={className} style={style} {...Rest}>
       {intertitle}
@@ -49,15 +49,14 @@ export const HeadingInterTitle: React.FC<TextProps> = ({
   );
 };
 
-
-export const HeadingSubInterTitle: React.FC<TextProps> = ({
+export const HeadingSubInterTitle = ({
   SubInterTitle,
   span,
   className,
   style,
   IsInline,
   ...Rest
-}) => {
+}: TextProps) => {
   return (
     <T.HeadingSubInterTitleStyled className={className} style={style} {...Rest}>
       {SubInterTitle}
@@ -66,13 +65,13 @@ export const HeadingSubInterTitle: React.FC<TextProps> = ({
   );
 };
 
-export const Paragraph: React.FC<TextProps> = ({
+export const Paragraph = ({
   paragraph,
   span,
   className,
   style,
   ...Rest
-}) => {
+}: TextProps) => {
   return (
     <T.ParagraphStyled className={className} style={style} {...Rest}>
       {paragraph}

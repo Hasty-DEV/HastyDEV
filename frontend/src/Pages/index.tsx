@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useState } from "react";
+import { Suspense, lazy, useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -12,7 +12,7 @@ import Footer from "../Ui/Partials/Footer/Footer";
 import Hero from "./Hero/Hero";
 import Loader from "../Ui/components/Loader/Loader";
 import ForgotPassword from "./ForgotPassword/ForgotPassword";
-
+import { PagesProps } from "../Data/@types/Page/Page.type";
 const About = lazy(() => import("./About/About"));
 const Register = lazy(() => import("./Register/Register"));
 const EmailVerification = lazy(
@@ -22,12 +22,7 @@ const ContactUs = lazy(() => import("./ContactUs/ContactUs"));
 const Login = lazy(() => import("./Login/Login"));
 const Project = lazy(() => import("./Project/Project"));
 
-type PagesProps = {
-  theme: any;
-  setTheme: React.Dispatch<React.SetStateAction<any>>;
-};
-
-const Pages: React.FC<PagesProps> = ({ theme, setTheme }) => {
+const Pages = ({ theme, setTheme }: PagesProps) => {
   const [allowEmailVerification, setAllowEmailVerification] = useState(false);
 
   const toggleTheme = () => {
