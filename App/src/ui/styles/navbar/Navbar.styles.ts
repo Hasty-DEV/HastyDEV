@@ -2,12 +2,29 @@ import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  background-color: ${(props) => props.theme.colors.primary};
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 
   div.dropdown-menu[data-bs-popper] {
     top: 150% !important;
     right: 0 !important;
     left: -245px;
+  }
+
+  .md-person-icon {
+    color:${(props) => props.theme.colors.text};  
+  }
+
+
+  .search-button {
+    background-color: ${(props) => props.theme.colors.primary};
+    border-color: ${(props) => props.theme.colors.text};  
+    color: ${(props) => props.theme.colors.text};  
+
+    
+    &:hover {
+      background-color: ${(props) => props.theme.colors.secondary}; // Altere para a cor desejada no hover
+    }
   }
 `;
 

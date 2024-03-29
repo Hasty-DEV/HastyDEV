@@ -15,5 +15,7 @@ export default {
     color_Form: "#fff",
     box_shadow: "22px 22px 65px #d1d1d1, -22px -22px 65px #d1d1d1",
     color_emailVerification: "#f3f3f3",
+    post_background: "#fff",
+    post_border: "#fff",
   },
 } as DefaultTheme;

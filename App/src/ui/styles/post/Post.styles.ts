@@ -5,8 +5,10 @@ const PostContainer = styled.div`
   -moz-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
   box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
   border-radius: 20px;
-  background-color: #fff;
-  color: #000;
+  color: ${(props) => props.theme.colors.text};
+  margin-top: 20px;
+  border: 2px solid ${(props) => props.theme.colors.post_border};
+  background-color:${(props) => props.theme.colors.post_background};
 
   .container {
     padding: 20px;

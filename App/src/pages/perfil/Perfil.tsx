@@ -1,10 +1,4 @@
-import {
-  useState,
-  ChangeEvent,
-  FormEvent,
-  useEffect,
-  useCallback,
-} from "react";
+import  { useState, ChangeEvent, FormEvent, useEffect, useCallback } from "react";
 import { api } from "../../data/services/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
@@ -26,6 +20,7 @@ const Perfil: React.FC = () => {
   const [username, setUsername] = useState<string>("");
   const [editMode, setEditMode] = useState<boolean>(false);
   const [userId, setUserId] = useState<string>("");
+  const [originalValues, setOriginalValues] = useState<{ name: string, surname: string, username: string }>({ name: "", surname: "", username: "" });
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
@@ -48,6 +43,7 @@ const Perfil: React.FC = () => {
       setName(user.first_name);
       setSurname(user.last_name);
       setUsername(user.username);
+      setOriginalValues({ name: user.first_name, surname: user.last_name, username: user.username });
       const icon = await getUserIcon();
       if (icon && icon.data) {
         setUserIcon(URL.createObjectURL(new Blob([icon.data])));
@@ -133,6 +129,13 @@ const Perfil: React.FC = () => {
     }
   };
 
+  const handleCancelEdit = () => {
+    setName(originalValues.name);
+    setSurname(originalValues.surname);
+    setUsername(originalValues.username);
+    setEditMode(false);
+  };
+
   return (
     <PerfilContainer>
       <form onSubmit={(e) => handleUpload(e)} encType="multipart/form-data">
@@ -146,7 +149,7 @@ const Perfil: React.FC = () => {
               src={previewImage || userIcon || DefaultUserIcon}
               alt=""
             />
-            <FontAwesomeIcon icon={faEdit} className="editIcon position-absolute " />
+            <FontAwesomeIcon icon={faEdit} className="editIcon" />
             <input
               id="fileInput"
               type="file"
@@ -158,74 +161,88 @@ const Perfil: React.FC = () => {
             />
           </label>
 
-          <div className="textContainer d-flex flex-column ">
-            <p className="name position-relative">
-              <input
-                className="input"
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                disabled={!editMode}
-              />
-              {!editMode && (
-                <button
-                  type="button"
-                  onClick={() => setEditMode(true)}
-                  className="edit-button d-inline-flex align-items-center justify-content-center position-relative"
-                >
-                  <FontAwesomeIcon icon={faEdit} className="editValues" />
-                </button>
-              )}
-            </p>
-            <p className="surname position-relative">
-              <input
-                className="input"
-                type="text"
-                value={surname}
-                onChange={(e) => setSurname(e.target.value)}
-                disabled={!editMode}
-              />
-              {!editMode && (
-                <button
-                  type="button"
-                  onClick={() => setEditMode(true)}
-                  className="edit-button d-inline-flex align-items-center justify-content-center position-relative"
-                >
-                  <FontAwesomeIcon icon={faEdit} className="editValues" />
-                </button>
-              )}
-            </p>
-            <p className="username position-relative">
-              <input
-                className="input"
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                disabled={!editMode}
-              />
-              {!editMode && (
-                <button
-                  type="button"
-                  onClick={() => setEditMode(true)}
-                  className="edit-button d-inline-flex align-items-center justify-content-center position-relative"
-                >
-                  <FontAwesomeIcon icon={faEdit} className="editValues" />
-                </button>
-              )}
-            </p>
+          <div className="form-group">
+            <label htmlFor="Nome">Nome</label>
+            <input
+              className="input"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              disabled={!editMode}
+            />
+            {!editMode && (
+              <button
+                type="button"
+                onClick={() => setEditMode(true)}
+                className="edit-button d-inline-flex align-items-center justify-content-center position-relative"
+              >
+                <FontAwesomeIcon icon={faEdit} className="editValues" />
+              </button>
+            )}
           </div>
-          <button
-            type="submit"
-            disabled={uploading}
-            className="saveButton"
-            onClick={handleSaveChanges}
-          >
-            {uploading ? "Enviando..." : "Enviar"}
-          </button>
+
+          <div className="form-group">
+            <label htmlFor="Sobrenome">Sobrenome</label>
+            <input
+              className="input"
+              type="text"
+              value={surname}
+              onChange={(e) => setSurname(e.target.value)}
+              disabled={!editMode}
+            />
+            {!editMode && (
+              <button
+                type="button"
+                onClick={() => setEditMode(true)}
+                className="edit-button d-inline-flex align-items-center justify-content-center position-relative"
+              >
+                <FontAwesomeIcon icon={faEdit} className="editValues" />
+              </button>
+            )}
+          </div>
+
+    
+          <div className="form-group">
+            <label htmlFor="Username">Username</label>
+            <input
+              className="input"
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              disabled={!editMode}
+            />
+            {!editMode && (
+              <button
+                type="button"
+                onClick={() => setEditMode(true)}
+                className="edit-button d-inline-flex align-items-center justify-content-center  "
+              >
+                <FontAwesomeIcon icon={faEdit} className="editValues" />
+              </button>
+            )}
+          </div>
+        
+           {editMode && (
+            <button
+               type="button"
+               onClick={handleCancelEdit}
+               className="cancelButton"
+            >
+               Cancelar
+           </button>
+            )}
+            <button
+              type="submit"
+              disabled={uploading}
+              className="saveButton"
+              onClick={handleSaveChanges}
+            >
+              {uploading ? "Enviando..." : "Enviar"}
+            </button>
+           
+          
           {error && <div style={{ color: "red" }}>{error}</div>}
-          {successMessage && (
-            <div style={{ color: "green" }}>{successMessage}</div>
-          )}
+          {successMessage && <div style={{ color: "green" }}>{successMessage}</div>}
         </div>
       </form>
     </PerfilContainer>

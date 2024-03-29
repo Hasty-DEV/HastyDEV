@@ -15,6 +15,8 @@ declare module "styled-components" {
       color_Form: string;
       box_shadow: string;
       color_emailVerification: string;
+      post_background: string;
+      post_border: string;
     };
   }
 }

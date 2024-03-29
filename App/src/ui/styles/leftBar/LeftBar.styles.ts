@@ -1,13 +1,14 @@
 import styled from "styled-components";
 
-const LeftBarContainer = styled.div`
+const LeftBarContainer = styled.aside`
   flex: 2;
   top: 65px;
   height: calc(100vh - 70px);
   overflow: scroll;
-  background-color: #fff;
-  color: #000;
+  background-color: ${(props) => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.text};
   box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 80px;
 
   @media (max-width: 768px) {
     display: none;
@@ -24,8 +25,15 @@ const LeftBarContainer = styled.div`
       margin: 20px 0px;
       border: none;
       height: 0.5px;
-      background-color: ${({ theme }) => theme.border};
+      background-color: ${(props) => props.theme.colors.text};
     }
+
+ 
+
+    .plus-circle {
+          color: ${(props) => props.theme.colors.text}; 
+          font-size: 30px; 
+        }
 
     .menu {
       gap: 20px;

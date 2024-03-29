@@ -13,7 +13,7 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { Link } from "react-router-dom";
-import Logo from "../../assets/HastyDEV/LogoLight.svg";
+ 
 import { MdPerson, MdOutlineSecurity, MdHelpOutline } from "react-icons/md";
 import { IoIosSettings, IoMdPerson } from "react-icons/io";
 
@@ -21,6 +21,10 @@ import { useAuth } from "../../../data/context/AuthContext";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { IoBag } from "react-icons/io5";
 import { ThemeContext } from "styled-components";
+import { DefaultTheme } from "styled-components";
+ 
+import LogoLight from "../../assets/LogoLight.svg";
+import LogoDark from "../../assets/LogoDark.svg";
 
 interface HeaderProps {
   toggleTheme(): void;
@@ -61,7 +65,10 @@ const Header = ({ toggleTheme }: HeaderProps) => {
     }
   };
 
-  const theme = useContext(ThemeContext);
+
+  const theme = useContext<DefaultTheme>(ThemeContext);
+
+  const ImgDarkLight = theme.title === "light" ? LogoLight : LogoDark;
 
   if (!theme || !("title" in theme)) {
     return null; 
@@ -72,7 +79,13 @@ const Header = ({ toggleTheme }: HeaderProps) => {
       <Navbar expand="md">
         <Container fluid>
           <Navbar.Brand as={Link} to="/">
-            <img src={Logo} alt="Logo HastyDEV" />
+          <img
+              src={ImgDarkLight}
+              alt="Logo HastyDEV modo Light"
+              className="mt-2"
+              width={150}
+              height={50}
+            />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="offcanvasNavbar-expand" />
           <Navbar.Offcanvas
@@ -93,19 +106,22 @@ const Header = ({ toggleTheme }: HeaderProps) => {
                   placeholder="Pesquisar..."
                   className="me-2"
                   aria-label="Search"
+                  
                 />
-                <Button variant="outline-success">Pesquisar</Button>
+                <Button className="search-button">Pesquisar</Button>
               </Form>
               <div className="d-flex justify-content-center align-items-center">
-                <MdPerson
-                  size={24}
-                  onClick={toggleDropdown}
-                  style={{ cursor: "pointer" }}
-                />
+              <MdPerson
+                size={24}
+                onClick={toggleDropdown}
+                className="md-person-icon"
+                style={{ cursor: "pointer" }}
+/>
                 <NavDropdown
                   show={isDropdownOpen}
                   onToggle={toggleDropdown}
                   title=""
+                  className="md-person-icon"
                   id="offcanvasNavbarDropdown-expand"
                 >
                   <NavDropdown.ItemText>{`Olá, ${userData?.username}!`}</NavDropdown.ItemText>

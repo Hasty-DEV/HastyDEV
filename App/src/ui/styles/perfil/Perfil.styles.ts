@@ -2,23 +2,21 @@ import styled from "styled-components";
 
 const PerfilContainer = styled.div`
   .card {
-    height: 100vh;
-    background: rgb(39, 39, 39);
-    border-radius: 12px;
-    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.123);
-    justify-content: flex-start;
-    transition-duration: 0.5s;
+    height: 100%;
+    background: ${(props) => props.theme.colors.background};
+   border: none;
+    margin: 20px;
   }
 
   .profileImageContainer {
-    margin-top: 40px;
+    margin-top: 10px;
     width: 170px;
     height: 170px;
+    margin-bottom: 35px;
   }
 
   .profileImage {
-    background: linear-gradient(to right, rgb(54, 54, 54), rgb(32, 32, 32));
-    border-radius: 50%;
+     border-radius: 50%;
     box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.329);
     object-fit: cover;
   }
@@ -27,26 +25,29 @@ const PerfilContainer = styled.div`
     gap: 10px;
   }
 
+  .cancelButton {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
-  .name input,
-  .surname input,
-  .username input {
-    border: none;
-    border-bottom: 1px solid black;
-    text-align: center;
-    width: 80%;
-    max-width: 300px;
-    margin: 0 auto;
-  }
+.cancelButton:hover {
+  background-color: #c82333;
+}
+
+ 
 
   .edit-button {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: rgb(20, 20, 20);
+    background-color: ${(props) => props.theme.colors.background};
     border: none;
     font-weight: 600;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
     cursor: pointer;
     transition-duration: 0.3s;
     overflow: hidden;
@@ -55,27 +56,19 @@ const PerfilContainer = styled.div`
   }
 
   .edit-button:hover {
-    width: 120px;
+   width: 120px;
+   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
     border-radius: 50px;
     transition-duration: 0.3s;
-    background-color: rgb(255, 69, 69);
+    background-color:  ${(props) => props.theme.colors.secondary};
   }
 
-  .edit-button:hover .edit-svgIcon {
-    width: 20px;
-    transition-duration: 0.3s;
-    transform: translateY(60%);
-    -webkit-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-
+  
+ 
   .edit-button::before {
     display: none;
     content: "Edit";
-    color: white;
+    color: ${(props) => props.theme.colors.text};
     transition-duration: 0.3s;
     font-size: 2px;
   }
@@ -89,68 +82,64 @@ const PerfilContainer = styled.div`
     transition-duration: 0.3s;
   }
 
-  .card:hover {
-    background-color: rgb(43, 43, 43);
-    transition-duration: 0.5s;
-  }
-
+  
   .editValues path {
-    fill: #fff;
+    fill: ${(props) => props.theme.colors.text};
   }
 
   .editIcon {
     bottom: 5px;
     right: 5px;
-    background-color: #fff;
-    padding: 3px;
+    background-color: ${(props) => props.theme.colors.text};
+    padding: 5px;
     border-radius: 50%;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    position: absolute;
+    width: 15px;
+    height: 15px;
   }
 
-  .editIcon:hover {
-    background-color: #ccc;
+  .editIcon path{
+  fill: ${(props) => props.theme.colors.primary}; 
   }
 
-  .input {
-    max-width: 190px;
-    border: none;
-    outline: none;
-    background: none;
-    font-size: 18px;
-    color: #222;
-    padding: 15px 5px 10px 20px;
-    box-shadow: Inset 0 1px 25px rgba(0, 0, 0, 0.55);
-    border-radius: 25px;
-    color: #fff;
-  }
+  .form-group {
+    margin-bottom: 15px;
+    gap: 16px;
+    text-align: center;
 
-  .input:focus {
-    border: 2px solid #c3c6ce;
+    label {
+      display: block;
+      margin-bottom: 16px;
+      color: ${(props) => props.theme.colors.text};
+      font-size: 16px;
+      font-weight: 400;
+    }
+    input {
+      width: 100%;
+      text-align: center;
+      padding: 10px;
+      border-radius: 50px;
+      border: 2px solid ${(props) => props.theme.colors.secondary};
+      background: ${(props) => props.theme.colors.background};
+      color: ${(props) => props.theme.colors.text};
+    }
   }
 
   .saveButton {
-    padding: 13px 20px;
-    border-radius: 10px;
-    border: 0;
-    background-color: rgb(255, 56, 86);
-    font-size: 13px;
-    transition: all 0.3s ease;
-    box-shadow: rgb(201, 46, 70) 0px 10px 0px 0px;
-    color: hsl(0, 0%, 100%);
-    cursor: pointer;
-  }
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color:${(props) => props.theme.colors.secondary};
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 30%
+}
 
-  .saveButton:hover {
-    box-shadow: rgb(201, 46, 70) 0px 7px 0px 0px;
-  }
-
-  .saveButton:active {
-    background-color: rgb(255, 56, 86);
-    box-shadow: rgb(201, 46, 70) 0px 0px 0px 0px;
-    transform: translateY(5px);
-    transition: 200ms;
-  }
+  
 `;
 
 export default PerfilContainer;

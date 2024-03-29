@@ -1,4 +1,4 @@
-import Events from "../../assets/6.svg";
+
 import Gaming from "../../assets/7.png";
 import Gallery from "../../assets/8.png";
 import Videos from "../../assets/9.png";
@@ -12,6 +12,7 @@ import Loader from "../Loader/Loader";
 import { Link } from "react-router-dom";
 import { getUserIcon } from "../../../data/services/getUserIconService";
 import DefaultUserIcon from "../../assets/user/user_icon.png";
+import { AiOutlinePlusCircle } from "react-icons/ai";
 
 interface UserDataTypes {
   first_name: string;
@@ -79,7 +80,7 @@ const LeftBar = () => {
 
               <div className="item d-flex align-items-center">
                 <Link to="/createpost">
-                  <img src={Events} alt="" />
+                <AiOutlinePlusCircle className="plus-circle" />
                 </Link>
                 <span>Criar Post</span>
               </div>
