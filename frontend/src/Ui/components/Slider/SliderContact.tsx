@@ -5,7 +5,7 @@ import HeroImg1 from "../../../Ui/assets/images/Hero/Hero-Img1.webp";
 import HeroImg2 from "../../../Ui/assets/images/Hero/Hero-Img2.webp";
 import HeroImg3 from "../../../Ui/assets/images/Hero/Hero-Img3.webp";
 import HeroImg4 from "../../../Ui/assets/images/Hero/Hero-Img4.webp";
-import { CarouselImage } from "../../styles/SliderContact/SliderContact.styles"; 
+import { CarouselImage } from "../../styles/SliderContact/SliderContact.styles";
 import { SliderContactProps } from "../../../Data/@types/SliderContact/SliderContact.type";
 
 class SliderContact extends Component<SliderContactProps> {

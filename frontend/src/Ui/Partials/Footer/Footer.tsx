@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { FooterStyled, SocialMediaContainer } from "./Footer.styles";
+import { FooterContainer, SocialContainer, SocialMediaContainer } from "./Footer.styles";
 import LogoDark from "../../assets/LogoDark.svg";
 import LogoLight from "../../assets/LogoLight.svg";
 import { Row, Col, Container } from "react-bootstrap";
@@ -16,7 +16,7 @@ const Footer = () => {
   const ImgDarkLight = theme.title === "light" ? LogoLight : LogoDark;
 
   return (
-    <FooterStyled>
+    <FooterContainer>
       <Container fluid>
         <hr />
         <Row className="mt-4 footer-container">
@@ -28,34 +28,34 @@ const Footer = () => {
             <p>
               <SocialMediaContainer>
                 <div className="d-flex">
-                  <a
+                  <SocialContainer
                     href="#"
-                    className="socialContainer containerOne"
+                    className="containerOne"
                     title="HastyDEV Instagram"
                   >
                     <FaInstagram />
-                  </a>
-                  <a
+                  </SocialContainer>
+                  <SocialContainer
                     href="#"
-                    className="socialContainer containerTwo"
+                    className="containerTwo"
                     title="HastyDEV Twitter"
                   >
                     <FaTwitter />
-                  </a>
-                  <a
+                  </SocialContainer>
+                  <SocialContainer
                     href="#"
-                    className="socialContainer containerThree"
+                    className="containerThree"
                     title="HastyDEV Linkedin"
                   >
                     <FaLinkedin />
-                  </a>
-                  <a
+                  </SocialContainer>
+                  <SocialContainer
                     href="#"
-                    className="socialContainer containerFour"
+                    className="containerFour"
                     title="HastyDEV Whatsapp"
                   >
                     <FaWhatsapp />
-                  </a>
+                  </SocialContainer>
                 </div>
               </SocialMediaContainer>
             </p>
@@ -84,7 +84,7 @@ const Footer = () => {
           </Col>
         </Row>
       </Container>
-    </FooterStyled>
+    </FooterContainer>
   );
 };
 

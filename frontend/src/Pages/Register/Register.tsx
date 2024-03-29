@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Formik, Field } from "formik";
-import * as yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert2";
 import { toast, ToastContainer } from "react-toastify";
@@ -12,37 +11,10 @@ import { Container, Row, Col } from "react-bootstrap";
 import RegisterImg from "../../Ui/assets/images/RegisterImg.png";
 import { FormFetch } from "../../Data/Services/axios/config";
 import { FormValues } from "../../Data/@types/FormValues/FormValues.type";
+import { validationsRegister } from "../../Data/Services/Validation/ValidationRegister.service";
+import { RegisterProps } from "../../Data/@types/Register/Register.type";
 
-const validationsRegister = yup.object().shape({
-  first_name: yup.string().required("O campo de nome é obrigatório"),
-  last_name: yup.string().required("O campo de sobrenome é obrigatório"),
-  username: yup
-    .string()
-    .required("O campo de nome de usuário é obrigatório")
-    .min(5, "O username deve ter pelo menos 5 caracteres"),
-  email: yup.string().email("Email inválido").required("O email é obrigatório"),
-  password: yup
-    .string()
-    .required("A senha é obrigatória")
-    .min(6, "A senha deve ter pelo menos 6 caracteres")
-    .matches(/[a-z]/, "A senha deve conter pelo menos uma letra minúscula")
-    .matches(/[A-Z]/, "A senha deve conter pelo menos uma letra maiúscula")
-    .matches(/[0-9]/, "A senha deve conter pelo menos um número")
-    .matches(
-      /[@$!¨%*#?&]/,
-      "A senha deve conter pelo menos um caractere especial"
-    ),
-  confirmPassword: yup
-    .string()
-    .required("A confirmação da senha é obrigatória")
-    .oneOf([yup.ref("password")], "As senhas não coincidem"),
-});
-
-interface RegisterProps {
-  setAllowEmailVerification: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const Register: React.FC<RegisterProps> = ({ setAllowEmailVerification }) => {
+const Register = ({ setAllowEmailVerification }: RegisterProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const [registrationInProgress, setRegistrationInProgress] = useState(false);
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
@@ -63,7 +35,7 @@ const Register: React.FC<RegisterProps> = ({ setAllowEmailVerification }) => {
     email,
     password,
     confirmPassword,
-    role
+    role,
   }: FormValues) => {
     try {
       setRegistrationInProgress(true);
@@ -74,14 +46,17 @@ const Register: React.FC<RegisterProps> = ({ setAllowEmailVerification }) => {
         email,
         password,
         confirmPassword,
-        role
+        role,
       });
-      console.log(response.data);
 
       const responses = await FormFetch.post("/sendEmailVerification", {
         email,
       });
-      console.log(responses.data);
+
+      if (response && responses) {
+        console.log("ok!");
+      }
+
       swal.fire({
         position: "center",
         icon: "success",
@@ -109,7 +84,7 @@ const Register: React.FC<RegisterProps> = ({ setAllowEmailVerification }) => {
       <Container>
         <Row>
           <Col sm={12} xl={6}>
-            <R.RegisterForm>
+            <R.RegisterForm className="text-center ">
               {registrationInProgress ? (
                 <Loader />
               ) : registrationSuccess ? (
@@ -123,15 +98,15 @@ const Register: React.FC<RegisterProps> = ({ setAllowEmailVerification }) => {
                 </>
               ) : (
                 <Formik
-                initialValues={{
-                  username: "",
-                  password: "",
-                  first_name: "",
-                  last_name: "",
-                  email: "",
-                  role: "user",  
-                  confirmPassword: "",
-                }}
+                  initialValues={{
+                    username: "",
+                    password: "",
+                    first_name: "",
+                    last_name: "",
+                    email: "",
+                    role: "user",
+                    confirmPassword: "",
+                  }}
                   onSubmit={handleRegister}
                   validationSchema={validationsRegister}
                 >
@@ -139,74 +114,86 @@ const Register: React.FC<RegisterProps> = ({ setAllowEmailVerification }) => {
                     <>
                       <form onSubmit={handleSubmit}>
                         <h2>Inscreva-se na HastyDEV!</h2>
-                        <div className="form-group mb-5">
-                          <label htmlFor="first_name">Nome:</label>
+                        <div className="form-group position-relative mb-5">
+                          <label htmlFor="first_name" className="d-block">
+                            Nome:
+                          </label>
                           <Field
                             type="text"
                             id="first_name"
                             name="first_name"
                           />
-                          <span>
+                          <span className="position-absolute">
                             {errors.first_name &&
                               touched.first_name &&
                               errors.first_name}
                           </span>
                         </div>
-                        <div className="form-group mb-5">
-                          <label htmlFor="last_name">Sobrenome:</label>
+                        <div className="form-group position-relative mb-5">
+                          <label htmlFor="last_name" className="d-block">
+                            Sobrenome:
+                          </label>
                           <Field type="text" id="last_name" name="last_name" />
-                          <span>
+                          <span className="position-absolute">
                             {errors.last_name &&
                               touched.last_name &&
                               errors.last_name}
                           </span>
                         </div>
-                        <div className="form-group mb-5">
-                          <label htmlFor="username">Usuário:</label>
+                        <div className="form-group position-relative mb-5">
+                          <label htmlFor="username" className="d-block">
+                            Usuário:
+                          </label>
                           <Field type="text" id="username" name="username" />
-                          <span>
+                          <span className="position-absolute">
                             {errors.username &&
                               touched.username &&
                               errors.username}
                           </span>
                         </div>
-                        <div className="form-group mb-5">
-                          <label htmlFor="email">E-mail:</label>
+                        <div className="form-group position-relative mb-5">
+                          <label htmlFor="email" className="d-block">
+                            E-mail:
+                          </label>
                           <Field type="email" id="email" name="email" />
-                          <span>
+                          <span className="position-absolute">
                             {errors.email && touched.email && errors.email}
                           </span>
                         </div>
-                        <div className="form-group mb-5">
-          <label htmlFor="role">Status:</label>
-          <div className="radio-input"> 
-            <label>
-              <Field
-                value="user"
-                name="role"
-                id="user"
-                type="radio"
-              />
-              <p>Usuário</p>
-            </label>
-            <label>
-              <Field
-                value="business"
-                name="role"
-                id="business"
-                type="radio"
-              />
-              <p>Empresa</p>
-            </label>
-            <div className="selection"></div>
-          </div>
-          <span>
-            {errors.role && touched.role && errors.role}
-          </span>
-        </div>
-                        <div className="form-group mb-5">
-                          <label htmlFor="password">Senha:</label>
-                          <div className="password-input">
+                        <div className="form-group position-relative mb-5">
+                          <label htmlFor="role" className="d-block">
+                            Status:
+                          </label>
+                          <div className="radio-input position-relative d-flex align-items-center">
+                            <label className="d-block w-100 justify-content-center align-items-center ">
+                              <Field
+                                value="user"
+                                name="role"
+                                id="user"
+                                type="radio"
+                              />
+                              <p>Usuário</p>
+                            </label>
+                            <label className="d-block">
+                              <Field
+                                value="business"
+                                name="role"
+                                id="business"
+                                type="radio"
+                              />
+                              <p>Empresa</p>
+                            </label>
+                            <div className="selection d-none position-absolute h-100 top-0 "></div>
+                          </div>
+                          <span className="position-absolute">
+                            {errors.role && touched.role && errors.role}
+                          </span>
+                        </div>
+                        <div className="form-group position-relative mb-5">
+                          <label htmlFor="password" className="d-block">
+                            Senha:
+                          </label>
+                          <div className="password-input align-items-center position-relative ">
                             <Field
                               type={showPassword ? "text" : "password"}
                               id="password"
@@ -215,20 +202,20 @@ const Register: React.FC<RegisterProps> = ({ setAllowEmailVerification }) => {
                             <FontAwesomeIcon
                               icon={showPassword ? faEyeSlash : faEye}
                               onClick={handleTogglePassword}
-                              className="password-toggle-icon"
+                              className="password-toggle-icon position-absolute "
                             />
                           </div>
-                          <span>
+                          <span className="position-absolute">
                             {errors.password &&
                               touched.password &&
                               errors.password}
                           </span>
                         </div>
-                        <div className="form-group mb-5">
-                          <label htmlFor="confirmPassword">
+                        <div className="form-group position-relative mb-5">
+                          <label htmlFor="confirmPassword" className="d-block">
                             Confirme Sua Senha:
                           </label>
-                          <div className="password-input">
+                          <div className="password-input align-items-center position-relative ">
                             <Field
                               type={showPassword ? "text" : "password"}
                               id="confirmPassword"
@@ -237,17 +224,17 @@ const Register: React.FC<RegisterProps> = ({ setAllowEmailVerification }) => {
                             <FontAwesomeIcon
                               icon={showPassword ? faEyeSlash : faEye}
                               onClick={handleTogglePassword2}
-                              className="password-toggle-icon"
+                              className="password-toggle-icon position-absolute"
                             />
                           </div>
-                          <span>
+                          <span className="position-absolute">
                             {errors.confirmPassword &&
                               touched.confirmPassword &&
                               errors.confirmPassword}
                           </span>
                         </div>
 
-                        <div className="form-group">
+                        <div className="form-group position-relative">
                           <button type="submit" disabled={isSubmitting}>
                             Inscreva-se
                           </button>

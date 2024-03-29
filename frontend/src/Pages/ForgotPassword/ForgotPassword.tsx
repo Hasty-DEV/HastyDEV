@@ -1,4 +1,3 @@
-import * as yup from "yup";
 import { useState } from "react";
 import styled from "styled-components";
 import { api } from "../../Data/Services/api";
@@ -7,22 +6,9 @@ import Loader from "../../Ui/components/Loader/Loader";
 import { Field, Formik } from "formik";
 import { ButtonPrimaryLongNoLink } from "../../Ui/components/Buttons/Buttons";
 import { useNavigate } from "react-router-dom";
-
-export type ForgotPasswordValues = {
-  email: string;
-  resetCode?: string;
-  newPassword?: string;
-};
-
-const validationSendPassCode = yup.object().shape({
-  email: yup.string().email("Email inválido").required("O email é obrigatório"),
-});
-
-const validationNewPassword = yup.object().shape({
-  email: yup.string().email("Email inválido").required("O email é obrigatório"),
-  resetCode: yup.string().required("O código é obrigatório"),
-  newPassword: yup.string().required("A senha é obrigatória"),
-});
+import { ForgotPasswordValues } from "../../Data/@types/ForgotPassword/ForgotPassword.type";
+import { validationSendPassCode } from "../../Data/Services/Validation/ValidationSendPassCode.service";
+import { validationNewPassword } from "../../Data/Services/Validation/ValidationNewPassword.service";
 
 const ForgotPassword = () => {
   const [loading, setLoading] = useState(false);
@@ -137,14 +123,12 @@ const ForgotPassword = () => {
                   )}
 
                   <div className="button">
-                  <ButtonPrimaryLongNoLink
-                  
-                    className="mt-3"
-                    type="submit"
-                    buttonText="Entre em Contato"
-                    disabled={isSubmitting}
-                    
-                  />
+                    <ButtonPrimaryLongNoLink
+                      className="mt-3"
+                      type="submit"
+                      buttonText="Entre em Contato"
+                      disabled={isSubmitting}
+                    />
                   </div>
                 </form>
               )}
@@ -162,13 +146,11 @@ export default ForgotPassword;
 const ForgotPasswordContainer = styled.section`
   margin-top: 10%;
 
- span{
-
-  margin-top:5px;
-  display: flex;
-  justify-content: center;  
-
- }
+  span {
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+  }
 
   input {
     width: 100%;
@@ -177,14 +159,12 @@ const ForgotPasswordContainer = styled.section`
     border: 2px solid ${(props) => props.theme.colors.secondary};
     background: ${(props) => props.theme.colors.background};
     color: ${(props) => props.theme.colors.text};
-    margin-top:4%;
+    margin-top: 4%;
     text-align: center;
-
   }
 
   .button {
     display: flex;
-    justify-content: center;  
+    justify-content: center;
   }
- 
 `;

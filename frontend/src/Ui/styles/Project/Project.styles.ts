@@ -22,7 +22,6 @@ export const ProjectFirstSection = styled(Container)`
 export const ProjectHeadingTitle = styled(HeadingTitle)`
   max-width: 800px;
   font-size: 3rem;
-  text-align: start;
 
   @media (max-width: 575px) {
     font-size: 2.5rem;
@@ -31,7 +30,6 @@ export const ProjectHeadingTitle = styled(HeadingTitle)`
 `;
 
 export const ProjectSubInterTitle = styled(HeadingSubInterTitle)`
-  display: inline-block;
   width: 40%;
   @media (max-width: 575px) {
     padding: 10px;
@@ -47,4 +45,12 @@ export const ProjectParagraph = styled(Paragraph)`
     font-size: 1rem;
     padding: 10px;
   }
+`;
+
+export const ProjectParagraphContainer = styled.div`
+  margin-top: 10%;
+`;
+
+export const ProjectTitleContainer = styled.div`
+  margin-top: 20%;
 `;

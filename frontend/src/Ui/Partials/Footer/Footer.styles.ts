@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const FooterStyled = styled.footer`
+export const FooterContainer = styled.footer`
   background: ${(props) => props.theme.colors.background};
   color: ${(props) => props.theme.colors.text};
   width: 100vw;
@@ -17,18 +17,6 @@ export const FooterStyled = styled.footer`
 export const SocialMediaContainer = styled.div`
   div {
     gap: 15px;
-  }
-
-  .socialContainer {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: ${(props) => props.theme.colors.text};
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    transition-duration: 0.3s;
   }
 
   .containerOne:hover {
@@ -79,4 +67,16 @@ export const SocialMediaContainer = styled.div`
       opacity: 1;
     }
   }
+`;
+
+export const SocialContainer = styled.a`
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: ${(props) => props.theme.colors.text};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition-duration: 0.3s;
 `;

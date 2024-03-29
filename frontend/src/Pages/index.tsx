@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useState } from "react";
+import { Suspense, lazy, useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -22,7 +22,7 @@ const ContactUs = lazy(() => import("./ContactUs/ContactUs"));
 const Login = lazy(() => import("./Login/Login"));
 const Project = lazy(() => import("./Project/Project"));
 
-const Pages: React.FC<PagesProps> = ({ theme, setTheme }) => {
+const Pages = ({ theme, setTheme }: PagesProps) => {
   const [allowEmailVerification, setAllowEmailVerification] = useState(false);
 
   const toggleTheme = () => {

@@ -17,7 +17,7 @@ export const LoaderStyled = styled.div`
   .loader {
     width: fit-content;
     height: fit-content;
-    font-size: 36px; 
+    font-size: 36px;
     line-height: 1.4;
     font-weight: bold;
     background: linear-gradient(#000 0 0) left, linear-gradient(#000 0 0) right;
