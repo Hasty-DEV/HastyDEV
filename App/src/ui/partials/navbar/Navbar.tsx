@@ -16,15 +16,12 @@ import { Link } from "react-router-dom";
 import Logo from "../../assets/HastyDEV/LogoLight.svg";
 import { MdPerson, MdOutlineSecurity, MdHelpOutline } from "react-icons/md";
 import { IoIosSettings, IoMdPerson } from "react-icons/io";
-
 import { useAuth } from "../../../data/context/AuthContext";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { IoBag } from "react-icons/io5";
-import { ThemeContext } from "styled-components";
+import { DefaultTheme, ThemeContext } from "styled-components";
+import { HeaderProps } from "../../../data/@types/Navbar/Navbar.type";
 
-interface HeaderProps {
-  toggleTheme(): void;
-}
 
 const Header = ({ toggleTheme }: HeaderProps) => {
   const { logout } = useAuth();
@@ -61,11 +58,7 @@ const Header = ({ toggleTheme }: HeaderProps) => {
     }
   };
 
-  const theme = useContext(ThemeContext);
-
-  if (!theme || !("title" in theme)) {
-    return null; 
-  }
+  const theme: DefaultTheme = useContext(ThemeContext);
 
   return (
     <HeaderContainer className="mb-3 fixed-top">
