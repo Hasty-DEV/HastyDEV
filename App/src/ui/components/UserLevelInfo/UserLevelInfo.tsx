@@ -43,7 +43,7 @@ const UserLevelInfo = () => {
           <div className="user">
             <div className="userInfo">
               <img src={userIcon || DefaultUserIcon} alt="" />
-              <span className="username"> lucasqc04{userData?.username}</span>
+              <span className="username">{userData?.username}</span>
             </div>
             <div className="level d-flex flex-column">
               <span>{`${userData?.level.level} Lvl`}</span>
