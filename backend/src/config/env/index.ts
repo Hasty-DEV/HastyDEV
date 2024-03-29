@@ -27,5 +27,3 @@ export const EnvVariables = {
   },
   Port: process.env.PORT,
 };
-
-

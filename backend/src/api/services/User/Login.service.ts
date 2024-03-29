@@ -22,9 +22,12 @@ const LoginService = async (req: Request, res: Response) => {
   }
 
   if (!user.isVerified) {
-    logger.error("Conta não verificada. Por favor, verifique sua conta antes de fazer o login.");
+    logger.error(
+      "Conta não verificada. Por favor, verifique sua conta antes de fazer o login."
+    );
     res.status(403).json({
-      error: "Conta não verificada. Por favor, verifique sua conta antes de fazer o login.",
+      error:
+        "Conta não verificada. Por favor, verifique sua conta antes de fazer o login.",
     });
     return;
   }

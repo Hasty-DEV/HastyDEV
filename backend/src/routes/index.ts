@@ -20,11 +20,10 @@ routes.get("/", (req, res) => {
   res.send("Bem-Vindo a HastyDEV API");
 });
 
-// Rotas de Autenticação
 routes.post("/login", LoginController.login);
+
 routes.post("/register", RegisterController.RegisterUser);
 
-// User Data
 routes.get(
   "/user/:id",
   verifyTokenMiddleware.verifyTokenWithParam,
@@ -36,21 +35,21 @@ routes.put(
   UpdateUserController.updateUser
 );
 
-// Rotas para verificar email
 routes.post(
   "/sendEmailVerification",
   SendEmailVerificationController.sendEmail
 );
+
 routes.post(
   "/emailCodeVerification",
   EmailCodeVerificationController.codeVerification
 );
 
-// Rotas para resetar senha do usuário
 routes.post(
   "/sendResetPassVerification",
   SendResetPassVerificationController.sendPasswordResetEmail
 );
+
 routes.post(
   "/resetPassCodeVerification",
   ResetPassCodeVerificationController.resetPassword
@@ -58,7 +57,6 @@ routes.post(
 
 routes.post("/contactForm", ContactFormController.sendContactForm);
 
-// Rotas protegidas por token
 routes.post(
   "/upload/:id",
   verifyTokenMiddleware.verifyTokenWithIdAndTokenInHeaders,
@@ -95,7 +93,8 @@ routes.get(
   CommetsController.getAllCommentsForPost
 );
 routes.post(
-  "/comments/:postid",  verifyTokenMiddleware.verifyTokenWithIdAndTokenInHeaders,
+  "/comments/:postid",
+  verifyTokenMiddleware.verifyTokenWithIdAndTokenInHeaders,
   CommetsController.createCommentForPost
 );
 
@@ -110,6 +109,5 @@ routes.post(
   verifyTokenMiddleware.verifyTokenWithOnlyToken,
   AnswersController.createAnswerForComment
 );
-
 
 export default routes;

@@ -10,17 +10,14 @@ export const app = express();
 
 export const httpServer = createServer(app);
 
-export function setupExpress(): void {
+export const setupExpress = (): void => {
   app.use(express.json());
   app.use(cors({ origin: "*" }));
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use("/api", routes);
-}
-
-
+};
 
 httpServer.listen(PORT, () => {
   console.log(`Servidor está Rodando na Porta: ${PORT}`);
 });
-
