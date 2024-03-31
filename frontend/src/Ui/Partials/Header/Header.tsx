@@ -10,30 +10,44 @@ import {
 } from "../../components/Buttons/Buttons";
 import { ButtonsHeader, HeaderContainer } from "./Header.styles";
 import { ThemeContext } from "styled-components";
-import { useContext } from "react";
-import { useEffect } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { HeaderProps } from "../../../Data/@types/Header/Header.type";
 import SwitchButton from "../../components/SwitchButton/SwitchButton";
-import { handleOutsideClick } from "../../../Data/Services/HandleOutsideClick/HandleOutsideClick.service";
 
 const Header = ({ toggleTheme }: HeaderProps) => {
   const theme = useContext(ThemeContext);
-
-  if (!theme) {
-    return null;
-  }
+  const headerRef = useRef<HTMLDivElement>(null); 
 
   useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      const navbar = document.getElementById("navbarSupportedContent");
+      const navbarToggle = document.querySelector(".custom-navbar-toggler");
+      if (
+        navbar &&
+        navbar.classList.contains("show") &&
+        !navbar.contains(event.target as Node) &&
+        !headerRef.current?.contains(event.target as Node) &&
+        navbarToggle &&
+        navbarToggle instanceof HTMLElement
+      ) {
+        navbarToggle.click();
+      }
+    };
+
     document.addEventListener("click", handleOutsideClick);
     return () => {
       document.removeEventListener("click", handleOutsideClick);
     };
   }, []);
 
+  if (!theme) {
+    return null;
+  }
+
   const ImgDarkLight = theme.title === "light" ? LogoLight : LogoDark;
 
   return (
-    <HeaderContainer className="position-fixed w-100 top-0 ">
+    <HeaderContainer ref={headerRef} className="position-fixed w-100 top-0 ">
       <Navbar expand="lg">
         <Container fluid>
           <Navbar.Brand as={Link} to="/" className="mr-auto">

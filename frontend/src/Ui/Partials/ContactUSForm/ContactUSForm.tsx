@@ -9,8 +9,6 @@ import Loader from "../../components/Loader/Loader";
 import { toast, ToastContainer } from "react-toastify";
 import { validationsContact } from "../../../Data/Services/Validation/ValidationContact.service";
 
-
-
 const ContactUSForm = () => {
   const [loading, setLoading] = useState(false);
   const handleContact = async ({
