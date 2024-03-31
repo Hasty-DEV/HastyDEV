@@ -20,7 +20,6 @@ const Perfil: React.FC = () => {
   const [username, setUsername] = useState<string>("");
   const [editMode, setEditMode] = useState<boolean>(false);
   const [userId, setUserId] = useState<string>("");
-  const [originalValues, setOriginalValues] = useState<{ name: string, surname: string, username: string }>({ name: "", surname: "", username: "" });
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
@@ -43,7 +42,6 @@ const Perfil: React.FC = () => {
       setName(user.first_name);
       setSurname(user.last_name);
       setUsername(user.username);
-      setOriginalValues({ name: user.first_name, surname: user.last_name, username: user.username });
       const icon = await getUserIcon();
       if (icon && icon.data) {
         setUserIcon(URL.createObjectURL(new Blob([icon.data])));
@@ -78,25 +76,27 @@ const Perfil: React.FC = () => {
     setSuccessMessage(null);
     setUploading(true);
 
-    if (!file) {
-      setError("Nenhum arquivo selecionado.");
-      setUploading(false);
-      return;
-    }
+    if (file) {
+      // Salvar as alterações de nome antes de enviar a imagem
+      await handleSaveChanges();
 
-    const formData = new FormData();
-    formData.append("unprocessed_userIcon", file);
+      const formData = new FormData();
+      formData.append("unprocessed_userIcon", file);
 
-    try {
-      const response = await api.post(`/upload/${userId}`, formData);
-      setSuccessMessage("Arquivo enviado com sucesso.");
-      console.log("Arquivo enviado com sucesso:", response.data);
-    } catch (error) {
-      setError("Erro ao enviar o arquivo. Por favor, tente novamente.");
-      console.error("Erro ao enviar o arquivo:", error);
-    } finally {
+      try {
+        const response = await api.post(`/upload/${userId}`, formData);
+        setSuccessMessage("Arquivo enviado com sucesso.");
+        console.log("Arquivo enviado com sucesso:", response.data);
+      } catch (error) {
+        setError("Erro ao enviar o arquivo. Por favor, tente novamente.");
+        console.error("Erro ao enviar o arquivo:", error);
+      } finally {
+        setUploading(false);
+        window.location.reload();
+      }
+    } else {
+       await handleSaveChanges();
       setUploading(false);
-      window.location.reload();
     }
   };
 
@@ -106,33 +106,44 @@ const Perfil: React.FC = () => {
       return;
     }
 
-    setEditMode(false);
-    try {
-      await api.put(`/user/${userId}`, {
-        first_name: name,
-        last_name: surname,
-        username,
-      });
-      console.log("Alterações salvas com sucesso!");
+    const confirmation = await swal.fire({
+      title: 'Tem certeza que deseja salvar as alterações?',
+      text: 'Isso alterará suas informações de perfil.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, salvar alterações',
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+    });
 
-      fetchData();
-      window.location.reload();
-      swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Suas alterações foram realizadas com sucesso",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-    } catch (error) {
-      console.error("Erro ao salvar alterações:", error);
+    if (confirmation.isConfirmed) {
+      setEditMode(false);
+      try {
+        await api.put(`/user/${userId}`, {
+          first_name: name,
+          last_name: surname,
+          username,
+        });
+        console.log("Alterações salvas com sucesso!");
+
+        fetchData();
+        swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Suas alterações foram realizadas com sucesso",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        window.location.reload();
+      } catch (error) {
+        console.error("Erro ao salvar alterações:", error);
+      }
     }
   };
 
   const handleCancelEdit = () => {
-    setName(originalValues.name);
-    setSurname(originalValues.surname);
-    setUsername(originalValues.username);
+    fetchData(); // Revertendo as alterações feitas
     setEditMode(false);
   };
 
@@ -201,7 +212,6 @@ const Perfil: React.FC = () => {
             )}
           </div>
 
-    
           <div className="form-group">
             <label htmlFor="Username">Username</label>
             <input
@@ -221,8 +231,8 @@ const Perfil: React.FC = () => {
               </button>
             )}
           </div>
-        
-           {editMode && (
+
+          {editMode && (
             <button
                type="button"
                onClick={handleCancelEdit}
@@ -230,16 +240,14 @@ const Perfil: React.FC = () => {
             >
                Cancelar
            </button>
-            )}
-            <button
-              type="submit"
-              disabled={uploading}
-              className="saveButton"
-              onClick={handleSaveChanges}
-            >
-              {uploading ? "Enviando..." : "Enviar"}
-            </button>
-           
+          )}
+          <button
+            type="submit"
+            disabled={uploading}
+            className="saveButton"
+          >
+            {uploading ? "Enviando..." : "Enviar"}
+          </button>
           
           {error && <div style={{ color: "red" }}>{error}</div>}
           {successMessage && <div style={{ color: "green" }}>{successMessage}</div>}

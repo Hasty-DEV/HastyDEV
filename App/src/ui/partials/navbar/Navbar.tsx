@@ -63,7 +63,7 @@ const Header = ({ toggleTheme }: HeaderProps) => {
   };
 
 
-  const theme: DefaultTheme = useContext(ThemeContext);
+const theme: DefaultTheme = useContext(ThemeContext);
 
   const ImgDarkLight = theme.title === "light" ? LogoLight : LogoDark;
 

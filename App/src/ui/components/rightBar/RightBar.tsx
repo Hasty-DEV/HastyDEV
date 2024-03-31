@@ -50,7 +50,7 @@ const RightBar: React.FC = () => {
 
                       <div>
                     <label key={categoryIndex}>
-                      <input type="checkbox" />
+                      <input type="checkbox" className="checkbox-style" />
                       
                       {category}
                     </label>

@@ -8,6 +8,8 @@ const RightBarContainer = styled.aside`
   overflow: scroll;
   background-color: ${(props) => props.theme.colors.background};
 
+ 
+
   @media (max-width: 768px), (max-width: 1024px) {
     display: none;
   }
@@ -18,6 +20,8 @@ const RightBarContainer = styled.aside`
 
   .container {
     padding: 20px;
+
+
 
     .item {
       box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
@@ -64,6 +68,9 @@ const RightBarContainer = styled.aside`
       }
     }
   }
-`;
+`
+
+
+;
 
 export default RightBarContainer;
