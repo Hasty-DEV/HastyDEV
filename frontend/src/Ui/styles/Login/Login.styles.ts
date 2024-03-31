@@ -36,6 +36,15 @@ export const LoginForm = styled.div`
     }
   }
 
+  input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 50px;
+    border: 2px solid ${(props) => props.theme.colors.secondary};
+    background: ${(props) => props.theme.colors.background};
+    color: ${(props) => props.theme.colors.text};
+  }
+
   button {
     height: 34px;
     flex-shrink: 0;
@@ -75,7 +84,7 @@ export const LoginForm = styled.div`
     font-weight: 400;
     line-height: normal;
 
-    span {
+    a {
       text-decoration: none;
       color: ${(props) => props.theme.colors.text};
       font-weight: bold;

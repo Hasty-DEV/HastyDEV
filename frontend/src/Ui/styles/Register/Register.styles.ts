@@ -13,6 +13,7 @@ export const RegisterContainer = styled.section`
 export const RegisterForm = styled.div`
   background-color: ${(props) => props.theme.colors.background};
   border-radius: 10px;
+  text-align: center;
 
   h2 {
     color: ${(props) => props.theme.colors.text};
@@ -23,8 +24,6 @@ export const RegisterForm = styled.div`
     label {
       margin-bottom: 16px;
       color: ${(props) => props.theme.colors.text};
-      font-size: 16px;
-      font-weight: 400;
     }
     input {
       height: 50px;
@@ -44,10 +43,6 @@ export const RegisterForm = styled.div`
       white-space: nowrap;
     }
 
-    .radio-input input {
-      display: none;
-    }
-
     .radio-input {
       --container_width: 370px;
       border-radius: 50px;
@@ -59,13 +54,10 @@ export const RegisterForm = styled.div`
       overflow: hidden;
       margin: 0 auto;
     }
-
     .radio-input label {
       padding: 10px;
       cursor: pointer;
       z-index: 1;
-      font-weight: 400;
-      font-size: 14px;
     }
 
     .radio-input p {
@@ -73,9 +65,13 @@ export const RegisterForm = styled.div`
     }
 
     .selection {
+      display: none;
+      position: absolute;
+      height: 100%;
       width: calc(var(--container_width) / 2);
       z-index: 0;
       left: 0;
+      top: 0;
       transition: 0.15s ease;
     }
 
@@ -99,8 +95,11 @@ export const RegisterForm = styled.div`
 
   .password-input {
     display: initial;
+    align-items: center;
+    position: relative;
 
     .password-toggle-icon {
+      position: absolute;
       right: 20px;
       cursor: pointer;
       top: 1px;
@@ -118,7 +117,6 @@ export const RegisterForm = styled.div`
     margin-top: 20px;
     margin-bottom: 20px;
   }
-
   .sign_in {
     color: ${(props) => props.theme.colors.text};
     font-size: 16px;

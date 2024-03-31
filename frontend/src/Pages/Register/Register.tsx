@@ -67,8 +67,7 @@ const Register = ({ setAllowEmailVerification }: RegisterProps) => {
       setRegistrationSuccess(true);
       setAllowEmailVerification(true);
       navigate(
-        `/emailVerification${
-          email ? `?email=${encodeURIComponent(email)}` : ""
+        `/emailVerification${email ? `?email=${encodeURIComponent(email)}` : ""
         }`
       );
     } catch (err: any) {
@@ -161,34 +160,35 @@ const Register = ({ setAllowEmailVerification }: RegisterProps) => {
                           </span>
                         </div>
                         <div className="form-group position-relative mb-5">
-                          <label htmlFor="role" className="d-block">
-                            Status:
-                          </label>
+                          <label htmlFor="role" className="d-block">Status:</label>
                           <div className="radio-input position-relative d-flex align-items-center">
-                            <label className="d-block w-100 justify-content-center align-items-center ">
+                            <label className="d-block w-100 justify-content-center align-items-center">
                               <Field
                                 value="user"
                                 name="role"
                                 id="user"
                                 type="radio"
+                                className="d-none"
                               />
                               <p>Usuário</p>
                             </label>
-                            <label className="d-block">
+                            <label className="d-block w-100 justify-content-center align-items-center">
                               <Field
                                 value="business"
                                 name="role"
                                 id="business"
                                 type="radio"
+                                className="d-none"
                               />
                               <p>Empresa</p>
                             </label>
-                            <div className="selection d-none position-absolute h-100 top-0 "></div>
+                            <div className="selection"></div>
                           </div>
                           <span className="position-absolute">
                             {errors.role && touched.role && errors.role}
                           </span>
                         </div>
+
                         <div className="form-group position-relative mb-5">
                           <label htmlFor="password" className="d-block">
                             Senha:
