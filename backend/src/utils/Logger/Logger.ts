@@ -32,7 +32,6 @@ const logger = createLogger({
   ],
 });
 
-
 logger.on("error", (err) => {
   console.error("Erro no logger:", err);
 });

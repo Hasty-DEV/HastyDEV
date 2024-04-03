@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
-import  logger from "../../../utils/Logger/Logger";
+import logger from "../../../utils/Logger/Logger";
 import User from "../../models/User/User.model";
 import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
@@ -9,16 +9,21 @@ import validationRules from "../Validation/validations.controller";
 
 class Register {
   public async RegisterUser(req: Request, res: Response): Promise<void> {
-
-    await Promise.all(validationRules.registrationValidationRules.map(rule => rule.run(req)));
+    await Promise.all(
+      validationRules.registrationValidationRules.map((rule) => rule.run(req))
+    );
     const { username, email, password, first_name, last_name, role } = req.body;
 
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      const errorMessages = errors.array().map(error => error.msg);
-      logger.error(`Erros de validação no Register ${errorMessages.join(', ')}`);
-      res.status(400).send(`Erros de validação no Register ${errorMessages.join(', ')}`);
+      const errorMessages = errors.array().map((error) => error.msg);
+      logger.error(
+        `Erros de validação no Register ${errorMessages.join(", ")}`
+      );
+      res
+        .status(400)
+        .send(`Erros de validação no Register ${errorMessages.join(", ")}`);
       return;
     }
 
