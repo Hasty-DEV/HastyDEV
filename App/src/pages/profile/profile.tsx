@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getUserDataById } from '../../data/services/userService';  
+import { getUserDataById } from '../../data/services/userService'; 
 
 interface UserDataTypes {
   first_name: string;

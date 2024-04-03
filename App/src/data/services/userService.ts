@@ -23,7 +23,7 @@ export const getUserDataById = async (userId: any) => {
 
     if (userToken && userId) {
       api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
-      const response = await api.get(`/user/${userId}`);
+      const response = await api.get(`/userbasic/${userId}`);
       return response.data.user;
     } else {
       throw new Error("Token de usuário ou ID de usuário ausente");

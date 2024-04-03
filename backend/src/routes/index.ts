@@ -13,6 +13,7 @@ import PostController from "../api/controllers/Posts/Posts.controller";
 import CommetsController from "../api/controllers/Commets/Comments.controller";
 import AnswersController from "../api/controllers/Awnsers/Awnsers.controller";
 import UpdateUserController from "../api/controllers/User/UpdateUser.controller";
+import ReadUserBasicController from "../api/controllers/User/ReadUserBasic.controller";
 
 const routes = Router();
 
@@ -29,6 +30,12 @@ routes.get(
   verifyTokenMiddleware.verifyTokenWithParam,
   ReadUserController.getUserData
 );
+
+routes.get(
+  "/userbasic/:id",
+  ReadUserBasicController.getUserBasicInfo
+);
+
 routes.put(
   "/user/:id",
   verifyTokenMiddleware.verifyTokenWithParam,
