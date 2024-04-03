@@ -1,4 +1,8 @@
 {
+  "include": [
+    "src/**/*.ts",
+    "__tests__/**/*.ts"
+  ],
   "compilerOptions": {
     "target": "ES6",
     "experimentalDecorators": true,
