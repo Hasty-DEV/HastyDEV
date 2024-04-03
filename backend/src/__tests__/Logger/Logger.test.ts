@@ -1,4 +1,4 @@
-import logger from "../../src/utils/Logger/Logger";
+import logger from "../../utils/Logger/Logger";
 
 describe("Teste do Logger", () => {
   it("Deve criar logs corretamente", () => {

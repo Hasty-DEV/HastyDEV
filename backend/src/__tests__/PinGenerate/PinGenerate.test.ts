@@ -1,4 +1,4 @@
-import { generatePinCode } from "../../src/utils/PinGenerate/PinGenerate";
+import { generatePinCode } from "../../utils/PinGenerate/PinGenerate";
 
 describe("Teste de Geração de PIN", () => {
   it("Desde deve gerar um pin de 3 Caracteres em Maiúsculas", () => {

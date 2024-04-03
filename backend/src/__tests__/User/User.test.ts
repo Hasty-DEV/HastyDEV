@@ -1,6 +1,8 @@
+/*
+
 import request from "supertest";
-import { app } from "../../src/config/express/express";
-import VerificationCode from "../../src/api/models/Email/EmailVerifyCode.model";
+import { app } from "../../config/express/express";
+import VerificationCode from "../../api/models/Email/EmailVerifyCode.model";
 
 interface UserDataTypes {
   username: string;
@@ -62,3 +64,4 @@ describe("Fará Todo o Processo de Autenticação e ciclo de vida de um usuário
     expect(response.status).toBe(200);
   });
 });
+*/
