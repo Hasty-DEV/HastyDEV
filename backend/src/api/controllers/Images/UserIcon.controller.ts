@@ -15,20 +15,20 @@ class UserIconController {
         `../../../../uploads/${userId}/perfil`
       );
 
-      // Verificar se o diretório existe, se não, criar
+     
       if (!fs.existsSync(uploadDir)) {
         fs.mkdirSync(uploadDir, { recursive: true });
       }
 
-      // Verificar se já existe um arquivo na pasta
+     
       const files = fs.readdirSync(uploadDir);
       const userIconFile = files.find((file) => file.startsWith("unprocessed_userIcon"));
       if (userIconFile) {
-        // Se um arquivo existir, exclua-o
+         
         fs.unlinkSync(path.join(uploadDir, userIconFile));
       }
 
-      // Prossiga com o upload do novo arquivo
+      
       uploadPerfilIcon.single("unprocessed_userIcon")(req, res, async (err: any) => {
         if (err instanceof multer.MulterError) {
           logger.error("Erro do Multer: " + err, res);
@@ -47,7 +47,7 @@ class UserIconController {
               .jpeg({ quality: 70 })  
               .toFile(processedImagePath);  
 
-            // Excluir o arquivo original
+    
             fs.unlinkSync(req.file.path);
 
             logger.info("Arquivo enviado com sucesso: " + req.file, res);
@@ -73,18 +73,26 @@ class UserIconController {
         __dirname,
         `../../../../uploads/${userId}/perfil`
       );
+  
+     
+      if (!fs.existsSync(uploadDir)) {
+        logger.error("Diretório de perfil não encontrado", res);
+        res.status(404).send("Diretório de perfil não encontrado");
+        return;
+      }
+  
       const files = fs.readdirSync(uploadDir);
-
+  
       const userIconFile = files.find((file) => file.startsWith("userIcon"));
-
+  
       if (!userIconFile) {
         logger.error("Ícone do usuário não encontrado", res);
         res.status(404).send("Ícone do usuário não encontrado");
         return;
       }
-
+  
       const iconPath = path.join(uploadDir, userIconFile);
-
+  
       res.sendFile(iconPath);
     } catch (error) {
       logger.error("Erro ao obter o ícone do usuário: " + error, res);
@@ -93,6 +101,7 @@ class UserIconController {
         .send("Ocorreu um erro interno ao obter o ícone do usuário");
     }
   }
+  
 }
 
 export default new UserIconController();

@@ -92,7 +92,7 @@ const Perfil: React.FC = () => {
         console.error("Erro ao enviar o arquivo:", error);
       } finally {
         setUploading(false);
-        window.location.reload();
+        
       }
     } else {
        await handleSaveChanges();
@@ -135,7 +135,9 @@ const Perfil: React.FC = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        window.location.reload();
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000); 
       } catch (error) {
         console.error("Erro ao salvar alterações:", error);
       }

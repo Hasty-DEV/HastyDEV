@@ -6,6 +6,8 @@ import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
 import Token from "../../models/Token/Token.model";
 import validationRules from "../Validation/validations.controller";
+import * as fs from "fs";
+import path from "path";
 
 class Register {
   public async RegisterUser(req: Request, res: Response): Promise<void> {
@@ -67,6 +69,16 @@ class Register {
         });
 
         const user_id = user.dataValues.userid;
+
+        
+        const uploadDir = path.join(
+          __dirname,
+          `../../../../uploads/${user_id}/perfil`
+        );
+
+        if (!fs.existsSync(uploadDir)) {
+          fs.mkdirSync(uploadDir, { recursive: true });
+        }
 
         const secret = process.env.SECRET;
         if (!secret) {

@@ -66,10 +66,14 @@ const Register = ({ setAllowEmailVerification }: RegisterProps) => {
       });
       setRegistrationSuccess(true);
       setAllowEmailVerification(true);
-      navigate(
-        `/emailVerification${email ? `?email=${encodeURIComponent(email)}` : ""
-        }`
-      );
+
+      setTimeout(() => {
+        navigate(
+          `/emailVerification${email ? `?email=${encodeURIComponent(email)}` : ""
+          }`
+        );
+      }, 2000); 
+    
     } catch (err: any) {
       setRegistrationInProgress(false);
       toast.error(err.response.data.error);

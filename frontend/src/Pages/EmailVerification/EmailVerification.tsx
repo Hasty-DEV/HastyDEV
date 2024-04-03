@@ -33,7 +33,10 @@ function EmailVerification() {
         showConfirmButton: false,
         timer: 1500,
       });
+
+      setTimeout(() => {
       navigate("/login");
+    }, 2000); 
     } catch (error) {
       console.error("Erro ao verificar o email:", error);
       setMessage("codigo de verificação inválido");

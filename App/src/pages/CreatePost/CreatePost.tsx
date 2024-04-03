@@ -79,10 +79,20 @@ const CreatePost = () => {
         });
         
  
-          window.location.reload();
+      
  
         console.log("Resposta do servidor:", response.data);
         setLoading(false);
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Suas alterações foram realizadas com sucesso",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000); 
       } catch (error) {
         console.error("Erro ao enviar o formulário:", error);
         setLoading(false);

@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import Comments from "../comments/Comments";
 import { useCallback, useEffect, useState } from "react";
 import PostContainer from "../../styles/post/Post.styles";
-import { getUserData } from "../../../data/services/userService";
-import { UserDataTypes } from "../../../data/@types/UserData/UserData.type";
+ 
+ 
 
 interface AuthorType {
   first_name: string;
@@ -31,7 +31,7 @@ import userIconDefault from "../../assets/user/user_icon.png";
 import { getUserIconByID } from "../../../data/services/getUserIconService";
 
 const Post = ({ post }: { post: PostType }) => {
-  const [userData, setUserData] = useState<UserDataTypes | null>(null);
+ 
   const [commentOpen, setCommentOpen] = useState(false);
   const [formattedUpdatedAt, setFormattedUpdatedAt] = useState<string>("");
   const [userIcon, setUserIcon] = useState<string | null>(null);
@@ -62,8 +62,7 @@ const Post = ({ post }: { post: PostType }) => {
 
   const fetchData = useCallback(async () => {
     try {
-      const user = await getUserData();
-      setUserData(user);
+       
       const icon = await getUserIconByID(post.userid);
       if (icon && icon.data) {
         setUserIcon(URL.createObjectURL(new Blob([icon.data])));
@@ -89,7 +88,7 @@ const Post = ({ post }: { post: PostType }) => {
                   to={`/profile/${post.userid}`}
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
-                  <span className="name">{`${post.author.first_name} ${post.author.last_name} | nível: ${userData?.level.level}`}</span>
+                  <span className="name">{`${post.author.first_name} ${post.author.last_name} `}</span>
                 </Link>
                 <span className="date">{formattedUpdatedAt}</span>
               </div>
