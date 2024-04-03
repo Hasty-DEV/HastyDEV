@@ -17,6 +17,7 @@ import RightBar from "../ui/components/rightBar/RightBar";
 import ChatButton from "../ui/components/ChatButton/ChatButton";
 import { PagesProps } from "../data/@types/Page/Page.type";
 import { PagesContainer } from "../ui/styles/Pages/Pages.style";
+import ProfilePage from "./profile/profile";
 
 const Pages = ({ theme, setTheme }: PagesProps) => {
   const toggleTheme = () => {
@@ -40,6 +41,7 @@ const Pages = ({ theme, setTheme }: PagesProps) => {
               <Route path="/help" element={<Help />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/chat" element={<Chat />} />
+              <Route path="/profile/:userId" element={<ProfilePage />} />
             </Routes>
           </PrivateRoute>
         </PagesContainer>
