@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const CreatePostContainer = styled.div`
   height: 100vh;
- 
+ margin-top: 150px ;
 `;
 
 export const Form = styled.form`

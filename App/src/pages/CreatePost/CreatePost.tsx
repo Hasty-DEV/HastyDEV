@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
 import {
   CreatePostContainer,
   Form,
@@ -9,8 +9,16 @@ import {
   TextArea,
   Button,
 } from "../../ui/styles/CreatePost/CreatePost.styles";
+import Swal from "sweetalert2";
 import { api } from "../../data/services/api";
+import { getUserData } from "../../data/services/userService";
+
+interface UserDataTypes {
+  role: string;
+}
+
 const CreatePost = () => {
+  const [userData, setUserData] = useState<UserDataTypes | null>(null);
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
@@ -22,35 +30,76 @@ const CreatePost = () => {
   const [programmingLanguages, setProgrammingLanguages] = useState<string>("");
   const [deadline, setDeadline] = useState("");
 
-  const handleFormSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    setLoading(true);
 
+  const fetchData = useCallback(async () => {
     try {
-      const userId = localStorage.getItem("userId");
-      const userToken = localStorage.getItem("userToken");
-
-      const response = await api.post("/posts", {
-        id: userId,
-        token: `Bearer ${userToken}`,
-        title,
-        subtitle,
-        isPaid,
-        price,
-        photos,
-        companyContent,
-        categories,
-        programmingLanguages,
-        deadline,
-      });
-
-      console.log("Resposta do servidor:", response.data);
-      setLoading(false);
-      window.location.reload();
+      setLoading(true);
+      const user = await getUserData();
+      setUserData(user);
     } catch (error) {
-      console.error("Erro ao enviar o formulário:", error);
+      console.error("Erro ao obter dados do usuário:", error);
+    } finally {
       setLoading(false);
     }
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+
+  const handleFormSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (userData?.role === "user") {  
+      Swal.fire({
+        icon: "error",
+        title: "Acesso Negado",
+        text: "Usuários comuns não têm permissão para criar posts.",
+      });
+      return;
+    }
+    const confirmed = await confirmSubmission();
+    if (confirmed) {
+      setLoading(true);
+      try {
+        const userId = localStorage.getItem("userId");
+        const userToken = localStorage.getItem("userToken");
+        const response = await api.post("/posts", {
+          id: userId,
+          token: `Bearer ${userToken}`,
+          title,
+          subtitle,
+          isPaid,
+          price,
+          photos,
+          companyContent,
+          categories,
+          programmingLanguages,
+          deadline,
+        });
+        
+ 
+          window.location.reload();
+ 
+        console.log("Resposta do servidor:", response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Erro ao enviar o formulário:", error);
+        setLoading(false);
+      }
+    }
+  };
+
+  const confirmSubmission = async () => {
+    const result = await Swal.fire({
+      title: "Você tem certeza?",
+      text: "Deseja realmente fazer o post?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Sim",
+      cancelButtonText: "Cancelar",
+    });
+    return result.isConfirmed;
   };
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

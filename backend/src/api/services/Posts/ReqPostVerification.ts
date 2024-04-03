@@ -5,9 +5,9 @@ export const isPostRequestIncomplete = (
   res: Response,
   next: NextFunction
 ) => {
-  const { id, token, title, content } = req.body;
+  const { id, token, title } = req.body;
 
-  if (!id || !token || !title || !content) {
+  if (!id || !token || !title) {
     return res.status(400).json({ error: "Requisição incompleta" });
   } else {
     next();

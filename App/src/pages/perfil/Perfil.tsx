@@ -77,7 +77,7 @@ const Perfil: React.FC = () => {
     setUploading(true);
 
     if (file) {
-      // Salvar as alterações de nome antes de enviar a imagem
+  
       await handleSaveChanges();
 
       const formData = new FormData();

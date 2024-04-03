@@ -1,22 +1,23 @@
+import  { useCallback, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import { useAuth } from "../../../data/context/AuthContext";
+import Loader from "../Loader/Loader";
+import { getUserData } from "../../../data/services/userService";
+import { getUserIcon } from "../../../data/services/getUserIconService";
+import DefaultUserIcon from "../../assets/user/user_icon.png";
+import { AiOutlinePlusCircle } from "react-icons/ai";
 
 import Gaming from "../../assets/7.png";
 import Gallery from "../../assets/8.png";
 import Videos from "../../assets/9.png";
 import Messages from "../../assets/10.png";
 import LeftBarContainer from "../../styles/leftBar/LeftBar.styles";
-import { useCallback, useEffect, useState } from "react";
-import { getUserData } from "../../../data/services/userService";
-import { Button } from "react-bootstrap";
-import { useAuth } from "../../../data/context/AuthContext";
-import Loader from "../Loader/Loader";
-import { Link } from "react-router-dom";
-import { getUserIcon } from "../../../data/services/getUserIconService";
-import DefaultUserIcon from "../../assets/user/user_icon.png";
-import { AiOutlinePlusCircle } from "react-icons/ai";
 
 interface UserDataTypes {
   first_name: string;
   last_name: string;
+  role: string;
 }
 
 const LeftBar = () => {
@@ -56,6 +57,8 @@ const LeftBar = () => {
     }
   };
 
+  
+
   return (
     <>
       {loading && <Loader />}
@@ -78,12 +81,15 @@ const LeftBar = () => {
             <div className="menu d-flex flex-column ">
               <span>Em Construção...</span>
 
-              <div className="item d-flex align-items-center">
-                <Link to="/createpost">
-                <AiOutlinePlusCircle className="plus-circle" />
-                </Link>
-                <span>Criar Post</span>
-              </div>
+              {userData?.role !== "user" && (  
+                <div className="item d-flex align-items-center">
+                  <Link to="/createpost">
+                    <AiOutlinePlusCircle className="plus-circle" />
+                  </Link>
+                  <span>Criar Post</span>
+                </div>
+              )}
+
               <div className="item d-flex align-items-center">
                 <img src={Gaming} alt="" />
                 <span>Em Construção...</span>
