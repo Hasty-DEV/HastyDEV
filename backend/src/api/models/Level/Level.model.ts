@@ -1,15 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../../../config/database/MySQL/MySQL";
 import User from "../User/User.model";
-
-interface LevelAttributes {
-  userid: number;
-  exp: number;
-  level: number;
-  expNeeded: number;
-  createdAt?: Date;
-  updatedAt?: Date;
-}
+import { LevelAttributes } from "../../../types/Level/Level.type";
 
 class LevelModel extends Model<LevelAttributes> implements LevelAttributes {
   public userid!: number;

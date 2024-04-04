@@ -2,17 +2,8 @@ import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../../../config/database/MySQL/MySQL";
 import User from "../User/User.model";
 import Comment from "../Commets/Commets.model";
+import { AnswerAttributes } from "../../../types/Awnsers/Awnsers.type";
 
-interface AnswerAttributes {
- replyid?: number;
- userid: number;
- commentid: number;
- content: string;
- createdAt?: Date;
- updatedAt?: Date;
-}
-
-// Modelo para a tabela de Respostas
 class Answer extends Model<AnswerAttributes> implements AnswerAttributes {
   public commentid!: number;
   public postid!: number;
@@ -24,43 +15,43 @@ class Answer extends Model<AnswerAttributes> implements AnswerAttributes {
 }
 
 Answer.init(
-    {
-      replyid: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
-      },
-      userid: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      commentid: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      content: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-      },
-      createdAt: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
-      },
-      updatedAt: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
-        onUpdate: 'CASCADE',
-      },
+  {
+    replyid: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
     },
-    {
-      sequelize: sequelize,
-      modelName: "Answer",
-      tableName: "replies",
-      timestamps: true,
-    }
-  );
-   
-  Answer.belongsTo(User, { foreignKey: 'userid', as: 'author' });
-  Answer.belongsTo(Comment, { foreignKey: 'commentid', as: 'comment' });
-   
-  export default Answer;
+    userid: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    commentid: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    content: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+      onUpdate: 'CASCADE',
+    },
+  },
+  {
+    sequelize: sequelize,
+    modelName: "Answer",
+    tableName: "replies",
+    timestamps: true,
+  }
+);
+
+Answer.belongsTo(User, { foreignKey: 'userid', as: 'author' });
+Answer.belongsTo(Comment, { foreignKey: 'commentid', as: 'comment' });
+
+export default Answer;
