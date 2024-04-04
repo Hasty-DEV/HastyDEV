@@ -2,36 +2,14 @@ import { FaHeart, FaRegHeart, FaComment } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Comments from "../comments/Comments";
 import { useCallback, useEffect, useState } from "react";
-import PostContainer from "../../styles/post/Post.styles";
- 
- 
-
-interface AuthorType {
-  first_name: string;
-  last_name: string;
-}
-
-interface PostType {
-  postid: number | string;
-  userid: number | string;
-  author: AuthorType;
-  content: string;
-  img?: string;
-  updatedAt: string;
-  title: string;
-  subtitle: string;
-  price: string;
-  companyContent: string;
-  categories: string;
-  progammingLanguages: string;
-  deadline: Date;
-}
-
+import PostContainer, { BussinessDataContainer, CommentContainer, LikeContainer } from "../../styles/post/Post.styles";
 import userIconDefault from "../../assets/user/user_icon.png";
 import { getUserIconByID } from "../../../data/services/getUserIconService";
+import { Button } from "react-bootstrap";
+import { PostType } from "../../../data/@types/Post/Post.type";
 
 const Post = ({ post }: { post: PostType }) => {
- 
+
   const [commentOpen, setCommentOpen] = useState(false);
   const [formattedUpdatedAt, setFormattedUpdatedAt] = useState<string>("");
   const [userIcon, setUserIcon] = useState<string | null>(null);
@@ -62,7 +40,7 @@ const Post = ({ post }: { post: PostType }) => {
 
   const fetchData = useCallback(async () => {
     try {
-       
+
       const icon = await getUserIconByID(post.userid);
       if (icon && icon.data) {
         setUserIcon(URL.createObjectURL(new Blob([icon.data])));
@@ -78,60 +56,58 @@ const Post = ({ post }: { post: PostType }) => {
 
   return (
     <PostContainer>
-      <div className="post">
-        <div className="container">
-          <div className="user d-flex align-items-center justify-content-between ">
-            <div className="userInfo d-flex">
-              <img src={userIcon || userIconDefault} alt="" />
-              <div className="details d-flex flex-column">
+      <div className="d-flex align-items-start justify-content-between px-3 pt-4">
+        <div className="d-flex flex-column align-items-start justify-content-center">
+          <h2 className="fw-bold text-capitalize">{post.title}</h2>
+          <h5 className="fw-medium text-capitalize">{post.subtitle}</h5>
+          <span className="text-capitalize">Publicado: {formattedUpdatedAt}</span>
+          <span>Quantidade de Interessados: 5</span>
+        </div>
+        <div className="d-flex flex-column align-items-start justify-content-center">
+          <Button className="text-capitalize rounded bg-success border-0">ir para projeto</Button>
+          <span className="mt-1">R$ {post.price}</span>
+        </div>
+      </div>
+      <div className="d-flex flex-column align-items-start justify-content-between px-3 pt-4">
+        {expanded ? (
+          <>
+            <p>{post.content}</p>
+            <img src={post.img} alt="" />
+            {/*como no catho, quero colocar o nivel game do contratante ou ao inves de colocar addos  do contratante, colocar as fotos e palavras chave... nao sei se precisa colcoar os dados... so da pessoa clicar no perfil ve quem é*/}
+            <Button variant="Link" onClick={() => setExpanded(false)}>Ler menos</Button>
+            <BussinessDataContainer className="d-flex flex-column justify-content-center align-items-start">
+              <h4 >Dados do Contratante</h4>
+              <div className="d-flex justify-content-center align-items-center pt-2 pb-2">
                 <Link
                   to={`/profile/${post.userid}`}
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
-                  <span className="name">{`${post.author.first_name} ${post.author.last_name} `}</span>
+                  <img src={userIcon || userIconDefault} className="rounded-circle" alt="User Profile" />
                 </Link>
-                <span className="date">{formattedUpdatedAt}</span>
+                <span >{`${post.author.first_name} ${post.author.last_name} `}</span>
               </div>
-            </div>
-          </div>
-          <div className="content">
-            <h2>{post.title}</h2>
-
-            <div className="title-container d-flex justify-content-between  align-items-center">
-              <h5>{post.subtitle}</h5>
-
-              <p className="price">{post.price}</p>
-            </div>
-            <br />
-            {expanded ? (
-              <>
-                <p>{post.content}</p>
-                <img src={post.img} alt="" />
-                <hr />
-                <h4>Dados do Contratante</h4>
-                {/*como no catho, quero colocar o nivel game do contratante ou ao inves de colocar addos  do contratante, colocar as fotos e palavras chave... nao sei se precisa colcoar os dados... so da pessoa clicar no perfil ve quem é*/}
-                <button onClick={() => setExpanded(false)}>Ler menos</button>
-              </>
-            ) : (
-              <>
-                {post.content && <p>{post.content.slice(0, 200)}...</p>}
-                <button onClick={() => setExpanded(true)}>Ler mais</button>
-              </>
-            )}
-          </div>
-          <div className="info d-flex align-items-center">
-            <div className="item d-flex align-items-center">
-              {liked ? <FaHeart /> : <FaRegHeart />}1 Likes
-            </div>
-            <div
-              className="item d-flex align-items-center"
-              onClick={() => setCommentOpen(!commentOpen)}
-            >
-              <FaComment />2 Comentários
-            </div>
-          </div>
-          {commentOpen && <Comments postId={post.postid.toString()} />}
+            </BussinessDataContainer>
+          </>
+        ) : (
+          <>
+            {post.content && <p>{post.content.slice(0, 200)}...</p>}
+            <Button variant="Link" onClick={() => setExpanded(true)} className="text-start">Ler mais</Button>
+          </>
+        )}
+        <div className="d-flex align-items-center justify-content-between w-50 pb-3">
+          <LikeContainer className="w-50 d-flex align-items-center justify-content-start">
+            {liked ? <FaHeart /> : <FaRegHeart />}
+            <span>1 Likes</span>
+          </LikeContainer>
+          <CommentContainer
+            className="w-50 d-flex align-items-center justify-content-start"
+            onClick={() => setCommentOpen(!commentOpen)}
+          >
+            <FaComment />
+            <span>2 Comentários</span>
+          </CommentContainer>
         </div>
+        {commentOpen && <Comments postId={post.postid.toString()} />}
       </div>
     </PostContainer>
   );

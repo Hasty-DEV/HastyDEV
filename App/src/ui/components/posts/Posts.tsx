@@ -2,27 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import PostsContainer from "../../styles/posts/Posts.styles";
 import Post from "../post/Post";
 import { getPosts } from "../../../data/services/postsService";
-
-interface AuthorType {
-  first_name: string;
-  last_name: string;
-}
-
-interface PostType {
-  postid: number | string;
-  userid: number | string;
-  author: AuthorType;
-  content: string;
-  img?: string;
-  updatedAt: string;
-  title: string;
-  subtitle: string;
-  price: string;
-  companyContent: string;
-  categories: string;
-  progammingLanguages: string;
-  deadline: Date;
-}
+import { PostType } from "../../../data/@types/Post/Post.type";
 
 const Posts = () => {
   const [posts, setPosts] = useState<PostType[]>([]);
@@ -43,11 +23,10 @@ const Posts = () => {
 
   return (
     <PostsContainer className="d-flex flex-column">
-      <div className="posts">
-        {posts.map((post) => (
-          <Post post={post} key={post.postid} />
-        ))}
-      </div>
+      <h2 className="mb-3">Procure o Tabalho Ideal</h2>
+      {posts.map((post) => (
+        <Post post={post} key={post.postid} />
+      ))}
     </PostsContainer>
   );
 };
