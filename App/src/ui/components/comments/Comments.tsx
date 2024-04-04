@@ -5,27 +5,22 @@ import Answers from "../answers/Answers";
 import { FaComment } from "react-icons/fa";
 import { getUserIconByID } from "../../../data/services/getUserIconService";
 import userIconDefault from "../../assets/user/user_icon.png";
+import { PostType } from "../../../data/@types/Post/Post.type";
+import { CommentType } from "../../../data/@types/Comment/Comment.type";
 
-interface Comment {
-  id: string;
-  userid: string;
-  content: string;
-  createdAt: string;
-  commentid: number | string;
-}
-const Comments: React.FC<{ postId: string }> = ({ postId }) => {
+const Comments = ({ postid }: PostType) => {
   const [userId, setUserId] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [userName, setUserName] = useState<string | null>(null);
   const [userIcon, setUserIcon] = useState<string | null>(null);
-  const [comments, setComments] = useState<Comment[]>([]);
+  const [comments, setComments] = useState<CommentType[]>([]);
   const [newComment, setNewComment] = useState<string>("");
   const [answerOpen, setAnswerOpen] = useState<string[]>([]);
 
   const getCommentsForPost = useCallback(
-    async (postId: string): Promise<Comment[]> => {
+    async (postId: string): Promise<CommentType[]> => {
       try {
-        const response = await api.get<Comment[]>(`/comments/${postId}`, {
+        const response = await api.get<CommentType[]>(`/comments/${postId}`, {
           headers: {
             id: userId || "",
             Authorization: `Bearer ${token || ""}`,
@@ -39,18 +34,18 @@ const Comments: React.FC<{ postId: string }> = ({ postId }) => {
     },
     [userId, token]
   );
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const storedUserId = localStorage.getItem("userId");
         const storedToken = localStorage.getItem("userToken");
 
-        if (storedUserId && storedToken && postId) {
+        if (storedUserId && storedToken && postid) {
           setUserId(storedUserId);
           setToken(storedToken);
 
-          const commentsForPost = await getCommentsForPost(postId);
+          const commentsForPost = await getCommentsForPost(postid.toString());
           setComments(commentsForPost);
 
           try {
@@ -80,7 +75,7 @@ const Comments: React.FC<{ postId: string }> = ({ postId }) => {
     };
 
     fetchData();
-  }, [postId, getCommentsForPost]);
+  }, [postid, getCommentsForPost]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewComment(event.target.value);
@@ -88,21 +83,21 @@ const Comments: React.FC<{ postId: string }> = ({ postId }) => {
 
   const handleCommentSubmit = async () => {
     try {
-      if (userId && token && postId) {
+      if (userId && token && postid) {
         const payload = {
           userid: userId,
           content: newComment,
           token: token,
           id: userId,
         };
-        await api.post(`/comments/${postId}`, payload, {
+        await api.post(`/comments/${postid}`, payload, {
           headers: {
             id: userId,
             Authorization: `Bearer ${token}`,
           },
         });
 
-        const updatedComments = await getCommentsForPost(postId);
+        const updatedComments = await getCommentsForPost(postid.toString());
         setComments(updatedComments);
 
         setNewComment("");
@@ -157,7 +152,7 @@ const Comments: React.FC<{ postId: string }> = ({ postId }) => {
             </div>
 
             {answerOpen.includes(comment.commentid.toString()) && (
-              <Answers commentId={comment.commentid.toString()} />
+              <Answers commentid={comment.commentid} />
             )}
           </div>
         ))}

@@ -1,13 +1,10 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-
-type PrivateRouteProps = {
-  children: React.ReactNode;
-};
+import { PrivateRouteProps } from "../../../data/@types/PrivateRoute/PrivateRoute.type";
 
 const URL_FRONTEND: string = import.meta.env.VITE_FRONTEND_URL;
 
-const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
+const PrivateRoute = ({ children }: PrivateRouteProps) => {
   const location = useLocation();
 
   useEffect(() => {

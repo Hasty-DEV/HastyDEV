@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../data/context/AuthContext";
 
-const UserData: React.FC = () => {
+const UserData = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const id = params.get("id");

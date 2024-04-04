@@ -3,15 +3,10 @@ import AnswersContainer from "../../styles/answers/Answers.styles";
 import { api } from "../../../data/services/api";
 import { getUserIconByID } from "../../../data/services/getUserIconService";
 import userIconDefault from "../../assets/user/user_icon.png";
+import { Answer } from "../../../data/@types/Answer/Answer.type";
+import { CommentType } from "../../../data/@types/Comment/Comment.type";
 
-interface Answer {
-  id: string;
-  userid: string;
-  content: string;
-  createdAt: string;
-}
-
-const Answers: React.FC<{ commentId: string }> = ({ commentId }) => {
+const Answers = ( { id }: Partial<CommentType> ) => {
   const [userId, setUserId] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [userName, setUserName] = useState<string | null>(null);
@@ -25,11 +20,11 @@ const Answers: React.FC<{ commentId: string }> = ({ commentId }) => {
         const storedUserId = localStorage.getItem("userId");
         const storedToken = localStorage.getItem("userToken");
 
-        if (storedUserId && storedToken && commentId) {
+        if (storedUserId && storedToken && id) {
           setUserId(storedUserId);
           setToken(storedToken);
 
-          const answersForPost = await getAnswersForPost(commentId);
+          const answersForPost = await getAnswersForPost(id);
           setAnswers(answersForPost);
 
           try {
@@ -59,7 +54,7 @@ const Answers: React.FC<{ commentId: string }> = ({ commentId }) => {
     };
 
     fetchData();
-  }, [commentId]);
+  }, [id]);
 
   const getAnswersForPost = async (commentId: string): Promise<Answer[]> => {
     try {
@@ -77,21 +72,21 @@ const Answers: React.FC<{ commentId: string }> = ({ commentId }) => {
 
   const handleAnswerSubmit = async () => {
     try {
-      if (userId && token && commentId) {
+      if (userId && token && id) {
         const payload = {
           userid: userId,
           content: newAnswer,
           token: token,
           id: userId,
         };
-        await api.post(`/answers/${commentId}`, payload, {
+        await api.post(`/answers/${id}`, payload, {
           headers: {
             id: userId,
             Authorization: `Bearer ${token}`,
           },
         });
 
-        const updatedAnswers = await getAnswersForPost(commentId);
+        const updatedAnswers = await getAnswersForPost(id);
         setAnswers(updatedAnswers);
 
         setNewAnswer("");
