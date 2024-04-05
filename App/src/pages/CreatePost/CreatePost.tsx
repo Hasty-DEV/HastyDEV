@@ -1,14 +1,5 @@
-import { useState, useCallback, useEffect } from "react";
-import {
-  CreatePostContainer,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  FileInput,
-  TextArea,
-  Button,
-} from "../../ui/styles/CreatePost/CreatePost.styles";
+import  { useState, useCallback, useEffect, ChangeEvent, FormEvent } from "react";
+import { CreatePostContainer, Form, FormGroup, Label, Input, FileInput, TextArea, Button } from "../../ui/styles/CreatePost/CreatePost.styles";
 import Swal from "sweetalert2";
 import { api } from "../../data/services/api";
 import { getUserData } from "../../data/services/userService";
@@ -24,12 +15,30 @@ const CreatePost = () => {
   const [subtitle, setSubtitle] = useState("");
   const [isPaid, setIsPaid] = useState(false);
   const [price, setPrice] = useState("");
-  const [photos, setPhotos] = useState<string>("");
-  const [companyContent, setcompanyContent] = useState("");
+  const [files, setFiles] = useState<File[]>([]);
+  const [companyContent, setCompanyContent] = useState("");
   const [categories, setCategories] = useState<string>("");
   const [programmingLanguages, setProgrammingLanguages] = useState<string>("");
   const [deadline, setDeadline] = useState("");
+  const [userId, setUserId] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [uploading, setUploading] = useState<boolean>(false);
 
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    const userToken = localStorage.getItem("userToken");
+
+    api.defaults.headers.common["id"] = userId;
+    api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
+
+    setUserId(userId ?? "");
+
+    return () => {
+      delete api.defaults.headers.common["id"];
+      delete api.defaults.headers.common["Authorization"];
+    };
+  }, []);
 
   const fetchData = useCallback(async () => {
     try {
@@ -47,10 +56,46 @@ const CreatePost = () => {
     fetchData();
   }, [fetchData]);
 
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const selectedFiles = event.target.files;
+    if (selectedFiles) {
+      const filesArray = Array.from(selectedFiles);
+      setFiles(filesArray);
+    }
+  };
 
-  const handleFormSubmit = async (event: React.FormEvent) => {
+  const handleUpload = async (e: FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setSuccessMessage(null);
+    setUploading(true);
+
+    try {
+      await confirmSubmission();
+
+      
+
+      const formData = new FormData();
+      files.forEach((file) => {
+        formData.append(`files`, file);
+    
+      });
+     
+     
+      const response = await api.post(`/upload-files/${userId}`, formData);
+      setSuccessMessage("Arquivos enviados com sucesso.");
+      console.log("Arquivos enviados com sucesso:", response.data);
+    } catch (error) {
+      setError("Erro ao enviar os arquivos. Por favor, tente novamente.");
+      console.error("Erro ao enviar os arquivos:", error);
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleFormSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    if (userData?.role === "user") {  
+    if (userData?.role === "user") {
       Swal.fire({
         icon: "error",
         title: "Acesso Negado",
@@ -62,7 +107,6 @@ const CreatePost = () => {
     if (confirmed) {
       setLoading(true);
       try {
-        const userId = localStorage.getItem("userId");
         const userToken = localStorage.getItem("userToken");
         const response = await api.post("/posts", {
           id: userId,
@@ -71,16 +115,12 @@ const CreatePost = () => {
           subtitle,
           isPaid,
           price,
-          photos,
           companyContent,
           categories,
           programmingLanguages,
           deadline,
         });
-        
- 
-      
- 
+
         console.log("Resposta do servidor:", response.data);
         setLoading(false);
         Swal.fire({
@@ -92,7 +132,7 @@ const CreatePost = () => {
         });
         setTimeout(() => {
           window.location.reload();
-        }, 2000); 
+        }, 2000);
       } catch (error) {
         console.error("Erro ao enviar o formulário:", error);
         setLoading(false);
@@ -112,43 +152,35 @@ const CreatePost = () => {
     return result.isConfirmed;
   };
 
-  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
 
-  const handleSubtitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSubtitleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSubtitle(e.target.value);
   };
 
-  const handleIsPaidChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleIsPaidChange = (e: ChangeEvent<HTMLInputElement>) => {
     setIsPaid(e.target.checked);
   };
 
-  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePriceChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPrice(e.target.value);
   };
 
-  const handlePhotosChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPhotos(Array.from(e.target.files || []).join(","));
+  const handleCompanyContentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setCompanyContent(e.target.value);
   };
 
-  const handlecompanyContentChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    setcompanyContent(e.target.value);
-  };
-
-  const handleCategoriesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCategoriesChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCategories(e.target.value);
   };
 
-  const handleProgrammingLanguagesChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleProgrammingLanguagesChange = (e: ChangeEvent<HTMLInputElement>) => {
     setProgrammingLanguages(e.target.value);
   };
 
-  const handleDeadlineChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleDeadlineChange = (e: ChangeEvent<HTMLInputElement>) => {
     setDeadline(e.target.value);
   };
 
@@ -156,109 +188,51 @@ const CreatePost = () => {
     <CreatePostContainer className="d-flex justify-content-center align-items-center">
       {loading && <div>Carregando...</div>}
       <Form onSubmit={handleFormSubmit}>
-        <FormGroup className="position-relative">
-          <Label className="d-block" htmlFor="title">Título:</Label>
-          <Input
-            type="text"
-            id="title"
-            value={title}
-            onChange={handleTitleChange}
-            required
-            className="w-100"
-          />
+        <FormGroup>
+          <Label htmlFor="title">Título:</Label>
+          <Input type="text" id="title" value={title} onChange={handleTitleChange} required />
         </FormGroup>
-        <FormGroup className="position-relative">
-          <Label className="d-block" htmlFor="subtitle">Subtítulo:</Label>
-          <Input
-            type="text"
-            id="subtitle"
-            value={subtitle}
-            onChange={handleSubtitleChange}
-            required
-            className="w-100"
-          />
+        <FormGroup>
+          <Label htmlFor="subtitle">Subtítulo:</Label>
+          <Input type="text" id="subtitle" value={subtitle} onChange={handleSubtitleChange} required />
         </FormGroup>
-        <FormGroup className="position-relative">
-          <Label className="checkbox-container d-block">
+        <FormGroup>
+          <Label className="checkbox-container">
             Remunerado:
-            <Input
-              className="custom-checkbox w-100"
-              type="checkbox"
-              checked={isPaid}
-              onChange={handleIsPaidChange}
-            />
+            <Input type="checkbox" checked={isPaid} onChange={handleIsPaidChange} />
             <span className="checkmark"></span>
           </Label>
         </FormGroup>
         {isPaid && (
-          <FormGroup className="position-relative">
-            <Label className="d-block" htmlFor="price">Preço:</Label>
-            <Input
-              type="number"
-              id="price"
-              value={price}
-              onChange={handlePriceChange}
-              required
-              className="w-100"
-            />
+          <FormGroup>
+            <Label htmlFor="price">Preço:</Label>
+            <Input type="number" id="price" value={price} onChange={handlePriceChange} required />
           </FormGroup>
         )}
-        <FormGroup className="position-relative">
-          <Label className="d-block" htmlFor="photos">Fotos do projeto:</Label>
-          <FileInput
-            type="file"
-            id="photos"
-            multiple
-            onChange={handlePhotosChange}
-            className="w-100"
-          />
+        <FormGroup>
+          <Label htmlFor="files">Fotos do projeto:</Label>
+          <FileInput type="file" id="files" name="files" multiple onChange={handleFileChange} />
         </FormGroup>
-        <FormGroup className="position-relative">
-          <Label className="d-block" htmlFor="companyContent">Informações da Empresa:</Label>
-          <TextArea
-            id="companyContent"
-            value={companyContent}
-            onChange={handlecompanyContentChange}
-            required
-            className="w-100"
-          />
+        <FormGroup>
+          <Label htmlFor="companyContent">Informações da Empresa:</Label>
+          <TextArea id="companyContent" value={companyContent} onChange={handleCompanyContentChange} required />
         </FormGroup>
-        <FormGroup className="position-relative">
-          <Label className="d-block" htmlFor="categories">Categorias:</Label>
-          <Input
-            type="text"
-            id="categories"
-            value={categories}
-            onChange={handleCategoriesChange}
-            required
-            className="w-100"
-          />
+        <FormGroup>
+          <Label htmlFor="categories">Categorias:</Label>
+          <Input type="text" id="categories" value={categories} onChange={handleCategoriesChange} required />
         </FormGroup>
-        <FormGroup className="position-relative">
-          <Label className="d-block" htmlFor="programmingLanguages">
-            Linguagens de Programação:
-          </Label>
-          <Input
-            type="text"
-            id="programmingLanguages"
-            value={programmingLanguages}
-            onChange={handleProgrammingLanguagesChange}
-            required
-            className="w-100"
-          />
+        <FormGroup>
+          <Label htmlFor="programmingLanguages">Linguagens de Programação:</Label>
+          <Input type="text" id="programmingLanguages" value={programmingLanguages} onChange={handleProgrammingLanguagesChange} required />
         </FormGroup>
-        <FormGroup className="position-relative">
-          <Label className="d-block" htmlFor="deadline">Prazo:</Label>
-          <Input
-            type="date"
-            id="deadline"
-            value={deadline}
-            onChange={handleDeadlineChange}
-            required
-            className="w-100"
-          />
+        <FormGroup>
+          <Label htmlFor="deadline">Prazo:</Label>
+          <Input type="date" id="deadline" value={deadline} onChange={handleDeadlineChange} required />
         </FormGroup>
-        <Button type="submit" className="d-block w-100">Criar Post</Button>
+        <Button type="submit" onClick={handleUpload} className="d-block w-100">{uploading ? "Enviando..." : "Enviar"}</Button>
+
+        {error && <div style={{ color: "red" }}>{error}</div>}
+        {successMessage && <div style={{ color: "green" }}>{successMessage}</div>}
       </Form>
     </CreatePostContainer>
   );

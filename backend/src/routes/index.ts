@@ -14,6 +14,7 @@ import CommetsController from "../api/controllers/Commets/Comments.controller";
 import AnswersController from "../api/controllers/Awnsers/Awnsers.controller";
 import UpdateUserController from "../api/controllers/User/UpdateUser.controller";
 import ReadUserBasicController from "../api/controllers/User/ReadUserBasic.controller";
+import CreatePostController from "../api/controllers/Files/files.controller"
 
 const routes = Router();
 
@@ -68,6 +69,12 @@ routes.post(
   "/upload/:id",
   verifyTokenMiddleware.verifyTokenWithIdAndTokenInHeaders,
   UserIconController.setUserIcon
+);
+
+routes.post(
+  "/upload-files/:id",
+ verifyTokenMiddleware.verifyTokenWithIdAndTokenInHeaders,
+  CreatePostController.createPost
 );
 
 routes.get(

@@ -18,3 +18,20 @@ const storagePerfilIcon = multer.diskStorage({
 });
 
 export const uploadPerfilIcon = multer({ storage: storagePerfilIcon });
+
+const storageFiles = multer.diskStorage({
+  destination: function (req, file, cb) {
+    const userId = req.headers.id as string;
+    const uploadPath = path.join("uploads", userId, "posts");
+
+    fs.mkdirSync(uploadPath, { recursive: true });
+
+    cb(null, uploadPath);
+  },
+  filename: function (req, file, cb) {
+    const extension = path.extname(file.originalname);
+    cb(null, `files${extension}`);
+  },
+});
+
+export const uploadFiles = multer({ storage: storageFiles });
