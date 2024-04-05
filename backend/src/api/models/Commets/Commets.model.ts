@@ -1,10 +1,9 @@
-
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../../../config/database/MySQL/MySQL";
 import User from "../User/User.model";
 import Post from "../Posts/Posts.model";
 
-// Modelo para a tabela de Comentários
+
 class Comment extends Model {
   public commentid!: number;
   public postid!: number;
@@ -45,7 +44,7 @@ Comment.init(
   },
   {
     tableName: "comments",
-    sequelize, // passando a instância do Sequelize
+    sequelize, 
   }
 );
 

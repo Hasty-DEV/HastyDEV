@@ -1,25 +1,11 @@
-import { DataTypes, Model, Optional } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../../../config/database/MySQL/MySQL";
-
-export interface UserAttributes {
-  userid: number;
-  username: string;
-  password: string;
-  email: string;
-  first_name: string;
-  last_name: string;
-  lockUntil?: Date | null;
-  loginAttempts?: number | null;
-  isVerified?: boolean;
-  role: "admin" | "user" | "business";
-}
-
-interface UserCreationAttributes extends Optional<UserAttributes, "userid"> {}
+import { UserAttributes } from "../../../types/User/User.type";
+import { UserCreationAttributes } from "../../../types/UserCreation/UserCreation.type";
 
 class User
   extends Model<UserAttributes, UserCreationAttributes>
-  implements UserAttributes
-{
+  implements UserAttributes {
   public userid!: number;
   public username!: string;
   public password!: string;

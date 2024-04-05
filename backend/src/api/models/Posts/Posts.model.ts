@@ -1,24 +1,8 @@
-import { DataTypes, Model, Optional } from "sequelize";
+import { DataTypes, Model} from "sequelize";
 import { sequelize } from "../../../config/database/MySQL/MySQL";
 import User from "../User/User.model";
-
-interface PostAttributes {
-  postid: number;
-  userid: number;
-  title: string;
-  subtitle: string;
-  isPaid: boolean;
-  price?: number;
-  photos: string; // Alterado para string simples
-  companyContent: string;
-  categories: string; // Alterado para string simples
-  programmingLanguages: string; // Alterado para string simples
-  deadline: Date;
-  createdAt?: Date;
-  updatedAt?: Date;
-}
-
-interface PostCreationAttributes extends Optional<PostAttributes, "postid"> {}
+import { PostAttributes } from "../../../types/Post/Post.type";
+import { PostCreationAttributes } from "../../../types/PostCreation/PostCreation.type";
 
 class Post extends Model<PostAttributes, PostCreationAttributes> implements PostAttributes {
   public postid!: number;
@@ -58,30 +42,30 @@ Post.init(
     isPaid: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: false, // Padrão para não remunerado
+      defaultValue: false, 
     },
     price: {
       type: DataTypes.FLOAT,
       allowNull: true,
     },
     photos: {
-      type: DataTypes.STRING, // Alterado para string simples
+      type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "", // Padrão para nenhum foto
+      defaultValue: "", 
     },
     companyContent: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     categories: {
-      type: DataTypes.STRING, // Alterado para string simples
+      type: DataTypes.STRING, 
       allowNull: false,
-      defaultValue: "", // Padrão para nenhuma categoria
+      defaultValue: "", 
     },
     programmingLanguages: {
-      type: DataTypes.STRING, // Alterado para string simples
+      type: DataTypes.STRING, 
       allowNull: false,
-      defaultValue: "", // Padrão para nenhuma linguagem de programação
+      defaultValue: "", 
     },
     deadline: {
       type: DataTypes.DATE,

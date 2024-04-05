@@ -1,13 +1,6 @@
 import { DataTypes, Model, Sequelize } from "sequelize";
 import { sequelize } from "../../../config/database/MySQL/MySQL";
-
-export interface ResetPassCodeAttributes {
-  resetCodeId?: number;
-  userId: number;
-  resetCode: string;
-  expiresAt: Date;
-  createdAt: Date;
-}
+import { ResetPassCodeAttributes } from "../../../types/ResetPass/ResetPass.type";
 
 class ResetPassCode
   extends Model<ResetPassCodeAttributes>
