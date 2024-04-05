@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
-import User, { UserAttributes } from "../../models/User/User.model";
+import User from "../../models/User/User.model";
 import LevelModel from "../../models/Level/Level.model";
 import logger from "../../../utils/Logger/Logger";
+import { UserAttributes } from "../../../types/User/User.type";
 
 interface UserAttributesWithLevel extends UserAttributes {
   level: LevelModel | null;

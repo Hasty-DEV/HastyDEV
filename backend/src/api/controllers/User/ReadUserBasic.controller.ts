@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import User, { UserAttributes } from "../../models/User/User.model";
+import User from "../../models/User/User.model";
 import logger from "../../../utils/Logger/Logger";
 
 interface UserAttributesSubset {
@@ -10,8 +10,6 @@ interface UserAttributesSubset {
 }
 
 class ReadUserBasic {
- 
-
   public async getUserBasicInfo(req: Request, res: Response): Promise<void> {
     const userId = req.params.id;
     try {
