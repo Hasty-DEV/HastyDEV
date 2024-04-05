@@ -5,10 +5,10 @@ import Answers from "../answers/Answers";
 import { FaComment } from "react-icons/fa";
 import { getUserIconByID } from "../../../data/services/getUserIconService";
 import userIconDefault from "../../assets/user/user_icon.png";
-import { PostType } from "../../../data/@types/Post/Post.type";
 import { CommentType } from "../../../data/@types/Comment/Comment.type";
 
-const Comments = ({ postid }: PostType) => {
+
+const Comments: React.FC<{ postId: string }> = ({ postId }) => {
   const [userId, setUserId] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [userName, setUserName] = useState<string | null>(null);
@@ -34,18 +34,18 @@ const Comments = ({ postid }: PostType) => {
     },
     [userId, token]
   );
-
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
         const storedUserId = localStorage.getItem("userId");
         const storedToken = localStorage.getItem("userToken");
 
-        if (storedUserId && storedToken && postid) {
+        if (storedUserId && storedToken && postId) {
           setUserId(storedUserId);
           setToken(storedToken);
 
-          const commentsForPost = await getCommentsForPost(postid.toString());
+          const commentsForPost = await getCommentsForPost(postId);
           setComments(commentsForPost);
 
           try {
@@ -75,7 +75,7 @@ const Comments = ({ postid }: PostType) => {
     };
 
     fetchData();
-  }, [postid, getCommentsForPost]);
+  }, [postId, getCommentsForPost]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewComment(event.target.value);
@@ -83,21 +83,21 @@ const Comments = ({ postid }: PostType) => {
 
   const handleCommentSubmit = async () => {
     try {
-      if (userId && token && postid) {
+      if (userId && token && postId) {
         const payload = {
           userid: userId,
           content: newComment,
           token: token,
           id: userId,
         };
-        await api.post(`/comments/${postid}`, payload, {
+        await api.post(`/comments/${postId}`, payload, {
           headers: {
             id: userId,
             Authorization: `Bearer ${token}`,
           },
         });
 
-        const updatedComments = await getCommentsForPost(postid.toString());
+        const updatedComments = await getCommentsForPost(postId);
         setComments(updatedComments);
 
         setNewComment("");
@@ -152,7 +152,7 @@ const Comments = ({ postid }: PostType) => {
             </div>
 
             {answerOpen.includes(comment.commentid.toString()) && (
-              <Answers commentid={comment.commentid} />
+              <Answers commentId={comment.commentid.toString()} />
             )}
           </div>
         ))}
@@ -161,7 +161,6 @@ const Comments = ({ postid }: PostType) => {
   );
 };
 
-// Função para formatar a data de criação
 const formatCreatedAt = (createdAt: string): string => {
   const date = new Date(createdAt);
   const options: Intl.DateTimeFormatOptions = {

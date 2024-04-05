@@ -4,9 +4,8 @@ import { api } from "../../../data/services/api";
 import { getUserIconByID } from "../../../data/services/getUserIconService";
 import userIconDefault from "../../assets/user/user_icon.png";
 import { Answer } from "../../../data/@types/Answer/Answer.type";
-import { CommentType } from "../../../data/@types/Comment/Comment.type";
 
-const Answers = ( { id }: Partial<CommentType> ) => {
+const Answers: React.FC<{ commentId: string }> = ({ commentId }) => {
   const [userId, setUserId] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [userName, setUserName] = useState<string | null>(null);
@@ -20,11 +19,11 @@ const Answers = ( { id }: Partial<CommentType> ) => {
         const storedUserId = localStorage.getItem("userId");
         const storedToken = localStorage.getItem("userToken");
 
-        if (storedUserId && storedToken && id) {
+        if (storedUserId && storedToken && commentId) {
           setUserId(storedUserId);
           setToken(storedToken);
 
-          const answersForPost = await getAnswersForPost(id);
+          const answersForPost = await getAnswersForPost(commentId);
           setAnswers(answersForPost);
 
           try {
@@ -54,7 +53,7 @@ const Answers = ( { id }: Partial<CommentType> ) => {
     };
 
     fetchData();
-  }, [id]);
+  }, [commentId]);
 
   const getAnswersForPost = async (commentId: string): Promise<Answer[]> => {
     try {
@@ -72,21 +71,21 @@ const Answers = ( { id }: Partial<CommentType> ) => {
 
   const handleAnswerSubmit = async () => {
     try {
-      if (userId && token && id) {
+      if (userId && token && commentId) {
         const payload = {
           userid: userId,
           content: newAnswer,
           token: token,
           id: userId,
         };
-        await api.post(`/answers/${id}`, payload, {
+        await api.post(`/answers/${commentId}`, payload, {
           headers: {
             id: userId,
             Authorization: `Bearer ${token}`,
           },
         });
 
-        const updatedAnswers = await getAnswersForPost(id);
+        const updatedAnswers = await getAnswersForPost(commentId);
         setAnswers(updatedAnswers);
 
         setNewAnswer("");
