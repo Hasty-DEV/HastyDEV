@@ -71,7 +71,7 @@ const CreatePost = () => {
     setUploading(true);
 
     try {
-      await confirmSubmission();
+ 
 
       
 
@@ -103,8 +103,8 @@ const CreatePost = () => {
       });
       return;
     }
-    const confirmed = await confirmSubmission();
-    if (confirmed) {
+ 
+ 
       setLoading(true);
       try {
         const userToken = localStorage.getItem("userToken");
@@ -137,7 +137,7 @@ const CreatePost = () => {
         console.error("Erro ao enviar o formulário:", error);
         setLoading(false);
       }
-    }
+ 
   };
 
   const confirmSubmission = async () => {
@@ -152,6 +152,34 @@ const CreatePost = () => {
     return result.isConfirmed;
   };
 
+
+  const handleBothActions = async (e: FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setSuccessMessage(null);
+    setUploading(true);
+  
+    try {
+      const confirmed = await confirmSubmission();
+  
+      if (confirmed) {
+        await handleUpload(e);
+        await handleFormSubmit(e);
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Seu post foi realizado com sucesso!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    } catch (error) {
+      setError("Erro ao enviar os arquivos ou o formulário. Por favor, tente novamente.");
+      console.error("Erro ao enviar os arquivos ou o formulário:", error);
+    } finally {
+      setUploading(false);
+    }
+  };
   const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
@@ -229,7 +257,7 @@ const CreatePost = () => {
           <Label htmlFor="deadline">Prazo:</Label>
           <Input type="date" id="deadline" value={deadline} onChange={handleDeadlineChange} required />
         </FormGroup>
-        <Button type="submit" onClick={handleUpload} className="d-block w-100">{uploading ? "Enviando..." : "Enviar"}</Button>
+        <Button type="submit" onClick={handleBothActions} className="d-block w-100">{uploading ? "Enviando..." : "Enviar"}</Button>
 
         {error && <div style={{ color: "red" }}>{error}</div>}
         {successMessage && <div style={{ color: "green" }}>{successMessage}</div>}
