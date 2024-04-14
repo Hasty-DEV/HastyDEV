@@ -3,6 +3,7 @@ export interface PostAttributes {
     userid: number;
     title: string;
     subtitle: string;
+    content: string;
     isPaid: boolean;
     price?: number;
     photos: string;
@@ -10,6 +11,7 @@ export interface PostAttributes {
     categories: string;
     programmingLanguages: string;
     deadline: Date;
+    likes: number;
     createdAt?: Date;
     updatedAt?: Date;
 }

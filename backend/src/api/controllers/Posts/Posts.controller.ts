@@ -3,6 +3,7 @@ import { getAllPostsService } from "../../services/Posts/GetAllPosts";
 import { PostService } from "../../services/Posts/Post.service";
 import Level from "../../services/Level/Level.service";
 import logger from "../../../utils/Logger/Logger";
+import Post from "../../models/Posts/Posts.model";
 
 class Posts extends Level {
   public async getAllPosts(req: Request, res: Response): Promise<void> {
@@ -30,6 +31,7 @@ class Posts extends Level {
    //   res.status(500).json({ error: "Erro Interno do Servidor" + error });
     }
   };
+ 
 }
 
 export default new Posts();

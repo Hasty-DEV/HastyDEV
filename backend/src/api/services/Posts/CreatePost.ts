@@ -8,6 +8,7 @@ export const createPost = async (req: Request) => {
       id,
       title,
       subtitle,
+      content,
       isPaid,
       price,
       photos,
@@ -15,12 +16,14 @@ export const createPost = async (req: Request) => {
       categories,
       programmingLanguages,
       deadline,
+      likes = 0
     } = req.body;
 
     await Post.create({
       userid: id,
       title,
       subtitle,
+      content,
       isPaid,
       price,
       photos,
@@ -28,6 +31,7 @@ export const createPost = async (req: Request) => {
       categories,
       programmingLanguages,
       deadline,
+      likes,
     });
 
     logger.info("post salvo no banco de dados");

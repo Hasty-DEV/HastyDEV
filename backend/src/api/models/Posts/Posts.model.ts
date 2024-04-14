@@ -1,4 +1,4 @@
-import { DataTypes, Model} from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../../../config/database/MySQL/MySQL";
 import User from "../User/User.model";
 import { PostAttributes } from "../../../types/Post/Post.type";
@@ -11,6 +11,7 @@ class Post extends Model<PostAttributes, PostCreationAttributes> implements Post
   public updatedAt!: Date;
   public title!: string;
   public subtitle!: string;
+  public content!: string;
   public isPaid!: boolean;
   public price?: number;
   public photos!: string;
@@ -18,6 +19,7 @@ class Post extends Model<PostAttributes, PostCreationAttributes> implements Post
   public categories!: string;
   public programmingLanguages!: string;
   public deadline!: Date;
+  public likes!: number;  
 }
 
 Post.init(
@@ -39,10 +41,14 @@ Post.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    content: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     isPaid: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: false, 
+      defaultValue: false,
     },
     price: {
       type: DataTypes.FLOAT,
@@ -51,25 +57,29 @@ Post.init(
     photos: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "", 
+      defaultValue: "",
     },
     companyContent: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     categories: {
-      type: DataTypes.STRING, 
+      type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "", 
+      defaultValue: "",
     },
     programmingLanguages: {
-      type: DataTypes.STRING, 
+      type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "", 
+      defaultValue: "",
     },
     deadline: {
       type: DataTypes.DATE,
       allowNull: false,
+    },
+    likes: {
+      type: DataTypes.INTEGER,  
+      defaultValue: 0,  
     },
     createdAt: {
       type: DataTypes.DATE,

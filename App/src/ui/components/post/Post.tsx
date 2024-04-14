@@ -1,7 +1,7 @@
-import { FaHeart, FaRegHeart, FaComment } from "react-icons/fa";
+import  { useState, useEffect } from "react";
+import { FaHeart, FaRegHeart, FaComment, FaSpinner } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Comments from "../comments/Comments";
-import { useCallback, useEffect, useState } from "react";
 import PostContainer, { BussinessDataContainer, CommentContainer, LikeContainer } from "../../styles/post/Post.styles";
 import { getUserData } from "../../../data/services/userService";
 import { UserDataTypes } from "../../../data/@types/UserData/UserData.type";
@@ -9,15 +9,97 @@ import userIconDefault from "../../assets/user/user_icon.png";
 import { getUserIconByID } from "../../../data/services/getUserIconService";
 import { PostType } from "../../../data/@types/Post/Post.type";
 import { Button } from "react-bootstrap";
+import { api } from "../../../data/services/api";
 
 const Post = ({ post }: { post: PostType }) => {
+  const [userId, setUserId] = useState<string>("");
+  const [userToken, setUserToken] = useState<string>("");
   const [, setUserData] = useState<UserDataTypes | null>(null);
   const [commentOpen, setCommentOpen] = useState(false);
   const [formattedUpdatedAt, setFormattedUpdatedAt] = useState<string>("");
   const [userIcon, setUserIcon] = useState<string | null>(null);
   const [expanded, setExpanded] = useState(false);
+  const [likes, setLikes] = useState(post.likes);
+  const [liked, setLiked] = useState(false);
+  const [loading, setLoading] = useState(false);  
 
-  const liked = false;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userId = localStorage.getItem("userId");
+        const userToken = localStorage.getItem("userToken");
+
+        api.defaults.headers.common["id"] = userId;
+        api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
+
+        setUserId(userId ?? "");
+        setUserToken(userToken ?? "");
+
+        const user = await getUserData();
+        setUserData(user);
+
+        const icon = await getUserIconByID(post.userid);
+        if (icon && icon.data) {
+          setUserIcon(URL.createObjectURL(new Blob([icon.data])));
+        }
+
+        const response = await api.post("/has-liked", {
+          postId: post.postid,
+          id: userId,
+          token: "Bearer " + userToken
+        });
+        setLiked(response.data.liked);
+      } catch (error) {
+        console.error("Erro ao obter dados do usuário:", error);
+      }
+    };
+
+    fetchData();
+  }, [post.userid]);
+
+  const likePost = async () => {
+    setLoading(true);  
+    try {
+      const response = await api.post(`/save-Likes`, {
+        postId: post.postid,
+        id: userId,
+        token: "Bearer " + userToken
+      });
+
+      if (!response) {
+        throw new Error('Erro ao salvar o like');
+      }
+
+      setLikes((prevLikes) => prevLikes + 1);
+      setLiked(true);
+    } catch (error) {
+      console.error('Erro ao salvar o like:', error);
+    } finally {
+      setLoading(false); 
+    }
+  };
+
+  const unlikePost = async () => {
+    setLoading(true);  
+    try {
+      const response = await api.post(`/remove-like`, {
+        postId: post.postid,
+        id: userId,
+        token: "Bearer " + userToken
+      });
+
+      if (!response) {
+        throw new Error('Erro ao remover o like');
+      }
+
+      setLikes((prevLikes) => prevLikes - 1);
+      setLiked(false);
+    } catch (error) {
+      console.error('Erro ao remover o like:', error);
+    } finally {
+      setLoading(false); 
+    }
+  };
 
   const formatUpdatedAt = (updatedAt: string) => {
     const date = new Date(updatedAt);
@@ -40,23 +122,6 @@ const Post = ({ post }: { post: PostType }) => {
     setFormattedUpdatedAt(formatUpdatedAt(post.updatedAt));
   }, [post.updatedAt]);
 
-  const fetchData = useCallback(async () => {
-    try {
-      const user = await getUserData();
-      setUserData(user);
-      const icon = await getUserIconByID(post.userid);
-      if (icon && icon.data) {
-        setUserIcon(URL.createObjectURL(new Blob([icon.data])));
-      }
-    } catch (error) {
-      console.error("Erro ao obter dados do usuário:", error);
-    }
-  }, [post.userid]);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-
   return (
     <PostContainer>
       <div className="d-flex align-items-start justify-content-between px-3 pt-4">
@@ -64,7 +129,7 @@ const Post = ({ post }: { post: PostType }) => {
           <h2 className="fw-bold text-capitalize">{post.title}</h2>
           <h5 className="fw-medium text-capitalize">{post.subtitle}</h5>
           <span className="text-capitalize">Publicado: {formattedUpdatedAt}</span>
-          <span>Quantidade de Interessados: 5</span>
+          <span className="text-capitalize">Prazo: {new Date(post.deadline).toLocaleDateString()}</span>
         </div>
         <div className="d-flex flex-column align-items-start justify-content-center">
           <Button className="text-capitalize rounded bg-success border-0">ir para projeto</Button>
@@ -75,8 +140,7 @@ const Post = ({ post }: { post: PostType }) => {
         {expanded ? (
           <>
             <p>{post.content}</p>
-            <img src={post.img} alt="" />
-            {/*como no catho, quero colocar o nivel game do contratante ou ao inves de colocar addos  do contratante, colocar as fotos e palavras chave... nao sei se precisa colcoar os dados... so da pessoa clicar no perfil ve quem é*/}
+            {post.img && <img src={post.img} alt="" />}
             <Button variant="Link" onClick={() => setExpanded(false)}>Ler menos</Button>
             <BussinessDataContainer className="d-flex flex-column justify-content-center align-items-start">
               <h4 >Dados do Contratante</h4>
@@ -89,6 +153,7 @@ const Post = ({ post }: { post: PostType }) => {
                 </Link>
                 <span >{`${post.author.first_name} ${post.author.last_name} `}</span>
               </div>
+              <p>{post.companyContent}</p>
             </BussinessDataContainer>
           </>
         ) : (
@@ -99,8 +164,12 @@ const Post = ({ post }: { post: PostType }) => {
         )}
         <div className="d-flex align-items-center justify-content-between w-50 pb-3">
           <LikeContainer className="w-50 d-flex align-items-center justify-content-start">
-            {liked ? <FaHeart /> : <FaRegHeart />}
-            <span>1 Likes</span>
+            {loading ? (
+               <FaSpinner className="loading-icon" />
+            ) : (
+               liked ? <FaHeart onClick={unlikePost}/> : <FaRegHeart onClick={likePost}/>
+            )}
+            <span >{likes} Likes</span>
           </LikeContainer>
           <CommentContainer
             className="w-50 d-flex align-items-center justify-content-start"

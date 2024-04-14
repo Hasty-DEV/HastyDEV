@@ -1,4 +1,4 @@
-import  { useState, useCallback, useEffect, ChangeEvent, FormEvent } from "react";
+import { useState, useCallback, useEffect, ChangeEvent, FormEvent } from "react";
 import { CreatePostContainer, Form, FormGroup, Label, Input, FileInput, TextArea, Button } from "../../ui/styles/CreatePost/CreatePost.styles";
 import Swal from "sweetalert2";
 import { api } from "../../data/services/api";
@@ -20,10 +20,13 @@ const CreatePost = () => {
   const [categories, setCategories] = useState<string>("");
   const [programmingLanguages, setProgrammingLanguages] = useState<string>("");
   const [deadline, setDeadline] = useState("");
+  const [content, setContent] = useState("");
   const [userId, setUserId] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [uploading, setUploading] = useState<boolean>(false);
+  const [userToken, setUserToken] = useState<string>("");
+
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
@@ -33,6 +36,7 @@ const CreatePost = () => {
     api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
 
     setUserId(userId ?? "");
+    setUserToken(userToken ?? "")
 
     return () => {
       delete api.defaults.headers.common["id"];
@@ -71,17 +75,11 @@ const CreatePost = () => {
     setUploading(true);
 
     try {
- 
-
-      
-
       const formData = new FormData();
       files.forEach((file) => {
         formData.append(`files`, file);
-    
       });
-     
-     
+
       const response = await api.post(`/upload-files/${userId}`, formData);
       setSuccessMessage("Arquivos enviados com sucesso.");
       console.log("Arquivos enviados com sucesso:", response.data);
@@ -103,41 +101,39 @@ const CreatePost = () => {
       });
       return;
     }
- 
- 
-      setLoading(true);
-      try {
-        const userToken = localStorage.getItem("userToken");
-        const response = await api.post("/posts", {
-          id: userId,
-          token: `Bearer ${userToken}`,
-          title,
-          subtitle,
-          isPaid,
-          price,
-          companyContent,
-          categories,
-          programmingLanguages,
-          deadline,
-        });
 
-        console.log("Resposta do servidor:", response.data);
-        setLoading(false);
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Suas alterações foram realizadas com sucesso",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
-      } catch (error) {
-        console.error("Erro ao enviar o formulário:", error);
-        setLoading(false);
-      }
- 
+    setLoading(true);
+    try {
+      const response = await api.post("/posts", {
+        id: userId,
+        token: "Bearer " + userToken,
+        title,
+        subtitle,
+        content,
+        isPaid,
+        price,
+        companyContent,
+        categories,
+        programmingLanguages,
+        deadline,
+      });
+
+      console.log("Resposta do servidor:", response.data);
+      setLoading(false);
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Suas alterações foram realizadas com sucesso",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    } catch (error) {
+      console.error("Erro ao enviar o formulário:", error);
+      setLoading(false);
+    }
   };
 
   const confirmSubmission = async () => {
@@ -152,16 +148,15 @@ const CreatePost = () => {
     return result.isConfirmed;
   };
 
-
   const handleBothActions = async (e: FormEvent) => {
     e.preventDefault();
     setError(null);
     setSuccessMessage(null);
     setUploading(true);
-  
+
     try {
       const confirmed = await confirmSubmission();
-  
+
       if (confirmed) {
         await handleUpload(e);
         await handleFormSubmit(e);
@@ -180,12 +175,17 @@ const CreatePost = () => {
       setUploading(false);
     }
   };
+
   const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
 
   const handleSubtitleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSubtitle(e.target.value);
+  };
+
+  const handleContentChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(e.target.value);
   };
 
   const handleIsPaidChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -212,6 +212,8 @@ const CreatePost = () => {
     setDeadline(e.target.value);
   };
 
+ 
+
   return (
     <CreatePostContainer className="d-flex justify-content-center align-items-center">
       {loading && <div>Carregando...</div>}
@@ -237,6 +239,10 @@ const CreatePost = () => {
             <Input type="number" id="price" value={price} onChange={handlePriceChange} required />
           </FormGroup>
         )}
+        <FormGroup>
+          <Label htmlFor="content">Conteúdo:</Label>
+          <TextArea id="content" value={content} onChange={handleContentChange} required />
+        </FormGroup>
         <FormGroup>
           <Label htmlFor="files">Fotos do projeto:</Label>
           <FileInput type="file" id="files" name="files" multiple onChange={handleFileChange} />

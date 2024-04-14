@@ -17,4 +17,5 @@ export interface PostType {
     categories: string;
     progammingLanguages: string;
     deadline: Date;
+    likes: number;
 }

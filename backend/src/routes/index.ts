@@ -15,6 +15,7 @@ import AnswersController from "../api/controllers/Awnsers/Awnsers.controller";
 import UpdateUserController from "../api/controllers/User/UpdateUser.controller";
 import ReadUserBasicController from "../api/controllers/User/ReadUserBasic.controller";
 import CreatePostController from "../api/controllers/Files/files.controller"
+import LikesController from "../api/controllers/Posts/Likes.controller";
 
 const routes = Router();
 
@@ -100,6 +101,24 @@ routes.post(
   verifyTokenMiddleware.verifyTokenWithBody,
   PostController.createPost
 );
+
+routes.post(
+"/save-Likes",
+verifyTokenMiddleware.verifyTokenWithBody,
+LikesController.saveLike
+)
+
+routes.post(
+  "/has-liked",
+  verifyTokenMiddleware.verifyTokenWithBody,
+  LikesController.hasLiked
+  )
+
+  routes.post(
+    "/remove-like",
+    verifyTokenMiddleware.verifyTokenWithBody,
+    LikesController.removeLike
+    )
 
 routes.get(
   "/comments/:postid",
