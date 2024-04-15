@@ -1,5 +1,5 @@
 import  { useState, useEffect } from "react";
-import { FaHeart, FaRegHeart, FaComment, FaSpinner } from "react-icons/fa";
+import { FaHeart, FaRegHeart, FaComment, FaDownload, FaSpinner } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Comments from "../comments/Comments";
 import PostContainer, { BussinessDataContainer, CommentContainer, LikeContainer } from "../../styles/post/Post.styles";
@@ -21,7 +21,8 @@ const Post = ({ post }: { post: PostType }) => {
   const [expanded, setExpanded] = useState(false);
   const [likes, setLikes] = useState(post.likes);
   const [liked, setLiked] = useState(false);
-  const [loading, setLoading] = useState(false);  
+  const [loading, setLoading] = useState(false);
+  const [files, setFiles] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,16 +50,19 @@ const Post = ({ post }: { post: PostType }) => {
           token: "Bearer " + userToken
         });
         setLiked(response.data.liked);
+
+        const filesResponse = await api.get(`/get-files/${post.userid}/${post.postid}`);
+        setFiles(filesResponse.data.files);
       } catch (error) {
         console.error("Erro ao obter dados do usuário:", error);
       }
     };
 
     fetchData();
-  }, [post.userid]);
+  }, [post.userid, post.userid, post.postid]);
 
   const likePost = async () => {
-    setLoading(true);  
+    setLoading(true);
     try {
       const response = await api.post(`/save-Likes`, {
         postId: post.postid,
@@ -75,12 +79,12 @@ const Post = ({ post }: { post: PostType }) => {
     } catch (error) {
       console.error('Erro ao salvar o like:', error);
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
   const unlikePost = async () => {
-    setLoading(true);  
+    setLoading(true);
     try {
       const response = await api.post(`/remove-like`, {
         postId: post.postid,
@@ -97,7 +101,7 @@ const Post = ({ post }: { post: PostType }) => {
     } catch (error) {
       console.error('Erro ao remover o like:', error);
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
@@ -122,6 +126,22 @@ const Post = ({ post }: { post: PostType }) => {
     setFormattedUpdatedAt(formatUpdatedAt(post.updatedAt));
   }, [post.updatedAt]);
 
+  const handleDownload = async (fileName: string) => {
+    try {
+      const response = await api.get(`/download/${post.userid}/${post.postid}/${fileName}`, {
+        responseType: "blob",
+      });
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", fileName);
+      document.body.appendChild(link);
+      link.click();
+    } catch (error) {
+      console.error("Erro ao fazer o download do arquivo:", error);
+    }
+  };
+
   return (
     <PostContainer>
       <div className="d-flex align-items-start justify-content-between px-3 pt-4">
@@ -140,7 +160,16 @@ const Post = ({ post }: { post: PostType }) => {
         {expanded ? (
           <>
             <p>{post.content}</p>
-            {post.img && <img src={post.img} alt="" />}
+            <ul>
+              {files.map((file, index) => (
+                <li key={index}>
+                  <button onClick={() => handleDownload(file)}>
+                    <FaDownload />
+                    {file}
+                  </button>
+                </li>
+              ))}
+            </ul>
             <Button variant="Link" onClick={() => setExpanded(false)}>Ler menos</Button>
             <BussinessDataContainer className="d-flex flex-column justify-content-center align-items-start">
               <h4 >Dados do Contratante</h4>
@@ -165,9 +194,9 @@ const Post = ({ post }: { post: PostType }) => {
         <div className="d-flex align-items-center justify-content-between w-50 pb-3">
           <LikeContainer className="w-50 d-flex align-items-center justify-content-start">
             {loading ? (
-               <FaSpinner className="loading-icon" />
+              <FaSpinner className="loading-icon" />
             ) : (
-               liked ? <FaHeart onClick={unlikePost}/> : <FaRegHeart onClick={likePost}/>
+              liked ? <FaHeart onClick={unlikePost}/> : <FaRegHeart onClick={likePost}/>
             )}
             <span >{likes} Likes</span>
           </LikeContainer>

@@ -25,6 +25,7 @@ class Posts extends Level {
       const userid: number = req.body.id;
       await this.incrementExpService(userid, 10);
       await PostService(req, res, next);  
+      
       logger.info("Post Criado com Sucesso!");
     } catch (error) {
       logger.error("Erro ao criar post: " + error);

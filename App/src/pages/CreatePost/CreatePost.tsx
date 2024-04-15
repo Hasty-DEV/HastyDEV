@@ -26,6 +26,7 @@ const CreatePost = () => {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [uploading, setUploading] = useState<boolean>(false);
   const [userToken, setUserToken] = useState<string>("");
+  const [, setPostId] = useState<string>("");
 
 
   useEffect(() => {
@@ -68,30 +69,7 @@ const CreatePost = () => {
     }
   };
 
-  const handleUpload = async (e: FormEvent) => {
-    e.preventDefault();
-    setError(null);
-    setSuccessMessage(null);
-    setUploading(true);
-
-    try {
-      const formData = new FormData();
-      files.forEach((file) => {
-        formData.append(`files`, file);
-      });
-
-      const response = await api.post(`/upload-files/${userId}`, formData);
-      setSuccessMessage("Arquivos enviados com sucesso.");
-      console.log("Arquivos enviados com sucesso:", response.data);
-    } catch (error) {
-      setError("Erro ao enviar os arquivos. Por favor, tente novamente.");
-      console.error("Erro ao enviar os arquivos:", error);
-    } finally {
-      setUploading(false);
-    }
-  };
-
-  const handleFormSubmit = async (event: FormEvent) => {
+  const handleFormSubmit = async (event: FormEvent): Promise<string | null> => {
     event.preventDefault();
     if (userData?.role === "user") {
       Swal.fire({
@@ -99,7 +77,7 @@ const CreatePost = () => {
         title: "Acesso Negado",
         text: "Usuários comuns não têm permissão para criar posts.",
       });
-      return;
+      return null;
     }
 
     setLoading(true);
@@ -118,21 +96,35 @@ const CreatePost = () => {
         deadline,
       });
 
-      console.log("Resposta do servidor:", response.data);
+      const   postId = response.data.postId;
+
+      setPostId(postId);
       setLoading(false);
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Suas alterações foram realizadas com sucesso",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
+      console.log(postId)
+      return postId;
     } catch (error) {
       console.error("Erro ao enviar o formulário:", error);
       setLoading(false);
+      return null;
+    }
+  };
+
+  const handleUpload = async (postId: string) => {
+    try {
+      setUploading(true);
+      const formData = new FormData();
+      files.forEach((file) => {
+        formData.append(`files`, file);
+      });
+
+      const response = await api.post(`/upload-files/${userId}/${postId}`, formData);
+      setSuccessMessage("Arquivos enviados com sucesso.");
+      console.log("Arquivos enviados com sucesso:", response.data);
+    } catch (error) {
+      setError("Erro ao enviar os arquivos. Por favor, tente novamente.");
+      console.error("Erro ao enviar os arquivos:", error);
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -158,15 +150,21 @@ const CreatePost = () => {
       const confirmed = await confirmSubmission();
 
       if (confirmed) {
-        await handleUpload(e);
-        await handleFormSubmit(e);
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Seu post foi realizado com sucesso!",
-          showConfirmButton: false,
-          timer: 1500,
-        });
+        const postId = await handleFormSubmit(e);
+
+        if (postId) {
+          await handleUpload(postId);
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Seu post foi realizado com sucesso!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       }
     } catch (error) {
       setError("Erro ao enviar os arquivos ou o formulário. Por favor, tente novamente.");
@@ -211,8 +209,6 @@ const CreatePost = () => {
   const handleDeadlineChange = (e: ChangeEvent<HTMLInputElement>) => {
     setDeadline(e.target.value);
   };
-
- 
 
   return (
     <CreatePostContainer className="d-flex justify-content-center align-items-center">

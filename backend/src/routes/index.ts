@@ -14,7 +14,7 @@ import CommetsController from "../api/controllers/Commets/Comments.controller";
 import AnswersController from "../api/controllers/Awnsers/Awnsers.controller";
 import UpdateUserController from "../api/controllers/User/UpdateUser.controller";
 import ReadUserBasicController from "../api/controllers/User/ReadUserBasic.controller";
-import CreatePostController from "../api/controllers/Files/files.controller"
+import FilesPostController from "../api/controllers/Files/files.controller"
 import LikesController from "../api/controllers/Posts/Likes.controller";
 
 const routes = Router();
@@ -73,10 +73,18 @@ routes.post(
 );
 
 routes.post(
-  "/upload-files/:id",
+  "/upload-files/:id/:postId",
  verifyTokenMiddleware.verifyTokenWithIdAndTokenInHeaders,
-  CreatePostController.createPost
+  FilesPostController.createPost
 );
+
+routes.get(
+  "/get-files/:userid/:postid",
+  verifyTokenMiddleware.verifyTokenWithOnlyToken,
+  FilesPostController.getFiles
+);
+
+routes.get("/download/:userId/:postId/:fileName",  verifyTokenMiddleware.verifyTokenWithOnlyToken, FilesPostController.downloadFile);
 
 routes.get(
   "/userIcon/:id",
