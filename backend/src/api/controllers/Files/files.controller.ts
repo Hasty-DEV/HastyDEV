@@ -8,23 +8,23 @@ import logger from "../../../utils/Logger/Logger";
 class FilesPostController {
   public async createPost(req: Request, res: Response): Promise<void> {
     try {
-       const formData = req.body;
+      const formData = req.body;
       const userId = req.params.id;
-      const postId = req.params.postId
-
-         const uploadDir = path.join(
+      const postId = req.params.postId;
+  
+      const uploadDir = path.join(
         __dirname,
         `../../../../uploads/${userId}/posts/${postId}`
       );
-
+  
+    
       if (!fs.existsSync(uploadDir)) {
         fs.mkdirSync(uploadDir, { recursive: true });
       }
-
-       uploadFiles.array("files")(req, res, async (err: any) => {
+  
+      uploadFiles.array("files")(req, res, async (err: any) => {
         if (err instanceof multer.MulterError) {
-        
-          logger.error("Erro do Multer: "  + err, res, );
+          logger.error("Erro do Multer: " + err, res);
           res.status(400).send("Erro ao fazer o upload do arquivo");
         } else if (err) {
           logger.error("Erro: " + err, res);
@@ -32,9 +32,9 @@ class FilesPostController {
         } else {
           const files = req.files as Express.Multer.File[];
           if (files && files.length > 0) {
-             for (const file of files) {
+            for (const file of files) {
               const filePath = path.join(uploadDir, file.originalname);
-               fs.renameSync(file.path, filePath);
+              fs.renameSync(file.path, filePath);
             }
             logger.info("Arquivos enviados com sucesso", res);
             res.status(200).send("Arquivos enviados com sucesso");
@@ -51,7 +51,7 @@ class FilesPostController {
         .send("Ocorreu um erro interno ao processar o envio de arquivos");
     }
   }
-
+  
   public async getFiles(req: Request, res: Response): Promise<void> {
     try {
       const userId = req.params.userid;

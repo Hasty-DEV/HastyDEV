@@ -85,8 +85,21 @@ const Perfil: React.FC = () => {
 
       try {
         const response = await api.post(`/upload/${userId}`, formData);
+
+
         setSuccessMessage("Arquivo enviado com sucesso.");
         console.log("Arquivo enviado com sucesso:", response.data);
+
+        swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Suas alterações foram realizadas com sucesso",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000); 
       } catch (error) {
         setError("Erro ao enviar o arquivo. Por favor, tente novamente.");
         console.error("Erro ao enviar o arquivo:", error);
@@ -128,16 +141,7 @@ const Perfil: React.FC = () => {
         console.log("Alterações salvas com sucesso!");
 
         fetchData();
-        swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Suas alterações foram realizadas com sucesso",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000); 
+     
       } catch (error) {
         console.error("Erro ao salvar alterações:", error);
       }
