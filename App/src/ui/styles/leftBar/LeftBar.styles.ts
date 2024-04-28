@@ -13,6 +13,7 @@ const LeftBarContainer = styled.aside`
   @media (max-width: 768px) {
     display: none;
   }
+ 
 
   &::-webkit-scrollbar {
     display: none;

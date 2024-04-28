@@ -35,7 +35,7 @@ const LeftBar = () => {
       setLoading(false);
     }
   }, []);
-
+ 
   useEffect(() => {
     fetchData();
   }, [fetchData]);
@@ -108,6 +108,7 @@ const LeftBar = () => {
       </LeftBarContainer>
     </>
   );
+ 
 };
 
 export default LeftBar;

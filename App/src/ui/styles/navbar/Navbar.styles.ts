@@ -1,4 +1,5 @@
 import styled from "styled-components";
+ 
 
 export const HeaderContainer = styled.header`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -26,6 +27,26 @@ export const HeaderContainer = styled.header`
       background-color: ${(props) => props.theme.colors.secondary}; // Altere para a cor desejada no hover
     }
   }
+
+
+
+`;
+ 
+
+ 
+
+export const OffCanvasContainer = styled.div`
+
+ 
+   
+  display:none;
+
+  @media (max-width: 767px) {
+  
+    display: block;
+ 
+}
+
 `;
 
 export const SwitchContainer = styled.label`

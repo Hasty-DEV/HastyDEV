@@ -36,6 +36,7 @@ const UserLevelInfo = () => {
     <>
       {loading && <Loader />}
       <UserLevelInfoContainer>
+ 
         <div className="item">
           <span>Seu Nível</span>
           <div className="user">
@@ -53,6 +54,7 @@ const UserLevelInfo = () => {
           </div>
 
         </div>
+      
       </UserLevelInfoContainer>
     </>
   );

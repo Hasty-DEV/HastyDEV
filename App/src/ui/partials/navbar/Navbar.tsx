@@ -1,7 +1,8 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import   { useCallback, useContext, useEffect, useState } from "react";
 import {
   HeaderContainer,
   SwitchContainer,
+  OffCanvasContainer
 } from "../../styles/navbar/Navbar.styles";
 import { getUserData } from "../../../data/services/userService";
 import { getUserIcon } from "../../../data/services/getUserIconService";
@@ -13,7 +14,7 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { Link } from "react-router-dom";
- 
+
 import { MdPerson, MdOutlineSecurity, MdHelpOutline } from "react-icons/md";
 import { IoIosSettings, IoMdPerson } from "react-icons/io";
 import { useAuth } from "../../../data/context/AuthContext";
@@ -21,17 +22,19 @@ import { RiLogoutBoxLine } from "react-icons/ri";
 import { IoBag } from "react-icons/io5";
 import { ThemeContext } from "styled-components";
 import { DefaultTheme } from "styled-components";
- 
+
 import LogoLight from "../../assets/LogoLight.svg";
 import LogoDark from "../../assets/LogoDark.svg";
 import { HeaderProps } from "../../../data/@types/Navbar/Navbar.type";
 
-
+import UserLevelInfo from "../../components/UserLevelInfo/UserLevelInfo";
+ 
 const Header = ({ toggleTheme }: HeaderProps) => {
   const { logout } = useAuth();
   const [userData, setUserData] = useState<UserDataTypes | null>(null);
   const [, setUserIcon] = useState<string | null>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+  
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -62,11 +65,9 @@ const Header = ({ toggleTheme }: HeaderProps) => {
     }
   };
 
-
-const theme: DefaultTheme = useContext(ThemeContext);
+  const theme: DefaultTheme = useContext(ThemeContext);
 
   const ImgDarkLight = theme.title === "light" ? LogoLight : LogoDark;
-
   return (
     <HeaderContainer className="mb-3 fixed-top">
       <Navbar expand="md">
@@ -79,6 +80,7 @@ const theme: DefaultTheme = useContext(ThemeContext);
               width={150}
               height={50}
             />
+
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="offcanvasNavbar-expand" />
           <Navbar.Offcanvas
@@ -92,6 +94,7 @@ const theme: DefaultTheme = useContext(ThemeContext);
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
+                         
               <div className="justify-content-end flex-grow-1 pe-3"></div>
               <Form className="d-flex px-4">
                 <Form.Control
@@ -170,6 +173,15 @@ const theme: DefaultTheme = useContext(ThemeContext);
                   </NavDropdown.Item>
                 </NavDropdown>
               </div>
+
+
+              <OffCanvasContainer>
+
+ 
+<UserLevelInfo></UserLevelInfo>
+ 
+
+              </OffCanvasContainer>
               <SwitchContainer>
                 <label className="switch">
                   <span className="sun">
