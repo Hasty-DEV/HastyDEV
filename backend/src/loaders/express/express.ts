@@ -3,7 +3,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import { createServer } from "http";
 import routes from "../../routes";
-import { EnvVariables } from "../env";
+import { EnvVariables } from "../../config/env";
 const PORT = Number(EnvVariables.Port);
 
 export const app = express();

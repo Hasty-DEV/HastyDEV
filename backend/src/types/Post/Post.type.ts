@@ -1,4 +1,4 @@
-export interface PostAttributes {
+export type PostAttributes = {
     postid: number;
     userid: number;
     title: string;

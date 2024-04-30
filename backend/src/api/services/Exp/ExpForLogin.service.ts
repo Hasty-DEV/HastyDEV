@@ -1,7 +1,6 @@
 import LoginHistoryModel from "../../models/LoginHistory/LoginHistory.model";
 import Level from "../Level/Level.service";
 import logger from "../../../utils/Logger/Logger";
-import { Response } from "express";
 
 class ExpForLogin extends Level {
   public async VerifyAndIncrement(userid: number) {

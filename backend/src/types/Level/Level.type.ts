@@ -1,4 +1,4 @@
-export interface LevelAttributes {
+export type LevelAttributes = {
     userid: number;
     exp: number;
     level: number;

@@ -1,4 +1,4 @@
-export interface UserAttributes {
+export type UserAttributes = {
     userid: number;
     username: string;
     password: string;

@@ -2,13 +2,15 @@ import MongoDB from "./MongoDB/MongoDB";
 import MySQL from "./MySQL/MySQL";
 
 class Databases {
-  constructor() {}
+  constructor() { }
 
   public initDB(): void {
-    const mysqlDB = new MySQL();
-    mysqlDB.connect();
-    const mongoDB = new MongoDB();
-    mongoDB.connect();
+    this.connectAll();
+  }
+
+  private connectAll(): void {
+    MySQL.connect();
+    MongoDB.connect();
   }
 }
 

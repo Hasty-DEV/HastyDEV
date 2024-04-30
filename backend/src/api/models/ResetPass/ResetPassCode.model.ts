@@ -1,5 +1,5 @@
 import { DataTypes, Model, Sequelize } from "sequelize";
-import { sequelize } from "../../../config/database/MySQL/MySQL";
+import { sequelize } from "../../../loaders/sequelize/sequelize";
 import { ResetPassCodeAttributes } from "../../../types/ResetPass/ResetPass.type";
 
 class ResetPassCode

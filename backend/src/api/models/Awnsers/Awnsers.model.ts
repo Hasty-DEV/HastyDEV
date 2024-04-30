@@ -1,5 +1,5 @@
 import { DataTypes, Model } from "sequelize";
-import { sequelize } from "../../../config/database/MySQL/MySQL";
+import { sequelize } from "../../../loaders/sequelize/sequelize";
 import User from "../User/User.model";
 import Comment from "../Commets/Commets.model";
 import { AnswerAttributes } from "../../../types/Awnsers/Awnsers.type";

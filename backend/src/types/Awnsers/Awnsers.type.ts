@@ -1,4 +1,4 @@
-export interface AnswerAttributes {
+export type AnswerAttributes = {
     replyid?: number;
     userid: number;
     commentid: number;

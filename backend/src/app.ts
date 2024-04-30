@@ -1,11 +1,13 @@
-import { setupExpress } from "./config/express/express";
+import server from "./server";
 import { SocketSetup } from "./config/Socket/Socket";
-import db from "./config/database/db";
+import Jobs from "./loaders/jobs/jobs.loader";
 
-function main() {
-  setupExpress();
-  SocketSetup();
-  db.initDB();
+class App {
+    public static Main() {
+        server.StartServer();
+        SocketSetup();
+        Jobs.Loader()
+    }
 }
 
-main();
+App.Main();

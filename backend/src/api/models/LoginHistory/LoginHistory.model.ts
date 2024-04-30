@@ -1,14 +1,11 @@
 import { DataTypes, Model } from "sequelize";
-import { sequelize } from "../../../config/database/MySQL/MySQL";
+import { sequelize } from "../../../loaders/sequelize/sequelize";
 import User from "../User/User.model";
 import { LoginHistoryAttributes } from "../../../types/LoginHistory/LoginHistory.type";
 
-
-
 class LoginHistoryModel
   extends Model<LoginHistoryAttributes>
-  implements LoginHistoryAttributes
-{
+  implements LoginHistoryAttributes {
   public id!: number;
   public login_date!: Date;
   public userid!: number;
