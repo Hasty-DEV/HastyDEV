@@ -1,15 +1,11 @@
-import { memo } from "react";
-import GlobalStyle from "./Ui/styles/global";
+import GlobalStyle from "./ui/styles/global";
+import Pages from "./pages/index";
+import usePersisteState from "./data/hooks/PersisteState/usePersisteState";
+import light from "./ui/themes/light";
 import { ThemeProvider } from "styled-components";
-import Pages from "./Pages/index";
-import { AuthProvider } from "./Data/Contexts/Auth/AuthProvider";
-import usePersisteState from "./Data/Hooks/PersisteState/usePersisteState";
-import light from "./Ui/styles/themes/light";
+import { AuthProvider } from "./data/contexts/Auth/AuthProvider";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
-
-const MemoizedAnalytics = memo(Analytics);
-const MemoizedSpeedInsights = memo(SpeedInsights);
 
 const App = () => {
   const [theme, setTheme] = usePersisteState("themes", light);
@@ -22,8 +18,8 @@ const App = () => {
         </AuthProvider>
         <GlobalStyle />
       </ThemeProvider>
-      <MemoizedAnalytics />
-      <MemoizedSpeedInsights />
+      <Analytics />
+      <SpeedInsights />
     </>
   );
 };

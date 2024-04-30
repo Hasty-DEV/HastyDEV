@@ -25,6 +25,6 @@
   "include": ["src", "src/**/*.ts", "src/**/*.tsx", "src/**/*.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }],
   "files": [
-    "src/Ui/styles/styled.d.ts"
+    "src/ui/styles/styled.d.ts"
   ],
 }
