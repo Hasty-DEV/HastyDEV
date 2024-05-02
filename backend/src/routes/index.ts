@@ -16,6 +16,7 @@ import UpdateUserController from "../api/controllers/User/UpdateUser.controller"
 import ReadUserBasicController from "../api/controllers/User/ReadUserBasic.controller";
 import FilesPostController from "../api/controllers/Files/files.controller"
 import LikesController from "../api/controllers/Posts/Likes.controller";
+import ItemService from "../api/services/Search/Search";
 
 const routes = Router();
 
@@ -150,5 +151,17 @@ routes.post(
   verifyTokenMiddleware.verifyTokenWithOnlyToken,
   AnswersController.createAnswerForComment
 );
+
+routes.get("/items/search", async (req, res) => {
+  const searchTerm: string = req.query.searchTerm as string;
+
+  try {
+    const items = await ItemService.searchItems(searchTerm);
+    res.json(items);
+  } catch (error) {
+    res.status(500).json({ error: "Erro ao pesquisar itens: " + error });
+  }
+});
+
 
 export default routes;
