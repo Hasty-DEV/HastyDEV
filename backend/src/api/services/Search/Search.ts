@@ -1,5 +1,5 @@
 import { QueryTypes } from "sequelize";
-import { sequelize } from "../../../config/database/MySQL/MySQL";
+import { sequelize } from "../../../loaders/sequelize/sequelize";
 
 class ItemService {
   static async searchItems(searchTerm: string) {

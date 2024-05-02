@@ -1,5 +1,5 @@
 import { DataTypes, Model } from "sequelize";
-import { sequelize } from "../../../config/database/MySQL/MySQL";
+import { sequelize } from "../../../loaders/sequelize/sequelize";
 // import User from "../User/User.model";
 import { PostAttributes } from "../../../types/Post/Post.type";
 import { PostCreationAttributes } from "../../../types/PostCreation/PostCreation.type";
