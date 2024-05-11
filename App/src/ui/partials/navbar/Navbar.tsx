@@ -29,7 +29,7 @@ import { HeaderProps } from "../../../data/@types/Navbar/Navbar.type";
 
 import UserLevelInfo from "../../components/UserLevelInfo/UserLevelInfo";
 import { api } from "../../../data/services/api";
-import { PostType } from "../../../data/@types/Post/Post.type";
+
  
 const Header = ({ toggleTheme }: HeaderProps) => {
   const { logout } = useAuth();
@@ -69,7 +69,7 @@ const Header = ({ toggleTheme }: HeaderProps) => {
 
 
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const [items, setItems] = useState<PostType[]>([]);
+  
  
 
   const handleSearch = async () => {

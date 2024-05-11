@@ -1,19 +1,25 @@
-import { QueryTypes } from "sequelize";
+import { Op } from "sequelize";
 import { sequelize } from "../../../loaders/sequelize/sequelize";
+import Search from "../../models/Search/Search.model";
 
 class ItemService {
   static async searchItems(searchTerm: string) {
-    const query = `
-      SELECT * FROM posts
-      WHERE programmingLanguages LIKE ?
-    `;
-
     const searchValue = `%${searchTerm}%`;
 
     try {
-      const results = await sequelize.query(query, {
-        replacements: [searchValue],
-        type: QueryTypes.SELECT,
+      const results = await Search.findAll({
+        where: {
+          [Op.or]: [
+            { title: { [Op.like]: searchValue } },
+            { subtitle: { [Op.like]: searchValue } },
+            { content: { [Op.like]: searchValue } },
+            { isPaid: true },
+            { photos: { [Op.like]: searchValue } },
+            { companyContent: { [Op.like]: searchValue } },
+            { categories: { [Op.like]: searchValue } },
+            { programmingLanguages: { [Op.like]: searchValue } },
+          ],
+        },
       });
 
       return results;
