@@ -1,14 +1,13 @@
 import styled from "styled-components";
 
 export const RightBarContainer = styled.aside`
-  flex: 3;
+  flex: 2.4;
   position: sticky;
   top: 80px;
   height: calc(100vh - 70px);
   overflow: scroll;
   background-color: ${(props) => props.theme.colors.primary};
   color: ${(props) => props.theme.colors.text};
-
   box-shadow: 0px 10px 10px 5px rgba(0, 0, 0, 0.1);
 
   @media (max-width: 768px), (max-width: 1024px) {
@@ -29,7 +28,7 @@ export const TodoListContainer = styled.div`
 
   h1 {
     margin: 0;
-    font-size: 20px;
+    font-size: 25px;
     
   }
 
@@ -68,11 +67,11 @@ export const ContainerFilter = styled.div`
 
 export const DivInput = styled.div`
   padding: 0px 0px 5px 0px;
-  font-size: 13px;
+  font-size: 18px;
   font-weight: 400;
 `;
 export const Input = styled.input`
-  margin: 0px 12px 10px 0px;
+  margin: 0px 10px 10px 0px;
   transform: scale(1.5);
  
 `;
