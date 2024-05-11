@@ -1,8 +1,9 @@
 import { useState } from "react";
-import RightBarContainer, { Categorias, Line, TodoListContainer } from "../../styles/rightBar/RightBar.styles";
+
 import UserLevelInfo from "../UserLevelInfo/UserLevelInfo";
 import { SlArrowDown, SlArrowRight } from "react-icons/sl";
 import { FilterType } from "../../../data/@types/Filter/Filter.type";
+import { Categorias, ContainerFilter, DivInput, Input, Line, RightBarContainer, TodoListContainer } from "../../styles/rightBar/RightBar.styles";
 
 const filtersConfig: FilterType[] = [
   { name: "Linguagens", defaultVisible: false, hasRemuneration: false, categories: ["JavaScript", "Python", "Java"] },
@@ -27,27 +28,31 @@ const RightBar = () => {
           {filtersConfig.map((filter, filterIndex) => (
             <TodoListContainer key={filterIndex}>
               <div className="row align-items-center">
-                <div className="col">
-                  <h1>
-                    <button onClick={() => toggleFilterVisibility(filterIndex)}>{filter.name}</button>
+                <ContainerFilter className="col d-flex justify-content-between align-items-center " onClick={() => toggleFilterVisibility(filterIndex)}>
+                  <h1 className="m-0">
+                    <button className="w-100">
+                      {filter.name}
+                    </button>
                   </h1>
-                </div>
+                  <div className="col-3 text-right">
+                    {filterVisibility[filterIndex] && <SlArrowDown />}
+                    {!filterVisibility[filterIndex] && <SlArrowRight />}
+                  </div>
+                </ContainerFilter>
+
                 {filterVisibility[filterIndex] && (
                   <Categorias>
                     {filter.categories.map((category, categoryIndex) => (
-                      <div>
+                      <DivInput>
                         <label key={categoryIndex}>
-                          <input type="checkbox" className="checkbox-style" />
+                          <Input type="checkbox"  />
                           {category}
                         </label>
-                      </div>
+
+                      </DivInput>
                     ))}
                   </Categorias>
                 )}
-                <div className="col-3 text-right align-self-center">
-                  {filterVisibility[filterIndex] && <SlArrowDown />}
-                  {!filterVisibility[filterIndex] && <SlArrowRight />}
-                </div>
               </div>
               <Line />
             </TodoListContainer>
