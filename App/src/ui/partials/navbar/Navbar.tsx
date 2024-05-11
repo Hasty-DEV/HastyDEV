@@ -28,6 +28,8 @@ import LogoDark from "../../assets/LogoDark.svg";
 import { HeaderProps } from "../../../data/@types/Navbar/Navbar.type";
 
 import UserLevelInfo from "../../components/UserLevelInfo/UserLevelInfo";
+import { api } from "../../../data/services/api";
+import { PostType } from "../../../data/@types/Post/Post.type";
  
 const Header = ({ toggleTheme }: HeaderProps) => {
   const { logout } = useAuth();
@@ -64,6 +66,23 @@ const Header = ({ toggleTheme }: HeaderProps) => {
       console.log(error);
     }
   };
+
+
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [items, setItems] = useState<PostType[]>([]);
+ 
+
+  const handleSearch = async () => {
+    try {
+      const response = await api.get(`/items/search?searchTerm=${searchTerm}`);
+      console.log(response.data)
+      return response.data
+    } catch (error) {
+      console.error("Erro ao pegar dados de Posts:", error);
+      throw error;
+    }
+  };
+
 
   const theme: DefaultTheme = useContext(ThemeContext);
 
@@ -102,9 +121,12 @@ const Header = ({ toggleTheme }: HeaderProps) => {
                   placeholder="Pesquisar..."
                   className="me-2"
                   aria-label="Search"
+                  value={searchTerm}
+                   onChange={(e) => setSearchTerm(e.target.value)}
                   
                 />
-                <Button className="search-button">Pesquisar</Button>
+                <Button onClick={handleSearch} className="search-button">Pesquisar</Button>
+                
               </Form>
               <div className="d-flex justify-content-center align-items-center">
               <MdPerson
