@@ -1,4 +1,4 @@
-import  { useState, ChangeEvent, FormEvent, useEffect, useCallback } from "react";
+import { useState, ChangeEvent, FormEvent, useEffect, useCallback } from "react";
 import { api } from "../../data/services/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
@@ -20,6 +20,12 @@ const Perfil: React.FC = () => {
   const [username, setUsername] = useState<string>("");
   const [editMode, setEditMode] = useState<boolean>(false);
   const [userId, setUserId] = useState<string>("");
+  const [socialEditMode, setSocialEditMode] = useState<boolean>(false); 
+  const [instagram, setInstagram] = useState<string>("");
+  const [facebook, setFacebook] = useState<string>("");
+  const [linkedin, setLinkedin] = useState<string>("");
+  const [github, setGithub] = useState<string>("");
+  const [whatsapp, setWhatsapp] = useState<string>("");
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
@@ -77,7 +83,6 @@ const Perfil: React.FC = () => {
     setUploading(true);
 
     if (file) {
-  
       await handleSaveChanges();
 
       const formData = new FormData();
@@ -85,7 +90,6 @@ const Perfil: React.FC = () => {
 
       try {
         const response = await api.post(`/upload/${userId}`, formData);
-
 
         setSuccessMessage("Arquivo enviado com sucesso.");
         console.log("Arquivo enviado com sucesso:", response.data);
@@ -99,16 +103,17 @@ const Perfil: React.FC = () => {
         });
         setTimeout(() => {
           window.location.reload();
-        }, 2000); 
+        }, 2000);
       } catch (error) {
-        setError("Erro ao enviar o arquivo. Por favor, tente novamente.");
+        setError(
+          "Erro ao enviar o arquivo. Por favor, tente novamente."
+        );
         console.error("Erro ao enviar o arquivo:", error);
       } finally {
         setUploading(false);
-        
       }
     } else {
-       await handleSaveChanges();
+      await handleSaveChanges();
       setUploading(false);
     }
   };
@@ -120,14 +125,14 @@ const Perfil: React.FC = () => {
     }
 
     const confirmation = await swal.fire({
-      title: 'Tem certeza que deseja salvar as alterações?',
-      text: 'Isso alterará suas informações de perfil.',
-      icon: 'warning',
+      title: "Tem certeza que deseja salvar as alterações?",
+      text: "Isso alterará suas informações de perfil.",
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonText: 'Sim, salvar alterações',
-      cancelButtonText: 'Cancelar',
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      confirmButtonText: "Sim, salvar alterações",
+      cancelButtonText: "Cancelar",
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
     });
 
     if (confirmation.isConfirmed) {
@@ -137,11 +142,14 @@ const Perfil: React.FC = () => {
           first_name: name,
           last_name: surname,
           username,
+          instagram,
+          facebook,
+          linkedin,
+          github,
+          whatsapp,
         });
         console.log("Alterações salvas com sucesso!");
-
         fetchData();
-     
       } catch (error) {
         console.error("Erro ao salvar alterações:", error);
       }
@@ -149,8 +157,40 @@ const Perfil: React.FC = () => {
   };
 
   const handleCancelEdit = () => {
-    fetchData(); // Revertendo as alterações feitas
+    fetchData();
     setEditMode(false);
+  };
+
+  const toggleSocialEditMode = () => {
+    setSocialEditMode((prevMode) => !prevMode);
+  };
+
+   const renderEditField = (
+    label: string,
+    value: string,
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  ) => {
+    return (
+      <div className="form-group">
+        <label htmlFor={label}>{label}</label>
+        <input
+          className="input"
+          type="text"
+          value={value}
+          onChange={onChange}
+          disabled={!editMode}
+        />
+        {!editMode && (
+          <button
+            type="button"
+            onClick={() => setEditMode(true)}
+            className="edit-button d-inline-flex align-items-center justify-content-center position-relative"
+          >
+            <FontAwesomeIcon icon={faEdit} className="editValues" />
+          </button>
+        )}
+      </div>
+    );
   };
 
   return (
@@ -178,66 +218,34 @@ const Perfil: React.FC = () => {
             />
           </label>
 
-          <div className="form-group">
-            <label htmlFor="Nome">Nome</label>
-            <input
-              className="input"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              disabled={!editMode}
-            />
-            {!editMode && (
-              <button
-                type="button"
-                onClick={() => setEditMode(true)}
-                className="edit-button d-inline-flex align-items-center justify-content-center position-relative"
-              >
-                <FontAwesomeIcon icon={faEdit} className="editValues" />
-              </button>
-            )}
-          </div>
 
-          <div className="form-group">
-            <label htmlFor="Sobrenome">Sobrenome</label>
-            <input
-              className="input"
-              type="text"
-              value={surname}
-              onChange={(e) => setSurname(e.target.value)}
-              disabled={!editMode}
-            />
-            {!editMode && (
-              <button
-                type="button"
-                onClick={() => setEditMode(true)}
-                className="edit-button d-inline-flex align-items-center justify-content-center position-relative"
-              >
-                <FontAwesomeIcon icon={faEdit} className="editValues" />
-              </button>
-            )}
-          </div>
+ 
+          {renderEditField("Nome", name, (e) => setName(e.target.value))}
+          {renderEditField("Sobrenome", surname, (e) => setSurname(e.target.value))}
+          {renderEditField("Username", username, (e) => setUsername(e.target.value))}
 
-          <div className="form-group">
-            <label htmlFor="Username">Username</label>
-            <input
-              className="input"
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              disabled={!editMode}
-            />
-            {!editMode && (
-              <button
-                type="button"
-                onClick={() => setEditMode(true)}
-                className="edit-button d-inline-flex align-items-center justify-content-center  "
-              >
-                <FontAwesomeIcon icon={faEdit} className="editValues" />
-              </button>
-            )}
-          </div>
+ 
+          {socialEditMode && (
+            <>
+              {renderEditField("Instagram", instagram, (e) => setInstagram(e.target.value))}
+              {renderEditField("Facebook", facebook, (e) => setFacebook(e.target.value))}
+              {renderEditField("LinkedIn", linkedin, (e) => setLinkedin(e.target.value))}
+              {renderEditField("GitHub", github, (e) => setGithub(e.target.value))}
+              {renderEditField("WhatsApp", whatsapp, (e) => setWhatsapp(e.target.value))}
+            </>
+          )}
+ 
 
+ 
+          <button
+            type="button"
+            onClick={toggleSocialEditMode}
+            className="toggleSocialEditButton"
+          >
+            {socialEditMode ? "Fechar Edição de Redes Sociais" : "Editar Redes Sociais"}
+          </button>
+
+ 
           {editMode && (
             <button
                type="button"

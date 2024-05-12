@@ -139,6 +139,20 @@ const PerfilContainer = styled.div`
   width: 30%
 }
 
+.toggleSocialEditButton{
+
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color:${(props) => props.theme.colors.secondary};
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 30%
+
+
+}
   
 `;
 

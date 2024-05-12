@@ -42,7 +42,7 @@ function ProfilePage() {
   useEffect(() => {
     fetchData();
   }, [fetchData]);
-
+ 
   return (
     <div className="container">
       {userData ? (

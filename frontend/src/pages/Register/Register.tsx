@@ -8,7 +8,7 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import Loader from "../../ui/components/Loader/Loader";
 import * as R from "../../ui/styles/Register/Register.styles";
 import { Container, Row, Col } from "react-bootstrap";
-import RegisterImg from "../../Ui/assets/images/RegisterImg.png";
+import RegisterImg from "../../ui/assets/images/RegisterImg.png";
 import { FormFetch } from "../../data/services/axios/config";
 import { FormValues } from "../../data/@types/FormValues/FormValues.type";
 import { validationsRegister } from "../../data/services/Validation/ValidationRegister.service";
