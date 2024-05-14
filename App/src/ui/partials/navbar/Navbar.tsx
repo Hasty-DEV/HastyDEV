@@ -15,11 +15,11 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { Link } from "react-router-dom";
 
-import { MdPerson, MdOutlineSecurity, MdHelpOutline } from "react-icons/md";
-import { IoIosSettings, IoMdPerson } from "react-icons/io";
+import { MdPerson, MdOutlineSecurity} from "react-icons/md";
+import {  IoMdPerson } from "react-icons/io";
+import { ImProfile } from "react-icons/im";
 import { useAuth } from "../../../data/context/AuthContext";
 import { RiLogoutBoxLine } from "react-icons/ri";
-import { IoBag } from "react-icons/io5";
 import { ThemeContext } from "styled-components";
 import { DefaultTheme } from "styled-components";
 
@@ -29,6 +29,7 @@ import { HeaderProps } from "../../../data/@types/Navbar/Navbar.type";
 
 import UserLevelInfo from "../../components/UserLevelInfo/UserLevelInfo";
 import { api } from "../../../data/services/api";
+import { AiOutlinePlusCircle } from "react-icons/ai";
 
  
 const Header = ({ toggleTheme }: HeaderProps) => {
@@ -37,6 +38,13 @@ const Header = ({ toggleTheme }: HeaderProps) => {
   const [, setUserIcon] = useState<string | null>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   
+  const getUserIdFromLocalStorage = () => {
+   
+    const userId = localStorage.getItem('userId');
+  
+ 
+    return userId;
+  };
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -83,6 +91,7 @@ const Header = ({ toggleTheme }: HeaderProps) => {
     }
   };
 
+  const userId = getUserIdFromLocalStorage();
 
   const theme: DefaultTheme = useContext(ThemeContext);
 
@@ -146,11 +155,11 @@ const Header = ({ toggleTheme }: HeaderProps) => {
                   <NavDropdown.Divider />
                   <NavDropdown.Item
                     as={Link}
-                    to="/projects"
+                    to="/createpost"
                     className="d-flex align-items-center justify-content-start"
                   >
-                    <IoBag className="mx-1" />
-                    Meus Projetos
+                    <AiOutlinePlusCircle className="mx-1" />
+                    Criar Post
                   </NavDropdown.Item>
                   <NavDropdown.Item
                     as={Link}
@@ -170,20 +179,13 @@ const Header = ({ toggleTheme }: HeaderProps) => {
                   </NavDropdown.Item>
                   <NavDropdown.Item
                     as={Link}
-                    to="/help"
+                    to={`/profile/${userId}`}
                     className="d-flex align-items-center justify-content-start"
                   >
-                    <MdHelpOutline className="mx-1" />
-                    Ajuda e Suporte
+                    <ImProfile className="mx-1" />
+                  Ver Meu Perfil
                   </NavDropdown.Item>
-                  <NavDropdown.Item
-                    as={Link}
-                    to="/settings"
-                    className="d-flex align-items-center justify-content-start"
-                  >
-                    <IoIosSettings className="mx-1" />
-                    Configurações
-                  </NavDropdown.Item>
+                  
                   <NavDropdown.Divider />
                   <NavDropdown.Item
                     as={Button}
