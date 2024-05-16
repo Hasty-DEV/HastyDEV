@@ -3,6 +3,7 @@ import { CreatePostContainer, Form, FormGroup, Label, Input, FileInput, TextArea
 import Swal from "sweetalert2";
 import { api } from "../../data/services/api";
 import { getUserData } from "../../data/services/userService";
+import Loader from "../../ui/components/Loader/Loader";
 
 interface UserDataTypes {
   role: string;
@@ -212,7 +213,7 @@ const CreatePost = () => {
 
   return (
     <CreatePostContainer className="d-flex justify-content-center align-items-center">
-      {loading && <div>Carregando...</div>}
+      {loading && <Loader />}
       <Form onSubmit={handleFormSubmit}>
         <FormGroup>
           <Label htmlFor="title">Título:</Label>

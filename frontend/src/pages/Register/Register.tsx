@@ -12,9 +12,9 @@ import RegisterImg from "../../ui/assets/images/RegisterImg.png";
 import { FormFetch } from "../../data/services/axios/config";
 import { FormValues } from "../../data/@types/FormValues/FormValues.type";
 import { validationsRegister } from "../../data/services/Validation/ValidationRegister.service";
-import { RegisterProps } from "../../data/@types/Register/Register.type";
+import { AllowEmailVerificationProps} from "../../data/@types/AllowEmailVerification/AllowEmailVerification.type";
 
-const Register = ({ setAllowEmailVerification }: RegisterProps) => {
+const Register = ({ setAllowEmailVerification }: AllowEmailVerificationProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const [registrationInProgress, setRegistrationInProgress] = useState(false);
   const [registrationSuccess, setRegistrationSuccess] = useState(false);

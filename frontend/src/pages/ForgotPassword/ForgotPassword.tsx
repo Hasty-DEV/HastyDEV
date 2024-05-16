@@ -9,12 +9,14 @@ import { useNavigate } from "react-router-dom";
 import { ForgotPasswordValues } from "../../data/@types/ForgotPassword/ForgotPassword.type";
 import { validationSendPassCode } from "../../data/services/Validation/ValidationSendPassCode.service";
 import { validationNewPassword } from "../../data/services/Validation/ValidationNewPassword.service";
+ 
 
 const ForgotPassword = () => {
   const [loading, setLoading] = useState(false);
   const [sendPass, setSendPass] = useState(true);
   const [confirmCode, setConfirmCode] = useState(false);
   const navigate = useNavigate();
+
 
   const handleSendPassCode = async ({ email }: ForgotPasswordValues) => {
     try {
@@ -93,6 +95,7 @@ const ForgotPassword = () => {
                 email: "",
                 resetCode: "",
                 newPassword: "",
+                confirmNewPassword: "",
               }}
               onSubmit={handleNewPass}
               validationSchema={validationNewPassword}
@@ -114,19 +117,27 @@ const ForgotPassword = () => {
                     <span>{errors.resetCode}</span>
                   )}
                   <Field
-                    type="text"
+                    type="password"
                     placeholder="Nova Senha"
                     name="newPassword"
                   />
                   {errors.newPassword && touched.newPassword && (
                     <span>{errors.newPassword}</span>
                   )}
+                  <Field
+                    type="password"
+                    placeholder="Confirme a Nova Senha"
+                    name="confirmNewPassword"
+                  />
+                  {errors.confirmNewPassword && touched.confirmNewPassword && (
+                    <span>{errors.confirmNewPassword}</span>
+                  )}
 
                   <div className="button">
                     <ButtonPrimaryLongNoLink
                       className="mt-3"
                       type="submit"
-                      buttonText="Entre em Contato"
+                      buttonText="Alterar Senha"
                       disabled={isSubmitting}
                     />
                   </div>

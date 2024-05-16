@@ -6,7 +6,7 @@ import LoginHistoryModel from '../../api/models/LoginHistory/LoginHistory.model'
 import User from '../../api/models/User/User.model';
 import { Op } from 'sequelize';
 
-console.log("To rodando adjkajdksa");
+
 
 const mail = EnvVariables.mail;
 

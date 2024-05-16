@@ -1,6 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
 import * as A from "../../ui/styles/About/About.styles";
-import AboutImg from "../../Ui/assets/images/About/AboutImg1.png";
+import AboutImg from "../../ui/assets/images/About/AboutImg1.png";
 import WorldMapLight from "../../Ui/assets/images/About/WorldMapLight.svg";
 import {
   HeadingTitle,

@@ -16,6 +16,7 @@ const Login = () => {
   const { signin } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showVerifyAccountLink, setShowVerifyAccountLink] = useState(false);
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
@@ -36,6 +37,7 @@ const Login = () => {
       }
     } catch (err: any) {
       toast.error(err.response.data.error);
+      setShowVerifyAccountLink(true);  
     } finally {
       setIsLoading(false);
     }
@@ -115,6 +117,11 @@ const Login = () => {
                       <div className="forgot-password text-center">
                         <Link to="/ForgotPassword">Esqueceu a senha?</Link>
                       </div>
+                      {showVerifyAccountLink && (  
+                        <div className="forgot-password text-center">
+                          <Link to="/CheckEmailNotVerified">Verificar Conta</Link>
+                        </div>
+                      )}
                     </>
                   )}
                 </Formik>

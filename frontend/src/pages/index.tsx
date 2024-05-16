@@ -13,6 +13,7 @@ import Hero from "./Hero/Hero";
 import Loader from "../ui/components/Loader/Loader";
 import ForgotPassword from "./ForgotPassword/ForgotPassword";
 import { PagesProps } from "../data/@types/Page/Page.type";
+import CheckEmailNotVerified from "./CheckEmailNotVerified/CheckEmailNotVerified";
 const About = lazy(() => import("./About/About"));
 const Register = lazy(() => import("./Register/Register"));
 const EmailVerification = lazy(
@@ -57,6 +58,8 @@ const Pages = ({ theme, setTheme }: PagesProps) => {
               <Route path="/emailVerification" element={<Navigate to="/" />} />
             )}
             <Route path="/ForgotPassword" element={<ForgotPassword />} />
+            <Route path="/CheckEmailNotVerified" element={<CheckEmailNotVerified 
+             setAllowEmailVerification={setAllowEmailVerification} />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </main>
