@@ -8,7 +8,7 @@ import {
   ButtonSecondary,
   ButtonTertiary,
 } from "../../components/Buttons/Buttons";
-import { ButtonsHeader, HeaderContainer } from "./Header.styles";
+import { ButtonsHeader, HeaderContainer } from "../../styles/Header/Header.styles";
 import { ThemeContext } from "styled-components";
 import { useContext, useEffect, useRef } from "react";
 import { HeaderProps } from "../../../data/@types/Header/Header.type";
