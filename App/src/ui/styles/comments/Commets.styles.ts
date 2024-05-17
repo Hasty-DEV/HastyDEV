@@ -1,10 +1,19 @@
 import styled from 'styled-components';
 
 const CommentsContainer = styled.div`
+  margin-top: 20px;
+
   .comments {
+    .comment {
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+
     img {
-      width: 40px;
-      height: 40px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       object-fit: cover;
     }
@@ -19,6 +28,7 @@ const CommentsContainer = styled.div`
         border: 1px solid ${({ theme }) => theme.border};
         background-color: transparent;
         color: ${({ theme }) => theme.textColor};
+        max-width: 500px;
       }
 
       button {
@@ -31,30 +41,37 @@ const CommentsContainer = styled.div`
       }
     }
 
-    .comment {
-      margin: 30px 0px;
-      gap: 20px;
+    .info {
+      flex: 5;
+      gap: 3px;
+      align-items: flex-start;
 
-      .info {
-        flex: 5;
-        gap: 3px;
-        align-items: flex-start;
+      span {
+        font-weight: 500;
+      }
 
-        span {
-          font-weight: 500;
-        }
-
-        p {
-          color: ${({ theme }) => theme.textColorSoft};
-        }
+      p {
+        color: ${({ theme }) => theme.textColorSoft};
       }
 
       .date {
-        flex: 1;
-        align-self: center;
         color: gray;
-        font-size: 12px;
+        font-size: 0.8rem;
+        margin-top: 5px;
       }
+
+      .read-more {
+        cursor: pointer;
+        color: ${({ theme }) => theme.primary};
+      }
+    }
+
+    .item {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: ${({ theme }) => theme.textColorSoft};
     }
   }
 `;

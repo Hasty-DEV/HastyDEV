@@ -118,29 +118,27 @@ const Comments: React.FC<{ postId: string }> = ({ postId }) => {
   return (
     <CommentsContainer>
       <div className="comments">
-        <div className="write d-flex align-items-center justify-content-between ">
+        <div className="write d-flex align-items-center justify-content-between">
           <img src={userIcon || userIconDefault} alt="" />
           <input
             type="text"
             placeholder="Escreva um comentário"
             value={newComment}
             onChange={handleInputChange}
+            maxLength={200}
           />
           <button onClick={handleCommentSubmit}>Enviar</button>
         </div>
 
         {comments.map((comment) => (
-          <div
-            key={comment.id}
-            className="comment d-flex justify-content-between "
-          >
-            <img src={userIcon || userIconDefault} alt="" />
-            <div className="info d-flex flex-column">
-              <span>{userName}</span>
-              <p>{comment.content}</p>
+         <div key={comment.id} className="comment ">
+         <div className="info d-flex flex-column">
+           <img src={userIcon || userIconDefault} alt="" /> {/* Movido aqui */}
+           <span>{userName}</span>
+              <p>{comment.content.length > 200 ? `${comment.content.slice(0, 200)}...` : comment.content}</p>
+              {comment.content.length > 200 && <span className="read-more">Ler mais</span>}
+              <span className="date">{formatCreatedAt(comment.createdAt)}</span>
             </div>
-            <span className="date">{formatCreatedAt(comment.createdAt)}</span>
-
             <div
               className="item"
               onClick={() => toggleComments(comment.commentid.toString())}
@@ -160,19 +158,14 @@ const Comments: React.FC<{ postId: string }> = ({ postId }) => {
     </CommentsContainer>
   );
 };
-
-const formatCreatedAt = (createdAt: string): string => {
-  const date = new Date(createdAt);
+const formatCreatedAt = (updatedAt: string) => {
+  const date = new Date(updatedAt);
   const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
-    month: "long",
-    day: "numeric",
     hour: "numeric",
     minute: "numeric",
-    second: "numeric",
-    localeMatcher: "best fit",
-    weekday: "long",
-    era: undefined,
+    day: "numeric",
+    month: "numeric",
     timeZone: "America/Sao_Paulo",
   };
   return date.toLocaleDateString("pt-BR", options);

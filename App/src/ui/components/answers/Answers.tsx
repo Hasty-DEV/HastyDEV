@@ -98,26 +98,29 @@ const Answers: React.FC<{ commentId: string }> = ({ commentId }) => {
   return (
     <AnswersContainer>
       <div className="answers">
-        <div className="write d-flex align-items-center ">
-          <input
-            type="text"
-            placeholder="Escreva uma resposta"
-            value={newAnswer}
-            onChange={handleInputChange}
-          />
-          <button onClick={handleAnswerSubmit}>Enviar</button>
-        </div>
+        
 
         {answers.map((reply) => (
           <div key={reply.id} className="answer d-flex">
             <img src={userIcon || userIconDefault} alt="" />
             <div className="info">
               <span>{userName}</span>
-              <p>{reply.content}</p>
+              <p>{reply.content.length > 200 ? `${reply.content.slice(0, 200)}...` : reply.content}</p>
+              {reply.content.length > 200 && <span className="read-more">Ler mais</span>}
+              <span className="date">{formatCreatedAt(reply.createdAt)}</span>
             </div>
-            <span className="date">{formatCreatedAt(reply.createdAt)}</span>
           </div>
         ))}
+        <div className="write d-flex align-items-center">
+          <input
+            type="text"
+            placeholder="Escreva uma resposta"
+            value={newAnswer}
+            onChange={handleInputChange}
+            maxLength={200}
+          />
+          <button onClick={handleAnswerSubmit}>Enviar</button>
+        </div>
       </div>
     </AnswersContainer>
   );

@@ -1,4 +1,4 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FaHeart, FaRegHeart, FaComment, FaDownload, FaSpinner } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Comments from "../comments/Comments";
@@ -208,7 +208,11 @@ const Post = ({ post }: { post: PostType }) => {
             <span>2 Comentários</span>
           </CommentContainer>
         </div>
-        {commentOpen && <Comments postId={post.postid.toString()} />}
+        {commentOpen && (
+          <div className="comments-container">
+            <Comments postId={post.postid.toString()} />
+          </div>
+        )}
       </div>
     </PostContainer>
   );
