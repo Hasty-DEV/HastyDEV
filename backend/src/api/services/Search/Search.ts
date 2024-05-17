@@ -1,5 +1,4 @@
 import { Op } from "sequelize";
-import { sequelize } from "../../../loaders/sequelize/sequelize";
 import Search from "../../models/Search/Search.model";
 
 class ItemService {

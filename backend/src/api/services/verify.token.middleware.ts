@@ -45,7 +45,7 @@ class TokenVerifier {
       const currentDate = new Date();
       const tokenAgeInDays = Math.floor(
         (currentDate.getTime() - tokenCreationDate.getTime()) /
-          (1000 * 60 * 60 * 24)
+        (1000 * 60 * 60 * 24)
       );
 
       if (tokenAgeInDays > 7) {
@@ -101,7 +101,7 @@ class TokenVerifier {
       const currentDate = new Date();
       const tokenAgeInDays = Math.floor(
         (currentDate.getTime() - tokenCreationDate.getTime()) /
-          (1000 * 60 * 60 * 24)
+        (1000 * 60 * 60 * 24)
       );
 
       if (tokenAgeInDays > 7) {
@@ -192,7 +192,7 @@ class TokenVerifier {
       const currentDate = new Date();
       const tokenAgeInDays = Math.floor(
         (currentDate.getTime() - tokenCreationDate.getTime()) /
-          (1000 * 60 * 60 * 24)
+        (1000 * 60 * 60 * 24)
       );
 
       if (tokenAgeInDays > 7) {

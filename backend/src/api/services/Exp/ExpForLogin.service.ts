@@ -23,7 +23,7 @@ class ExpForLogin extends Level {
     } catch (error) {
       logger.error(
         "Erro ao verificar e incrementar a experiência do usuário durante o login: " +
-          error
+        error
       );
     }
   }
