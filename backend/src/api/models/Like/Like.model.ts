@@ -29,13 +29,11 @@ Like.init(
     sequelize: sequelize,
     modelName: "Like",
     tableName: "likes",
-    timestamps: true, 
+    timestamps: true,
   }
 );
 
-
 Like.belongsTo(User, { foreignKey: "userId", as: "user" });
 Like.belongsTo(Posts, { foreignKey: "postId", as: "post" });
-
 
 export default Like;

@@ -8,6 +8,9 @@ export const HeaderContainer = styled.header`
 
 export const ButtonsHeader = styled.div`
   @media (max-width: 991px) {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
     hr {
       display: block;
     }

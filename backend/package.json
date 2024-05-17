@@ -26,7 +26,7 @@
     "nodemailer": "^6.9.9",
     "pino": "^8.18.0",
     "sequelize": "^6.36.0",
-    "sharp": "^0.33.3",
+    "sharp": "^0.33.4",
     "socket.io": "^4.7.4",
     "supertest": "^6.3.4",
     "ts-node": "^10.9.2",

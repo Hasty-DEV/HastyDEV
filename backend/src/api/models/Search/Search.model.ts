@@ -1,6 +1,5 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../../../loaders/sequelize/sequelize";
-// import User from "../User/User.model";
 import { PostAttributes } from "../../../types/Post/Post.type";
 import { PostCreationAttributes } from "../../../types/PostCreation/PostCreation.type";
 
@@ -19,7 +18,7 @@ class Search extends Model<PostAttributes, PostCreationAttributes> implements Po
   public categories!: string;
   public programmingLanguages!: string;
   public deadline!: Date;
-  public likes!: number;  
+  public likes!: number;
 }
 
 Search.init(
@@ -78,8 +77,8 @@ Search.init(
       allowNull: false,
     },
     likes: {
-      type: DataTypes.INTEGER,  
-      defaultValue: 0,  
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
     },
     createdAt: {
       type: DataTypes.DATE,

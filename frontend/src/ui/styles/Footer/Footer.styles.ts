@@ -74,9 +74,6 @@ export const SocialContainer = styled.a`
   height: 30px;
   border-radius: 50%;
   background-color: ${(props) => props.theme.colors.text};
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
   transition-duration: 0.3s;
 `;

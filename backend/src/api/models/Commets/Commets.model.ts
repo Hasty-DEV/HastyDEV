@@ -3,7 +3,6 @@ import { sequelize } from "../../../loaders/sequelize/sequelize";
 import User from "../User/User.model";
 import Post from "../Posts/Posts.model";
 
-
 class Comment extends Model {
   public commentid!: number;
   public postid!: number;
@@ -52,65 +51,3 @@ Comment.belongsTo(User, { foreignKey: 'userid', as: 'author', onDelete: 'CASCADE
 Comment.belongsTo(Post, { foreignKey: 'postid', as: 'post' });
 
 export default Comment;
-
-
-
-
-
-// class Animal {
- 
-//   nome: string;
-//   som: string;
-
-  
-//   constructor(nome: string, som: string) {
-//     this.nome = nome;
-//     this.som = som;
-//   }
-
-
-//   fazerSom(): void {
-//     console.log(`${this.nome} faz um som: ${this.som}`);
-//   }
-// }
-
-// // Subclasse 1
-// class Cachorro extends Animal {
- 
-//   constructor(nome: string) {
-//     super(nome, 'Au Au!');
-//   }
-
-  
-//   abanarRabo(): void {
-//     console.log(`${this.nome} está abanando o rabo.`);
-//   }
-// }
-
-// // Subclasse 2
-// class Gato extends Animal {
-  
-//   constructor(nome: string) {
-//     super(nome, 'Miau!');
-//   }
-
-
-//   ronronar(): void {
-//     console.log(`${this.nome} está miando.`);
-//   }
-// }
-
-// // Exemplo de uso
-// const meuCachorro = new Cachorro('Dog');
-// const meuGato = new Gato('Gatinho');
-
-// meuCachorro.fazerSom();  
-// meuCachorro.abanarRabo();  
-
-// meuGato.fazerSom();  
-// meuGato.ronronar(); 
-
-
-
-
-

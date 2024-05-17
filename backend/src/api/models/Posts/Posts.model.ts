@@ -19,7 +19,7 @@ class Post extends Model<PostAttributes, PostCreationAttributes> implements Post
   public categories!: string;
   public programmingLanguages!: string;
   public deadline!: Date;
-  public likes!: number;  
+  public likes!: number;
 }
 
 Post.init(
@@ -78,8 +78,8 @@ Post.init(
       allowNull: false,
     },
     likes: {
-      type: DataTypes.INTEGER,  
-      defaultValue: 0,  
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
     },
     createdAt: {
       type: DataTypes.DATE,

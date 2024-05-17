@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { FooterContainer, SocialContainer, SocialMediaContainer } from "./Footer.styles";
+import { FooterContainer, SocialContainer, SocialMediaContainer } from "../../styles/Footer/Footer.styles";
 import LogoDark from "../../assets/LogoDark.svg";
 import LogoLight from "../../assets/LogoLight.svg";
 import { Row, Col, Container } from "react-bootstrap";
@@ -30,28 +30,28 @@ const Footer = () => {
                 <div className="d-flex">
                   <SocialContainer
                     href="#"
-                    className="containerOne"
+                    className="containerOne d-flex justify-content-center align-items-center"
                     title="HastyDEV Instagram"
                   >
                     <FaInstagram />
                   </SocialContainer>
                   <SocialContainer
                     href="#"
-                    className="containerTwo"
+                    className="containerTwo d-flex justify-content-center align-items-center"
                     title="HastyDEV Twitter"
                   >
                     <FaTwitter />
                   </SocialContainer>
                   <SocialContainer
                     href="#"
-                    className="containerThree"
+                    className="containerThree d-flex justify-content-center align-items-center"
                     title="HastyDEV Linkedin"
                   >
                     <FaLinkedin />
                   </SocialContainer>
                   <SocialContainer
                     href="#"
-                    className="containerFour"
+                    className="containerFour d-flex justify-content-center align-items-center"
                     title="HastyDEV Whatsapp"
                   >
                     <FaWhatsapp />

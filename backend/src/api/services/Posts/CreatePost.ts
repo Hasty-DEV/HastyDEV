@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 import Post from "../../models/Posts/Posts.model";
 import logger from "../../../utils/Logger/Logger";
 
@@ -38,7 +38,7 @@ export const createPost = async (req: Request, res: Response) => {
 
     const postId = newPost.postid;
 
-    res.status(201).json({ postId });  
+    res.status(201).json({ postId });
   } catch (error) {
     logger.error("Erro ao criar post:", error);
     res.status(500).json({ error: "Erro Interno do Servidor" });

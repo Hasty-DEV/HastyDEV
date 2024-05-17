@@ -6,21 +6,19 @@ import LoginHistoryModel from '../../api/models/LoginHistory/LoginHistory.model'
 import User from '../../api/models/User/User.model';
 import { Op } from 'sequelize';
 
-
-
 const mail = EnvVariables.mail;
 
 export const sendInactiveUserEmails = async () => {
     try {
         const thirtyDaysAgo = new Date();
         thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-        
+
         const inactiveUsers = await sequelize.query(`
             SELECT DISTINCT userid
             FROM LoginHistory
             WHERE login_date < '${thirtyDaysAgo.toISOString()}'
         `);
-        
+
         for (const row of inactiveUsers[0] as any[]) {
             const userId = row.userid;
             const lastLogin = await LoginHistoryModel.findOne({
@@ -32,10 +30,10 @@ export const sendInactiveUserEmails = async () => {
                 },
                 order: [['login_date', 'DESC']]
             });
-            
+
             if (!lastLogin) {
                 const user = await User.findByPk(userId);
-                
+
                 if (user && user.email) {
                     const emailContent = `Olá ${user.first_name} ${user.last_name},\n\nVocê não fez login na nossa plataforma nos últimos 30 dias. Estamos sentindo sua falta! Faça login em nosso site para aproveitar os últimos recursos e atualizações.\n\nAtenciosamente,\nSua Equipe`;
 

@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Request, Response, Router } from "express";
 import LoginController from "../api/controllers/User/Login.controller";
 import ReadUserController from "../api/controllers/User/ReadUser.controller";
 import RegisterController from "../api/controllers/User/Register.controller";
@@ -16,11 +16,11 @@ import UpdateUserController from "../api/controllers/User/UpdateUser.controller"
 import ReadUserBasicController from "../api/controllers/User/ReadUserBasic.controller";
 import FilesPostController from "../api/controllers/Files/files.controller"
 import LikesController from "../api/controllers/Posts/Likes.controller";
-import ItemService from "../api/services/Search/Search";
+import ItemsController from "../api/controllers/Items/Items.controller";
 
 const routes = Router();
 
-routes.get("/", (req, res) => {
+routes.get("/", (req: Request, res: Response) => {
   res.send("Bem-Vindo a HastyDEV API");
 });
 
@@ -75,7 +75,7 @@ routes.post(
 
 routes.post(
   "/upload-files/:id/:postId",
- verifyTokenMiddleware.verifyTokenWithIdAndTokenInHeaders,
+  verifyTokenMiddleware.verifyTokenWithIdAndTokenInHeaders,
   FilesPostController.createPost
 );
 
@@ -85,7 +85,7 @@ routes.get(
   FilesPostController.getFiles
 );
 
-routes.get("/download/:userId/:postId/:fileName",  verifyTokenMiddleware.verifyTokenWithOnlyToken, FilesPostController.downloadFile);
+routes.get("/download/:userId/:postId/:fileName", verifyTokenMiddleware.verifyTokenWithOnlyToken, FilesPostController.downloadFile);
 
 routes.get(
   "/userIcon/:id",
@@ -112,22 +112,22 @@ routes.post(
 );
 
 routes.post(
-"/save-Likes",
-verifyTokenMiddleware.verifyTokenWithBody,
-LikesController.saveLike
+  "/save-Likes",
+  verifyTokenMiddleware.verifyTokenWithBody,
+  LikesController.saveLike
 )
 
 routes.post(
   "/has-liked",
   verifyTokenMiddleware.verifyTokenWithBody,
   LikesController.hasLiked
-  )
+)
 
-  routes.post(
-    "/remove-like",
-    verifyTokenMiddleware.verifyTokenWithBody,
-    LikesController.removeLike
-    )
+routes.post(
+  "/remove-like",
+  verifyTokenMiddleware.verifyTokenWithBody,
+  LikesController.removeLike
+)
 
 routes.get(
   "/comments/:postid",
@@ -152,16 +152,6 @@ routes.post(
   AnswersController.createAnswerForComment
 );
 
-routes.get("/items/search", async (req, res) => {
-  const searchTerm: string = req.query.searchTerm as string;
-
-  try {
-    const items = await ItemService.searchItems(searchTerm);
-    res.json(items);
-  } catch (error) {
-    res.status(500).json({ error: "Erro ao pesquisar itens: " + error });
-  }
-});
-
+routes.get("/items/search", ItemsController.searchItems);
 
 export default routes;
