@@ -56,9 +56,9 @@ class Register {
     try {
       if (process.env.SALTROUNDS_SECRET) {
         const saltRounds = parseInt(process.env.SALTROUNDS_SECRET);
-
+    
         const hash = await bcrypt.hash(password, saltRounds);
-
+    
         const user = await User.create({
           username: username,
           password: hash,
@@ -66,7 +66,9 @@ class Register {
           first_name: first_name,
           last_name: last_name,
           role: role,
+          // userid não precisa ser fornecido, pois é gerado automaticamente pelo banco de dados
         });
+    
 
         const user_id = user.dataValues.userid;
 

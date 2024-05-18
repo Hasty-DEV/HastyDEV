@@ -26,6 +26,7 @@ const PerfilContainer = styled.div`
   }
 
   .cancelButton {
+    margin-top:20px;
   background-color: #dc3545;
   color: white;
   border: none;

@@ -48,6 +48,11 @@ const Perfil: React.FC = () => {
       setName(user.first_name);
       setSurname(user.last_name);
       setUsername(user.username);
+      setInstagram(user.userPerfil?.instagram);
+      setFacebook(user.userPerfil?.facebook);
+      setLinkedin(user.userPerfil?.linkedin);
+      setGithub(user.userPerfil?.github);
+      setWhatsapp(user.userPerfil?.whatsapp);
       const icon = await getUserIcon();
       if (icon && icon.data) {
         setUserIcon(URL.createObjectURL(new Blob([icon.data])));
@@ -94,16 +99,7 @@ const Perfil: React.FC = () => {
         setSuccessMessage("Arquivo enviado com sucesso.");
         console.log("Arquivo enviado com sucesso:", response.data);
 
-        swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Suas alterações foram realizadas com sucesso",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
+      
       } catch (error) {
         setError(
           "Erro ao enviar o arquivo. Por favor, tente novamente."
@@ -135,6 +131,16 @@ const Perfil: React.FC = () => {
       cancelButtonColor: "#d33",
     });
 
+    const socialLinks = { instagram, facebook, linkedin, github, whatsapp };
+
+ 
+    for (const [key, value] of Object.entries(socialLinks)) {
+      if (value && !isValidUrl(value, key)) {
+        setError(`URL inválida para ${key}.`);
+        return;
+      }
+    }
+
     if (confirmation.isConfirmed) {
       setEditMode(false);
       try {
@@ -149,11 +155,33 @@ const Perfil: React.FC = () => {
           whatsapp,
         });
         console.log("Alterações salvas com sucesso!");
+        swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Suas alterações foram realizadas com sucesso",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
         fetchData();
       } catch (error) {
         console.error("Erro ao salvar alterações:", error);
       }
     }
+  };
+
+  const isValidUrl = (url: string, type: string) => {
+    const urlRegexMap: Record<string, RegExp> = {
+      instagram: /^https?:\/\/(www\.)?instagram\.com\/[\w-.]+\/?$/,
+      facebook: /^https?:\/\/(www\.)?facebook\.com\/[\w-.]+\/?$/,
+      linkedin: /^https?:\/\/(www\.)?linkedin\.com\/(in|company)\/[\w-.]+\/?$/,
+      github: /^https?:\/\/(www\.)?github\.com\/[\w-.]+\/?$/,
+      whatsapp: /^https?:\/\/(api\.)?whatsapp\.com\/send\?phone=\d+$/,
+    };
+
+    return urlRegexMap[type].test(url);
   };
 
   const handleCancelEdit = () => {

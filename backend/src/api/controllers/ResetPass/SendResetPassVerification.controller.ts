@@ -25,12 +25,19 @@ class SendPasswordResetEmail {
 
         // Crie o objeto ResetPassCode com todos os atributos necessários
         await ResetPassCode.destroy({ where: { userId: user.userid } });
-        await ResetPassCode.create({
-          userId: user.userid,
-          resetCode,
-          expiresAt: new Date(Date.now() + 24 * 3600 * 1000),
-          createdAt: new Date(Date.now()),
-        });
+
+        if (user.userid !== undefined) {
+          await ResetPassCode.create({
+            userId: user.userid,
+            resetCode,
+            expiresAt: new Date(Date.now() + 24 * 3600 * 1000),
+            createdAt: new Date(Date.now()),
+          });
+        } else {
+          logger.error("O id do usuário é undefined");
+          res.status(500).send("O id do usuário é undefined");
+          return;
+        }
 
         const transport = nodemailer.createTransport({
           host: "smtp.hostinger.com",
@@ -73,3 +80,4 @@ class SendPasswordResetEmail {
 }
 
 export default new SendPasswordResetEmail();
+

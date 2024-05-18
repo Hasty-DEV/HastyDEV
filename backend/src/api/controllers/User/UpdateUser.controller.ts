@@ -1,22 +1,23 @@
 import { Request, Response } from "express";
 import User from "../../models/User/User.model";
+import UserPerfil from "../../models/UserPerfil/UserPerfil.model";
 import validationRules from "../Validation/validations.controller";
 import { validationResult } from "express-validator";
 import logger from "../../../utils/Logger/Logger";
 
 class UpdateUser {
   public async updateUser(req: Request, res: Response): Promise<void> {
-    const userId = req.params.id;
+    const userId = parseInt(req.params.id);  
     try {
-      if (!userId) {
-        logger.error("ID de usuário ausente na solicitação");
-        res.status(400).json({ message: "ID de usuário ausente na solicitação" });
+      if (!userId || isNaN(userId)) { 
+        logger.error("ID de usuário ausente ou inválido na solicitação");
+        res.status(400).json({ message: "ID de usuário ausente ou inválido na solicitação" });
         return;
       }
 
       await Promise.all(validationRules.updateUserValidationRules.map(rule => rule.run(req)));
       
-      const { username, email, first_name, last_name } = req.body;
+      const { username, email, first_name, last_name, instagram, facebook, linkedin, github, whatsapp } = req.body;
 
       const errors = validationResult(req);
   
@@ -27,7 +28,7 @@ class UpdateUser {
         return;
       }
 
-      const user = await User.findByPk(userId);
+      let user = await User.findByPk(userId);
 
       if (!user) {
         logger.error("Usuário não encontrado");
@@ -35,7 +36,6 @@ class UpdateUser {
         return;
       }
       
-      // Verifica se o novo username já está sendo utilizado por outro usuário
       if (username !== user.username) {
         const existingUser = await User.findOne({ where: { username } });
         if (existingUser) {
@@ -45,14 +45,28 @@ class UpdateUser {
         }
       }
 
-      // Atualiza os campos do usuário
       if (username) user.username = username;
       if (email) user.email = email;
       if (first_name) user.first_name = first_name;
       if (last_name) user.last_name = last_name;
 
-      // Salva as alterações no banco de dados
       await user.save();
+
+      let userPerfil = await UserPerfil.findByPk(userId);
+
+      if (!userPerfil) {
+        userPerfil = await UserPerfil.create({ userId });
+      }
+
+      if (userPerfil) {
+        if (instagram) userPerfil.instagram = instagram;
+        if (facebook) userPerfil.facebook = facebook;
+        if (linkedin) userPerfil.linkedin = linkedin;
+        if (github) userPerfil.github = github;
+        if (whatsapp) userPerfil.whatsapp = whatsapp;
+
+        await userPerfil.save();
+      }
 
       logger.info("Usuário atualizado com sucesso");
       res.status(200).json({ message: "Usuário atualizado com sucesso" });

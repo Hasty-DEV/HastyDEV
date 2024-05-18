@@ -54,10 +54,14 @@ const LoginService = async (req: Request, res: Response) => {
 
     const user_id = user.dataValues.userid;
 
-    await InitializeLevel(user_id);
-    await LoginHistory(user_id);
-    await ExpForLogin.VerifyAndIncrement(user_id);
-
+    if (user_id !== undefined) {
+      await InitializeLevel(user_id);
+      await LoginHistory(user_id);
+      await ExpForLogin.VerifyAndIncrement(user_id);
+    } else {
+      logger.error("UserId não fornecido");
+      res.status(401).json({ error: "UserId não fornecido" });
+    }
     const secret = process.env.SECRET;
     if (secret) {
       const token = jwt.sign({ id: user_id }, secret);

@@ -1,5 +1,7 @@
+import { UserPerfilAttributes } from "../../api/models/UserPerfil/UserPerfil.model";
+
 export type UserAttributes = {
-    userid: number;
+    userid?: number;
     username: string;
     password: string;
     email: string;
@@ -10,3 +12,8 @@ export type UserAttributes = {
     isVerified?: boolean;
     role: "admin" | "user" | "business";
 }
+
+export interface UserAttributesWithProfile extends UserAttributes {
+    userPerfil?: UserPerfilAttributes | null;
+  }
+  

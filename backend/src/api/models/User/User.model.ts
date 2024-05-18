@@ -1,12 +1,23 @@
-import { DataTypes, Model } from "sequelize";
-import { sequelize } from "../../../loaders/sequelize/sequelize";
-import { UserAttributes } from "../../../types/User/User.type";
-import { UserCreationAttributes } from "../../../types/UserCreation/UserCreation.type";
+import { DataTypes, Model } from 'sequelize';
+import { sequelize } from '../../../loaders/sequelize/sequelize';
+import { UserPerfilAttributes } from '../UserPerfil/UserPerfil.model';
 
-class User
-  extends Model<UserAttributes, UserCreationAttributes>
-  implements UserAttributes {
-  public userid!: number;
+export interface UserAttributes {
+  userid?: number;
+  username: string;
+  password: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+  lockUntil?: Date | null;
+  loginAttempts?: number | null;
+  isVerified?: boolean;
+  role: "admin" | "user" | "business";
+  userPerfil?: UserPerfilAttributes | null;
+}
+
+class User extends Model<UserAttributes> implements UserAttributes {
+  public userid?: number;
   public username!: string;
   public password!: string;
   public email!: string;
@@ -16,10 +27,7 @@ class User
   public loginAttempts?: number | null;
   public isVerified?: boolean;
   public role!: "admin" | "user" | "business";
-
-  static associate(models: any) {
-    this.hasMany(models.Post, { foreignKey: "userid", as: "posts" });
-  }
+  public userPerfil!: UserPerfilAttributes | null;
 }
 
 User.init(
@@ -69,8 +77,8 @@ User.init(
   },
   {
     sequelize: sequelize,
-    modelName: "User",
-    tableName: "users",
+    modelName: 'User',
+    tableName: 'users',
     timestamps: false,
   }
 );
