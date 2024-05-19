@@ -16,7 +16,7 @@ const UserLevelInfo = () => {
       setLoading(true);
       const user = await getUserData();
       setUserData(user);
-      console.log(user);
+      
       const icon = await getUserIcon();
       if (icon && icon.data) {
         setUserIcon(URL.createObjectURL(new Blob([icon.data])));

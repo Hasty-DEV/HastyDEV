@@ -1,8 +1,8 @@
-import   { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import {
   HeaderContainer,
   SwitchContainer,
-  OffCanvasContainer
+  OffCanvasContainer,
 } from "../../styles/navbar/Navbar.styles";
 import { getUserData } from "../../../data/services/userService";
 import { getUserIcon } from "../../../data/services/getUserIconService";
@@ -14,38 +14,35 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { Link } from "react-router-dom";
-
-import { MdPerson, MdOutlineSecurity} from "react-icons/md";
-import {  IoMdPerson } from "react-icons/io";
+import { MdPerson, MdOutlineSecurity } from "react-icons/md";
+import { IoMdPerson } from "react-icons/io";
 import { ImProfile } from "react-icons/im";
 import { useAuth } from "../../../data/context/AuthContext";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { ThemeContext } from "styled-components";
 import { DefaultTheme } from "styled-components";
-
 import LogoLight from "../../assets/LogoLight.svg";
 import LogoDark from "../../assets/LogoDark.svg";
 import { HeaderProps } from "../../../data/@types/Navbar/Navbar.type";
-
 import UserLevelInfo from "../../components/UserLevelInfo/UserLevelInfo";
-import { api } from "../../../data/services/api";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 
- 
-const Header = ({ toggleTheme }: HeaderProps) => {
+const Header = ({ toggleTheme, onSearch }: HeaderProps) => {
+  const [searchTerm, setSearchTerm] = useState<string>("");
   const { logout } = useAuth();
   const [userData, setUserData] = useState<UserDataTypes | null>(null);
   const [, setUserIcon] = useState<string | null>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
-  
-  const getUserIdFromLocalStorage = () => {
-   
-    const userId = localStorage.getItem('userId');
-  
- 
-    return userId;
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.defaultPrevented;
+    setSearchTerm(event.target.value);
   };
 
+  const getUserIdFromLocalStorage = () => {
+    const userId = localStorage.getItem("userId");
+    return userId;
+  };
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
@@ -74,41 +71,28 @@ const Header = ({ toggleTheme }: HeaderProps) => {
       console.log(error);
     }
   };
-
-
-  const [searchTerm, setSearchTerm] = useState<string>('');
-  
- 
-
-  const handleSearch = async () => {
-    try {
-      const response = await api.get(`/items/search?searchTerm=${searchTerm}`);
-      console.log(response.data)
-      return response.data
-    } catch (error) {
-      console.error("Erro ao pegar dados de Posts:", error);
-      throw error;
-    }
-  };
-
   const userId = getUserIdFromLocalStorage();
-
   const theme: DefaultTheme = useContext(ThemeContext);
 
   const ImgDarkLight = theme.title === "light" ? LogoLight : LogoDark;
+
+  const handleSearch = async () => {
+    onSearch(searchTerm);
+    
+  };
+
   return (
     <HeaderContainer className="mb-3 fixed-top">
       <Navbar expand="md">
         <Container fluid>
           <Navbar.Brand as={Link} to="/">
-          <img
+            <img
               src={ImgDarkLight}
               alt="Logo HastyDEV modo Light"
               className="mt-2"
               width={150}
               height={50}
             />
-
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="offcanvasNavbar-expand" />
           <Navbar.Offcanvas
@@ -122,7 +106,6 @@ const Header = ({ toggleTheme }: HeaderProps) => {
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-                         
               <div className="justify-content-end flex-grow-1 pe-3"></div>
               <Form className="d-flex px-4">
                 <Form.Control
@@ -131,19 +114,19 @@ const Header = ({ toggleTheme }: HeaderProps) => {
                   className="me-2"
                   aria-label="Search"
                   value={searchTerm}
-                   onChange={(e) => setSearchTerm(e.target.value)}
-                  
+                  onChange={handleChange}
                 />
-                <Button onClick={handleSearch} className="search-button">Pesquisar</Button>
-                
+                <Button onClick={handleSearch} className="search-button">
+                  Pesquisar
+                </Button>
               </Form>
               <div className="d-flex justify-content-center align-items-center">
-              <MdPerson
-                size={24}
-                onClick={toggleDropdown}
-                className="md-person-icon"
-                style={{ cursor: "pointer" }}
-/>
+                <MdPerson
+                  size={24}
+                  onClick={toggleDropdown}
+                  className="md-person-icon"
+                  style={{ cursor: "pointer" }}
+                />
                 <NavDropdown
                   show={isDropdownOpen}
                   onToggle={toggleDropdown}
@@ -183,9 +166,9 @@ const Header = ({ toggleTheme }: HeaderProps) => {
                     className="d-flex align-items-center justify-content-start"
                   >
                     <ImProfile className="mx-1" />
-                  Ver Meu Perfil
+                    Ver Meu Perfil
                   </NavDropdown.Item>
-                  
+
                   <NavDropdown.Divider />
                   <NavDropdown.Item
                     as={Button}
@@ -198,13 +181,8 @@ const Header = ({ toggleTheme }: HeaderProps) => {
                 </NavDropdown>
               </div>
 
-
               <OffCanvasContainer>
-
- 
-<UserLevelInfo></UserLevelInfo>
- 
-
+                <UserLevelInfo></UserLevelInfo>
               </OffCanvasContainer>
               <SwitchContainer>
                 <label className="switch">
