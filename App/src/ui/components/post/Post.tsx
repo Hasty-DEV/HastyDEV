@@ -180,7 +180,7 @@ const Post = ({ post }: { post: PostType }) => {
                 >
                   <img src={userIcon || userIconDefault} className="rounded-circle" alt="User Profile" />
                 </Link>
-                <span >{`${post.author.first_name} ${post.author.last_name} `}</span>
+                <span >{`${post.author?.first_name} ${post.author?.last_name} `}</span>
               </div>
               <p>{post.companyContent}</p>
             </BussinessDataContainer>
