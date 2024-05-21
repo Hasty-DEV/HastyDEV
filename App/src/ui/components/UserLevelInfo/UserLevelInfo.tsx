@@ -3,24 +3,20 @@ import Loader from "../Loader/Loader";
 import { UserDataTypes } from "../../../data/@types/UserData/UserData.type";
 import { getUserIcon } from "../../../data/services/getUserIconService";
 import { getUserData } from "../../../data/services/userService";
-import DefaultUserIcon from "../../assets/user/user_icon.png";
 import UserLevelInfoContainer from "../../styles/UserLevelInfo/UserLevelInfo.styles";
 
 const UserLevelInfo = () => {
   const [userData, setUserData] = useState<UserDataTypes | null>(null);
   const [loading, setLoading] = useState(false);
-  const [userIcon, setUserIcon] = useState<string | null>(null);
+  const [userIcon, setUserIcon] = useState<string>();
 
   const fetchData = useCallback(async () => {
     try {
       setLoading(true);
       const user = await getUserData();
       setUserData(user);
-      
       const icon = await getUserIcon();
-      if (icon && icon.data) {
-        setUserIcon(URL.createObjectURL(new Blob([icon.data])));
-      }
+      setUserIcon(icon);
     } catch (error) {
       console.error("Erro ao obter dados do usuário:", error);
     } finally {
@@ -41,7 +37,7 @@ const UserLevelInfo = () => {
           <span>Seu Nível</span>
           <div className="user">
             <div className="userInfo">
-              <img src={userIcon || DefaultUserIcon} alt="" />
+              <img src={userIcon} alt="" />
               <span className="username">{userData?.username}</span>
             </div>
             <div className="level d-flex flex-column">

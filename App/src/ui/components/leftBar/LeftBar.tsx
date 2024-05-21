@@ -5,7 +5,6 @@ import { useAuth } from "../../../data/context/AuthContext";
 import Loader from "../Loader/Loader";
 import { getUserData } from "../../../data/services/userService";
 import { getUserIcon } from "../../../data/services/getUserIconService";
-import DefaultUserIcon from "../../assets/user/user_icon.png";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import Gaming from "../../assets/7.png";
 import Gallery from "../../assets/8.png";
@@ -18,7 +17,7 @@ const LeftBar = () => {
   const { logout } = useAuth();
   const [userData, setUserData] = useState<UserDataTypes | null>(null);
   const [loading, setLoading] = useState(false);
-  const [userIcon, setUserIcon] = useState<string | null>(null);
+  const [userIcon, setUserIcon] = useState<string>();
 
   const fetchData = useCallback(async () => {
     try {
@@ -26,16 +25,15 @@ const LeftBar = () => {
       const user = await getUserData();
       setUserData(user);
       const icon = await getUserIcon();
-      if (icon && icon.data) {
-        setUserIcon(URL.createObjectURL(new Blob([icon.data])));
-      }
+      setUserIcon(icon);
+
     } catch (error) {
       console.error("Erro ao obter dados do usuário:", error);
     } finally {
       setLoading(false);
     }
   }, []);
- 
+
   useEffect(() => {
     fetchData();
   }, [fetchData]);
@@ -60,7 +58,7 @@ const LeftBar = () => {
             <div className="menu d-flex flex-column ">
               <div className="user d-flex align-items-center">
                 <Link to="/perfil">
-                  <img src={userIcon || DefaultUserIcon} alt="" />
+                  <img src={userIcon} alt="" />
                 </Link>
                 <span className="text-capitalize">
                   {userData
@@ -108,7 +106,7 @@ const LeftBar = () => {
       </LeftBarContainer>
     </>
   );
- 
+
 };
 
 export default LeftBar;

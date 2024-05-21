@@ -2,7 +2,6 @@ import UserData from "../ui/components/UserData/UserData";
 import PrivateRoute from "../ui/components/PrivateRoute/PrivateRoute";
 import Perfil from "./perfil/Perfil";
 import CreatePost from "./CreatePost/CreatePost";
-import Chat from "./Chat/Chat";
 import Projects from "./Projects/Projects";
 import PrivacyPolicy from "./PrivacyPolicy/PrivacyPolicy";
 import Help from "./Help/Help";
@@ -47,7 +46,6 @@ const Pages = ({ theme, setTheme }: PagesProps ) => {
               <Route path="/privacypolicy" element={<PrivacyPolicy />} />
               <Route path="/help" element={<Help />} />
               <Route path="/settings" element={<Settings />} />
-              <Route path="/chat" element={<Chat />} />
               <Route path="/profile/:userId" element={<ProfilePage />} />
             </Routes>
           </PrivateRoute>

@@ -12,7 +12,6 @@ export const getUserData = async () => {
     }
   } catch (error) {
     console.error("Erro ao pegar dados de Usuário:", error);
-    throw error;
   }
 };
 

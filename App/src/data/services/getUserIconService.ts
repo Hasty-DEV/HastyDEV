@@ -1,23 +1,31 @@
-import { api } from "./api";
+import { CDN, api } from "./api";
+import axios from "axios";
+import DefaultUserIcon from "../../ui/assets/user/user_icon.png";
 
-export const getUserIcon = async () => {
+export const getUserIcon = async (): Promise<string | undefined> => {
   try {
-    const userId = await localStorage.getItem("userId");
-    const userToken = await localStorage.getItem("userToken");
+    const userId = localStorage.getItem("userId");
+    if (!userId) {
+      throw new Error("User ID not found in localStorage");
+    }
+    const url = `${CDN}/${userId}/perfil/userIcon.jpg`;
 
-    if (userToken && userId) {
-      api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
-      const response = await api.get(`/userIcon/${userId}`, {
-        responseType: "arraybuffer",
-      });
-      return {
-        data: response.data,
-        headers: response.headers,
-      };
+    const response = await axios.get(url);
+
+    if(response.status === 200) {
+      return url;
     }
   } catch (error) {
-    console.error("Erro ao pegar dados de Usuário:", error);
-    throw error;
+    if (axios.isAxiosError(error)) {
+      if (error.response && error.response.status === 404) {
+        console.error(`User icon not found: ${error.response.statusText}`);
+      } else {
+        console.error("Error fetching user icon:", error.message);
+      }
+    } else {
+      console.error("Unexpected error:", error);
+    }
+    return DefaultUserIcon;
   }
 };
 
