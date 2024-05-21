@@ -1,8 +1,15 @@
 import { Request, Response } from 'express';
-import User from '../../models/User/User.model';
+import User, { UserAttributes } from '../../models/User/User.model';
 import UserPerfil from '../../models/UserPerfil/UserPerfil.model';
 import logger from '../../../utils/Logger/Logger';
 import { UserAttributesWithProfile } from '../../../types/User/User.type';
+import LevelModel from '../../models/Level/Level.model';
+
+
+interface UserAttributesWithLevel extends UserAttributes {
+  level: LevelModel | null;
+}
+
 
 class ReadUser {
   public async getUserData(req: Request, res: Response): Promise<void> {
@@ -21,14 +28,21 @@ class ReadUser {
         return;
       }
 
-      const userPerfil = await UserPerfil.findOne({ where: { userId } });
-
       const userData: UserAttributesWithProfile = {
         ...user.toJSON(),
-        userPerfil: userPerfil ? userPerfil.toJSON() : null,
       };
 
-      res.status(200).json({ user: userData });
+      const userPerfil = await UserPerfil.findOne({ where: { userId } });
+      userData.userPerfil = userPerfil ? userPerfil.toJSON() : null;
+
+      const levelData = await LevelModel.findOne({ where: { userid: userId } });
+      if (levelData) {
+        const userDataWithLevel: UserAttributesWithLevel = userData as UserAttributesWithLevel;
+        userDataWithLevel.level = levelData;
+        res.status(200).json({ user: userDataWithLevel });
+      } else {
+        res.status(200).json({ user: userData });
+      }
     } catch (error) {
       logger.error('Erro ao ler o usuário: ' + error);
       res.status(500).json({ message: 'Erro ao processar a solicitação' });
