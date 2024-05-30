@@ -20,6 +20,9 @@ class Post extends Model<PostAttributes, PostCreationAttributes> implements Post
   public programmingLanguages!: string;
   public deadline!: Date;
   public likes!: number;
+
+    
+  public author?: User;  
 }
 
 Post.init(
