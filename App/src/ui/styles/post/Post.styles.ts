@@ -1,18 +1,49 @@
 import styled from "styled-components";
 
-const PostContainer = styled.div`
+export const PostContainer = styled.div`
   -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.38);
   -moz-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.38);
   box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.38);
   border-radius: 5px;
-  color: ${(props) => props.theme.colors.text};
   margin-top: 20px;
   border: 2px solid ${(props) => props.theme.colors.post_border};
-  background-color:${(props) => props.theme.colors.post_background};
+  background-color: ${(props) => props.theme.colors.post_background};
+  color: ${(props) => props.theme.colors.text};
+
+  .LerMais{
+    color: ${(props) => props.theme.colors.text};
+
+  }
+
+  & .text-capitalize {
+    text-transform: capitalize;
+  }
+
+  & .fw-bold {
+    font-weight: bold;
+  }
+
+  & .fw-medium {
+    font-weight: 500;
+  }
+
+  & .rounded-circle {
+    border-radius: 50%;
+  }
+
+  & .loading-icon {
+    animation: spin 1s infinite linear;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 `;
-
-export default PostContainer;
-
 
 export const BussinessDataContainer = styled.div`
   div {
@@ -28,11 +59,17 @@ export const LikeContainer = styled.button`
   border: none;
   outline: none;
   gap: 10px;
+  color: ${(props) => props.theme.colors.text};
 `;
 
 export const CommentContainer = styled.button`
-background: none;
+  background: none;
   border: none;
   outline: none;
   gap: 10px;
+  color: ${(props) => props.theme.colors.text};
 `;
+
+
+
+export default PostContainer;

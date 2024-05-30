@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { FaHeart, FaRegHeart, FaComment, FaDownload, FaSpinner } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Comments from "../comments/Comments";
-import PostContainer, { BussinessDataContainer, CommentContainer, LikeContainer } from "../../styles/post/Post.styles";
 import { getUserData } from "../../../data/services/userService";
 import { UserDataTypes } from "../../../data/@types/UserData/UserData.type";
 import userIconDefault from "../../assets/user/user_icon.png";
@@ -10,6 +9,8 @@ import { getUserIconByID } from "../../../data/services/getUserIconService";
 import { PostType } from "../../../data/@types/Post/Post.type";
 import { Button } from "react-bootstrap";
 import { api } from "../../../data/services/api";
+import PostContainer, { BussinessDataContainer, LikeContainer, CommentContainer } from "../../styles/post/Post.styles";
+
 
 const Post = ({ post }: { post: PostType }) => {
   const [userId, setUserId] = useState<string>("");
@@ -170,7 +171,7 @@ const Post = ({ post }: { post: PostType }) => {
                 </li>
               ))}
             </ul>
-            <Button variant="Link" onClick={() => setExpanded(false)}>Ler menos</Button>
+            <Button className="LerMais" variant="Link" onClick={() => setExpanded(false)}>Ler menos</Button>
             <BussinessDataContainer className="d-flex flex-column justify-content-center align-items-start">
               <h4 >Dados do Contratante</h4>
               <div className="d-flex justify-content-center align-items-center pt-2 pb-2">
