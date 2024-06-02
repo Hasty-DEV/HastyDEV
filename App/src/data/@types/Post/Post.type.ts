@@ -4,6 +4,7 @@ interface AuthorType {
 }
 
 export interface PostType {
+    comments: any;
     postid: number | string;
     userid: number | string;
     author: AuthorType;

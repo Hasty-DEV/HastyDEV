@@ -19,13 +19,15 @@ class Comments {
           {
             model: User,
             as: "author",
-            attributes: ["userid", "username"],
+            attributes: ["userid", "first_name", "last_name"],
           },
+
           {
             model: Post,
             as: "post",
             attributes: ["postid", "title"],
           },
+         
         ],
       });
       res.status(200).json(comments);
@@ -42,11 +44,9 @@ class Comments {
     const { postid } = req.params;
 
     if (!postid) {
-      res
-        .status(400)
-        .json({
-          error: "O parâmetro 'postid' não foi fornecido na requisição",
-        });
+      res.status(400).json({
+        error: "O parâmetro 'postid' não foi fornecido na requisição",
+      });
       return;
     }
 
@@ -60,7 +60,9 @@ class Comments {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      logger.error("Erros de validação no comentário", { errors: errors.array() });
+      logger.error("Erros de validação no comentário", {
+        errors: errors.array(),
+      });
       res.status(400).json({ errors: errors.array() });
       return;
     }
