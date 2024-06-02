@@ -104,7 +104,7 @@ const Answers: React.FC<{ commentId: string }> = ({ commentId }) => {
           <div key={reply.id} className="answer d-flex">
             <img src={userIcon || userIconDefault} alt="" />
             <div className="info">
-              <span>{userName}</span>
+            <span>{`${reply.author.first_name} ${reply.author.last_name}`}</span> {/* Nome do autor */}
               <p>{reply.content.length > 200 ? `${reply.content.slice(0, 200)}...` : reply.content}</p>
               {reply.content.length > 200 && <span className="read-more">Ler mais</span>}
               <span className="date">{formatCreatedAt(reply.createdAt)}</span>
