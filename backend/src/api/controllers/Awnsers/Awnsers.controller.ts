@@ -3,8 +3,11 @@ import { Request, Response } from "express";
 import logger from "../../../utils/Logger/Logger";
 import Answer from "../../models/Awnsers/Awnsers.model";
 import Comment from "../../models/Commets/Commets.model";
+import User from "../../models/User/User.model";
 
 class AnswersController {
+
+  
   // Método para criar uma nova resposta para um comentário específico
   public async createAnswerForComment(req: Request, res: Response): Promise<void> {
     const { commentid } = req.params;
@@ -46,6 +49,15 @@ class AnswersController {
     try {
       const answers = await Answer.findAll({
         where: { commentid },
+        include: [
+          {
+            model: User,
+            as: "author",
+            attributes: ["userid", "first_name", "last_name"],
+          },
+
+         
+        ],
       });
 
       logger.info("Respostas encontradas com sucesso!");
