@@ -54,8 +54,8 @@ const Perfil: React.FC = () => {
       setGithub(user.userPerfil?.github);
       setWhatsapp(user.userPerfil?.whatsapp);
       const icon = await getUserIcon();
-      if (icon && icon.data) {
-        setUserIcon(URL.createObjectURL(new Blob([icon.data])));
+      if (icon ) {
+        setUserIcon(URL.createObjectURL(new Blob([icon])));
       }
     } catch (error) {
       console.error("Erro ao obter dados do usuário:", error);

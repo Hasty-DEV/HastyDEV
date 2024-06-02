@@ -8,7 +8,7 @@ import Help from "./Help/Help";
 import Settings from "./Settings/Settings";
 import light from "../ui/theme/light";
 import dark from "../ui/theme/dark";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Header from "../ui/partials/navbar/Navbar";
 import LeftBar from "../ui/components/leftBar/LeftBar";
 import RightBar from "../ui/components/rightBar/RightBar";
@@ -22,6 +22,7 @@ import Posts from "../ui/components/posts/Posts";
 
 const Pages = ({ theme, setTheme }: PagesProps ) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
+
   const toggleTheme = () => {
     setTheme(theme.title === "dark" ? light : dark);
   };
@@ -47,6 +48,8 @@ const Pages = ({ theme, setTheme }: PagesProps ) => {
               <Route path="/help" element={<Help />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/profile/:userId" element={<ProfilePage />} />
+     
+              <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </PrivateRoute>
         </PagesContainer>

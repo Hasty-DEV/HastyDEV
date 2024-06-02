@@ -35,7 +35,6 @@ const Header = ({ toggleTheme, onSearch }: HeaderProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.defaultPrevented;
     setSearchTerm(event.target.value);
   };
 
@@ -43,6 +42,7 @@ const Header = ({ toggleTheme, onSearch }: HeaderProps) => {
     const userId = localStorage.getItem("userId");
     return userId;
   };
+
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
@@ -52,8 +52,8 @@ const Header = ({ toggleTheme, onSearch }: HeaderProps) => {
       const user = await getUserData();
       setUserData(user);
       const icon = await getUserIcon();
-      if (icon && icon.data) {
-        setUserIcon(URL.createObjectURL(new Blob([icon.data])));
+      if (icon) {
+        setUserIcon(icon);  
       }
     } catch (error) {
       console.error("Erro ao obter dados do usuário:", error);
@@ -71,6 +71,7 @@ const Header = ({ toggleTheme, onSearch }: HeaderProps) => {
       console.log(error);
     }
   };
+
   const userId = getUserIdFromLocalStorage();
   const theme: DefaultTheme = useContext(ThemeContext);
 
@@ -78,7 +79,6 @@ const Header = ({ toggleTheme, onSearch }: HeaderProps) => {
 
   const handleSearch = async () => {
     onSearch(searchTerm);
-    
   };
 
   return (

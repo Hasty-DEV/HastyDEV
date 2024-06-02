@@ -4,7 +4,7 @@ export const HeaderContainer = styled.header`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: ${(props) => props.theme.colors.primary};
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-
+ 
   div.dropdown-menu[data-bs-popper] {
     top: 150% !important;
     right: 0 !important;
