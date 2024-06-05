@@ -98,16 +98,27 @@ const Answers: React.FC<{ commentId: string }> = ({ commentId }) => {
   return (
     <AnswersContainer>
       <div className="answers">
-        
-
         {answers.map((reply) => (
-          <div key={reply.id} className="answer d-flex">
-            <img src={userIcon || userIconDefault} alt="" />
-            <div className="info">
-            <span>{`${reply.author.first_name} ${reply.author.last_name}`}</span> {/* Nome do autor */}
-              <p>{reply.content.length > 200 ? `${reply.content.slice(0, 200)}...` : reply.content}</p>
-              {reply.content.length > 200 && <span className="read-more">Ler mais</span>}
-              <span className="date">{formatCreatedAt(reply.createdAt)}</span>
+          <div key={reply.id} className="answer d-flex align-items-center ">
+            <img className="m-2"src={userIcon || userIconDefault} alt="userIcon" />
+            
+            <div className="info ">
+              <div className="d-flex align-items-center mb-1">
+              <span className="m-2">{`${reply.author.first_name} ${reply.author.last_name}`}</span>
+              <span className="date">
+                  {formatCreatedAt(reply.createdAt)}
+                </span>
+              </div>
+              
+
+              <p>
+                {reply.content.length > 200
+                  ? `${reply.content.slice(0, 200)}...`
+                  : reply.content}
+              </p>
+              {reply.content.length > 200 && (
+                <span className="read-more">Ler mais</span>
+              )}
             </div>
           </div>
         ))}
@@ -126,18 +137,14 @@ const Answers: React.FC<{ commentId: string }> = ({ commentId }) => {
   );
 };
 
-const formatCreatedAt = (createdAt: string): string => {
-  const date = new Date(createdAt);
+const formatCreatedAt = (updatedAt: string) => {
+  const date = new Date(updatedAt);
   const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
-    month: "long",
-    day: "numeric",
     hour: "numeric",
     minute: "numeric",
-    second: "numeric",
-    localeMatcher: "best fit",
-    weekday: "long",
-    era: undefined,
+    day: "numeric",
+    month: "numeric",
     timeZone: "America/Sao_Paulo",
   };
   return date.toLocaleDateString("pt-BR", options);

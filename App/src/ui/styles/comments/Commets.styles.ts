@@ -5,7 +5,7 @@ const CommentsContainer = styled.div`
 
   .comments {
     .comment {
-      background-color: #f9f9f9;
+      background-color: ${(props) => props.theme.colors.commentsColor};
       border-radius: 10px;
       padding: 15px;
       margin-bottom: 20px;
@@ -26,8 +26,9 @@ const CommentsContainer = styled.div`
         flex: 5;
         padding: 10px;
         border: 1px solid ${({ theme }) => theme.border};
+        border-radius: 15px;
         background-color: transparent;
-        color: ${({ theme }) => theme.textColor};
+        color: ${(props) => props.theme.colors.text};
         max-width: 500px;
       }
 
@@ -51,7 +52,7 @@ const CommentsContainer = styled.div`
       }
 
       p {
-        color: ${({ theme }) => theme.textColorSoft};
+        color: ${(props) => props.theme.colors.text};
       }
 
       .date {
@@ -62,7 +63,7 @@ const CommentsContainer = styled.div`
 
       .read-more {
         cursor: pointer;
-        color: ${({ theme }) => theme.primary};
+        color: ${(props) => props.theme.colors.text};
       }
     }
 
@@ -71,7 +72,7 @@ const CommentsContainer = styled.div`
       display: flex;
       align-items: center;
       gap: 5px;
-      color: ${({ theme }) => theme.textColorSoft};
+      color: ${(props) => props.theme.colors.text};
     }
   }
 `;

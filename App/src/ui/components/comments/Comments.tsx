@@ -1,4 +1,4 @@
-import  { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import CommentsContainer from "../../styles/comments/Commets.styles";
 import { api } from "../../../data/services/api";
 import Answers from "../answers/Answers";
@@ -10,7 +10,7 @@ import { CommentType } from "../../../data/@types/Comment/Comment.type";
 const Comments: React.FC<{ postId: string }> = ({ postId }) => {
   const [userId, setUserId] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(null);
-  const [userName, setUserName] = useState<string | null>(null);
+  const [, setUserName] = useState<string | null>(null);
   const [userIcon, setUserIcon] = useState<string | null>(null);
   const [comments, setComments] = useState<CommentType[]>([]);
   const [newComment, setNewComment] = useState<string>("");
@@ -117,7 +117,7 @@ const Comments: React.FC<{ postId: string }> = ({ postId }) => {
   return (
     <CommentsContainer>
       <div className="comments">
-        <div className="write d-flex align-items-center justify-content-between">
+        <div className="write d-flex align-items-center justify-content-between mb-3">
           <img src={userIcon || userIconDefault} alt="" />
           <input
             type="text"
@@ -125,18 +125,34 @@ const Comments: React.FC<{ postId: string }> = ({ postId }) => {
             value={newComment}
             onChange={handleInputChange}
             maxLength={200}
+            className="mx-2"
           />
           <button onClick={handleCommentSubmit}>Enviar</button>
         </div>
 
         {comments.map((comment) => (
-          <div key={comment.id} className="comment">
-            <div className="info d-flex flex-column">
-              <img src={userIcon || userIconDefault} alt="" /> {/* Icone do usuário */}
-              <span>{`${comment.author.first_name} ${comment.author.last_name}`}</span> {/* Nome do autor */}
-              <p>{comment.content.length > 200 ? `${comment.content.slice(0, 200)}...` : comment.content}</p>
-              {comment.content.length > 200 && <span className="read-more">Ler mais</span>}
-              <span className="date">{formatCreatedAt(comment.createdAt)}</span>
+          <div key={comment.id} className="comment mb-3">
+            <div className="info d-flex flex-column p-2">
+              <div className=" d-flex align-items-center mb-1">
+                <img
+                  src={userIcon || userIconDefault}
+                  alt="UserIcon"
+                  className="m-2"
+                />
+                <span className="m-2">{`${comment.author.first_name} ${comment.author.last_name}`}</span>
+                <span className="date">
+                  {formatCreatedAt(comment.createdAt)}
+                </span>
+              </div>
+
+              <p>
+                {comment.content.length > 200
+                  ? `${comment.content.slice(0, 200)}...`
+                  : comment.content}
+              </p>
+              {comment.content.length > 200 && (
+                <span className="read-more">Ler mais</span>
+              )}
             </div>
             <div
               className="item"

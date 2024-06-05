@@ -201,16 +201,18 @@ const Post = ({ post }: { post: PostType }) => {
             )}
             <span >{likes} Likes</span>
           </LikeContainer>
+
           <CommentContainer
             className="w-50 d-flex align-items-center justify-content-start"
             onClick={() => setCommentOpen(!commentOpen)}
           >
             <FaComment />
-            <span>2 Comentários</span>
+            <span>Comentários</span>
           </CommentContainer>
+
         </div>
         {commentOpen && (
-          <div className="comments-container">
+          <div className="w-100">
             <Comments postId={post.postid.toString()} />
           </div>
         )}

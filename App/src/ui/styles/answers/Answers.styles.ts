@@ -28,6 +28,7 @@ const AnswersContainer = styled.div`
     align-items: flex-start;
     margin-bottom: 20px;
     margin-top: 20px;
+    margin-right: 20px;
     gap: 10px;
   }
 

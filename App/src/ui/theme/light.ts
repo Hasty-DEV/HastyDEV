@@ -17,5 +17,6 @@ export default {
     color_emailVerification: "#f3f3f3",
     post_background: "#fff",
     post_border: "#000",
+    commentsColor: "#F5F5F5",
   },
 } as DefaultTheme;
