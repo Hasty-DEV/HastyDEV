@@ -1,7 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
-import { HeadingTitle, Paragraph } from "../../ui/components/Texts/Texts";
+import { HeadingTitle, Paragraph } from "../../components/Texts/Texts";
 import * as C from "../../ui/styles/ContactUs/ContactUs.styles";
-import ContactUSForm from "../../ui/partials/ContactUSForm/ContactUSForm";
+import ContactUSForm from "../../partials/ContactUSForm/ContactUSForm";
 import { FiPhoneCall } from "react-icons/fi";
 import { AiOutlineMail } from "react-icons/ai";
 import {

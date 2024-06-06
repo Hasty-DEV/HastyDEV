@@ -1,9 +1,9 @@
-import GlobalStyle from "./ui/styles/global";
+import GlobalStyle from "./styles/global";
 import Pages from "./pages/index";
-import usePersisteState from "./data/hooks/PersisteState/usePersisteState";
-import light from "./ui/themes/light";
+import usePersisteState from "../data/hooks/PersisteState/usePersisteState";
+import light from "./themes/light";
 import { ThemeProvider } from "styled-components";
-import { AuthProvider } from "./data/contexts/Auth/AuthProvider";
+import { AuthProvider } from "../data/contexts/Auth/AuthProvider";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 

@@ -1,14 +1,14 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { api } from "../../data/services/api";
+import { api } from "../../../data/services/api";
 import { ToastContainer, toast } from "react-toastify";
-import Loader from "../../ui/components/Loader/Loader";
+import Loader from "../../components/Loader/Loader";
 import { Field, Formik } from "formik";
-import { ButtonPrimaryLongNoLink } from "../../ui/components/Buttons/Buttons";
+import { ButtonPrimaryLongNoLink } from "../../components/Buttons/Buttons";
 import { useNavigate } from "react-router-dom";
-import { ForgotPasswordValues } from "../../data/@types/ForgotPassword/ForgotPassword.type";
-import { validationSendPassCode } from "../../data/services/Validation/ValidationSendPassCode.service";
-import { validationNewPassword } from "../../data/services/Validation/ValidationNewPassword.service";
+import { ForgotPasswordValues } from "../../../data/@types/ForgotPassword/ForgotPassword.type";
+import { validationSendPassCode } from "../../../data/services/Validation/ValidationSendPassCode.service";
+import { validationNewPassword } from "../../../data/services/Validation/ValidationNewPassword.service";
  
 
 const ForgotPassword = () => {

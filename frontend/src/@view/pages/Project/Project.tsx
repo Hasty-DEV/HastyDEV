@@ -1,6 +1,6 @@
 import { Row, Col } from "react-bootstrap";
 import { AiOutlineLine } from "react-icons/ai";
-import SearchForm from "../../ui/components/SearchForm/SearchForm";
+import SearchForm from "../../components/SearchForm/SearchForm";
 import ProjectImg1 from "../../ui/assets/images/Project/ProjectImg1.webp";
 import {
   ProjectFirstSection,

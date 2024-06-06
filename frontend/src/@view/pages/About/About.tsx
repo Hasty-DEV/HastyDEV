@@ -7,12 +7,12 @@ import {
   HeadingSubtitle,
   HeadingInterTitle,
   Paragraph,
-} from "../../ui/components/Texts/Texts";
-import ContactForm from "../../ui/partials/ContactForm/ContactForm";
-import SliderContact from "../../ui/components/Slider/SliderContact";
+} from "../../components/Texts/Texts";
+import ContactForm from "../../partials/ContactForm/ContactForm";
+import SliderContact from "../../components/Slider/SliderContact";
 import { ImageStyled } from "../../ui/styles/About/About.styles";
-import OurMissionTable from "../../ui/partials/OurMissionTable/OurMissionTable";
-import OurColaborationTable from "../../ui/partials/OurColaborationTable/OurColaborationTable";
+import OurMissionTable from "../../partials/OurMissionTable/OurMissionTable";
+import OurColaborationTable from "../../partials/OurColaborationTable/OurColaborationTable";
 
 const About: React.FC = () => {
   return (

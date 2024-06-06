@@ -5,14 +5,14 @@ import swal from "sweetalert2";
 import { toast, ToastContainer } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import Loader from "../../ui/components/Loader/Loader";
+import Loader from "../../components/Loader/Loader";
 import * as R from "../../ui/styles/Register/Register.styles";
 import { Container, Row, Col } from "react-bootstrap";
 import RegisterImg from "../../ui/assets/images/RegisterImg.png";
-import { FormFetch } from "../../data/services/axios/config";
-import { FormValues } from "../../data/@types/FormValues/FormValues.type";
-import { validationsRegister } from "../../data/services/Validation/ValidationRegister.service";
-import { AllowEmailVerificationProps} from "../../data/@types/AllowEmailVerification/AllowEmailVerification.type";
+import { FormFetch } from "../../../data/services/axios/config";
+import { FormValues } from "../../../data/@types/FormValues/FormValues.type";
+import { validationsRegister } from "../../../data/services/Validation/ValidationRegister.service";
+import { AllowEmailVerificationProps} from "../../../data/@types/AllowEmailVerification/AllowEmailVerification.type";
 
 const Register = ({ setAllowEmailVerification }: AllowEmailVerificationProps) => {
   const [showPassword, setShowPassword] = useState(false);

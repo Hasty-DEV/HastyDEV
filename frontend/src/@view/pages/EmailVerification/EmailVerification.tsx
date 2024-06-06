@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import swal from "sweetalert2";
 import { EmailVerificationContainer } from "../../ui/styles/emailVerification/emailVerification.styles";
-import { api } from "../../data/services/api";
+import { api } from "../../../data/services/api";
 
 function EmailVerification() {
   const [email, setEmail] = useState("");

@@ -1,7 +1,7 @@
 import { ButtonProps } from "../../../data/@types/Button/Button.type";
 import * as B from "../../styles/Button/Buttons.styles";
 
-export const ButtonPrimary= ({
+export const ButtonPrimary = ({
   route,
   buttonText,
   ...rest

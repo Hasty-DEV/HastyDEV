@@ -1,12 +1,12 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { Formik, Field } from "formik";
-import { ButtonPrimaryLongNoLink } from "../../ui/components/Buttons/Buttons";
-import { api } from "../../data/services/api";
+import { ButtonPrimaryLongNoLink } from "../../components/Buttons/Buttons";
+import { api } from "../../../data/services/api";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { AllowEmailVerificationProps } from "../../data/@types/AllowEmailVerification/AllowEmailVerification.type";
-import Loader from "../../ui/components/Loader/Loader";
+import { AllowEmailVerificationProps } from "../../../data/@types/AllowEmailVerification/AllowEmailVerification.type";
+import Loader from "../../components/Loader/Loader";
 
 const CheckEmailNotVerified =({ setAllowEmailVerification }: AllowEmailVerificationProps)=> {
     const [loading, setLoading] = useState(false);

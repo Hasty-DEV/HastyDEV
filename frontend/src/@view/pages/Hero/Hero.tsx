@@ -1,11 +1,11 @@
 import { Container } from "react-bootstrap";
-import { HeadingTitle, Paragraph } from "../../ui/components/Texts/Texts";
-import { ButtonPrimary } from "../../ui/components/Buttons/Buttons";
-import { HeroContainer } from "../../ui/styles/Hero/Hero.styles";
-import HeroImg1 from "../../ui/assets/images/Hero/Hero-Img1.webp";
-import HeroImg2 from "../../ui/assets/images/Hero/Hero-Img2.webp";
-import HeroImg3 from "../../ui/assets/images/Hero/Hero-Img3.webp";
-import HeroImg4 from "../../ui/assets/images/Hero/Hero-Img4.webp";
+import { HeadingTitle, Paragraph } from "../../components/Texts/Texts";
+import { ButtonPrimary } from "../../components/Buttons/Buttons";
+import { HeroContainer } from "../../styles/Hero/Hero.styles";
+import HeroImg1 from "../../assets/images/Hero/Hero-Img1.webp";
+import HeroImg2 from "../../assets/images/Hero/Hero-Img2.webp";
+import HeroImg3 from "../../assets/images/Hero/Hero-Img3.webp";
+import HeroImg4 from "../../assets/images/Hero/Hero-Img4.webp";
 
 const Hero = () => {
   return (
