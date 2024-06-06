@@ -1,47 +1,13 @@
-import { FormFetch } from "../../../data/services/axios/config";
 import { Formik, Field } from "formik";
 import { ButtonPrimaryLongNoLink } from "../../components/Buttons/Buttons";
-import { ContactFormValues } from "../../../data/@types/ContactFormValues/ContactFormValues.type";
 import { FormContainer } from "../../styles/ContactForm/ContactForm.styles";
-import { useState } from "react";
 import Loader from "../../components/Loader/Loader";
-import swal from "sweetalert2";
 import { validationsContact } from "../../../data/services/Validation/ValidationContact.service";
+import { useContactForm } from "./useContactForm";
 
 const ContactForm = () => {
-  const [loading, setLoading] = useState(false);
+  const {loading, handleContact } = useContactForm();
 
-  const handleContact = async ({
-    Name,
-    Email,
-    Phone,
-    Category,
-    Subject,
-    Message,
-  }: ContactFormValues) => {
-    try {
-      setLoading(true);
-      await FormFetch.post("/contactForm", {
-        Name,
-        Email,
-        Phone,
-        Category,
-        Subject,
-        Message,
-      });
-      swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Sua Mensagem foi enviada com sucesso!",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoading(false);
-    }
-  };
   return (
     <>
       {loading ? (
