@@ -1,41 +1,15 @@
-import { FormFetch } from "../../../data/services/axios/config";
 import { Formik, Field } from "formik";
 import { ButtonPrimaryLongNoLink } from "../../components/Buttons/Buttons";
 import { Container, Row, Col } from "react-bootstrap";
-import { ContactFormValues } from "../../../data/@types/ContactFormValues/ContactFormValues.type";
 import { FormContainer } from "../../styles/ContactUsForm/ContactUsForm.styles";
-import { useState } from "react";
 import Loader from "../../components/Loader/Loader";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import { validationsContact } from "../../../data/services/Validation/ValidationContact.service";
+import { useContactUSForm } from "./useContactUSForm";
 
 const ContactUSForm = () => {
-  const [loading, setLoading] = useState(false);
-  const handleContact = async ({
-    Name,
-    Email,
-    Phone,
-    Category,
-    Subject,
-    Message,
-  }: ContactFormValues) => {
-    try {
-      setLoading(true);
-      await FormFetch.post("/contactForm", {
-        Name,
-        Email,
-        Phone,
-        Category,
-        Subject,
-        Message,
-      });
-      toast.success("E-mail enviado com sucesso");
-    } catch (err) {
-      toast.error("Erro ao enviar e-mail");
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { loading, handleContact } = useContactUSForm();
+
   return (
     <>
       {loading ? (
