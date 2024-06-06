@@ -9,40 +9,18 @@ import {
   ButtonTertiary,
 } from "../../components/Buttons/Buttons";
 import { ButtonsHeader, HeaderContainer } from "../../styles/Header/Header.styles";
-import { ThemeContext } from "styled-components";
-import { useContext, useEffect, useRef } from "react";
 import { HeaderProps } from "../../../data/@types/Header/Header.type";
 import SwitchButton from "../../components/SwitchButton/SwitchButton";
+import { useHeader } from "./useHeader"
+import { ThemeContext } from "styled-components";
+import { useContext } from "react";
 
 const Header = ({ toggleTheme }: HeaderProps) => {
   const theme = useContext(ThemeContext);
-  const headerRef = useRef<HTMLDivElement>(null); 
-
-  useEffect(() => {
-    const handleOutsideClick = (event: MouseEvent) => {
-      const navbar = document.getElementById("navbarSupportedContent");
-      const navbarToggle = document.querySelector(".custom-navbar-toggler");
-      if (
-        navbar &&
-        navbar.classList.contains("show") &&
-        !navbar.contains(event.target as Node) &&
-        !headerRef.current?.contains(event.target as Node) &&
-        navbarToggle &&
-        navbarToggle instanceof HTMLElement
-      ) {
-        navbarToggle.click();
-      }
-    };
-
-    document.addEventListener("click", handleOutsideClick);
-    return () => {
-      document.removeEventListener("click", handleOutsideClick);
-    };
-  }, []);
-
   if (!theme) {
     return null;
-  }
+}
+  const { headerRef } = useHeader();
 
   const ImgDarkLight = theme.title === "light" ? LogoLight : LogoDark;
 
