@@ -1,15 +1,21 @@
 import { Row, Col } from "react-bootstrap";
-import { AiOutlineLine } from "react-icons/ai";
 import SearchForm from "../../components/SearchForm/SearchForm";
-import ProjectImg1 from "../../ui/assets/images/Project/ProjectImg1.webp";
+import ProjectImg1 from "../../assets/images/Project/ProjectImg1.webp";
 import {
   ProjectFirstSection,
-  ProjectHeadingTitle,
+ 
   ProjectParagraph,
   ProjectSubInterTitle,
   ProjectParagraphContainer,
   ProjectTitleContainer,
-} from "../../ui/styles/Project/Project.styles";
+  HorizontalLine,
+  Header,
+  SpanHeader,
+  
+  
+  
+ 
+} from "../../styles/Project/Project.styles";
 
 const Project = () => {
   return (
@@ -19,16 +25,15 @@ const Project = () => {
           <Col xs={12} sm={6}>
             <Col xs={12}>
               <ProjectTitleContainer>
+                
                 <ProjectSubInterTitle SubInterTitle="Sobre o Projeto" className="d-inline-block"/>
-                <AiOutlineLine size={64} />
+                <HorizontalLine></HorizontalLine>
               </ProjectTitleContainer>
             </Col>
             <Col xs={12}>
-              <ProjectHeadingTitle
-                title="Revolucionário Espaço de Projetos Para Realizar sua"
-                span="Inovação"
-                className="text-start "
-              />
+
+           <Header className="text-start"><SpanHeader>Revolucionário</SpanHeader> Espaço de Projetos Para Realizar sua Inovação</Header>
+             
             </Col>
           </Col>
           <Col

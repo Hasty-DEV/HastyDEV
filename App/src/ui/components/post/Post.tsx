@@ -153,8 +153,8 @@ const Post = ({ post }: { post: PostType }) => {
           <span className="text-capitalize">Prazo: {new Date(post.deadline).toLocaleDateString()}</span>
         </div>
         <div className="d-flex flex-column align-items-start justify-content-center">
-          <Button className="text-capitalize rounded bg-success border-0">ir para projeto</Button>
-          <span className="mt-1">R$ {post.price}</span>
+          
+          <span className="mt-1 fs-3">R$ {post.price}</span>
         </div>
       </div>
       <div className="d-flex flex-column align-items-start justify-content-between px-3 pt-4">

@@ -1,7 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
-import * as A from "../../ui/styles/About/About.styles";
-import AboutImg from "../../ui/assets/images/About/AboutImg1.png";
-import WorldMapLight from "../../ui/assets/images/About/WorldMapLight.svg";
+import * as A from "../../styles/About/About.styles";
+import AboutImg from "../../assets/images/About/AboutImg1.png";
+import WorldMapLight from "../../assets/images/About/WorldMapLight.svg";
 import {
   HeadingTitle,
   HeadingSubtitle,
@@ -10,7 +10,7 @@ import {
 } from "../../components/Texts/Texts";
 import ContactForm from "../../partials/ContactForm/ContactForm";
 import SliderContact from "../../components/Slider/SliderContact";
-import { ImageStyled } from "../../ui/styles/About/About.styles";
+import { ImageStyled } from "../../styles/About/About.styles";
 import OurMissionTable from "../../partials/OurMissionTable/OurMissionTable";
 import OurColaborationTable from "../../partials/OurColaborationTable/OurColaborationTable";
 

@@ -1,10 +1,10 @@
 import { Component } from "react";
 import { Container } from "react-bootstrap";
 import Slider from "react-slick";
-import HeroImg1 from "../../../ui/assets/images/Hero/Hero-Img1.webp";
-import HeroImg2 from "../../../ui/assets/images/Hero/Hero-Img2.webp";
-import HeroImg3 from "../../../ui/assets/images/Hero/Hero-Img3.webp";
-import HeroImg4 from "../../../ui/assets/images/Hero/Hero-Img4.webp";
+import HeroImg1 from "../../assets/images/Hero/Hero-Img1.webp";
+import HeroImg2 from "../../assets/images/Hero/Hero-Img2.webp";
+import HeroImg3 from "../../assets/images/Hero/Hero-Img3.webp";
+import HeroImg4 from "../../assets/images/Hero/Hero-Img4.webp";
 import { CarouselImage } from "../../styles/SliderContact/SliderContact.styles";
 import { SliderContactProps } from "../../../data/@types/SliderContact/SliderContact.type";
 
