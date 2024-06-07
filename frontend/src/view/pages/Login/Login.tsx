@@ -4,13 +4,14 @@ import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import LoginImg from  "../../ui/assets/images/LoginImg.png";
+import LoginImg from  "../../assets/images/LoginImg.png";
 import { useAuth } from "../../../data/contexts/Auth/AuthProvider";
-import * as L from "../../ui/styles/Login/Login.styles";
+
 import Loader from "../../components/Loader/Loader";
 import { FormValues } from "../../../data/@types/FormValues/FormValues.type";
 import { toast, ToastContainer } from "react-toastify";
 import { validationsLogin } from "../../../data/services/Validation/Validationlogin.service";
+import { LoginContainer, LoginForm } from "../../styles/Login/Login.styles";
 
 const Login = () => {
   const { signin } = useAuth();
@@ -46,11 +47,11 @@ const Login = () => {
   const isPasswordVisible = showPassword ? "text" : "password";
 
   return (
-    <L.LoginContainer>
+    <LoginContainer>
       <Container fluid>
         <Row>
           <Col sm={7} xl={6}>
-            <L.LoginForm className="text-center">
+            <LoginForm className="text-center">
               {isLoading ? (
                 <Loader />
               ) : (
@@ -126,7 +127,7 @@ const Login = () => {
                   )}
                 </Formik>
               )}
-            </L.LoginForm>
+            </LoginForm>
           </Col>
           <Col sm={5} xl={6}>
             <img src={LoginImg} alt="" className="img-fluid" />
@@ -134,7 +135,7 @@ const Login = () => {
         </Row>
       </Container>
       <ToastContainer />
-    </L.LoginContainer>
+    </LoginContainer>
   );
 };
 

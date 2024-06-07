@@ -1,5 +1,6 @@
 import { Container } from "react-bootstrap";
 import styled from "styled-components";
+
 import {
   HeadingSubInterTitle,
   HeadingTitle,
@@ -8,7 +9,7 @@ import {
 
 export const ProjectFirstSection = styled(Container)`
   padding: 200px;
-  padding-top: 20px;
+  padding-top: 50px;
 
   @media (min-width: 576px) and (max-width: 1024px) {
     padding: 20px;
@@ -20,8 +21,8 @@ export const ProjectFirstSection = styled(Container)`
 `;
 
 export const ProjectHeadingTitle = styled(HeadingTitle)`
-  max-width: 800px;
-  font-size: 3rem;
+  max-width: 100%;
+  font-size: 40px;
 
   @media (max-width: 575px) {
     font-size: 2.5rem;
@@ -30,16 +31,17 @@ export const ProjectHeadingTitle = styled(HeadingTitle)`
 `;
 
 export const ProjectSubInterTitle = styled(HeadingSubInterTitle)`
-  width: 40%;
+  width: 55%;
+  font-size: 1.5rem;
   @media (max-width: 575px) {
     padding: 10px;
   }
 `;
 
 export const ProjectParagraph = styled(Paragraph)`
-  max-width: 600px;
-  font-size: 1.5rem;
-  line-height: 30px;
+  max-width: 100%;
+  font-size: 18px;
+  
 
   @media (max-width: 575px) {
     font-size: 1rem;
@@ -53,4 +55,23 @@ export const ProjectParagraphContainer = styled.div`
 
 export const ProjectTitleContainer = styled.div`
   margin-top: 20%;
+  display: inline-flex;
+  
+ 
+ 
 `;
+export const HorizontalLine = styled.div`
+  width: 150px; 
+  height: 1.5px;  
+  background-color: black; 
+  margin: 6% 0px 0px 0px ; 
+  background: ${(props) => props.theme.colors.text};
+`;
+
+export const Header = styled.h1`
+font-size: 35px;
+color: ${(props) => props.theme.colors.text};
+`
+export const SpanHeader = styled.span`
+color: ${(props) => props.theme.colors.span};
+`

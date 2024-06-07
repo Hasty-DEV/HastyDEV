@@ -24,7 +24,7 @@
     "react-toastify": "^10.0.4",
     "socket.io-client": "^4.7.4",
     "styled-components": "^6.1.8",
-    "sweetalert2": "^11.10.6",
+    "sweetalert2": "^11.6.13",
     "yup": "^1.4.0"
   },
   "devDependencies": {
