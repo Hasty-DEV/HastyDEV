@@ -3,12 +3,13 @@ import styled from "styled-components";
 export const PostContainer = styled.div`
   -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.38);
   -moz-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.38);
-  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.38);
-  border-radius: 5px;
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 5, 10);
+  
   margin-top: 20px;
-  border: 2px solid ${(props) => props.theme.colors.post_border};
+  
   background-color: ${(props) => props.theme.colors.post_background};
   color: ${(props) => props.theme.colors.text};
+  border-radius: 10px;
 
   .LerMais{
     color: ${(props) => props.theme.colors.text};
