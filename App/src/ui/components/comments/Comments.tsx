@@ -116,8 +116,8 @@ const Comments: React.FC<{ postId: string }> = ({ postId }) => {
 
   return (
     <CommentsContainer>
-      <div className="comments">
-        <div className="write d-flex align-items-center justify-content-between mb-3">
+      <div className="comments w-100">
+        <div className=" w-100 write d-flex align-items-center justify-content-between mb-3">
           <img src={userIcon || userIconDefault} alt="" />
           <input
             type="text"

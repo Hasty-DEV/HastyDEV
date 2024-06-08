@@ -29,7 +29,7 @@ const CommentsContainer = styled.div`
         border-radius: 15px;
         background-color: transparent;
         color: ${(props) => props.theme.colors.text};
-        max-width: 500px;
+        width: 100%;
       }
 
       button {
@@ -39,6 +39,14 @@ const CommentsContainer = styled.div`
         padding: 10px;
         cursor: pointer;
         border-radius: 3px;
+
+        &:hover{
+          opacity: 0.8;
+        }
+        &:active {
+          opacity: 0.2; 
+        }
+        
       }
     }
 

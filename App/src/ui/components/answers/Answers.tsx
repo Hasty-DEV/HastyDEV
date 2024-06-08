@@ -8,7 +8,7 @@ import { Answer } from "../../../data/@types/Answer/Answer.type";
 const Answers: React.FC<{ commentId: string }> = ({ commentId }) => {
   const [userId, setUserId] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(null);
-  const [userName, setUserName] = useState<string | null>(null);
+  const [, setUserName] = useState<string | null>(null);
   const [userIcon, setUserIcon] = useState<string | null>(null);
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [newAnswer, setNewAnswer] = useState<string>("");
