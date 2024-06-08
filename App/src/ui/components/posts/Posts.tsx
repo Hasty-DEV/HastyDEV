@@ -1,11 +1,10 @@
-import { useState, useEffect, useCallback } from "react";
+import  { useState, useEffect, useCallback } from "react";
 import PostsContainer from "../../styles/posts/Posts.styles";
 import Post from "../post/Post";
-
+import Loader from "../Loader/Loader";
 
 import { PostType } from "../../../data/@types/Post/Post.type";
 import { api } from "../../../data/services/api";
-import Loader from "../Loader/Loader";
 
 type PostsProps = {
   searchTerm: string;
@@ -34,7 +33,7 @@ const Posts = ({ searchTerm }: PostsProps) => {
   };
 
   const fetchPostsFilter = useCallback(async () => {
-    setLoading(true); // Define o estado de carregamento como verdadeiro antes de buscar os posts
+    setLoading(true); 
     try {
       const response = await getPostsFilter(searchTerm);
       const reversedPosts = response.reverse();
@@ -42,7 +41,7 @@ const Posts = ({ searchTerm }: PostsProps) => {
     } catch (error) {
       console.error("Erro ao buscar os posts:", error);
     } finally {
-      setLoading(false); // Define o estado de carregamento como falso após a busca dos posts, independentemente de sucesso ou erro
+      setLoading(false); 
     }
   }, [searchTerm]);
 
@@ -54,9 +53,13 @@ const Posts = ({ searchTerm }: PostsProps) => {
     <PostsContainer className="d-flex flex-column">
       <h2 className="mb-3">Procure o Trabalho Ideal</h2>
       {loading ? (
-        <Loader /> // Renderiza o spinner de carregamento enquanto os posts estão sendo carregados
+        <Loader /> 
       ) : (
-        postFilter.map((post) => <Post post={post} key={post.postid} />)
+        postFilter.length > 0 ? (
+          postFilter.map((post) => <Post post={post} key={post.postid} />)
+        ) : (
+          <p>Nenhum post encontrado.</p>
+        )
       )}
     </PostsContainer>
   );
