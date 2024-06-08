@@ -9,7 +9,7 @@ import { getUserIconByID } from "../../../data/services/getUserIconService";
 import { PostType } from "../../../data/@types/Post/Post.type";
 import { Button } from "react-bootstrap";
 import { api } from "../../../data/services/api";
-import PostContainer, { BussinessDataContainer, LikeContainer, CommentContainer } from "../../styles/post/Post.styles";
+import PostContainer, { BussinessDataContainer, LikeContainer, CommentContainer, ButtonLer } from "../../styles/post/Post.styles";
 
 
 const Post = ({ post }: { post: PostType }) => {
@@ -171,7 +171,7 @@ const Post = ({ post }: { post: PostType }) => {
                 </li>
               ))}
             </ul>
-            <Button className="LerMais" variant="Link" onClick={() => setExpanded(false)}>Ler menos</Button>
+            <ButtonLer className="LerMais" variant="Link" onClick={() => setExpanded(false)}>Ler menos</ButtonLer>
             <BussinessDataContainer className="d-flex flex-column justify-content-center align-items-start">
               <h4 >Dados do Contratante</h4>
               <div className="d-flex justify-content-center align-items-center pt-2 pb-2">
@@ -189,7 +189,7 @@ const Post = ({ post }: { post: PostType }) => {
         ) : (
           <>
             {post.content && <p>{post.content.slice(0, 200)}...</p>}
-            <Button variant="Link" onClick={() => setExpanded(true)} className="text-start">Ler mais</Button>
+            <ButtonLer variant="Link" onClick={() => setExpanded(true)} className="text-start">Ler mais</ButtonLer>
           </>
         )}
         <div className="d-flex align-items-center justify-content-between w-50 pb-3">

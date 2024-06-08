@@ -1,3 +1,4 @@
+import { Button } from "react-bootstrap";
 import styled from "styled-components";
 
 export const PostContainer = styled.div`
@@ -72,5 +73,18 @@ export const CommentContainer = styled.button`
 `;
 
 
+export const ButtonLer = styled(Button)`
+ color: ${(props) => props.theme.colors.text};
+  border: none;
+ 
+  
+  cursor: pointer;
+
+ 
+
+  &:hover {
+    opacity: 0.6;
+  }
+  `;
 
 export default PostContainer;
