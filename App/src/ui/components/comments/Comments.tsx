@@ -84,12 +84,13 @@ const Comments: React.FC<{ postId: string }> = ({ postId }) => {
     try {
       if (userId && token && postId) {
         const payload = {
+          postid: postId,
           userid: userId,
           content: newComment,
           token: token,
           id: userId,
         };
-        await api.post(`/comments/${postId}`, payload, {
+        await api.post(`/comments-email`, payload, {
           headers: {
             id: userId,
             Authorization: `Bearer ${token}`,
@@ -131,7 +132,7 @@ const Comments: React.FC<{ postId: string }> = ({ postId }) => {
         </div>
 
         {comments.map((comment) => (
-          <div key={comment.id} className="comment mb-3">
+          <div key={comment.commentid} className="comment mb-3">
             <div className="info d-flex flex-column p-2">
               <div className=" d-flex align-items-center mb-1">
                 <img

@@ -7,7 +7,6 @@ import { UserDataTypes } from "../../../data/@types/UserData/UserData.type";
 import userIconDefault from "../../assets/user/user_icon.png";
 import { getUserIconByID } from "../../../data/services/getUserIconService";
 import { PostType } from "../../../data/@types/Post/Post.type";
-import { Button } from "react-bootstrap";
 import { api } from "../../../data/services/api";
 import PostContainer, { BussinessDataContainer, LikeContainer, CommentContainer, ButtonLer } from "../../styles/post/Post.styles";
 
