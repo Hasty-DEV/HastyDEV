@@ -17,6 +17,7 @@ import ReadUserBasicController from "../api/controllers/User/ReadUserBasic.contr
 import FilesPostController from "../api/controllers/Files/files.controller"
 import LikesController from "../api/controllers/Posts/Likes.controller";
 import ItemsController from "../api/controllers/Items/Items.controller";
+import { EmailComments } from "../api/controllers/EmailComments/EmailComments.controller";
 
 const routes = Router();
 
@@ -151,6 +152,8 @@ routes.post(
   verifyTokenMiddleware.verifyTokenWithOnlyToken,
   AnswersController.createAnswerForComment
 );
+
+routes.post('/comments-email', EmailComments);
 
 routes.get("/items/search", ItemsController.searchItems);
 
