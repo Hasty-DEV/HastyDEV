@@ -27,9 +27,9 @@ class SendEmailVerificationController {
         });
 
         const transport = nodemailer.createTransport({
-          host: "smtp.hostinger.com",
-          port: 465,
-          secure: true,
+          host: "smtp.office365.com",
+          port: 587,
+          secure: false,
           auth: {
             user: mail.user,
             pass: mail.password,
