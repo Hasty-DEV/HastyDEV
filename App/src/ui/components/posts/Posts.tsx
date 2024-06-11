@@ -10,7 +10,7 @@ type PostsProps = {
   searchTerm: string;
 };
 
-const Posts = ({ searchTerm }: PostsProps) => {
+const  Posts = ({ searchTerm }: PostsProps) => {
   const [postFilter, setPostFilter] = useState<PostType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -51,7 +51,7 @@ const Posts = ({ searchTerm }: PostsProps) => {
 
   return (
     <PostsContainer className="d-flex flex-column">
-      <h2 className="mb-3">Procure o Trabalho Ideal</h2>
+      <h2 className="mb-3 fw-bold text-xl-center">Procure o Trabalho Ideal</h2>
       {loading ? (
         <Loader /> 
       ) : (
