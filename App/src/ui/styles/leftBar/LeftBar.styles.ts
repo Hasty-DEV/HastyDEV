@@ -1,14 +1,15 @@
 import styled from "styled-components";
 
 const LeftBarContainer = styled.aside`
-  flex: 2.4;
-  position: sticky;
-  top: 80px;
-  height: calc(100vh - 70px);
+  flex: 2;
+  top: 65px;
+  height: 99vh;
+  padding-top: 30px;
   overflow: scroll;
   background-color: ${(props) => props.theme.colors.primary};
   color: ${(props) => props.theme.colors.text};
-  box-shadow: 0px 10px 10px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1);
+
 
   @media (max-width: 768px) {
     display: none;
