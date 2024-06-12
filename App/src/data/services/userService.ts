@@ -18,11 +18,9 @@ export const getUserData = async () => {
 
 export const getUserDataById = async (userId: any) => {
   try {
-    const userToken = await localStorage.getItem("userToken");
-
-    if (userToken && userId) {
-      api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
-      const response = await api.get(`/userbasic/${userId}`);
+ 
+    if (userId) {
+       const response = await api.get(`/userbasic/${userId}`);
       return response.data.user;
     } else {
       throw new Error("Token de usuário ou ID de usuário ausente");

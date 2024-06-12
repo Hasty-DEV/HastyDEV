@@ -1,14 +1,15 @@
 import { Request, Response } from "express";
 import User from "../../models/User/User.model";
+import UserPerfil from "../../models/UserPerfil/UserPerfil.model";
 import logger from "../../../utils/Logger/Logger";
 
-interface UserAttributesSubset {
+interface UserBasicInfo {
   username: string;
   email: string;
   first_name: string;
   last_name: string;
+  userPerfil: any;  
 }
-
 class ReadUserBasic {
   public async getUserBasicInfo(req: Request, res: Response): Promise<void> {
     const userId = req.params.id;
@@ -18,6 +19,7 @@ class ReadUserBasic {
         res.status(400).json({ message: "ID de usuário ausente na solicitação" });
         return;
       }
+
       const user = await User.findByPk(userId, {
         attributes: ["username", "email", "first_name", "last_name"],
       });
@@ -28,7 +30,11 @@ class ReadUserBasic {
         return;
       }
 
-      const userData: UserAttributesSubset = user.toJSON() as UserAttributesSubset;
+      const userData: UserBasicInfo = user.toJSON() as UserBasicInfo;
+
+      const userPerfil = await UserPerfil.findOne({ where: { userId } });
+      userData.userPerfil = userPerfil ? userPerfil.toJSON() : null;
+
       res.status(200).json({ user: userData });
     } catch (error) {
       logger.error("Erro ao ler o usuário: " + error);

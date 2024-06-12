@@ -154,7 +154,7 @@ const Comments: React.FC<{ postId: string }> = ({ postId }) => {
               {comment.content.length > 200 && (
                 <span className="read-more">Ler mais</span>
               )}
-            </div>
+<b></b>            </div>
             <div
               className="item"
               onClick={() => toggleComments(comment.commentid.toString())}

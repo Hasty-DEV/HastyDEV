@@ -8,6 +8,7 @@ import { getUserIcon } from "../../data/services/getUserIconService";
 import { getUserData } from "../../data/services/userService";
 import swal from "sweetalert2";
 
+
 const Perfil: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState<boolean>(false);
@@ -26,6 +27,8 @@ const Perfil: React.FC = () => {
   const [linkedin, setLinkedin] = useState<string>("");
   const [github, setGithub] = useState<string>("");
   const [whatsapp, setWhatsapp] = useState<string>("");
+  const [aboutMe, setAboutMe] = useState<string>("");
+
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
@@ -53,6 +56,7 @@ const Perfil: React.FC = () => {
       setLinkedin(user.userPerfil?.linkedin);
       setGithub(user.userPerfil?.github);
       setWhatsapp(user.userPerfil?.whatsapp);
+      setAboutMe(user.userPerfil?.aboutMe);
       const icon = await getUserIcon();
       if (icon ) {
         setUserIcon(URL.createObjectURL(new Blob([icon])));
@@ -153,6 +157,7 @@ const Perfil: React.FC = () => {
           linkedin,
           github,
           whatsapp,
+          aboutMe: aboutMe
         });
         console.log("Alterações salvas com sucesso!");
         swal.fire({
@@ -163,7 +168,7 @@ const Perfil: React.FC = () => {
           timer: 1500,
         });
         setTimeout(() => {
-          window.location.reload();
+          window.location.href =`/profile/${userId}`;
         }, 2000);
         fetchData();
       } catch (error) {
@@ -251,7 +256,7 @@ const Perfil: React.FC = () => {
           {renderEditField("Nome", name, (e) => setName(e.target.value))}
           {renderEditField("Sobrenome", surname, (e) => setSurname(e.target.value))}
           {renderEditField("Username", username, (e) => setUsername(e.target.value))}
-
+          {renderEditField("Sobre Mim", aboutMe, (e) => setAboutMe(e.target.value))}
  
           {socialEditMode && (
             <>

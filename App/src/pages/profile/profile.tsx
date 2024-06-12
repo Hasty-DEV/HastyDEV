@@ -1,47 +1,55 @@
-import { useCallback, useEffect, useState } from 'react';
-import { getUserData } from '../../data/services/userService'; 
+import {useEffect, useState } from 'react';
+import { getUserDataById } from '../../data/services/userService'; 
 import Loader from '../../ui/components/Loader/Loader';
 import ProfileContainer from '../../ui/styles/Profile/Profile.styles';
 import { getUserIconByID } from '../../data/services/getUserIconService';
 import DefaultUserIcon from "../../ui/assets/user/user_icon.png";
 import { FaInstagram, FaFacebook, FaLinkedin, FaGithub, FaWhatsapp, FaEnvelope, FaPhone } from "react-icons/fa";
-import { api } from '../../data/services/api';
-import { UserDataTypes } from '../../data/@types/UserData/UserData.type';
-
+import { useParams } from 'react-router-dom';
+ 
 function ProfilePage() {
-  const [userData, setUserData] = useState<UserDataTypes | null>(null);
+  const [userData, setUserData] = useState<any>(null); 
   const [userIcon, setUserIcon] = useState<string | null>(null);
-  const [userId, setUserId] = useState<string>(""); 
+  const [loading, setLoading] = useState<boolean>(true); 
+  const { userId } = useParams<{ userId: string }>();
 
   useEffect(() => {
-    const userId = localStorage.getItem("userId");
-    api.defaults.headers.common["id"] = userId;
-    setUserId(userId ?? "");
+    if (!userId) {
+      console.error("ID do usuário não especificado");
+      return;
+    }
 
-    return () => {
-      delete api.defaults.headers.common["id"];
-    };
-  }, []);
 
-  const fetchData = useCallback(async () => {
-    try {
-      if (userId) {  
-        const user = await getUserData();
+
+
+    const fetchData = async () => {
+      try {
+
+        const user = await getUserDataById(userId);
+        if (!user) {
+          console.error("Usuário não encontrado");
+        
+          return;
+        }
         setUserData(user);
         const icon = await getUserIconByID(userId);
         if (icon && icon.data) {
           setUserIcon(URL.createObjectURL(new Blob([icon.data])));
         }
-      }
-    } catch (error) {
-      console.error("Erro ao obter dados do usuário:", error);
-    } 
+        setLoading(false);  
+      } catch (error) {
+        console.error("Erro ao obter dados do usuário:", error);
+      
+      } 
+    };
+
+    fetchData();
   }, [userId]);
 
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
- 
+  if (!userId || loading) { 
+    return <Loader/>;
+  }
+
   return (
     <div className="container">
       {userData ? (

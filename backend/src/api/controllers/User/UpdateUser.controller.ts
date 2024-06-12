@@ -17,7 +17,7 @@ class UpdateUser {
 
       await Promise.all(validationRules.updateUserValidationRules.map(rule => rule.run(req)));
       
-      const { username, email, first_name, last_name, instagram, facebook, linkedin, github, whatsapp } = req.body;
+      const { username, email, first_name, last_name, instagram, facebook, linkedin, github, whatsapp, aboutMe } = req.body;
 
       const errors = validationResult(req);
   
@@ -64,7 +64,7 @@ class UpdateUser {
         if (linkedin) userPerfil.linkedin = linkedin;
         if (github) userPerfil.github = github;
         if (whatsapp) userPerfil.whatsapp = whatsapp;
-
+        if (aboutMe) userPerfil.aboutMe = aboutMe;
         await userPerfil.save();
       }
 

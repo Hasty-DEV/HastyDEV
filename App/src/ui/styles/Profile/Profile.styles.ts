@@ -29,15 +29,18 @@ const ProfileContainer = styled.div`
 
   .social-links a {
     margin-right: 10px;
-    color: #333;
+    color: ${(props) => props.theme.colors.text};
     font-size: 24px;
   }
 
   .about-me, .contacts {
-    background: #f5f5f5;
+    background: ${(props) => props.theme.colors.post_background};
+    border: 2px solid ${(props) => props.theme.colors.post_border};
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 20px;
+    color: ${(props) => props.theme.colors.text};
+
   }
 
   .about-me h2, .contacts h2 {
@@ -62,6 +65,13 @@ const ProfileContainer = styled.div`
     .social-links a {
       font-size: 20px;
     }
+  }
+
+
+  h1{
+
+    color: ${(props) => props.theme.colors.text};
+
   }
 `;
 export default ProfileContainer;
