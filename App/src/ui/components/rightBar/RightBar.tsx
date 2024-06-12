@@ -1,8 +1,6 @@
 import UserLevelInfo from "../UserLevelInfo/UserLevelInfo";
 import { RightBarContainer } from "../../styles/rightBar/RightBar.styles";
 
-
-
 const RightBar = () => {
   return (
     <RightBarContainer>

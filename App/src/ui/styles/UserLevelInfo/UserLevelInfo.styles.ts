@@ -2,11 +2,9 @@ import styled from "styled-components";
 
 const UserLevelInfoContainer = styled.div`
 
-border-radius: 25px;
   background-color: ${(props) => props.theme.colors.background};
   .item {
-    border-radius: 25px;
-   
+    border-radius: 20px;
   }
   .username {
     margin-left: 6px;
@@ -29,7 +27,6 @@ border-radius: 25px;
       margin: 20px 0px;
 
       .userInfo {
-        gap: 20px;
         img {
           width: 40px;
           height: 40px;
