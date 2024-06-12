@@ -35,7 +35,7 @@ const UserLevelInfo = () => {
       {loading && <Loader />}
       <UserLevelInfoContainer>
         <div className="item">
-          <span>Seu Nível</span>
+          <span className="fw-bold fs-5">Seu Nível</span>
           {userData?.level && (
             <div className="user">
               <div className="userInfo d-flex align-items-center">
