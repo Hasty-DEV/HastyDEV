@@ -37,14 +37,7 @@ const PrivacyPolicy = () => {
           O nosso site pode ter links para sites externos que não são operados
           por nós. Esteja ciente de que não temos controle sobre o conteúdo e
           práticas desses sites e não podemos aceitar responsabilidade por suas
-          respectivas&nbsp;
-          <a
-            href="https://politicaprivacidade.com/"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            políticas de privacidade.
-          </a>
+          respectivas políticas de privacidade.
         </p>
 
         <p>
