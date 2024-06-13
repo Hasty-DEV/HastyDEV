@@ -17,16 +17,18 @@ const LeftBar = () => {
       <LeftBarContainer className="position-sticky">
         <div className="leftBar">
           <div className="container">
-            <div className="menu d-flex flex-column ">
-              <div className="user d-flex align-items-center">
-                <Link to="/perfil">
-                  <img src={userIcon} alt="" />
-                </Link>
-                <span className="text-capitalize">
-                  {userData
-                    ? `${userData.first_name} ${userData.last_name}`
-                    : "Usuário"}
-                </span>
+            <div className="row justify-content-end">
+              <div className="menu">
+                <div className="user d-flex align-items-center">
+                  <Link to="/perfil" className="mr-3">
+                    <img src={userIcon} alt="User Icon" />
+                  </Link>
+                  <span className="text-capitalize d-inline-block">
+                    {userData
+                      ? `${userData.first_name} ${userData.last_name}`
+                      : "Usuário"}
+                  </span>
+                </div>
               </div>
             </div>
             <hr />
