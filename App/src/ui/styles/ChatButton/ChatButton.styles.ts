@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledChatButton = styled.button`
+
     bottom: 20px;
     right: 20px;
     z-index: 999;
