@@ -53,7 +53,7 @@ const Header = ({ toggleTheme, onSearch }: HeaderProps) => {
       setUserData(user);
       const icon = await getUserIcon();
       if (icon) {
-        setUserIcon(icon);  
+        setUserIcon(icon);
       }
     } catch (error) {
       console.error("Erro ao obter dados do usuário:", error);
@@ -78,7 +78,9 @@ const Header = ({ toggleTheme, onSearch }: HeaderProps) => {
   const ImgDarkLight = theme.title === "light" ? LogoLight : LogoDark;
 
   const handleSearch = async () => {
-    onSearch(searchTerm);
+    alert('Função não implementada.')
+    throw new Error('NOT_IMPLEMENTED')
+    /*onSearch(searchTerm); */
   };
 
   return (
