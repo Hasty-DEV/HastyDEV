@@ -1,54 +1,15 @@
-import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import { useAuth } from "../../../data/context/AuthContext";
 import Loader from "../Loader/Loader";
-import { getUserData } from "../../../data/services/userService";
-import { getUserIcon } from "../../../data/services/getUserIconService";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import LeftBarContainer from "../../styles/leftBar/LeftBar.styles";
-import { UserDataTypes } from "../../../data/@types/UserData/UserData.type";
 import { IoGameController, IoVideocam } from "react-icons/io5";
 import { RiGalleryFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
-
-
+import { useLeftBar } from "./useLeftBar";
 
 const LeftBar = () => {
-  const { logout } = useAuth();
-  const [userData, setUserData] = useState<UserDataTypes | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [userIcon, setUserIcon] = useState<string>();
-
-  const fetchData = useCallback(async () => {
-    try {
-      setLoading(true);
-      const user = await getUserData();
-      setUserData(user);
-      const icon = await getUserIcon();
-      setUserIcon(icon);
-
-    } catch (error) {
-      console.error("Erro ao obter dados do usuário:", error);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-
-  const handleLogout = async () => {
-    try {
-      setLoading(true);
-      await logout();
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { loading, userIcon, userData, handleLogout } = useLeftBar();
 
   return (
     <>
