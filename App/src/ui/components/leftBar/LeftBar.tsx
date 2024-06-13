@@ -6,12 +6,13 @@ import Loader from "../Loader/Loader";
 import { getUserData } from "../../../data/services/userService";
 import { getUserIcon } from "../../../data/services/getUserIconService";
 import { AiOutlinePlusCircle } from "react-icons/ai";
-import Gaming from "../../assets/7.png";
-import Gallery from "../../assets/8.png";
-import Videos from "../../assets/9.png";
-import Messages from "../../assets/10.png";
 import LeftBarContainer from "../../styles/leftBar/LeftBar.styles";
 import { UserDataTypes } from "../../../data/@types/UserData/UserData.type";
+import { IoGameController, IoVideocam } from "react-icons/io5";
+import { RiGalleryFill } from "react-icons/ri";
+import { MdEmail } from "react-icons/md";
+
+
 
 const LeftBar = () => {
   const { logout } = useAuth();
@@ -79,19 +80,19 @@ const LeftBar = () => {
                 </div>
               )}
               <div className="item d-flex align-items-center">
-                <img src={Gaming} alt="" />
+                <IoGameController size={28} />
                 <span>Dashboard</span>
               </div>
               <div className="item d-flex align-items-center">
-                <img src={Gallery} alt="" />
+                <RiGalleryFill size={28} />
                 <span>Projetos Concluídos</span>
               </div>
               <div className="item d-flex align-items-center">
-                <img src={Videos} alt="" />
+                <IoVideocam size={28} />
                 <span>Recompensas</span>
               </div>
               <div className="item d-flex align-items-center">
-                <img src={Messages} alt="" />
+                <MdEmail size={28} />
                 <span>Lista de Favoritos</span>
               </div>
             </div>
