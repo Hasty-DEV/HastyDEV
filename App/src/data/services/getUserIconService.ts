@@ -37,17 +37,27 @@ export const getUserIcon = async (): Promise<string | undefined> => {
 
 export const getUserIconByID = async (userId: number | string) => {
   try {
-    const userToken = await localStorage.getItem("userToken");
+    if (!userId) {
+      throw new Error("User ID not found in localStorage");
+    }
 
-    if (userToken && userId) {
-      api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
-      const response = await api.get(`/userIconForPost/${userId}`, {
-        responseType: "arraybuffer",
-      });
-      return {
-        data: response.data,
-        headers: response.headers,
-      };
+    const CACHED_URL = localStorage.getItem(`URL_${userId}`);
+
+    if (CACHED_URL) {
+      return CACHED_URL;
+    }
+
+    const url = `${CDN}/${userId}/perfil/userIcon.jpg`;
+
+    const response = await axios.get(url, { responseType: "blob" });
+
+    if (response.status === 200) {
+      const blob = new Blob([response.data], { type: "image/jpeg" });
+      const objectURL = URL.createObjectURL(blob);
+
+      localStorage.setItem(`URL_${userId}`, objectURL);
+
+      return objectURL;
     }
   } catch (error) {
     console.error("Erro ao pegar dados de Usuário:", error);

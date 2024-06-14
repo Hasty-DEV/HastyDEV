@@ -40,8 +40,8 @@ const Post = ({ post }: { post: PostType }) => {
         setUserData(user);
 
         const icon = await getUserIconByID(post.userid);
-        if (icon && icon.data) {
-          setUserIcon(URL.createObjectURL(new Blob([icon.data])));
+        if (icon) {
+          setUserIcon(icon);
         }
 
         const response = await api.post("/has-liked", {
@@ -152,7 +152,7 @@ const Post = ({ post }: { post: PostType }) => {
           <span className="text-capitalize">Prazo: {new Date(post.deadline).toLocaleDateString()}</span>
         </div>
         <div className="d-flex flex-column align-items-start justify-content-center">
-          
+
           <span className="mt-1 fs-3">R$ {post.price}</span>
         </div>
       </div>
@@ -196,7 +196,7 @@ const Post = ({ post }: { post: PostType }) => {
             {loading ? (
               <FaSpinner className="loading-icon" />
             ) : (
-              liked ? <FaHeart onClick={unlikePost}/> : <FaRegHeart onClick={likePost}/>
+              liked ? <FaHeart onClick={unlikePost} /> : <FaRegHeart onClick={likePost} />
             )}
             <span >{likes} Likes</span>
           </LikeContainer>

@@ -40,8 +40,8 @@ const Answers: React.FC<{ commentId: string }> = ({ commentId }) => {
             }
 
             const icon = await getUserIconByID(storedUserId);
-            if (icon && icon.data) {
-              setUserIcon(URL.createObjectURL(new Blob([icon.data])));
+            if (icon) {
+              setUserIcon(icon);
             }
           } catch (error) {
             console.error("Error fetching user data:", error);
