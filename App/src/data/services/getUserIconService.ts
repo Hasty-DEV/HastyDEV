@@ -10,9 +10,15 @@ export const getUserIcon = async (): Promise<string | undefined> => {
     }
     const url = `${CDN}/${userId}/perfil/userIcon.jpg`;
 
+    const CACHED_URL = localStorage.getItem(`URL_${userId}`)
+
+    if (CACHED_URL) return CACHED_URL;
+
     const response = await axios.get(url);
 
-    if(response.status === 200) {
+    localStorage.setItem(`URL_${userId}`, url);
+
+    if (response.status === 200) {
       return url;
     }
   } catch (error) {
