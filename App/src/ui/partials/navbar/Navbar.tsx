@@ -21,7 +21,7 @@ import UserLevelInfo from "../../components/UserLevelInfo/UserLevelInfo";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useNavbar } from "./useNavbar";
 
-const Header = ({ toggleTheme, onSearch }: HeaderProps) => {
+const Header = ({ toggleTheme }: HeaderProps) => {
   const { theme, searchTerm, isDropdownOpen, userData, userId, handleLogout, handleChange, handleSearch, toggleDropdown } = useNavbar()
   const ImgDarkLight = theme.title === "light" ? LogoLight : LogoDark;
 
