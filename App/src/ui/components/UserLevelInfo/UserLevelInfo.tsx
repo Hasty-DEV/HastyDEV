@@ -1,35 +1,11 @@
-import { useCallback, useEffect, useState } from "react";
 import Loader from "../Loader/Loader";
-import { UserDataTypes } from "../../../data/@types/UserData/UserData.type";
-import { getUserIcon } from "../../../data/services/getUserIconService";
-import { getUserData } from "../../../data/services/userService";
 import UserLevelInfoContainer from "../../styles/UserLevelInfo/UserLevelInfo.styles";
 import { ProgressBar } from "react-bootstrap";
+import { useUserLevelInfo } from "./useUserLevelInfo";
 
 
 const UserLevelInfo = () => {
-  const [userData, setUserData] = useState<UserDataTypes | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [userIcon, setUserIcon] = useState<string>();
-
-  const fetchData = useCallback(async () => {
-    try {
-      setLoading(true);
-      const user = await getUserData();
-      setUserData(user);
-      const icon = await getUserIcon();
-      setUserIcon(icon);
-    } catch (error) {
-      console.error("Erro ao obter dados do usuário:", error);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-
+  const { loading, userData, userIcon } = useUserLevelInfo();
   return (
     <>
       {loading && <Loader />}
