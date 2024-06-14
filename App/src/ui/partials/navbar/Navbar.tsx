@@ -1,12 +1,8 @@
-import { useCallback, useContext, useEffect, useState } from "react";
 import {
   HeaderContainer,
   SwitchContainer,
   OffCanvasContainer,
 } from "../../styles/navbar/Navbar.styles";
-import { getUserData } from "../../../data/services/userService";
-import { getUserIcon } from "../../../data/services/getUserIconService";
-import { UserDataTypes } from "../../../data/@types/UserData/UserData.type";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -17,71 +13,17 @@ import { Link } from "react-router-dom";
 import { MdPerson, MdOutlineSecurity } from "react-icons/md";
 import { IoMdPerson } from "react-icons/io";
 import { ImProfile } from "react-icons/im";
-import { useAuth } from "../../../data/context/AuthContext";
 import { RiLogoutBoxLine } from "react-icons/ri";
-import { ThemeContext } from "styled-components";
-import { DefaultTheme } from "styled-components";
 import LogoLight from "../../assets/LogoLight.svg";
 import LogoDark from "../../assets/LogoDark.svg";
 import { HeaderProps } from "../../../data/@types/Navbar/Navbar.type";
 import UserLevelInfo from "../../components/UserLevelInfo/UserLevelInfo";
 import { AiOutlinePlusCircle } from "react-icons/ai";
+import { useNavbar } from "./useNavbar";
 
 const Header = ({ toggleTheme, onSearch }: HeaderProps) => {
-  const [searchTerm, setSearchTerm] = useState<string>("");
-  const { logout } = useAuth();
-  const [userData, setUserData] = useState<UserDataTypes | null>(null);
-  const [, setUserIcon] = useState<string | null>(null);
-  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
-  };
-
-  const getUserIdFromLocalStorage = () => {
-    const userId = localStorage.getItem("userId");
-    return userId;
-  };
-
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-
-  const fetchData = useCallback(async () => {
-    try {
-      const user = await getUserData();
-      setUserData(user);
-      const icon = await getUserIcon();
-      if (icon) {
-        setUserIcon(icon);
-      }
-    } catch (error) {
-      console.error("Erro ao obter dados do usuário:", error);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-
-  const handleLogout = async () => {
-    try {
-      await logout();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const userId = getUserIdFromLocalStorage();
-  const theme: DefaultTheme = useContext(ThemeContext);
-
+  const { theme, searchTerm, isDropdownOpen, userData, userId, handleLogout, handleChange, handleSearch, toggleDropdown } = useNavbar()
   const ImgDarkLight = theme.title === "light" ? LogoLight : LogoDark;
-
-  const handleSearch = async () => {
-    alert('Função não implementada.')
-    throw new Error('NOT_IMPLEMENTED')
-    /*onSearch(searchTerm); */
-  };
 
   return (
     <HeaderContainer className="mb-3 fixed-top">
