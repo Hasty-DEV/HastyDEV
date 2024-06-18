@@ -2,6 +2,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import * as A from "../../styles/About/About.styles";
 import AboutImg from "../../assets/images/About/AboutImg1.png";
 import WorldMapLight from "../../assets/images/About/WorldMapLight.svg";
+
 import {
   HeadingTitle,
   HeadingSubtitle,
@@ -13,8 +14,12 @@ import SliderContact from "../../components/Slider/SliderContact";
 import { ImageStyled } from "../../styles/About/About.styles";
 import OurMissionTable from "../../partials/OurMissionTable/OurMissionTable";
 import OurColaborationTable from "../../partials/OurColaborationTable/OurColaborationTable";
+import SliderTeam from "../../components/Slider/SliderTeam";
 
 const About: React.FC = () => {
+
+
+  
   return (
     <A.AboutContainer>
       <Container className="text-center">
@@ -95,7 +100,7 @@ const About: React.FC = () => {
               <HeadingSubtitle span="Nosso Time de Sucesso" className="mt-5" />
             </Col>
             <Col xs={12}>
-              <SliderContact />
+              <SliderTeam />
             </Col>
           </article>
           <A.ContactFormDiv fluid>
