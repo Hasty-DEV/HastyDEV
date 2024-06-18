@@ -27,8 +27,8 @@ function ProfilePage() {
         }
         setUserData(user);
         const icon = await getUserIconByID(userId);
-        if (icon) {
-          setUserIcon(icon);
+        if (icon && icon.data) {
+          setUserIcon(URL.createObjectURL(new Blob([icon.data])));
         }
         setLoading(false);
       } catch (error) {
