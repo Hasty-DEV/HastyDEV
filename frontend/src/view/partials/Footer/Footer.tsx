@@ -50,7 +50,7 @@ const Footer = () => {
                     <FaLinkedin />
                   </SocialContainer>
                   <SocialContainer
-                    href="#"
+                    href="https://api.whatsapp.com/send?phone=119977328121"
                     className="containerFour d-flex justify-content-center align-items-center"
                     title="HastyDEV Whatsapp"
                   >

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const LeftBarContainer = styled.aside`
   flex: 2;
-  top: 65px;
+  margin-top: 65px;
   height: 99vh;
   padding-top: 30px;
   overflow: scroll;
