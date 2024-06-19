@@ -10,8 +10,7 @@ import {
   Paragraph,
 } from "../../components/Texts/Texts";
 import ContactForm from "../../partials/ContactForm/ContactForm";
-import SliderContact from "../../components/Slider/SliderContact";
-import { ImageStyled } from "../../styles/About/About.styles";
+  import { ImageStyled } from "../../styles/About/About.styles";
 import OurMissionTable from "../../partials/OurMissionTable/OurMissionTable";
 import OurColaborationTable from "../../partials/OurColaborationTable/OurColaborationTable";
 import SliderTeam from "../../components/Slider/SliderTeam";

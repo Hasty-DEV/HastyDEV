@@ -1,4 +1,4 @@
-import { CDN } from "./api";
+import { CDN, api } from "./api";
 import axios from "axios";
 import DefaultUserIcon from "../../ui/assets/user/user_icon.png";
 
