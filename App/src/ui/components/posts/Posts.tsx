@@ -10,12 +10,17 @@ type PostsProps = {
 const Posts = ({ searchTerm }: PostsProps) => {
   const { loading, postFilter } = usePosts(searchTerm);
 
+ 
+  const noPostsFound = !loading && postFilter.length === 0;
+
   return (
     <PostsContainer className="d-flex flex-column">
       <h2 className="mb-3 fw-bold text-xl-center">Procure o Trabalho Ideal</h2>
       {loading && <Loader />}
+      {/* Verifica se há posts para exibir */}
       {postFilter.length > 0 && postFilter.map((post) => <Post post={post} key={post.postid} />)}
-      {!postFilter && <p>Nenhum post encontrado.</p>}
+      {/* Exibe mensagem se nenhum post foi encontrado */}
+      {noPostsFound && <p>Nenhum post encontrado.</p>}
     </PostsContainer>
   );
 };

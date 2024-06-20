@@ -18,6 +18,7 @@ import { PagesContainer } from "../ui/styles/Pages/Pages.style";
 import ProfilePage from "./profile/profile";
 import { useState } from "react";
 import Posts from "../ui/components/posts/Posts";
+import MyPosts from "../ui/components/MyPosts/Myposts";
 
 
 const Pages = ({ theme, setTheme }: PagesProps ) => {
@@ -48,7 +49,7 @@ const Pages = ({ theme, setTheme }: PagesProps ) => {
               <Route path="/help" element={<Help />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/profile/:userId" element={<ProfilePage />} />
-     
+              <Route path="/Myposts/:userId" element={<MyPosts searchTerm={searchTerm} />} />
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </PrivateRoute>

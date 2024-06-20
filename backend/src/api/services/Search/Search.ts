@@ -51,4 +51,46 @@ const searchItems = async (searchTerm: string) => {
   }
 };
 
-export default { searchItems };
+const getPostsByUserId = async (userId: string) => {
+  try {
+    const posts = await Post.findAll({
+      where: {
+        userid: userId
+      },
+      include: {
+        model: User,
+        as: 'author',
+        attributes: ["first_name", "last_name"],
+      },
+    });
+
+    const formattedPosts = posts.map(post => ({
+      postid: post.postid,
+      userid: post.userid,
+      title: post.title,
+      subtitle: post.subtitle,
+      content: post.content,
+      isPaid: post.isPaid,
+      price: post.price,
+      photos: post.photos || "",
+      companyContent: post.companyContent,
+      categories: post.categories,
+      programmingLanguages: post.programmingLanguages,
+      deadline: post.deadline,
+      likes: post.likes,
+      createdAt: post.createdAt,
+      updatedAt: post.updatedAt,
+      author: post.author ? {
+        first_name: post.author.first_name,
+        last_name: post.author.last_name
+      } : null
+    }));
+
+    return formattedPosts;
+  } catch (error) {
+    console.error(`Erro ao buscar posts do usuário com ID ${userId}:`, error);
+    throw error;
+  }
+};
+
+export default { searchItems, getPostsByUserId };

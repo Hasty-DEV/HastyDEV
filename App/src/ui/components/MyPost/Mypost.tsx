@@ -10,7 +10,7 @@ import { PostType } from "../../../data/@types/Post/Post.type";
 import { api } from "../../../data/services/api";
 import PostContainer, { BussinessDataContainer, LikeContainer, CommentContainer, ButtonLer } from "../../styles/post/Post.styles";
 
-const Post = ({ post }: { post: PostType }) => {
+const MyPost = ({ post }: { post: PostType }) => {
   const [userId, setUserId] = useState<string>("");
   const [userToken, setUserToken] = useState<string>("");
   const [, setUserData] = useState<UserDataTypes | null>(null);
@@ -232,4 +232,4 @@ const Post = ({ post }: { post: PostType }) => {
   );
 };
 
-export default Post;
+export default MyPost;

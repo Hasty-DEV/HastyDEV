@@ -106,6 +106,7 @@ routes.get(
   PostController.getAllPosts
 );
 
+
 routes.post(
   "/posts",
   verifyTokenMiddleware.verifyTokenWithBody,
@@ -156,5 +157,7 @@ routes.post(
 routes.post('/comments-email', EmailComments);
 
 routes.get("/items/search", ItemsController.searchItems);
+
+routes.get("/items/search/:id", ItemsController.getPostsByUserId);
 
 export default routes;
