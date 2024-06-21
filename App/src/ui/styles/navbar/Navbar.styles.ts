@@ -22,7 +22,7 @@ export const HeaderContainer = styled.header`
 
     &:hover {
       background-color: ${(props) =>
-        props.theme.colors.secondary}; // Altere para a cor desejada no hover
+        props.theme.colors.secondary};
     }
   }
 `;

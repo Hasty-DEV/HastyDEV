@@ -29,6 +29,11 @@ export function useLeftBar() {
         fetchData();
     }, [fetchData]);
 
+    const getUserIdFromLocalStorage = () => {
+        const userId = localStorage.getItem("userId");
+        return userId;
+    };
+
     const handleLogout = async () => {
         try {
             setLoading(true);
@@ -40,7 +45,10 @@ export function useLeftBar() {
         }
     };
 
+    const userId = getUserIdFromLocalStorage();
+
     return {
+        userId,
         userData,
         loading,
         userIcon,

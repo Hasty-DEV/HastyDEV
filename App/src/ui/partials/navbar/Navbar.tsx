@@ -20,6 +20,7 @@ import { HeaderProps } from "../../../data/@types/Navbar/Navbar.type";
 import UserLevelInfo from "../../components/UserLevelInfo/UserLevelInfo";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useNavbar } from "./useNavbar";
+import { BsPostcardHeart } from "react-icons/bs";
 
 const Header = ({ toggleTheme }: HeaderProps) => {
   const { theme, searchTerm, isDropdownOpen, userData, userId, handleLogout, handleChange, handleSearch, toggleDropdown } = useNavbar()
@@ -110,7 +111,16 @@ const Header = ({ toggleTheme }: HeaderProps) => {
                     className="d-flex align-items-center justify-content-start"
                   >
                     <ImProfile className="mx-1" />
-                    Ver Meu Perfil
+                    Meu Perfil
+                  </NavDropdown.Item>
+
+                  <NavDropdown.Item
+                    as={Link}
+                    to={`/myposts/${userId}`}
+                    className="d-flex align-items-center justify-content-start"
+                  >
+                    <BsPostcardHeart className="mx-1" />
+                    Meus posts
                   </NavDropdown.Item>
 
                   <NavDropdown.Divider />

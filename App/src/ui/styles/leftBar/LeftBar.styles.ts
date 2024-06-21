@@ -1,14 +1,16 @@
 import styled from "styled-components";
 
 const LeftBarContainer = styled.aside`
-  flex: 2;
-  margin-top: 65px;
-  height: 99vh;
-  padding-top: 30px;
+    flex: 2.4;
+  position: sticky;
+  widht: 10px;
+  top: 80px;
+  height: calc(100vh - 70px);
   overflow: scroll;
   background-color: ${(props) => props.theme.colors.primary};
   color: ${(props) => props.theme.colors.text};
-  box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 10px 10px 5px rgba(0, 0, 0, 0.1);
+
 
 
   @media (max-width: 768px) {
@@ -30,9 +32,13 @@ const LeftBarContainer = styled.aside`
       background-color: ${(props) => props.theme.colors.text};
     }
 
- 
+ .link-style {
+  color: inherit; /* Herda a cor do texto do pai */
+  text-decoration: none; /* Remove sublinhado */
+}
 
-    .plus-circle {
+
+    .iconstyle {
           color: ${(props) => props.theme.colors.text}; 
           font-size: 30px; 
         }
