@@ -28,7 +28,7 @@ const Perfil: React.FC = () => {
   const [github, setGithub] = useState<string>("");
   const [whatsapp, setWhatsapp] = useState<string>("");
   const [aboutMe, setAboutMe] = useState<string>("");
-
+ 
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
@@ -59,7 +59,7 @@ const Perfil: React.FC = () => {
       setAboutMe(user.userPerfil?.aboutMe);
       const icon = await getUserIcon();
       if (icon ) {
-        setUserIcon(URL.createObjectURL(new Blob([icon])));
+        setUserIcon(icon);
       }
     } catch (error) {
       console.error("Erro ao obter dados do usuário:", error);
@@ -160,16 +160,7 @@ const Perfil: React.FC = () => {
           aboutMe: aboutMe
         });
         console.log("Alterações salvas com sucesso!");
-        swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Suas alterações foram realizadas com sucesso",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        setTimeout(() => {
-          window.location.href =`/profile/${userId}`;
-        }, 2000);
+         
         fetchData();
       } catch (error) {
         console.error("Erro ao salvar alterações:", error);

@@ -25,7 +25,7 @@ const MyPosts = ({ searchTerm }: PostsProps) => {
 
   return (
     <PostsContainer className="d-flex flex-column">
-      <h2 className="mb-3 fw-bold text-xl-center">Procure o Trabalho Ideal</h2>
+      <h2 className="mb-3 fw-bold text-xl-center">Meus Posts</h2>
       {loading && <Loader />}
       {filteredPosts.length > 0 ? (
         filteredPosts.map((post) => <MyPost post={post} key={post.postid} />)

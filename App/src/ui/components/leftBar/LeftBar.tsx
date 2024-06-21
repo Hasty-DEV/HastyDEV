@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import Loader from '../Loader/Loader';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import LeftBarContainer from '../../styles/leftBar/LeftBar.styles';
-import { MdEmail, MdOutlineSecurity } from 'react-icons/md';
+import { MdOutlineSecurity } from 'react-icons/md';
 import { useLeftBar } from './useLeftBar';
 import { IoMdPerson } from 'react-icons/io';
 import { ImProfile } from 'react-icons/im';

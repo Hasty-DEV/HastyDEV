@@ -4,8 +4,9 @@ import { UserDataTypes } from "../../../data/@types/UserData/UserData.type";
 import { useAuth } from "../../../data/context/AuthContext";
 import { getUserIcon } from "../../../data/services/getUserIconService";
 import { getUserData } from "../../../data/services/userService";
+import { HeaderProps } from "../../../data/@types/Navbar/Navbar.type";
 
-export function useNavbar() {
+export function useNavbar({ onSearch }: HeaderProps) {
     const [searchTerm, setSearchTerm] = useState<string>("");
     const { logout } = useAuth();
     const [userData, setUserData] = useState<UserDataTypes | null>(null);
@@ -13,6 +14,7 @@ export function useNavbar() {
     const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        event.preventDefault();
         setSearchTerm(event.target.value);
     };
 
@@ -53,14 +55,16 @@ export function useNavbar() {
     const userId = getUserIdFromLocalStorage();
     const theme: DefaultTheme = useContext(ThemeContext);
 
-    
-
-    const handleSearch = async () => {
-        alert('Função não implementada.')
-        throw new Error('NOT_IMPLEMENTED')
-        /*onSearch(searchTerm); */
+    const handleSearchByEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          handleSearch();
+        }
     };
 
+    const handleSearch = async () => {
+        onSearch(searchTerm);
+    };
 
     return {
         searchTerm,
@@ -68,9 +72,10 @@ export function useNavbar() {
         userId,
         theme,
         isDropdownOpen,
+        handleSearchByEnter,
         toggleDropdown,
         handleChange,
         handleLogout,
-        handleSearch
-    }
+        handleSearch,
+    };
 }

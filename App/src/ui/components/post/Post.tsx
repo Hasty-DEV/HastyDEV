@@ -30,7 +30,7 @@ const Post = ({ post }: { post: PostType }) => {
         const userToken = localStorage.getItem("userToken");
 
         if (!userId || !userToken) {
-          throw new Error('User ID or token not found in localStorage.');
+          throw new Error('ID de usuário ou token não encontrados no localStorage.');
         }
 
         api.defaults.headers.common["id"] = userId;
@@ -57,7 +57,7 @@ const Post = ({ post }: { post: PostType }) => {
         const filesResponse = await api.get(`/get-files/${post.userid}/${post.postid}`);
         setFiles(filesResponse.data.files);
       } catch (error) {
-        console.error("Error fetching user data:", error);
+        console.error("Erro ao buscar dados do usuário:", error);
       }
     };
 
@@ -66,7 +66,7 @@ const Post = ({ post }: { post: PostType }) => {
 
   const likePost = async () => {
     if (liked) {
-      console.log("User already liked this post.");
+      console.log("Usuário já curtiu esta postagem.");
       return;
     }
 
@@ -79,13 +79,13 @@ const Post = ({ post }: { post: PostType }) => {
       });
 
       if (!response) {
-        throw new Error('Error saving like');
+        throw new Error('Erro ao salvar curtida');
       }
 
       setLikes(prevLikes => prevLikes + 1);
       setLiked(true);
     } catch (error) {
-      console.error('Error saving like:', error);
+      console.error('Erro ao salvar curtida:', error);
     } finally {
       setLoading(false);
     }
@@ -93,7 +93,7 @@ const Post = ({ post }: { post: PostType }) => {
 
   const unlikePost = async () => {
     if (!liked) {
-      console.log("User hasn't liked this post yet.");
+      console.log("Usuário ainda não curtiu esta postagem.");
       return;
     }
 
@@ -106,13 +106,13 @@ const Post = ({ post }: { post: PostType }) => {
       });
 
       if (!response) {
-        throw new Error('Error removing like');
+        throw new Error('Erro ao remover curtida');
       }
 
       setLikes(prevLikes => prevLikes - 1);
       setLiked(false);
     } catch (error) {
-      console.error('Error removing like:', error);
+      console.error('Erro ao remover curtida:', error);
     } finally {
       setLoading(false);
     }
@@ -151,7 +151,7 @@ const Post = ({ post }: { post: PostType }) => {
       document.body.appendChild(link);
       link.click();
     } catch (error) {
-      console.error("Error downloading file:", error);
+      console.error("Erro ao baixar arquivo:", error);
     }
   };
 
@@ -161,8 +161,8 @@ const Post = ({ post }: { post: PostType }) => {
         <div className="d-flex flex-column align-items-start justify-content-center">
           <h2 className="fw-bold text-capitalize">{post.title}</h2>
           <h5 className="fw-medium text-capitalize">{post.subtitle}</h5>
-          <span className="text-capitalize">Published: {formattedUpdatedAt}</span>
-          <span className="text-capitalize">Deadline: {new Date(post.deadline).toLocaleDateString()}</span>
+          <span className="text-capitalize">Publicado em: {formattedUpdatedAt}</span>
+          <span className="text-capitalize">Prazo: {new Date(post.deadline).toLocaleDateString()}</span>
         </div>
         <div className="d-flex flex-column align-items-start justify-content-center">
           <span className="mt-1 fs-3">R$ {post.price}</span>
@@ -184,13 +184,13 @@ const Post = ({ post }: { post: PostType }) => {
             </ul>
             <ButtonLer className="LerMais" variant="Link" onClick={() => setExpanded(false)}>Leia Menos</ButtonLer>
             <BussinessDataContainer className="d-flex flex-column justify-content-center align-items-start">
-              <h4>Business Data</h4>
+              <h4>Dados da Empresa</h4>
               <div className="d-flex justify-content-center align-items-center pt-2 pb-2">
                 <Link
                   to={`/profile/${post.userid}`}
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
-                  <img src={userIcon || userIconDefault} className="rounded-circle" alt="User Profile" />
+                  <img src={userIcon || userIconDefault} className="rounded-circle" alt="Perfil do Usuário" />
                 </Link>
                 <span>{`${post.author?.first_name} ${post.author?.last_name} `}</span>
               </div>
@@ -210,7 +210,7 @@ const Post = ({ post }: { post: PostType }) => {
             ) : (
               liked ? <FaHeart onClick={unlikePost} /> : <FaRegHeart onClick={likePost} />
             )}
-            <span>{likes} Likes</span>
+            <span>{likes} Curtidas</span>
           </LikeContainer>
 
           <CommentContainer
@@ -218,7 +218,7 @@ const Post = ({ post }: { post: PostType }) => {
             onClick={() => setCommentOpen(!commentOpen)}
           >
             <FaComment />
-            <span>Comments</span>
+            <span>Comentários</span>
           </CommentContainer>
 
         </div>

@@ -22,9 +22,24 @@ import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useNavbar } from "./useNavbar";
 import { BsPostcardHeart } from "react-icons/bs";
 
-const Header = ({ toggleTheme }: HeaderProps) => {
-  const { theme, searchTerm, isDropdownOpen, userData, userId, handleLogout, handleChange, handleSearch, toggleDropdown } = useNavbar()
+const Header = ({ toggleTheme, onSearch }: HeaderProps) => {
+  const {
+    theme,
+    searchTerm,
+    isDropdownOpen,
+    userData,
+    userId,
+    handleLogout,
+    handleChange,
+    handleSearch,
+    toggleDropdown,
+    handleSearchByEnter
+  } = useNavbar({ toggleTheme, onSearch });
+
   const ImgDarkLight = theme.title === "light" ? LogoLight : LogoDark;
+
+ 
+ 
 
   return (
     <HeaderContainer className="mb-3 fixed-top">
@@ -52,19 +67,23 @@ const Header = ({ toggleTheme }: HeaderProps) => {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <div className="justify-content-end flex-grow-1 pe-3"></div>
-              <Form className="d-flex px-4">
-                <Form.Control
-                  type="search"
-                  placeholder="Pesquisar..."
-                  className="me-2"
-                  aria-label="Search"
-                  value={searchTerm}
-                  onChange={handleChange}
-                />
-                <Button onClick={handleSearch} className="search-button">
-                  Pesquisar
-                </Button>
-              </Form>
+              <Form className="d-flex px-4" onSubmit={(e) => { e.preventDefault(); }}>
+  <Form.Control
+    type="search"
+    placeholder="Pesquisar..."
+    className="me-2"
+    aria-label="Search"
+    value={searchTerm}
+    onChange={handleChange}
+    onKeyDown={handleSearchByEnter}
+  />
+  <Button type="button" className="search-button" onClick={handleSearch}>
+    Pesquisar
+  </Button>
+</Form>
+
+
+
               <div className="d-flex justify-content-center align-items-center">
                 <MdPerson
                   size={24}

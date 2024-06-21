@@ -4,6 +4,7 @@ const ProfileContainer = styled.div`
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+  height: 900px;
   .card {
     height: 100%;
     background: ${(props) => props.theme.colors.background};
