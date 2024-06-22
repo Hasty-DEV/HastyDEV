@@ -66,7 +66,6 @@ class Register {
           first_name: first_name,
           last_name: last_name,
           role: role,
-          isVerified: true
         });
     
 
